@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aii Language Center</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Outfit', sans-serif; }
+        .activity-link { transition: all 0.3s ease; }
+        .activity-link:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        .modal-content { animation: fadeIn 0.3s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        .progress-bar { height: 8px; border-radius: 4px; overflow: hidden; }
+        .progress-fill { height: 100%; transition: width 0.4s ease; }
+
+        /* Side Panel Styles */
+        #sidePanel {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background-color: #1a1f2e;
+            z-index: 1000;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            padding-top: 60px;
+        }
+        #sidePanel.active { transform: translateX(0); }
+        #panelOverlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+        #panelOverlay.active { display: block; }
+        .panel-link {
+            display: block;
+            padding: 12px 20px;
+            color: #e5e7eb;
+            text-decoration: none;
+            border-left: 3px solid transparent;
+        }
+        .panel-link:hover {
+            background-color: #2d3748;
+            border-left-color: #3b82f6;
+        }
+        .close-panel-btn {
+            position: absolute;
+            top: 10px; right: 10px;
+            background: none; border: none; color: #e5e7eb;
+            font-size: 1.5rem; cursor: pointer;
+        }
+        .content-shifted { margin-left: 250px; }
+        nav.adjusted-for-panel { padding-left: calc(4rem + 250px); }
+
+        /* SVG icon styling */
+        .icon-svg { width: 50px; height: 50px; fill: currentColor; }
+        .resource-icon { width: 40px; height: 40px; fill: currentColor; }
+        .cover-svg { width: 100%; height: 120px; object-fit: cover; }
+    </style>
+</head>
+<body class="bg-[#0f1419] text-[#e5e7eb] min-h-screen">
+
+    <!-- Side Panel -->
+    <div id="sidePanel" class="bg-[#1a1f2e]">
+        <button id="closePanelBtn" class="close-panel-btn">&times;</button>
+        <h2 class="text-xl font-bold p-4 border-b border-gray-700">Quick Links</h2>
+        <nav>
+            <a href="#homework" class="panel-link">Homework</a>
+            <a href="#toefl" class="panel-link">TOEFL Test</a>
+            <a href="#worksheet-uploads" class="panel-link">Worksheet Uploads</a>
+            <a href="#games" class="panel-link">Learning Games</a>
+            <a href="#worksheets" class="panel-link">Worksheets</a>
+        </nav>
+    </div>
+    <div id="panelOverlay"></div>
+
+    <!-- Navigation -->
+    <nav id="mainNav" class="bg-[#1a1f2e] py-4 px-6 flex justify-between items-center sticky top-0 z-10">
+        <div class="flex items-center space-x-2">
+            <button id="togglePanelBtn" class="mr-4 text-xl focus:outline-none">☰</button>
+            <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
+                <span class="font-bold">Aii</span>
+            </div>
+            <h1 class="text-xl font-bold">Language Center</h1>
+        </div>
+        <div class="hidden md:flex space-x-6">
+            <a href="#home" class="hover:text-blue-400 transition">Home</a>
+            <a href="#courses" class="hover:text-blue-400 transition">Courses</a>
+            <a href="#resources" class="hover:text-blue-400 transition">Resources</a>
+            <a href="#blog" class="hover:text-blue-400 transition">Blog</a>
+            <a href="#contact" class="hover:text-blue-400 transition">Contact</a>
+        </div>
+        <div class="flex items-center space-x-4">
+            <button id="authTrigger" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition">Join Aii</button>
+            <select class="bg-[#2d3748] text-white px-2 py-1 rounded">
+                <option>English</option>
+                <option>ខ្មែរ</option>
+            </select>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div id="mainContent" class="transition-all duration-300 ease-in-out">
+
+        <!-- Hero Section -->
+        <section id="home" class="py-20 px-4 bg-gradient-to-b from-[#0f1419] to-[#1a1f2e] text-center">
+            <div class="max-w-4xl mx-auto">
+                <h1 id="heroTitle" class="text-5xl font-bold mb-4">Aii Language Center</h1>
+                <p id="heroSubtitle" class="text-xl text-blue-400 mb-8">Master English with confidence</p>
+                <div class="space-x-4">
+                    <button id="ctaBtn1" class="activity-link bg-gradient-to-r from-blue-500 to-blue-700 text-white px-6 py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-blue-800 shadow-lg">Explore Courses</button>
+                    <button id="ctaBtn2" class="activity-link bg-gradient-to-r from-blue-500 to-blue-700 text-white px-6 py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-blue-800 shadow-lg">Join Now</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Authentication Modal -->
+        <div id="authModal" class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden">
+            <div class="min-h-screen flex items-center justify-center p-4">
+                <div class="modal-content bg-[#1a1f2e] w-full max-w-md rounded-xl shadow-2xl">
+                    <div class="p-6">
+                        <h2 class="text-2xl font-bold mb-6 text-center">Join Aii Language Center</h2>
+                        <div class="flex border-b border-gray-700 mb-6">
+                            <button id="loginTab" class="flex-1 py-2 font-medium text-gray-400 bg-gray-800 rounded-t-lg hover:text-white">Login</button>
+                            <button id="signupTab" class="flex-1 py-2 font-medium text-gray-400 bg-gray-800 rounded-t-lg hover:text-white">Sign Up</button>
+                        </div>
+                        <form id="loginForm" class="space-y-4">
+                            <input type="email" placeholder="School Email" class="w-full px-4 py-3 bg-[#2d3748] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                            <input type="password" placeholder="Password" class="w-full px-4 py-3 bg-[#2d3748] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                            <div class="flex justify-between items-center">
+                                <a href="#" class="text-blue-400 hover:underline text-sm">Forgot password?</a>
+                                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg">Login</button>
+                            </div>
+                        </form>
+                        <form id="signupForm" class="space-y-4 hidden">
+                            <input type="text" placeholder="Full Name" class="w-full px-4 py-3 bg-[#2d3748] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                            <input type="email" placeholder="School Email *" class="w-full px-4 py-3 bg-[#2d3748] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                            <input type="text" placeholder="School Name" class="w-full px-4 py-3 bg-[#2d3748] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                            <input type="password" placeholder="Password" class="w-full px-4 py-3 bg-[#2d3748] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                            <input type="password" placeholder="Confirm Password" class="w-full px-4 py-3 bg-[#2d3748] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg">Create Account</button>
+                        </form>
+                        <div id="authMessage" class="mt-4 text-center text-sm p-2 rounded-lg opacity-0 transition-opacity duration-300"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Courses Section -->
+        <section id="courses" class="py-16 px-4">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl font-bold mb-12 text-center">Our Courses</h2>
+                <p class="text-center text-gray-400 mb-10">Choose the perfect course for your learning level</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                    <div class="bg-[#1a1f2e] p-6 rounded-xl border border-gray-800">
+                        <h3 class="text-xl font-bold mb-2">Pre-Kid Program</h3>
+                        <p class="text-gray-400 mb-4">Introduction to English for young learners. Building foundational listening and speaking skills through play and interactive activities.</p>
+                        <p class="text-sm text-blue-400">Ages 3-5</p>
+                        <button class="mt-4 text-blue-400 hover:underline">Learn More →</button>
+                    </div>
+                    <div class="bg-[#1a1f2e] p-6 rounded-xl border border-gray-800">
+                        <h3 class="text-xl font-bold mb-2">Kid Program</h3>
+                        <p class="text-gray-400 mb-4">Comprehensive English curriculum for children. Develop reading, writing, speaking, and listening skills with engaging lessons and games.</p>
+                        <p class="text-sm text-blue-400">Ages 6-12</p>
+                        <button class="mt-4 text-blue-400 hover:underline">Learn More →</button>
+                    </div>
+                    <div class="bg-[#1a1f2e] p-6 rounded-xl border border-gray-800">
+                        <h3 class="text-xl font-bold mb-2">GEP Program</h3>
+                        <p class="text-gray-400 mb-4">Advanced English program for high achievers. Prepare for examinations and advanced proficiency with intensive training and expert instruction.</p>
+                        <p class="text-sm text-blue-400">Advanced</p>
+                        <button class="mt-4 text-blue-400 hover:underline">Learn More →</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Homework Activities -->
+        <section id="homework" class="py-16 bg-[#1a1f2e] px-4">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl font-bold mb-12 text-center">KID 5 Homework Activities</h2>
+                <p class="text-center text-gray-400 mb-10">Interactive homework exercises to reinforce learning and build confidence</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Reading Future Connect 1 -->
+                    <div class="bg-[#2d3748] p-6 rounded-xl flex flex-col items-center">
+                        <svg class="icon-svg mb-3" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 15h30v20H10z" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <path d="M15 20h20" stroke="currentColor" stroke-width="2"/>
+                            <path d="M15 25h20" stroke="currentColor" stroke-width="2"/>
+                            <path d="M15 30h20" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="30" cy="20" r="8" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <text x="25" y="24" font-size="10" fill="currentColor">ABC...</text>
+                        </svg>
+                        <h3 class="text-xl font-bold mb-2">Reading Future Connect 1</h3>
+                        <p class="text-gray-400 mb-4 text-center">Fill-in-the-blank reading comprehension exercises with word banks. Practice vocabulary and grammar in context while building fluency.</p>
+                        <p class="text-sm text-yellow-400">Intermediate</p>
+                        <button onclick="goToRF()" class="mt-4 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">Start Activity →</button>
+                    </div>
+
+                    <!-- Writing Workshop -->
+                    <div class="bg-[#2d3748] p-6 rounded-xl flex flex-col items-center">
+                        <svg class="icon-svg mb-3" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 15h30v20H10z" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <path d="M15 20h20" stroke="currentColor" stroke-width="2"/>
+                            <path d="M15 25h20" stroke="currentColor" stroke-width="2"/>
+                            <path d="M15 30h20" stroke="currentColor" stroke-width="2"/>
+                            <path d="M35 15l-10 10-5-5" stroke="currentColor" stroke-width="2" fill="none"/>
+                        </svg>
+                        <h3 class="text-xl font-bold mb-2">Writing Workshop</h3>
+                        <p class="text-gray-400 mb-4 text-center">Guided writing activities with prompts and templates. Improve sentence structure, paragraph organization, and creative expression.</p>
+                        <p class="text-sm text-yellow-400">Intermediate</p>
+                        <button class="mt-4 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">Start Activity →</button>
+                    </div>
+
+                    <!-- Listening Challenge -->
+                    <div class="bg-[#2d3748] p-6 rounded-xl flex flex-col items-center">
+                        <svg class="icon-svg mb-3" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="25" cy="20" r="12" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <path d="M25 8v12" stroke="currentColor" stroke-width="2"/>
+                            <path d="M25 32l-8 8v-8" stroke="currentColor" stroke-width="2" fill="none"/>
+                            <path d="M25 32l8 8v-8" stroke="currentColor" stroke-width="2" fill="none"/>
+                            <path d="M15 20q0-5 5-5t5 5-5 5-5-5zm20 0q0-5-5-5t-5 5 5 5 5-5z" stroke="currentColor" stroke-width="2" fill="none"/>
+                        </svg>
+                        <h3 class="text-xl font-bold mb-2">Listening Challenge</h3>
+                        <p class="text-gray-400 mb-4 text-center">Audio listening exercises with comprehension questions. Develop listening skills and learn proper pronunciation from native speakers.</p>
+                        <p class="text-sm text-yellow-400">Intermediate</p>
+                        <button class="mt-4 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">Start Activity →</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section id="resources" class="py-16 px-4">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl font-bold mb-12 text-center">Learning Resources</h2>
+                <p class="text-center text-gray-400 mb-10">Explore our library of PDFs, videos, and interactive games</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 text-center">
+                    <!-- PDFs -->
+                    <div class="bg-[#1a1f2e] p-4 rounded-lg cursor-pointer hover:bg-[#2d3748] transition flex flex-col items-center justify-center">
+                        <svg class="resource-icon mb-2" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="5" y="5" width="30" height="30" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <path d="M15 10h10v5h-10z" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <path d="M15 20h10" stroke="currentColor" stroke-width="2"/>
+                            <path d="M15 25h10" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="25" cy="15" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <text x="22" y="17" font-size="8" fill="currentColor">cat</text>
+                        </svg>
+                        <h3 class="font-bold">PDFs</h3>
+                    </div>
+                    <!-- Videos -->
+                    <div class="bg-[#1a1f2e] p-4 rounded-lg cursor-pointer hover:bg-[#2d3748] transition flex flex-col items-center justify-center">
+                        <svg class="resource-icon mb-2" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="5" y="5" width="30" height="30" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <rect x="15" y="15" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <polygon points="25,15 30,20 25,25" fill="currentColor"/>
+                        </svg>
+                        <h3 class="font-bold">Videos</h3>
+                    </div>
+                    <!-- Games -->
+                    <div class="bg-[#1a1f2e] p-4 rounded-lg cursor-pointer hover:bg-[#2d3748] transition flex flex-col items-center justify-center">
+                        <svg class="resource-icon mb-2" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="20" cy="20" r="15" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <path d="M15 15l10 10" stroke="currentColor" stroke-width="2"/>
+                            <path d="M25 15l-10 10" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                        <h3 class="font-bold">Games</h3>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Grammar Guide -->
+                    <div class="bg-[#1a1f2e] p-6 rounded-xl border border-gray-800">
+                        <svg class="cover-svg mb-4" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="0" y="0" width="400" height="200" fill="#1a1f2e"/>
+                            <rect x="50" y="40" width="300" height="120" rx="8" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <path d="M100 80h200" stroke="currentColor" stroke-width="2"/>
+                            <path d="M100 110h200" stroke="currentColor" stroke-width="2"/>
+                            <path d="M100 140h200" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="250" cy="90" r="20" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <text x="240" y="95" font-size="16" fill="currentColor">cat</text>
+                        </svg>
+                        <h3 class="text-xl font-bold mb-2">Grammar Guide</h3>
+                        <p class="text-gray-400 mb-4">Complete reference for English grammar rules</p>
+                        <button class="text-blue-400 hover:underline">Download PDF →</button>
+                    </div>
+
+                    <!-- Pronunciation Videos -->
+                    <div class="bg-[#1a1f2e] p-6 rounded-xl border border-gray-800">
+                        <div class="w-full h-32 bg-gray-800 rounded mb-4 flex items-center justify-center">
+                            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-gray-500">
+                                <rect x="5" y="5" width="30" height="30" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <rect x="15" y="15" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <polygon points="25,15 30,20 25,25" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Pronunciation Videos</h3>
+                        <p class="text-gray-400 mb-4">Learn correct pronunciation from native speakers</p>
+                        <button class="text-blue-400 hover:underline">Watch Videos →</button>
+                    </div>
+
+                    <!-- Vocabulary Games -->
+                    <div class="bg-[#1a1f2e] p-6 rounded-xl border border-gray-800">
+                        <div class="w-full h-32 bg-gray-800 rounded mb-4 flex items-center justify-center">
+                            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-gray-500">
+                                <circle cx="20" cy="20" r="15" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <path d="M15 15l10 10" stroke="currentColor" stroke-width="2"/>
+                                <path d="M25 15l-10 10" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Vocabulary Games</h3>
+                        <p class="text-gray-400 mb-4">Fun interactive games to expand your vocabulary</p>
+                        <button class="text-blue-400 hover:underline">Play Games →</button>
+                    </div>
+
+                    <!-- Study Materials -->
+                    <div class="bg-[#1a1f2e] p-6 rounded-xl border border-gray-800">
+                        <div class="w-full h-32 bg-gray-800 rounded mb-4 flex items-center justify-center">
+                            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-gray-500">
+                                <rect x="5" y="5" width="30" height="30" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <path d="M15 10h10v5h-10z" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <path d="M15 20h10" stroke="currentColor" stroke-width="2"/>
+                                <path d="M15 25h10" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Study Materials</h3>
+                        <p class="text-gray-400 mb-4">Downloadable worksheets and practice exercises</p>
+                        <button class="text-blue-400 hover:underline">Download →</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Latest Blog Posts -->
+        <section id="blog" class="py-16 bg-[#1a1f2e] px-4">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl font-bold mb-12 text-center">Latest Blog Posts</h2>
+                <p class="text-center text-gray-400 mb-10">Tips, tricks, and insights for language learning</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <article class="bg-[#2d3748] p-6 rounded-xl">
+                        <h3 class="text-lg font-bold mb-2">5 Tips to Master English Pronunciation</h3>
+                        <p class="text-gray-400 text-sm mb-4">Learn effective techniques to improve your English pronunciation and sound like a native speaker.</p>
+                        <p class="text-xs text-gray-500">March 15, 2024</p>
+                    </article>
+                    <article class="bg-[#2d3748] p-6 rounded-xl">
+                        <h3 class="text-lg font-bold mb-2">Common English Mistakes & How to Avoid Them</h3>
+                        <p class="text-gray-400 text-sm mb-4">Discover the most common mistakes learners make and practical strategies to overcome them.</p>
+                        <p class="text-xs text-gray-500">March 10, 2024</p>
+                    </article>
+                    <article class="bg-[#2d3748] p-6 rounded-xl">
+                        <h3 class="text-lg font-bold mb-2">The Power of Immersion Learning</h3>
+                        <p class="text-gray-400 text-sm mb-4">Understand how immersion techniques can accelerate your English learning journey.</p>
+                        <p class="text-xs text-gray-500">March 5, 2024</p>
+                    </article>
+                    <article class="bg-[#2d3748] p-6 rounded-xl">
+                        <h3 class="text-lg font-bold mb-2">Build Your Business English Vocabulary</h3>
+                        <p class="text-gray-400 text-sm mb-4">Essential vocabulary and phrases for succeeding in professional English environments.</p>
+                        <p class="text-xs text-gray-500">February 28, 2024</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Your Learning Progress -->
+        <section class="py-16 px-4">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold mb-12 text-center">Your Learning Progress</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-[#1a1f2e] p-6 rounded-xl border border-gray-800">
+                        <h3 class="text-lg font-bold mb-4">Vocabulary</h3>
+                        <div class="progress-bar bg-gray-700">
+                            <div class="progress-fill bg-green-500" style="width: 75%;"></div>
+                        </div>
+                        <p class="text-right mt-1">75%</p>
+                    </div>
+                    <div class="bg-[#1a1f2e] p-6 rounded-xl border border-gray-800">
+                        <h3 class="text-lg font-bold mb-4">Grammar</h3>
+                        <div class="progress-bar bg-gray-700">
+                            <div class="progress-fill bg-yellow-500" style="width: 60%;"></div>
+                        </div>
+                        <p class="text-right mt-1">60%</p>
+                    </div>
+                    <div class="bg-[#1a1f2e] p-6 rounded-xl border border-gray-800">
+                        <h3 class="text-lg font-bold mb-4">Speaking</h3>
+                        <div class="progress-bar bg-gray-700">
+                            <div class="progress-fill bg-red-500" style="width: 45%;"></div>
+                        </div>
+                        <p class="text-right mt-1">45%</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Get in Touch -->
+        <section id="contact" class="py-16 bg-[#1a1f2e] px-4">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold mb-12 text-center">Get in Touch</h2>
+                <p class="text-center text-gray-400 mb-10">Have questions? We'd love to hear from you!</p>
+
+                <form class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <input type="text" placeholder="Your Name" class="px-4 py-3 bg-[#2d3748] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <input type="email" placeholder="Email Address" class="px-4 py-3 bg-[#2d3748] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <textarea placeholder="Message" rows="5" class="w-full px-4 py-3 bg-[#2d3748] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg">Send Message</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Teacher Dashboard -->
+        <section class="py-16 px-4">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl font-bold mb-12 text-center">Teacher Dashboard</h2>
+                <p class="text-center text-gray-400 mb-10">Upload lessons, games, and digital materials</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-[#1a1f2e] p-6 rounded-xl border border-gray-800 text-center">
+                        <h3 class="text-xl font-bold mb-4">Upload Lessons</h3>
+                        <p class="text-gray-400 mb-4">Drag and drop lesson files</p>
+                        <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">Upload</button>
+                    </div>
+                    <div class="bg-[#1a1f2e] p-6 rounded-xl border border-gray-800 text-center">
+                        <h3 class="text-xl font-bold mb-4">Share Games</h3>
+                        <p class="text-gray-400 mb-4">Add interactive learning games</p>
+                        <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">Share</button>
+                    </div>
+                    <div class="bg-[#1a1f2e] p-6 rounded-xl border border-gray-800 text-center">
+                        <h3 class="text-xl font-bold mb-4">Digital Books</h3>
+                        <p class="text-gray-400 mb-4">Upload study materials</p>
+                        <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">Upload</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Learning Games -->
+        <section id="games" class="py-16 bg-[#1a1f2e] px-4">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl font-bold mb-12 text-center">Interactive Learning Games</h2>
+                <p class="text-center text-gray-400 mb-10">Engaging games to boost vocabulary, grammar, and conversation skills</p>
+
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                    <div class="bg-[#2d3748] p-4 rounded-lg text-center">
+                        <p class="text-sm">Coming Soon</p>
+                        <p class="text-xs text-gray-500">Exciting game being developed</p>
+                    </div>
+                    <div class="bg-[#2d3748] p-4 rounded-lg text-center">
+                        <p class="text-sm">Coming Soon</p>
+                        <p class="text-xs text-gray-500">Exciting game being developed</p>
+                    </div>
+                    <div class="bg-[#2d3748] p-4 rounded-lg text-center">
+                        <p class="text-sm">Coming Soon</p>
+                        <p class="text-xs text-gray-500">Exciting game being developed</p>
+                    </div>
+                    <div class="bg-[#2d3748] p-4 rounded-lg text-center">
+                        <p class="text-sm">Coming Soon</p>
+                        <p class="text-xs text-gray-500">Exciting game being developed</p>
+                    </div>
+                    <div class="bg-[#2d3748] p-4 rounded-lg text-center">
+                        <p class="text-sm">Coming Soon</p>
+                        <p class="text-xs text-gray-500">Exciting game being developed</p>
+                    </div>
+                    <div class="bg-[#2d3748] p-4 rounded-lg text-center">
+                        <p class="text-sm">Coming Soon</p>
+                        <p class="text-xs text-gray-500">Exciting game being developed</p>
+                    </div>
+                </div>
+
+                <div class="text-center mt-12">
+                    <p class="mb-4">Want to Create a Game?</p>
+                    <p class="text-gray-400 text-sm mb-6">We're always looking for creative educators to contribute interactive games to our platform.</p>
+                    <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg">Get in Touch</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Teacher Worksheet Library -->
+        <section id="worksheet-uploads" class="py-16 px-4">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl font-bold mb-12 text-center">Teacher Worksheet Library</h2>
+                <p class="text-center text-gray-400 mb-10">Share and discover worksheets created by our teaching community</p>
+
+                <div class="bg-[#1a1f2e] p-6 rounded-xl border border-gray-800 mb-12">
+                    <h3 class="text-xl font-bold mb-4">Upload Your Worksheet</h3>
+                    <form class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-1">Worksheet Title *</label>
+                            <input type="text" class="w-full px-4 py-2 bg-[#2d3748] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1">Description *</label>
+                            <textarea class="w-full px-4 py-2 bg-[#2d3748] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1">Grade Level *</label>
+                            <select class="w-full px-4 py-2 bg-[#2d3748] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option>Select a level...</option>
+                                <option>Beginner</option>
+                                <option>Intermediate</option>
+                                <option>Advanced</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1">Upload File *</label>
+                            <div class="border-2 border-dashed border-gray-600 rounded-lg p-8 text-center">
+                                <p class="text-gray-400">Drag and drop your file here</p>
+                                <p class="text-gray-500 text-sm">or click to browse (PDF, DOC, DOCX)</p>
+                            </div>
+                        </div>
+                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg">Upload Worksheet</button>
+                    </form>
+                </div>
+
+                <div class="mb-12">
+                    <h3 class="text-2xl font-bold mb-6">All Worksheets</h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-[#1a1f2e] p-6 rounded-xl border border-gray-800">
+                            <h4 class="font-bold mb-1">Present Continuous Practice</h4>
+                            <p class="text-gray-400 text-sm mb-3">Interactive exercises focusing on present continuous tense with daily activities.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs bg-blue-900 text-blue-300 px-2 py-1 rounded">Beginner</span>
+                                <p class="text-xs text-gray-500">by Sarah Chen</p>
+                            </div>
+                            <div class="flex space-x-2 mt-3">
+                                <button class="text-xs bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded">Download</button>
+                                <button class="text-xs bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded">Save</button>
+                            </div>
+                        </div>
+                        <div class="bg-[#1a1f2e] p-6 rounded-xl border border-gray-800">
+                            <h4 class="font-bold mb-1">Past Perfect Tense Exercises</h4>
+                            <p class="text-gray-400 text-sm mb-3">Comprehensive worksheet with 50+ past perfect exercises and real-world scenarios.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs bg-yellow-900 text-yellow-300 px-2 py-1 rounded">Intermediate</span>
+                                <p class="text-xs text-gray-500">by Mike Johnson</p>
+                            </div>
+                            <div class="flex space-x-2 mt-3">
+                                <button class="text-xs bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded">Download</button>
+                                <button class="text-xs bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded">Save</button>
+                            </div>
+                        </div>
+                        <div class="bg-[#1a1f2e] p-6 rounded-xl border border-gray-800">
+                            <h4 class="font-bold mb-1">Business English Vocabulary</h4>
+                            <p class="text-gray-400 text-sm mb-3">Professional vocabulary and phrases for corporate communication and presentations.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs bg-red-900 text-red-300 px-2 py-1 rounded">Advanced</span>
+                                <p class="text-xs text-gray-500">by Emma Wilson</p>
+                            </div>
+                            <div class="flex space-x-2 mt-3">
+                                <button class="text-xs bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded">Download</button>
+                                <button class="text-xs bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded">Save</button>
+                            </div>
+                        </div>
+                        <div class="bg-[#1a1f2e] p-6 rounded-xl border border-gray-800">
+                            <h4 class="font-bold mb-1">Question Formation Basics</h4>
+                            <p class="text-gray-400 text-sm mb-3">Step-by-step guide to forming questions with answer keys and common mistakes.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs bg-blue-900 text-blue-300 px-2 py-1 rounded">Beginner</span>
+                                <p class="text-xs text-gray-500">by David Martinez</p>
+                            </div>
+                            <div class="flex space-x-2 mt-3">
+                                <button class="text-xs bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded">Download</button>
+                                <button class="text-xs bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <p class="text-2xl font-bold mb-2">347</p>
+                    <p class="text-gray-400 text-sm">Total Worksheets</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TOEFL Practice Tests -->
+        <section id="toefl" class="py-16 bg-[#1a1f2e] px-4">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl font-bold mb-12 text-center">TOEFL Practice Tests</h2>
+                <p class="text-center text-gray-400 mb-10">Prepare for the TOEFL exam with our comprehensive practice tests</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                    <!-- Reading Test Card -->
+                    <div class="bg-[#2d3748] p-6 rounded-xl">
+                        <h3 class="text-xl font-bold mb-2">Reading Test</h3>
+                        <p class="text-gray-400 text-sm mb-4">Comprehensive reading comprehension exercises with academic passages and questions</p>
+                        <div class="flex justify-between text-xs mb-4">
+                            <span>60 minutes</span>
+                            <span>30 questions</span>
+                        </div>
+                        <!-- Button triggers the modal -->
+                        <button id="startReadingTestBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">Start Test</button>
+                    </div>
+                    <!-- Other Test Cards (Listening, Speaking, Writing) -->
+                    <div class="bg-[#2d3748] p-6 rounded-xl">
+                        <h3 class="text-xl font-bold mb-2">Listening Test</h3>
+                        <p class="text-gray-400 text-sm mb-4">Audio passages with conversations and lectures followed by questions</p>
+                        <div class="flex justify-between text-xs mb-4">
+                            <span>45 minutes</span>
+                            <span>28 questions</span>
+                        </div>
+                        <button class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">Start Test</button>
+                    </div>
+                    <div class="bg-[#2d3748] p-6 rounded-xl">
+                        <h3 class="text-xl font-bold mb-2">Speaking Test</h3>
+                        <p class="text-gray-400 text-sm mb-4">Record yourself answering speaking prompts and receive AI-powered feedback</p>
+                        <div class="flex justify-between text-xs mb-4">
+                            <span>20 minutes</span>
+                            <span>6 tasks</span>
+                        </div>
+                        <button class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">Start Test</button>
+                    </div>
+                    <div class="bg-[#2d3748] p-6 rounded-xl">
+                        <h3 class="text-xl font-bold mb-2">Writing Test</h3>
+                        <p class="text-gray-400 text-sm mb-4">Integrated and independent writing tasks with automated essay evaluation</p>
+                        <div class="flex justify-between text-xs mb-4">
+                            <span>50 minutes</span>
+                            <span>2 tasks</span>
+                        </div>
+                        <button class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">Start Test</button>
+                    </div>
+                </div>
+
+                <!-- Full-Length Practice Tests -->
+                <div class="text-center">
+                    <h3 class="text-2xl font-bold mb-6">Full-Length Practice Tests</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-[#2d3748] p-6 rounded-xl">
+                            <h4 class="font-bold mb-2">Full Practice Test 1</h4>
+                            <p class="text-gray-400 text-sm">Complete 3-hour exam simulation</p>
+                            <button class="mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">Start Test</button>
+                        </div>
+                        <div class="bg-[#2d3748] p-6 rounded-xl">
+                            <h4 class="font-bold mb-2">Full Practice Test 2</h4>
+                            <p class="text-gray-400 text-sm">Complete 3-hour exam simulation</p>
+                            <button class="mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">Start Test</button>
+                        </div>
+                        <div class="bg-[#2d3748] p-6 rounded-xl">
+                            <h4 class="font-bold mb-2">Full Practice Test 3</h4>
+                            <p class="text-gray-400 text-sm">Complete 3-hour exam simulation</p>
+                            <button class="mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">Start Test</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Track Your Progress -->
+                <div class="text-center mt-12">
+                    <h3 class="text-xl font-bold mb-6">Track Your Progress</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div>
+                            <p class="text-2xl font-bold">0</p>
+                            <p class="text-gray-400 text-sm">Tests Completed</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-bold">0</p>
+                            <p class="text-gray-400 text-sm">Average Score</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-bold">0</p>
+                            <p class="text-gray-400 text-sm">Study Streak Days</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-bold">0</p>
+                            <p class="text-gray-400 text-sm">Badges Earned</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-[#0a0f19] py-12 px-4 border-t border-gray-800">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div>
+                        <h3 class="text-xl font-bold mb-4">Aii Language Center</h3>
+                        <p class="text-gray-400 text-sm">Empowering learners worldwide through quality English education.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-4">Quick Links</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#courses" class="text-gray-400 hover:text-white text-sm">Courses</a></li>
+                            <li><a href="#resources" class="text-gray-400 hover:text-white text-sm">Resources</a></li>
+                            <li><a href="#blog" class="text-gray-400 hover:text-white text-sm">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-4">Support</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#contact" class="text-gray-400 hover:text-white text-sm">Contact Us</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white text-sm">FAQ</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white text-sm">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-4">Newsletter</h4>
+                        <div class="flex">
+                            <input type="email" placeholder="Your email" class="px-4 py-2 bg-[#1a1f2e] rounded-l-lg focus:outline-none w-full text-sm">
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-r-lg text-sm">Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500 text-sm">
+                    <p>&copy; 2024 Aii Language Center. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- TOEFL Reading Test Modal -->
+    <div id="toeflReadingModal" class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden">
+        <div class="min-h-screen flex items-center justify-center p-4">
+            <div class="modal-content bg-[#1a1f2e] w-full max-w-4xl rounded-xl shadow-2xl flex flex-col max-h-[90vh]">
+                <div class="p-6 flex justify-between items-center border-b border-gray-700">
+                    <h2 class="text-2xl font-bold">TOEFL Reading Test</h2>
+                    <div class="flex items-center space-x-4">
+                        <span id="timerDisplay" class="text-xl font-mono bg-gray-800 px-3 py-1 rounded">60:00</span>
+                        <button id="closeReadingModalBtn" class="text-xl focus:outline-none">&times;</button>
+                    </div>
+                </div>
+                <div class="overflow-y-auto flex-grow p-6">
+                    <div id="readingTestContent">
+                        <h3 id="testTitle" class="text-xl font-bold mb-4">Sample Academic Passage</h3>
+                        <p id="readingPassage" class="mb-6 leading-relaxed text-justify">
+                            The development of agriculture stands as one of humanity's most pivotal achievements, fundamentally altering social structures, population densities, and the relationship between humans and the environment. Archaeological evidence suggests that the transition from hunting-gathering to farming began independently in several regions around the world sometime after the end of the last Ice Age, approximately 10,000 to 12,000 years ago. This shift, often referred to as the Neolithic Revolution, involved the domestication of plants and animals.
+                            <br><br>
+                            Early agricultural societies, such as those in the Fertile Crescent (modern-day Middle East), began cultivating cereals like wheat and barley and domesticating animals like goats and sheep. This stable food supply allowed populations to settle in permanent villages, leading to increasingly complex social hierarchies, specialized labor, and technological advancements. However, the transition was not uniform or rapid everywhere, and it brought challenges, including increased susceptibility to disease due to higher population densities and potential nutritional deficiencies compared to diverse hunter-gatherer diets.
+                            <br><br>
+                            The impact of agriculture extended beyond immediate survival. It facilitated the rise of cities, complex political systems, and written language, laying the groundwork for what we consider "civilization." Understanding this transition helps historians and anthropologists grasp the roots of modern societal structures and environmental interactions.
+                        </p>
+                        <form id="readingQuestionsForm">
+                            <div class="question mb-6 p-4 bg-[#2d3748] rounded-lg">
+                                <p class="font-bold mb-2">1. According to the passage, the Neolithic Revolution refers to:</p>
+                                <label class="block mb-2"><input type="radio" name="q1" value="a" class="mr-2"> a) The end of the last Ice Age.</label>
+                                <label class="block mb-2"><input type="radio" name="q1" value="b" class="mr-2"> b) The development of agriculture and domestication.</label>
+                                <label class="block mb-2"><input type="radio" name="q1" value="c" class="mr-2"> c) The rise of cities and civilizations.</label>
+                                <label class="block mb-2"><input type="radio" name="q1" value="d" class="mr-2"> d) The transition to hunting and gathering.</label>
+                            </div>
+                            <div class="question mb-6 p-4 bg-[#2d3748] rounded-lg">
+                                <p class="font-bold mb-2">2. The passage suggests that early agricultural societies:</p>
+                                <label class="block mb-2"><input type="radio" name="q2" value="a" class="mr-2"> a) Were less susceptible to disease.</label>
+                                <label class="block mb-2"><input type="radio" name="q2" value="b" class="mr-2"> b) Led to more complex social structures.</label>
+                                <label class="block mb-2"><input type="radio" name="q2" value="c" class="mr-2"> c) Resulted in more diverse diets.</label>
+                                <label class="block mb-2"><input type="radio" name="q2" value="d" class="mr-2"> d) Prevented technological advancements.</label>
+                            </div>
+                            <div class="question mb-6 p-4 bg-[#2d3748] rounded-lg">
+                                <p class="font-bold mb-2">3. Which of the following is mentioned as a challenge brought by agriculture?</p>
+                                <label class="block mb-2"><input type="radio" name="q3" value="a" class="mr-2"> a) Decreased population density.</label>
+                                <label class="block mb-2"><input type="radio" name="q3" value="b" class="mr-2"> b) Increased susceptibility to disease.</label>
+                                <label class="block mb-2"><input type="radio" name="q3" value="c" class="mr-2"> c) Uniform and rapid transition everywhere.</label>
+                                <label class="block mb-2"><input type="radio" name="q3" value="d" class="mr-2"> d) Simplified social hierarchies.</label>
+                            </div>
+                            <!-- Add more questions as needed -->
+                        </form>
+                    </div>
+                </div>
+                <div class="p-6 border-t border-gray-700 flex justify-end">
+                    <button id="submitReadingAnswersBtn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg">Submit Answers</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ✅ NEW: Navigate directly to RF.html
+        function goToRF() {
+            window.location.href = 'RF.html';
+        }
+
+        // Authentication Modal Logic
+        const authModal = document.getElementById('authModal');
+        const authTrigger = document.getElementById('authTrigger');
+        const loginTab = document.getElementById('loginTab');
+        const signupTab = document.getElementById('signupTab');
+        const loginForm = document.getElementById('loginForm');
+        const signupForm = document.getElementById('signupForm');
+        const authMessage = document.getElementById('authMessage');
+
+        authTrigger.addEventListener('click', () => {
+            authModal.classList.remove('hidden');
+        });
+
+        loginTab.addEventListener('click', () => {
+            loginForm.style.display = 'block';
+            signupForm.style.display = 'none';
+            loginTab.classList.add('bg-blue-600', 'text-white');
+            loginTab.classList.remove('bg-gray-800', 'text-gray-400');
+            signupTab.classList.remove('bg-blue-600', 'text-white');
+            signupTab.classList.add('bg-gray-800', 'text-gray-400');
+        });
+
+        signupTab.addEventListener('click', () => {
+            loginForm.style.display = 'none';
+            signupForm.style.display = 'block';
+            signupTab.classList.add('bg-blue-600', 'text-white');
+            signupTab.classList.remove('bg-gray-800', 'text-gray-400');
+            loginTab.classList.remove('bg-blue-600', 'text-white');
+            loginTab.classList.add('bg-gray-800', 'text-gray-400');
+        });
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const [email, pass] = loginForm.querySelectorAll('input');
+            if (!email.value.includes('@school.') && !email.value.includes('@edu')) {
+                authMessage.textContent = '⚠ Please use a valid school email address (@school. or @edu)';
+                authMessage.style.opacity = '1';
+                setTimeout(() => authMessage.style.opacity = '0', 3000);
+                return;
+            }
+            authMessage.textContent = '✓ Login successful! Welcome back.';
+            authMessage.style.opacity = '1';
+            setTimeout(() => {
+                authModal.classList.add('hidden');
+                authMessage.style.opacity = '0';
+                loginForm.reset();
+            }, 2000);
+        });
+
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const [name, email, school, pass, confirm] = signupForm.querySelectorAll('input');
+            if (!email.value.includes('@school.') && !email.value.includes('@edu')) {
+                authMessage.textContent = '⚠ Please use a valid school email address (@school. or @edu)';
+                authMessage.style.opacity = '1';
+                setTimeout(() => authMessage.style.opacity = '0', 3000);
+                return;
+            }
+            if (pass.value !== confirm.value) {
+                authMessage.textContent = '⚠ Passwords do not match';
+                authMessage.style.opacity = '1';
+                setTimeout(() => authMessage.style.opacity = '0', 3000);
+                return;
+            }
+            if (pass.value.length < 8) {
+                authMessage.textContent = '⚠ Password must be at least 8 characters';
+                authMessage.style.opacity = '1';
+                setTimeout(() => authMessage.style.opacity = '0', 3000);
+                return;
+            }
+            authMessage.textContent = '✓ Account created successfully! Verification email sent.';
+            authMessage.style.opacity = '1';
+            setTimeout(() => {
+                authModal.classList.add('hidden');
+                authMessage.style.opacity = '0';
+                signupForm.reset();
+            }, 2000);
+        });
+
+        authModal.addEventListener('click', (e) => {
+            if (e.target === authModal) authModal.classList.add('hidden');
+        });
+
+        // Side Panel Logic
+        const sidePanel = document.getElementById('sidePanel');
+        const panelOverlay = document.getElementById('panelOverlay');
+        const togglePanelBtn = document.getElementById('togglePanelBtn');
+        const closePanelBtn = document.getElementById('closePanelBtn');
+        const mainContent = document.getElementById('mainContent');
+        const mainNav = document.getElementById('mainNav');
+
+        togglePanelBtn.addEventListener('click', () => {
+            sidePanel.classList.toggle('active');
+            panelOverlay.classList.toggle('active');
+            mainContent.classList.toggle('content-shifted');
+            mainNav.classList.toggle('adjusted-for-panel');
+        });
+        closePanelBtn.addEventListener('click', () => {
+            sidePanel.classList.remove('active');
+            panelOverlay.classList.remove('active');
+            mainContent.classList.remove('content-shifted');
+            mainNav.classList.remove('adjusted-for-panel');
+        });
+        panelOverlay.addEventListener('click', () => {
+            sidePanel.classList.remove('active');
+            panelOverlay.classList.remove('active');
+            mainContent.classList.remove('content-shifted');
+            mainNav.classList.remove('adjusted-for-panel');
+        });
+
+        // Apply default config
+        const defaultConfig = {
+            hero_title: 'Aii Language Center',
+            hero_subtitle: 'Master English with confidence',
+            cta_button_1: 'Explore Courses',
+            cta_button_2: 'Join Now',
+            background_color: '#0f1419',
+            surface_color: '#1a1f2e',
+            text_color: '#e5e7eb',
+            primary_action: '#3b82f6',
+            secondary_action: '#1e3a8a',
+            font_family: 'Outfit',
+            font_size: 16
+        };
+
+        function applyConfig(config) {
+            document.getElementById('heroTitle').textContent = config.hero_title || defaultConfig.hero_title;
+            document.getElementById('heroSubtitle').textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
+            document.getElementById('ctaBtn1').textContent = config.cta_button_1 || defaultConfig.cta_button_1;
+            document.getElementById('ctaBtn2').textContent = config.cta_button_2 || defaultConfig.cta_button_2;
+            document.getElementById('heroTitle').style.color = config.text_color || defaultConfig.text_color;
+            document.getElementById('heroSubtitle').style.color = config.primary_action || defaultConfig.primary_action;
+            document.getElementById('ctaBtn1').style.background = `linear-gradient(135deg, ${config.primary_action || defaultConfig.primary_action} 0%, ${config.secondary_action || defaultConfig.secondary_action} 100%)`;
+            document.getElementById('ctaBtn2').style.background = `linear-gradient(135deg, ${config.primary_action || defaultConfig.primary_action} 0%, ${config.secondary_action || defaultConfig.secondary_action} 100%)`;
+            const font = config.font_family || defaultConfig.font_family;
+            document.body.style.fontFamily = `${font}, sans-serif`;
+            const size = config.font_size || defaultConfig.font_size;
+            document.getElementById('heroTitle').style.fontSize = `${size * 3.5}px`;
+            document.getElementById('heroSubtitle').style.fontSize = `${size * 1.4}px`;
+        }
+        applyConfig(defaultConfig);
+
+        // --- TOEFL READING TEST LOGIC ---
+        const startReadingTestBtn = document.getElementById('startReadingTestBtn');
+        const toeflReadingModal = document.getElementById('toeflReadingModal');
+        const closeReadingModalBtn = document.getElementById('closeReadingModalBtn');
+        const submitReadingAnswersBtn = document.getElementById('submitReadingAnswersBtn');
+        const timerDisplay = document.getElementById('timerDisplay');
+        const readingQuestionsForm = document.getElementById('readingQuestionsForm');
+
+        let timerInterval;
+        let timeLeft = 60 * 60; // 60 minutes in seconds
+
+        function startTimer() {
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    alert("Time's up! Submitting answers...");
+                    // Optionally auto-submit here
+                    submitReadingAnswers();
+                }
+            }, 1000);
+        }
+
+        function stopTimer() {
+            clearInterval(timerInterval);
+        }
+
+        function resetTimer() {
+            stopTimer();
+            timeLeft = 60 * 60; // Reset to 60 minutes
+            timerDisplay.textContent = '60:00';
+        }
+
+        function showReadingTest() {
+            resetTimer();
+            toeflReadingModal.classList.remove('hidden');
+            startTimer();
+        }
+
+        function hideReadingTest() {
+            stopTimer();
+            toeflReadingModal.classList.add('hidden');
+            resetTimer();
+            readingQuestionsForm.reset(); // Clear answers when closing
+        }
+
+        function submitReadingAnswers() {
+            // Stop timer and prevent further updates
+            stopTimer();
+
+            // Get selected answers (example for 3 questions)
+            const q1Answer = document.querySelector('input[name="q1"]:checked');
+            const q2Answer = document.querySelector('input[name="q2"]:checked');
+            const q3Answer = document.querySelector('input[name="q3"]:checked');
+
+            // Example answer key (replace with correct answers)
+            const answerKey = { q1: 'b', q2: 'b', q3: 'b' };
+            let score = 0;
+
+            if (q1Answer && q1Answer.value === answerKey.q1) score++;
+            if (q2Answer && q2Answer.value === answerKey.q2) score++;
+            if (q3Answer && q3Answer.value === answerKey.q3) score++;
+
+            const totalQuestions = 3; // Update based on actual number of questions
+            const percentage = Math.round((score / totalQuestions) * 100);
+
+            alert(`Test submitted!\nCorrect Answers: ${score}/${totalQuestions}\nScore: ${percentage}%`);
+
+            // Reset and close modal after submission
+            hideReadingTest();
+        }
+
+        startReadingTestBtn.addEventListener('click', showReadingTest);
+        closeReadingModalBtn.addEventListener('click', hideReadingTest);
+        submitReadingAnswersBtn.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent default form submission
+            submitReadingAnswers();
+        });
+
+        // Optional: Close modal if clicked outside content
+        toeflReadingModal.addEventListener('click', (e) => {
+            if (e.target === toeflReadingModal) {
+                hideReadingTest();
+            }
+        });
+
+    </script>
+</body>
+</html>
+
