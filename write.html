@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sentence Quest</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{--bg:#0B1D13;--fg:#F5E6C8;--fd:#A89880;--gold:#C9A84C;--gd:#8B6914;--gl:#E8D48B;--acc:#E8583A;--ok:#4CAF50;--er:#E53935;--bs:#F0E4CC;--bl:#D4C4A0;--tl:#FFF8E7;--tm:#F5E6C8;--td:#E0D0B0;--gr:#C62828;--co:#00695C;--id:#E65100;--vo:#2E7D32;--st:#1565C0}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--fg);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 50% 30%,rgba(20,60,35,.6),transparent 70%);pointer-events:none;z-index:0}
+
+#startScreen,#modeScreen{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:2rem;text-align:center}
+.orn{font-size:2.5rem;color:var(--gold);margin-bottom:.5rem;opacity:.7}
+.stit{font-family:'Cinzel',serif;font-size:clamp(2.4rem,5vw,3.8rem);font-weight:900;color:var(--gold);line-height:1.1;margin-bottom:.3rem;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+.ssub{font-family:'Cinzel',serif;font-size:clamp(.85rem,1.8vw,1.1rem);color:var(--fd);letter-spacing:3px;text-transform:uppercase;margin-bottom:1.5rem}
+.sdesc{font-size:.95rem;color:var(--fd);max-width:440px;line-height:1.7;margin-bottom:2rem;opacity:.8}
+.sigrp{display:flex;flex-direction:column;align-items:center;gap:1rem;width:100%;max-width:360px}
+.si{width:100%;padding:1rem 1.2rem;border:2px solid rgba(201,168,76,.3);border-radius:10px;font-family:'Nunito',sans-serif;font-size:1rem;background:rgba(15,42,26,.8);color:var(--fg);outline:none;transition:all .3s;backdrop-filter:blur(8px)}
+.si:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(201,168,76,.15)}
+.si::placeholder{color:var(--fd);opacity:.5}
+.bgold{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;padding:.9rem 2.4rem;background:linear-gradient(135deg,var(--gold),var(--gd));color:#1a1a1a;border:none;border-radius:10px;font-family:'Nunito',sans-serif;font-size:1rem;font-weight:800;cursor:pointer;transition:all .3s;box-shadow:0 4px 16px rgba(201,168,76,.3),inset 0 1px 0 rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:1px}
+.bgold:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,.4)}
+.bgold:disabled{opacity:.35;cursor:not-allowed;transform:none}
+.sfeat{display:flex;gap:1.8rem;margin-top:2rem;flex-wrap:wrap;justify-content:center}
+.sfeat .f{display:flex;align-items:center;gap:.4rem;font-size:.8rem;color:var(--fd);opacity:.7}
+.sfeat .f i{color:var(--gold)}
+
+/* Mode cards */
+.mode-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;max-width:700px;width:100%;margin:1.5rem 0}
+.mode-card{background:rgba(15,42,26,.6);border:2px solid rgba(201,168,76,.15);border-radius:14px;padding:1.2rem;cursor:pointer;transition:all .3s;text-align:left}
+.mode-card:hover{border-color:var(--gold);background:rgba(201,168,76,.08);transform:translateY(-2px)}
+.mode-card.sel{border-color:var(--gold);background:rgba(201,168,76,.12);box-shadow:0 0 0 3px rgba(201,168,76,.2)}
+.mode-card .mc-icon{font-size:1.4rem;color:var(--gold);margin-bottom:.5rem}
+.mode-card .mc-name{font-weight:800;font-size:.95rem;color:var(--fg);margin-bottom:.3rem}
+.mode-card .mc-desc{font-size:.75rem;color:var(--fd);line-height:1.5;opacity:.8}
+.mode-card .mc-tag{display:inline-block;margin-top:.5rem;padding:.15rem .5rem;border-radius:50px;font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;background:rgba(201,168,76,.15);color:var(--gl)}
+
+#gameScreen{display:none;position:relative;z-index:1;min-height:100vh}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:.6rem 1.2rem;background:rgba(11,29,19,.92);border-bottom:1px solid rgba(201,168,76,.12);position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);flex-wrap:wrap;gap:.4rem}
+.tl{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.tlogo{font-family:'Cinzel',serif;font-weight:900;font-size:.9rem;color:var(--gold);letter-spacing:1px}
+.stag{background:rgba(201,168,76,.12);color:var(--gl);padding:.15rem .6rem;border-radius:50px;font-size:.7rem;font-weight:700;border:1px solid rgba(201,168,76,.2)}
+.mtag{background:rgba(232,88,58,.15);color:var(--acc);padding:.15rem .6rem;border-radius:50px;font-size:.68rem;font-weight:700;border:1px solid rgba(232,88,58,.2)}
+.tr{display:flex;align-items:center;gap:.3rem}
+.bic{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(201,168,76,.2);border-radius:7px;background:transparent;color:var(--fd);cursor:pointer;transition:all .2s;font-size:.75rem}
+.bic:hover{border-color:var(--gold);color:var(--gold)}
+
+.sbar{display:flex;gap:0;background:rgba(15,42,26,.6);border-bottom:1px solid rgba(201,168,76,.1);overflow-x:auto}
+.sc{display:flex;align-items:center;gap:.35rem;padding:.4rem .8rem;font-size:.72rem;font-weight:700;color:var(--fd);white-space:nowrap;border-right:1px solid rgba(201,168,76,.08)}
+.sc span{color:var(--gold);font-size:.9rem;font-weight:900}
+.sc i{font-size:.75rem;opacity:.6}
+.sc.timer-warn span{color:var(--er);animation:timerPulse 1s infinite}
+@keyframes timerPulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+.gl{display:flex;flex-direction:column;align-items:center;padding:1rem;gap:.8rem}
+.da{display:flex;align-items:center;gap:1.5rem;background:rgba(15,42,26,.5);padding:.8rem 1.5rem;border-radius:12px;border:1px solid rgba(201,168,76,.1)}
+.ds{width:62px;height:62px;perspective:400px}
+.dc{width:62px;height:62px;position:relative;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.15,.8,.3,1);transform:rotateX(-20deg) rotateY(20deg)}
+.dc.roll{transition:none;animation:dtumble .1s infinite linear}
+@keyframes dtumble{to{transform:rotateX(360deg) rotateY(360deg)}}
+.df{position:absolute;width:62px;height:62px;border-radius:10px;background:linear-gradient(145deg,#FFF,#F5F0E8);border:2px solid #E0D8C8;box-shadow:inset 0 0 12px rgba(0,0,0,.04);display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);padding:8px;gap:2px}
+.dd{width:100%;height:100%;border-radius:50%;background:radial-gradient(circle at 38% 35%,#555,#1a1a1a);box-shadow:inset 0 1px 2px rgba(0,0,0,.6);opacity:0;align-self:center;justify-self:center}
+.dd.on{opacity:1}
+.f1{transform:translateZ(31px)}.f6{transform:rotateY(180deg) translateZ(31px)}.f3{transform:rotateY(90deg) translateZ(31px)}.f4{transform:rotateY(-90deg) translateZ(31px)}.f2{transform:rotateX(-90deg) translateZ(31px)}.f5{transform:rotateX(90deg) translateZ(31px)}
+.di{display:flex;flex-direction:column;gap:.3rem}
+.dl{font-size:.68rem;color:var(--fd);font-weight:600;text-transform:uppercase;letter-spacing:1px;opacity:.5}
+.rb{padding:.6rem 1.4rem;background:linear-gradient(135deg,var(--acc),#C62828);color:#fff;border:none;border-radius:9px;font-family:'Nunito',sans-serif;font-size:.88rem;font-weight:800;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:.4rem;box-shadow:0 3px 10px rgba(232,88,58,.3);text-transform:uppercase;letter-spacing:.5px}
+.rb:hover{transform:translateY(-1px)}.rb:disabled{opacity:.35;cursor:not-allowed;transform:none}
+
+.sm{text-align:center;font-size:.88rem;font-weight:700;min-height:1.4em;color:var(--gl);transition:all .3s}
+.sm.er{color:var(--er)}.sm.ok{color:var(--ok)}
+
+.bf{position:relative;background:linear-gradient(145deg,#D4AF37,#8B6914,#C9A84C,#B8960C,#8B6914);padding:9px;border-radius:16px;box-shadow:0 0 0 2px #3E2723,0 0 0 5px rgba(201,168,76,.3),0 10px 36px rgba(0,0,0,.6),inset 0 2px 4px rgba(255,255,255,.15),inset 0 -2px 4px rgba(0,0,0,.3)}
+.bf::before{content:'';position:absolute;inset:6px;border:1.5px solid rgba(62,39,35,.5);border-radius:10px;pointer-events:none;z-index:1}
+.co{position:absolute;font-size:1rem;color:rgba(62,39,35,.6);z-index:2}
+.co.tl{top:2px;left:5px}.co.tr{top:2px;right:5px}.co.bl{bottom:2px;left:5px}.co.br{bottom:2px;right:5px}
+.btb{text-align:center;padding:4px 0 1px;font-family:'Cinzel',serif;font-size:.65rem;font-weight:700;color:var(--gd);letter-spacing:3px;text-transform:uppercase;opacity:.6}
+.bp{perspective:1100px}
+.bd{display:grid;grid-template-columns:repeat(10,1fr);grid-template-rows:repeat(5,1fr);gap:4px;width:700px;min-width:700px;background:var(--bs);padding:9px;border-radius:7px;transform:rotateX(8deg);transform-origin:center 60%;position:relative;box-shadow:inset 0 0 25px rgba(0,0,0,.06)}
+
+.c{width:63px;height:60px;border-radius:7px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;cursor:default;transition:all .25s;z-index:1;background:linear-gradient(160deg,var(--tl),var(--tm));border:2px solid var(--bl);box-shadow:0 2px 0 var(--td),0 3px 0 #C4B48C,0 5px 8px rgba(0,0,0,.14),inset 0 1px 0 rgba(255,255,255,.7);overflow:hidden}
+.c::after{content:'';position:absolute;inset:0;border-radius:5px;background:linear-gradient(180deg,rgba(255,255,255,.14) 0%,transparent 40%);pointer-events:none}
+.cn{font-size:.55rem;font-weight:900;color:#B0A080;position:absolute;top:2px;left:4px;z-index:2}
+.ci{font-size:.78rem;margin-top:2px;z-index:2;filter:drop-shadow(0 1px 1px rgba(0,0,0,.1))}
+.cl{font-size:.44rem;font-weight:800;text-transform:uppercase;letter-spacing:.2px;margin-top:1px;opacity:.55;z-index:2}
+.c.c1{background:linear-gradient(160deg,#E8F5E9,#C8E6C9);border-color:#A5D6A7;box-shadow:0 2px 0 #81C784,0 3px 0 #66BB6A,0 5px 8px rgba(0,0,0,.14),inset 0 1px 0 rgba(255,255,255,.7)}
+.c.c1 .ci{color:var(--ok);font-size:.9rem}
+.c.c50{background:linear-gradient(160deg,#FFF8E1,#FFECB3);border-color:#FFD54F;box-shadow:0 2px 0 #FFCA28,0 3px 0 #FFC107,0 5px 8px rgba(0,0,0,.14),inset 0 1px 0 rgba(255,255,255,.7);animation:fglow 2s ease-in-out infinite alternate}
+.c.c50 .ci{color:#F9A825;font-size:.9rem}
+@keyframes fglow{to{box-shadow:0 2px 0 #FFCA28,0 3px 0 #FFC107,0 5px 8px rgba(0,0,0,.14),inset 0 1px 0 rgba(255,255,255,.7),0 0 20px rgba(255,193,7,.4)}}
+.c.tg{border-bottom:3px solid var(--gr)}.c.tg .ci{color:var(--gr)}
+.c.tc{border-bottom:3px solid var(--co)}.c.tc .ci{color:var(--co)}
+.c.ti{border-bottom:3px solid var(--id)}.c.ti .ci{color:var(--id)}
+.c.tv{border-bottom:3px solid var(--vo)}.c.tv .ci{color:var(--vo)}
+.c.ts{border-bottom:3px solid var(--st)}.c.ts .ci{color:var(--st)}
+/* Power-up tile styles */
+.c.pu-skip{background:linear-gradient(160deg,#E3F2FD,#BBDEFB)!important;border-color:#64B5F6!important}
+.c.pu-skip .ci{color:#1565C0!important}
+.c.pu-double{background:linear-gradient(160deg,#FFF3E0,#FFE0B2)!important;border-color:#FFB74D!important}
+.c.pu-double .ci{color:#E65100!important}
+.c.pu-shield{background:linear-gradient(160deg,#F3E5F5,#E1BEE7)!important;border-color:#BA68C8!important}
+.c.pu-shield .ci{color:#7B1FA2!important}
+.c.pu-peek{background:linear-gradient(160deg,#E0F7FA,#B2EBF2)!important;border-color:#4DD0E1!important}
+.c.pu-peek .ci{color:#00838F!important}
+.c.cu{border-color:var(--gold)!important;border-width:3px!important;animation:cglow 1.5s ease-in-out infinite alternate;z-index:3;transform:scale(1.05)}
+@keyframes cglow{to{box-shadow:0 2px 0 var(--td),0 3px 0 #C4B48C,0 5px 8px rgba(0,0,0,.14),inset 0 1px 0 rgba(255,255,255,.7),0 0 22px rgba(201,168,76,.6)}}
+.c.vi{opacity:.5;filter:saturate(.3)}
+.c.vi::before{content:'\f00c';font-family:'Font Awesome 6 Free';font-weight:900;font-size:.5rem;color:var(--ok);position:absolute;bottom:2px;right:3px;z-index:3}
+.c.fa{animation:tfl .2s ease}
+@keyframes tfl{0%{background:linear-gradient(160deg,#C8E6C9,#A5D6A7)}100%{}}
+.c.ba{animation:tbk .15s ease}
+@keyframes tbk{0%{background:linear-gradient(160deg,#FFCDD2,#EF9A9A)}100%{}}
+
+#tk{position:fixed;z-index:300;pointer-events:none;transform:translate(-50%,-100%);transition:left .12s linear,top .12s linear;filter:drop-shadow(0 5px 7px rgba(0,0,0,.5))}
+#tk.hop{animation:thop .22s ease}
+@keyframes thop{40%{transform:translate(-50%,-128%)}}
+.th{width:20px;height:20px;background:radial-gradient(circle at 38% 32%,#FF6F61,#C62828 60%,#8E0000);border-radius:50%;margin:0 auto;box-shadow:inset 0 -2px 5px rgba(0,0,0,.2)}
+.ts{width:9px;height:16px;background:linear-gradient(90deg,#8E0000,#D32F2F 35%,#E53935 55%,#B71C1C);margin:-1px auto 0;border-radius:3px 3px 1px 1px}
+.tb{width:24px;height:9px;background:radial-gradient(ellipse,#D32F2F 20%,#8E0000);border-radius:50%;margin:-1px auto 0;box-shadow:0 2px 5px rgba(0,0,0,.5)}
+
+.bleg{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center}
+.bli{display:flex;align-items:center;gap:.25rem;font-size:.6rem;font-weight:700;color:var(--fd)}
+.bld{width:7px;height:7px;border-radius:2px}
+.lt{display:flex;align-items:center;gap:.4rem;font-size:.75rem;font-weight:700;color:var(--gold);cursor:pointer;border:none;background:none;font-family:'Nunito',sans-serif;padding:.3rem 0;opacity:.7}
+.lt:hover{opacity:1}
+.lp{display:none;max-height:160px;overflow-y:auto;background:rgba(15,42,26,.6);border:1px solid rgba(201,168,76,.1);border-radius:9px;padding:.7rem;font-size:.7rem;line-height:1.7;width:100%;max-width:700px}
+.lp.open{display:block}
+.le{border-bottom:1px solid rgba(201,168,76,.06);padding:.1rem 0;color:var(--fd)}
+.le:last-child{border-bottom:none}
+.lr{color:var(--gold);font-weight:700}.lok{color:var(--ok);font-weight:700}.lwr{color:var(--er);font-weight:700}
+
+.mo{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:500;align-items:center;justify-content:center;padding:1.5rem;backdrop-filter:blur(4px)}
+.mo.open{display:flex}
+.qm{background:linear-gradient(160deg,#FFFDF7,#F5E6C8);border-radius:14px;max-width:560px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 0 0 3px var(--gold),0 0 0 6px var(--gd),0 18px 50px rgba(0,0,0,.5);animation:mi .3s ease}
+@keyframes mi{from{opacity:0;transform:translateY(25px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}
+.qh{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.3rem;border-bottom:2px solid var(--bl)}
+.qh h3{font-size:.9rem;font-weight:800;color:#2D3436;display:flex;align-items:center;gap:.5rem}
+.qb{padding:.18rem .6rem;border-radius:50px;font-size:.65rem;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:.4px}
+.qbd{padding:1.3rem}
+.qt{font-size:1.05rem;line-height:1.7;font-weight:700;margin-bottom:1.2rem;color:#2D3436}
+.qo{display:flex;flex-direction:column;gap:.5rem}
+.qi{display:flex;align-items:flex-start;gap:.6rem;padding:.8rem .9rem;border:2px solid var(--bl);border-radius:9px;cursor:pointer;transition:all .2s;background:rgba(255,255,255,.5)}
+.qi:hover:not(.dis){border-color:var(--gold);background:rgba(201,168,76,.08)}
+.qi.dis{cursor:default;pointer-events:none}
+.qi.ca{border-color:var(--ok)!important;background:#E8F5E9!important}
+.qi.wa{border-color:var(--er)!important;background:#FDEAEA!important}
+.qr{width:18px;height:18px;border-radius:50%;border:2px solid var(--bl);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;background:#fff}
+.qi.ca .qr{border-color:var(--ok);background:var(--ok)}
+.qi.wa .qr{border-color:var(--er);background:var(--er)}
+.qi.ca .qr::after,.qi.wa .qr::after{content:'';width:7px;height:7px;border-radius:50%;background:#fff}
+.qx{font-size:.9rem;line-height:1.5;padding-top:1px;color:#2D3436}
+.ql{font-weight:800;color:var(--gd);margin-right:.2rem}
+.qf{display:none;padding:.7rem .9rem;border-radius:7px;margin-top:.8rem;font-size:.82rem;line-height:1.5;align-items:flex-start;gap:.4rem}
+.qf.show{display:flex}
+.qf.fc{background:#E8F5E9;color:#1B5E20;border:1px solid rgba(76,175,80,.3)}
+.qf.fw{background:#FDEAEA;color:#B71C1C;border:1px solid rgba(229,57,53,.3)}
+.qf i{margin-top:2px;flex-shrink:0}
+
+/* Power-up notification */
+.pu-notif{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);z-index:400;pointer-events:none;padding:1rem 2rem;border-radius:14px;font-size:1.1rem;font-weight:800;color:#fff;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,.5);animation:puIn .5s ease forwards}
+@keyframes puIn{0%{transform:translate(-50%,-50%) scale(0);opacity:0}50%{transform:translate(-50%,-50%) scale(1.15)}100%{transform:translate(-50%,-50%) scale(1);opacity:1}}
+.pu-notif.out{animation:puOut .3s ease forwards}
+@keyframes puOut{to{transform:translate(-50%,-50%) scale(0);opacity:0}}
+
+#vicS{display:none;position:relative;z-index:1;min-height:100vh;padding:2rem}
+.vicC{max-width:580px;margin:2rem auto 0;text-align:center}
+.vi2{width:90px;height:90px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.2rem;font-size:2.2rem;background:linear-gradient(145deg,#FFD54F,#F9A825,#FF8F00);color:#fff;box-shadow:0 8px 28px rgba(255,193,7,.4);animation:vp .6s cubic-bezier(.2,.8,.3,1.2)}
+@keyframes vp{from{transform:scale(0) rotate(-20deg)}to{transform:scale(1) rotate(0)}}
+.vt{font-family:'Cinzel',serif;font-size:2rem;font-weight:900;color:var(--gold);margin-bottom:.3rem}
+.vs{font-size:.9rem;color:var(--fd);margin-bottom:1.5rem}
+.vb2{font-size:3.5rem;font-weight:900;color:var(--acc);line-height:1;margin-bottom:.2rem}
+.vl2{font-size:.82rem;color:var(--fd);margin-bottom:1.5rem}
+.vbr{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-bottom:1.5rem;text-align:left}
+.vbc{background:rgba(15,42,26,.6);border:1px solid rgba(201,168,76,.15);border-radius:10px;padding:.8rem}
+.vbc h4{font-size:.65rem;font-weight:700;color:var(--fd);text-transform:uppercase;letter-spacing:.4px;margin-bottom:.3rem}
+.vbs{font-size:1.4rem;font-weight:900;color:var(--gold)}
+.vbr2{width:100%;height:4px;background:rgba(201,168,76,.1);border-radius:2px;margin-top:.4rem;overflow:hidden}
+.vbf{height:100%;border-radius:2px;transition:width 1s ease}
+.va2{display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap}
+.bo{padding:.55rem 1rem;border:1.5px solid rgba(201,168,76,.3);border-radius:9px;background:rgba(15,42,26,.4);font-family:'Nunito',sans-serif;font-size:.82rem;font-weight:700;cursor:pointer;transition:all .2s;color:var(--fg);display:inline-flex;align-items:center;gap:.4rem}
+.bo:hover{border-color:var(--gold);color:var(--gold)}
+
+.sm2{background:linear-gradient(160deg,#FFFDF7,#F5E6C8);border-radius:14px;max-width:580px;width:100%;max-height:85vh;overflow-y:auto;box-shadow:0 0 0 3px var(--gold),0 18px 50px rgba(0,0,0,.5);animation:mi .3s ease}
+.sh{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.3rem;border-bottom:2px solid var(--bl)}
+.sh h3{font-family:'Cinzel',serif;font-size:.95rem;font-weight:900;color:var(--gd)}
+.sx{width:30px;height:30px;display:flex;align-items:center;justify-content:center;border:none;background:rgba(0,0,0,.05);border-radius:50%;cursor:pointer;color:var(--fd);font-size:.8rem}
+.sx:hover{background:#FDEAEA;color:var(--er)}
+.sb{padding:1.3rem}
+.ss{margin-bottom:.8rem;padding:.7rem;background:rgba(0,0,0,.03);border-radius:7px;border-left:3px solid var(--gold)}
+.ss h4{font-size:.78rem;font-weight:800;color:var(--gd);margin-bottom:.2rem}
+.ss p,.ss li{font-size:.74rem;color:#2D3436;line-height:1.5}
+.ss ol{padding-left:1.1rem}
+.ss code{background:rgba(201,168,76,.1);padding:.1rem .3rem;border-radius:3px;font-size:.7rem;color:var(--gd);font-family:monospace}
+.sf{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:.8rem}
+.sff{display:flex;flex-direction:column;gap:.2rem}
+.sff.fu{grid-column:1/-1}
+.sff label{font-size:.64rem;font-weight:700;color:var(--fd);text-transform:uppercase;letter-spacing:.2px}
+.sff input{padding:.45rem .6rem;border:1.5px solid var(--bl);border-radius:7px;font-family:'Nunito',sans-serif;font-size:.78rem;outline:none;background:#fff}
+.sff input:focus{border-color:var(--gold)}
+.sft{padding:.8rem 1.3rem;border-top:2px solid var(--bl);display:flex;justify-content:flex-end;gap:.4rem}
+.bsv{padding:.55rem 1.2rem;background:linear-gradient(135deg,var(--gold),var(--gd));color:#1a1a1a;border:none;border-radius:7px;font-family:'Nunito',sans-serif;font-size:.82rem;font-weight:800;cursor:pointer}
+
+.bbar{position:sticky;bottom:0;background:rgba(11,29,19,.92);border-top:1px solid rgba(201,168,76,.12);padding:.6rem 1.2rem;display:flex;align-items:center;justify-content:space-between;box-shadow:0 -3px 12px rgba(0,0,0,.3);z-index:100;gap:.6rem;flex-wrap:wrap;backdrop-filter:blur(12px)}
+.bl2{display:flex;align-items:center;gap:.8rem}
+.bbi{font-size:.75rem;color:var(--fd);font-weight:600}
+.bbi span{font-weight:900;color:var(--gold)}
+.bbr{display:flex;gap:.35rem}
+
+.tst{position:fixed;bottom:70px;left:50%;transform:translateX(-50%) translateY(20px);padding:.6rem 1.2rem;border-radius:9px;font-size:.82rem;font-weight:700;z-index:2000;opacity:0;transition:all .3s;pointer-events:none;box-shadow:0 6px 20px rgba(0,0,0,.4)}
+.tst.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.tst.ok{background:linear-gradient(135deg,#2E7D32,#1B5E20);color:#fff}
+.tst.er{background:linear-gradient(135deg,#C62828,#B71C1C);color:#fff}
+.tst.in{background:linear-gradient(135deg,#1565C0,#0D47A1);color:#fff}
+iframe.snk{display:none}#cnf{position:fixed;inset:0;z-index:999;pointer-events:none}
+
+@media(max-width:768px){.topbar{padding:.4rem .7rem}.sbar{gap:0}.sc{padding:.3rem .5rem;font-size:.65rem}.gl{padding:.7rem .5rem}.da{padding:.7rem 1rem;gap:1rem}.vbr{grid-template-columns:1fr}.sf{grid-template-columns:1fr}.bbar{padding:.5rem .7rem}.bp{perspective:800px}.bd{transform:rotateX(4deg)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+
+<div id="startScreen">
+  <div class="orn">&#10022; &#10022; &#10022;</div>
+  <h1 class="stit">Sentence Quest</h1>
+  <p class="ssub">Advanced ESL Board Game</p>
+  <p class="sdesc">Race across 50 spaces with 6 game modes. Wrong answers send you back!</p>
+  <div class="sigrp">
+    <input type="text" class="si" id="nameIn" placeholder="Enter your full name" maxlength="60" autocomplete="off">
+    <button class="bgold" id="startBtn" disabled><i class="fas fa-play"></i> Continue</button>
+  </div>
+  <div class="sfeat">
+    <div class="f"><i class="fas fa-random"></i> Randomized Answers</div>
+    <div class="f"><i class="fas fa-gamepad"></i> 6 Game Modes</div>
+    <div class="f"><i class="fas fa-bolt"></i> Power-Ups</div>
+    <div class="f"><i class="fas fa-chart-line"></i> Sheet Tracking</div>
+  </div>
+</div>
+
+<div id="modeScreen" style="display:none">
+  <div class="orn">&#10022;</div>
+  <h2 class="stit" style="font-size:clamp(1.6rem,4vw,2.4rem)">Choose Your Mode</h2>
+  <p class="sdesc" id="modeSub">Each mode changes the rules. Pick your challenge level.</p>
+  <div class="mode-grid" id="modeGrid"></div>
+  <button class="bgold" id="modeBtn" style="margin-top:.5rem"><i class="fas fa-dice"></i> Start Game</button>
+</div>
+
+<div id="gameScreen">
+  <header class="topbar">
+    <div class="tl">
+      <div class="tlogo">Sentence Quest</div>
+      <span class="stag" id="sTag"></span>
+      <span class="mtag" id="mTag"></span>
+    </div>
+    <div class="tr">
+      <button class="bic" id="newBtn" title="New Game"><i class="fas fa-sync-alt"></i></button>
+      <button class="bic" id="setBtn" title="Teacher Setup"><i class="fas fa-cog"></i></button>
+    </div>
+  </header>
+  <div class="sbar" id="sbar"></div>
+  <div class="gl">
+    <div class="bleg">
+      <div class="bli"><div class="bld" style="background:var(--gr)"></div>Grammar</div>
+      <div class="bli"><div class="bld" style="background:var(--co)"></div>Collocation</div>
+      <div class="bli"><div class="bld" style="background:var(--id)"></div>Idiom</div>
+      <div class="bli"><div class="bld" style="background:var(--vo)"></div>Vocabulary</div>
+      <div class="bli"><div class="bld" style="background:var(--st)"></div>Structure</div>
+      <div class="bli"><div class="bld" style="background:#7B1FA2"></div>Power-Up</div>
+    </div>
+    <div class="da">
+      <div class="ds"><div class="dc" id="dCube"></div></div>
+      <div class="di">
+        <div class="dl">Click to roll</div>
+        <button class="rb" id="rollBtn"><i class="fas fa-dice"></i> Roll Dice</button>
+      </div>
+    </div>
+    <div class="sm" id="sMsg">Roll the dice to begin!</div>
+    <div class="bf">
+      <span class="co tl">&#10047;</span><span class="co tr">&#10047;</span>
+      <span class="co bl">&#10047;</span><span class="co br">&#10047;</span>
+      <div class="btb">Sentence Quest</div>
+      <div class="bp"><div class="bd" id="board"></div></div>
+    </div>
+    <button class="lt" id="logTgl"><i class="fas fa-scroll"></i> Game Log</button>
+    <div class="lp" id="logP"></div>
+  </div>
+  <footer class="bbar">
+    <div class="bl2"><div class="bbi">Progress: <span id="bProg">0%</span></div></div>
+    <div class="bbr">
+      <button class="bo" id="csvBtn"><i class="fas fa-download"></i> CSV</button>
+      <button class="bgold" id="subBtn" style="padding:.5rem 1rem;font-size:.75rem"><i class="fas fa-paper-plane"></i> Submit</button>
+    </div>
+  </footer>
+</div>
+
+<div id="tk" style="display:none"><div class="th"></div><div class="ts"></div><div class="tb"></div></div>
+<div class="pu-notif" id="puNotif" style="display:none"></div>
+
+<div class="mo" id="qModal"><div class="qm">
+  <div class="qh"><h3><span class="qb" id="qBadge">Grammar</span> Space <span id="qNum">1</span></h3></div>
+  <div class="qbd"><div class="qt" id="qText"></div><div class="qo" id="qOpts"></div><div class="qf" id="qFb"><i></i><div></div></div></div>
+</div></div>
+
+<div id="vicS"><div class="vicC" id="vicC"></div></div>
+
+<div class="mo" id="setModal"><div class="sm2">
+  <div class="sh"><h3><i class="fas fa-cog"></i> Google Sheets Setup</h3><button class="sx" id="clSet"><i class="fas fa-times"></i></button></div>
+  <div class="sb">
+    <div class="ss"><h4>Step 1</h4><p>Create a Google Form with short-answer fields: Name, Rolls, Correct, Wrong, Sent Back, Accuracy, Mode, Grammar, Collocation, Idiom, Vocabulary, Structure, Timestamp.</p></div>
+    <div class="ss"><h4>Step 2</h4><p>Link it to a Google Sheet via Responses tab.</p></div>
+    <div class="ss"><h4>Step 3</h4><p>View page source, search <code>entry.</code> for each field ID.</p></div>
+    <div class="sf">
+      <div class="sff fu"><label>Form URL</label><input id="cUrl" placeholder="https://docs.google.com/forms/d/e/.../formResponse"></div>
+      <div class="sff"><label>Name ID</label><input id="cNm" placeholder="entry.123"></div>
+      <div class="sff"><label>Rolls ID</label><input id="cRl" placeholder="entry.234"></div>
+      <div class="sff"><label>Correct ID</label><input id="cCr" placeholder="entry.345"></div>
+      <div class="sff"><label>Wrong ID</label><input id="cWr" placeholder="entry.456"></div>
+      <div class="sff"><label>Sent Back ID</label><input id="cBk" placeholder="entry.567"></div>
+      <div class="sff"><label>Accuracy ID</label><input id="cAc" placeholder="entry.678"></div>
+      <div class="sff"><label>Mode ID</label><input id="cMd" placeholder="entry.789"></div>
+      <div class="sff"><label>Grammar ID</label><input id="cGr" placeholder="entry.890"></div>
+      <div class="sff"><label>Collocation ID</label><input id="cCo" placeholder="entry.901"></div>
+      <div class="sff"><label>Idiom ID</label><input id="cId" placeholder="entry.012"></div>
+      <div class="sff"><label>Vocabulary ID</label><input id="cVo" placeholder="entry.123"></div>
+      <div class="sff"><label>Structure ID</label><input id="cSt" placeholder="entry.234"></div>
+      <div class="sff"><label>Timestamp ID</label><input id="cDt" placeholder="entry.345"></div>
+    </div>
+  </div>
+  <div class="sft"><button class="bo" id="clrSet"><i class="fas fa-trash"></i> Clear</button><button class="bsv" id="savSet"><i class="fas fa-save"></i> Save</button></div>
+</div></div>
+
+<iframe name="snkF" class="snk"></iframe>
+<div class="tst" id="tst"></div>
+<canvas id="cnf"></canvas>
+
+<script>
+var QB=[
+{t:"grammar",q:"Which is correct?",o:["Had I known, I would have attended the meeting.","If I would have known, I had attended the meeting.","Had I knew, I would attend the meeting.","If I had knew, I will attend the meeting."],c:0,e:"Third conditional inversion: Had I known = If I had known."},
+{t:"grammar",q:"Find the error: 'Not only she speaks French fluently, but she also writes it perfectly.'",o:["'Not only she speaks' should be 'Not only does she speak'","'fluently' should be 'fluent'","'but she also' should be 'but also she'","No error"],c:0,e:"Negative fronting requires inversion."},
+{t:"grammar",q:"Which is correct?",o:["The report, along with the appendices, was submitted on time.","The report, along with the appendices, were submitted on time.","The report, along with the appendices, have been submitted on time.","The report, along with the appendices, are submitted on time."],c:0,e:"'Along with' does not change subject number."},
+{t:"grammar",q:"Choose the correct sentence:",o:["I wish I hadn't said those hurtful things.","I wish I didn't said those hurtful things.","I wish I wouldn't have said those hurtful things.","I wish I haven't said those hurtful things."],c:0,e:"Wish + past perfect for past regrets."},
+{t:"grammar",q:"Which uses the subjunctive correctly?",o:["The committee recommended that he take a leave of absence.","The committee recommended that he takes a leave of absence.","The committee recommended that he took a leave of absence.","The committee recommended that he is taking a leave of absence."],c:0,e:"After recommend, use base form in that-clause."},
+{t:"grammar",q:"Which is correct?",o:["The number of complaints has increased dramatically.","The number of complaints have increased dramatically.","A number of complaints has increased dramatically.","The number of complaints are increasing dramatically."],c:0,e:"'The number of' takes singular verb."},
+{t:"grammar",q:"Find the error: 'He suggested to go to the museum instead.'",o:["'suggested to go' should be 'suggested going'","'to the museum' should be 'at the museum'","'instead' should be 'instead of'","No error"],c:0,e:"Suggest takes -ing, not to-infinitive."},
+{t:"grammar",q:"Which is correct?",o:["I look forward to hearing from you soon.","I look forward to hear from you soon.","I look forward to heard from you soon.","I am looking forward for hearing from you soon."],c:0,e:"Look forward to + gerund (to is preposition)."},
+{t:"grammar",q:"Find the error: 'Despite of the rain, we went for a walk.'",o:["'Despite of' should be 'Despite'","'the rain' should be 'raining'","'we went' should be 'we did go'","No error"],c:0,e:"Despite is used directly, no 'of'."},
+{t:"grammar",q:"Which is correct?",o:["She is used to working late at the office.","She is used to work late at the office.","She used to working late at the office.","She is used to works late at the office."],c:0,e:"Be used to + -ing = accustomed to."},
+{t:"grammar",q:"Which is correct?",o:["He denied having been involved in the scandal.","He denied to have been involved in the scandal.","He denied to being involved in the scandal.","He denied that having been involved in the scandal."],c:0,e:"Deny takes -ing form."},
+{t:"grammar",q:"Find the error: 'It is high time we leave this place.'",o:["'leave' should be 'left'","'It is' should be 'Its'","'this place' should be 'that place'","No error"],c:0,e:"High time + past subjunctive."},
+{t:"grammar",q:"Which uses inversion correctly?",o:["Under no circumstances should students use phones in class.","Under no circumstances students should use phones in class.","Under no circumstances students should to use phones in class.","Under no circumstances should using phones in class."],c:0,e:"Negative adverbial fronting triggers inversion."},
+{t:"grammar",q:"She accused him ___ stealing the money.",o:["of","for","with","about"],c:0,e:"Accuse someone OF something."},
+{t:"grammar",q:"Which is correct?",o:["I would rather you didn't tell anyone about this.","I would rather you didn't told anyone about this.","I would rather you don't tell anyone about this.","I would rather you wouldn't tell anyone about this."],c:0,e:"Would rather you + past simple."},
+{t:"grammar",q:"Find the error: 'The project is expected to completing by March.'",o:["'to completing' should be 'to be completed'","'expected' should be 'expecting'","'by March' should be 'until March'","No error"],c:0,e:"Passive infinitive: to be completed."},
+{t:"grammar",q:"Which is correct?",o:["Neither the manager nor the employees were aware of the changes.","Neither the manager nor the employees was aware of the changes.","Neither the manager nor the employees has been aware of the changes.","Neither the manager or the employees were aware of the changes."],c:0,e:"Neither...nor: verb agrees with nearest subject."},
+{t:"grammar",q:"He couldn't help but ___ at the absurdity.",o:["laugh","to laugh","laughing","laughed"],c:0,e:"Couldn't help but + base verb."},
+{t:"grammar",q:"Which is correct?",o:["Scarcely had he arrived when the phone rang.","Scarcely he had arrived when the phone rang.","Scarcely did he had arrived when the phone rang.","Scarcely had he arrived than the phone rang."],c:0,e:"Scarcely...when with inversion, never than."},
+{t:"grammar",q:"Which is correct?",o:["The more you practice, the better you become.","The more you practice, the more better you become.","More you practice, better you become.","The more you practice, the best you become."],c:0,e:"The + comparative, the + comparative."},
+{t:"grammar",q:"She insisted ___ paying for the meal herself.",o:["on","to","for","with"],c:0,e:"Insist on + -ing."},
+{t:"grammar",q:"Which is correct?",o:["Were he to arrive early, we could start on time.","If he would arrive early, we could start on time.","Was he to arrive early, we could start on time.","Had he arrive early, we could start on time."],c:0,e:"Inverted conditional uses 'were' for all subjects."},
+{t:"grammar",q:"Find the error: 'The reason of his absence was because he was ill.'",o:["'of' to 'for' and 'because' to 'that'","'of' to 'for' only","'because' to 'that' only","No error"],c:0,e:"The reason FOR...is THAT..."},
+{t:"grammar",q:"Which is correct?",o:["What I found most surprising was how little preparation had been done.","That I found most surprising was how little preparation had been done.","What I found most surprising was that little preparation had been done.","What I found most surprising it was how little preparation had been done."],c:0,e:"What-clause as subject, how for manner."},
+{t:"collocation",q:"She made a significant ___ to the research.",o:["contribution","donation","commitment","investment"],c:0,e:"Make a contribution to."},
+{t:"collocation",q:"The government needs to take ___ measures.",o:["drastic","strong","heavy","hard"],c:0,e:"Drastic measures = extreme actions."},
+{t:"collocation",q:"He has a tendency to jump to ___.",o:["conclusions","decisions","results","endings"],c:0,e:"Jump to conclusions = judge too quickly."},
+{t:"collocation",q:"The evidence ___ serious doubts.",o:["raises","makes","does","gives"],c:0,e:"Raise doubts is the standard collocation."},
+{t:"collocation",q:"The new policy will take ___ next month.",o:["effect","place","action","part"],c:0,e:"Take effect = become operative."},
+{t:"collocation",q:"He was ___ the impression that the deadline had been extended.",o:["under","with","on","at"],c:0,e:"Under the impression that..."},
+{t:"collocation",q:"The company decided to ___ down on expenses.",o:["cut","bring","put","get"],c:0,e:"Cut down on = reduce."},
+{t:"collocation",q:"Take all relevant factors into ___.",o:["account","consideration","mind","thought"],c:0,e:"Take into account."},
+{t:"collocation",q:"She couldn't ___ her temper.",o:["keep","hold","make","save"],c:0,e:"Keep one's temper."},
+{t:"collocation",q:"They reached a ___ after hours of negotiation.",o:["compromise","consent","permission","agreement"],c:0,e:"Reach a compromise."},
+{t:"collocation",q:"The results were ___ with previous findings.",o:["consistent","constant","connected","combined"],c:0,e:"Consistent with = in agreement with."},
+{t:"collocation",q:"We need to ___ a solution quickly.",o:["come up with","come across","come down with","come up against"],c:0,e:"Come up with = think of/produce."},
+{t:"collocation",q:"Her speech made a profound ___ on the audience.",o:["impact","affect","impression","mark"],c:0,e:"Make an impact on."},
+{t:"collocation",q:"The project was ___ due to lack of funding.",o:["called off","put off","taken off","set off"],c:0,e:"Call off = cancel completely."},
+{t:"collocation",q:"He ___ a lot of criticism.",o:["drew","pulled","took","made"],c:0,e:"Draw criticism = attract criticism."},
+{t:"collocation",q:"I fully ___ with your assessment.",o:["agree","approve","accept","confirm"],c:0,e:"Agree with an assessment."},
+{t:"collocation",q:"The company has ___ a reputation for quality.",o:["built up","set up","made up","put up"],c:0,e:"Build up a reputation."},
+{t:"collocation",q:"She ___ eye contact throughout the interview.",o:["maintained","kept","held","did"],c:0,e:"Maintain eye contact."},
+{t:"collocation",q:"The issue was finally ___ to rest.",o:["put","laid","set","brought"],c:0,e:"Put to rest = resolve definitively."},
+{t:"collocation",q:"Please ___ me posted on developments.",o:["keep","stay","leave","put"],c:0,e:"Keep someone posted = keep informed."},
+{t:"collocation",q:"He tried to ___ light on the disappearance.",o:["shed","throw","bring","give"],c:0,e:"Shed light on = clarify/reveal."},
+{t:"collocation",q:"The two theories ___ on several points.",o:["overlap","intersect","cross","meet"],c:0,e:"Overlap = have areas in common."},
+{t:"collocation",q:"We must ___ the matter seriously.",o:["take","make","have","do"],c:0,e:"Take something seriously."},
+{t:"collocation",q:"The new evidence ___ the existing theory.",o:["contradicts","conflicts","contrasts","opposes"],c:0,e:"Contradict a theory = oppose with evidence."},
+{t:"idiom",q:"She ___ the bullet and told her boss the truth.",o:["bit","chewed","swallowed","faced"],c:0,e:"Bite the bullet = force yourself to do something unpleasant."},
+{t:"idiom",q:"His argument doesn't ___ water.",o:["hold","keep","catch","store"],c:0,e:"Not hold water = not be valid."},
+{t:"idiom",q:"They decided to ___ the trigger on the new project.",o:["pull","push","press","hit"],c:0,e:"Pull the trigger = make a final decision."},
+{t:"idiom",q:"We are on the right ___.",o:["track","path","way","road"],c:0,e:"On the right track = moving correctly."},
+{t:"idiom",q:"The manager really ___ things around.",o:["turned","took","put","got"],c:0,e:"Turn things around = reverse a bad situation."},
+{t:"idiom",q:"Do not ___ the issue under the carpet.",o:["sweep","push","hide","put"],c:0,e:"Sweep under the carpet = hide a problem."},
+{t:"idiom",q:"The event went off without a ___.",o:["hitch","glitch","problem","catch"],c:0,e:"Without a hitch = without problems."},
+{t:"idiom",q:"He is sitting on the ___ about the decision.",o:["fence","wall","line","edge"],c:0,e:"Sitting on the fence = being indecisive."},
+{t:"idiom",q:"She has a ___ for learning languages.",o:["knack","knock","nack","nick"],c:0,e:"Have a knack for = have natural talent."},
+{t:"idiom",q:"Let us ___ the problem head-on.",o:["tackle","face","meet","handle"],c:0,e:"Tackle head-on = deal with directly."},
+{t:"idiom",q:"His comments added ___ to the fire.",o:["fuel","fire","wood","oil"],c:0,e:"Add fuel to the fire = make worse."},
+{t:"idiom",q:"They are beating around the ___.",o:["bush","tree","corner","block"],c:0,e:"Beat around the bush = avoid the point."},
+{t:"idiom",q:"That came out of the ___.",o:["blue","sky","air","clear"],c:0,e:"Out of the blue = suddenly, unexpectedly."},
+{t:"idiom",q:"By the end, she was running on ___.",o:["fumes","empty","nothing","zero"],c:0,e:"Running on fumes = no energy left."},
+{t:"idiom",q:"The boss threw a ___.",o:["fit","tantrum","scene","mood"],c:0,e:"Throw a fit = become very angry."},
+{t:"idiom",q:"We need to get to the ___ of this issue.",o:["bottom","root","base","core"],c:0,e:"Get to the bottom of = find the real cause."},
+{t:"idiom",q:"His excuse was off the ___.",o:["mark","wide","far","away"],c:0,e:"Off the mark = incorrect."},
+{t:"idiom",q:"She gave me a ___ start.",o:["jump","heart","scare","shock"],c:0,e:"Give someone a jump start = startle them."},
+{t:"idiom",q:"That plan is a non-___.",o:["starter","runner","goer","beginner"],c:0,e:"Non-starter = no chance of success."},
+{t:"idiom",q:"He ___ the line with those comments.",o:["crossed","stepped","walked","passed"],c:0,e:"Cross the line = go beyond limits."},
+{t:"idiom",q:"The proposals are ___ and apples.",o:["oranges","bananas","pears","lemons"],c:0,e:"Apples and oranges = incomparable things."},
+{t:"idiom",q:"She ___ it out of the park.",o:["hit","knocked","took","sent"],c:0,e:"Hit it out of the park = do exceptionally well."},
+{t:"idiom",q:"We are ___ the wrong tree.",o:["barking up","going up","looking up","climbing"],c:0,e:"Barking up the wrong tree = pursuing false lead."},
+{t:"idiom",q:"After the scandal, he worked to ___ his reputation.",o:["rebuild","make up","build again","patch up"],c:0,e:"Rebuild reputation = restore after damage."},
+{t:"vocabulary",q:"The government imposed ___ on imports.",o:["tariffs","taxes","fees","fines"],c:0,e:"Tariffs = taxes on imported goods."},
+{t:"vocabulary",q:"Her ___ for detail made her an excellent editor.",o:["eye","look","sight","view"],c:0,e:"An eye for detail = notice small details."},
+{t:"vocabulary",q:"The results were not ___ with previous research.",o:["commensurate","commensurable","complimentary","complementary"],c:0,e:"Commensurate with = corresponding in degree."},
+{t:"vocabulary",q:"The speech was full of ___.",o:["platitudes","attitudes","aptitudes","latitudes"],c:0,e:"Platitudes = trite, unoriginal remarks."},
+{t:"vocabulary",q:"Profits have ___ dramatically.",o:["plummeted","plumped","plundered","ploughed"],c:0,e:"Plummet = fall sharply at high speed."},
+{t:"vocabulary",q:"There is a ___ between promises and delivery.",o:["discrepancy","discretion","discrimination","distinction"],c:0,e:"Discrepancy = difference between things that should match."},
+{t:"vocabulary",q:"The technology has the ___ to revolutionize healthcare.",o:["potential","potency","capacity","capability"],c:0,e:"Potential to = latent possibility."},
+{t:"vocabulary",q:"She spoke with great ___.",o:["eloquence","elegance","frequency","fluency"],c:0,e:"Eloquence = fluent, persuasive speaking."},
+{t:"vocabulary",q:"The team worked ___ to meet the deadline.",o:["tirelessly","tiredly","tirefully","tiresomely"],c:0,e:"Tirelessly = without getting tired."},
+{t:"vocabulary",q:"The treaty was ___ by all nations.",o:["ratified","justified","clarified","identified"],c:0,e:"Ratify = formally approve a treaty."},
+{t:"vocabulary",q:"His ___ behavior surprised everyone.",o:["erratic","aromatic","acrobat","erotic"],c:0,e:"Erratic = inconsistent, unpredictable."},
+{t:"vocabulary",q:"The documentary is ___.",o:["compelling","repelling","propelling","compiling"],c:0,e:"Compelling = powerfully holding attention."},
+{t:"vocabulary",q:"The CEO showed ___ leadership.",o:["steadfast","steadfastly","steadfastness","steady"],c:0,e:"Steadfast = adjective meaning unwavering."},
+{t:"vocabulary",q:"Scientists made a ___ discovery.",o:["groundbreaking","groundless","floorbreaking","earthshaking"],c:0,e:"Groundbreaking = innovative, revolutionary."},
+{t:"vocabulary",q:"Please ___ the document before sending.",o:["proofread","readproof","reading","proof"],c:0,e:"Proofread = read and correct errors."},
+{t:"vocabulary",q:"Countries maintained diplomatic ___.",o:["relations","relationships","connections","links"],c:0,e:"Diplomatic relations = formal term between countries."},
+{t:"vocabulary",q:"Her argument was ___; no logical basis.",o:["spurious","spacious","specious","spuriously"],c:0,e:"Spurious = false, not genuine."},
+{t:"vocabulary",q:"The project was ___ due to insufficient funding.",o:["abandoned","abdicated","abolished","absolved"],c:0,e:"Abandon a project = give it up completely."},
+{t:"vocabulary",q:"The resignation was an ___ of guilt.",o:["admission","admittance","permission","submission"],c:0,e:"Admission of guilt = acknowledgment."},
+{t:"vocabulary",q:"The law aims to ___ corruption.",o:["eradicate","educate","elaborate","emancipate"],c:0,e:"Eradicate = completely eliminate."},
+{t:"vocabulary",q:"His ___ to success cannot be overstated.",o:["contribution","attribution","distribution","retribution"],c:0,e:"Contribution to = part played in achieving."},
+{t:"vocabulary",q:"The testimony was ___.",o:["inconsistent","inconsiderate","inconsequent","incontinent"],c:0,e:"Inconsistent = contradicting itself."},
+{t:"vocabulary",q:"The charity provides ___ assistance.",o:["humanitarian","human","humane","humanism"],c:0,e:"Humanitarian = concerned with reducing suffering."},
+{t:"vocabulary",q:"The investigation revealed widespread ___.",o:["malfeasance","misfeasance","nonfeasance","feasance"],c:0,e:"Malfeasance = wrongful conduct by officials."},
+{t:"structure",q:"Which uses a cleft correctly?",o:["It was the deadline that caused the most stress.","It was the deadline what caused the most stress.","That was the deadline that caused the most stress.","It is what the deadline caused the most stress."],c:0,e:"It-cleft: It + be + element + that-clause."},
+{t:"structure",q:"Which uses fronting correctly?",o:["Rarely have I seen such a poorly written report.","Rarely I have seen such a poorly written report.","Rarely seen I have such a report.","I have rarely seen it, rarely."],c:0,e:"Fronting with negative adverbials requires inversion."},
+{t:"structure",q:"Which uses a participle clause correctly?",o:["Having reviewed the document, she approved the version.","Having reviewed the document, the version was approved.","Reviewing the document, the version was approved.","Having been reviewed, she approved the version."],c:0,e:"Participle subject must match main clause subject."},
+{t:"structure",q:"Which emphasizes correctly?",o:["It was John who broke the window, not Peter.","John it was who broke the window.","It was John broke the window.","Who it was John broke the window."],c:0,e:"It-cleft: It was + element + who/that + clause."},
+{t:"structure",q:"Which uses 'so' inversion correctly?",o:["So impressive was the performance that the audience gave a standing ovation.","So impressive the performance was that the audience gave a standing ovation.","The performance was so impressive that so was the audience.","So was impressive the performance."],c:0,e:"So + adj + inversion + that-clause."},
+{t:"structure",q:"Which nominal clause is correct?",o:["What surprised me most was how quickly he adapted.","That surprised me most was how quickly he adapted.","What surprised me most was that quickly he adapted.","What surprised me most it was how quickly."],c:0,e:"What-clause as subject, how for manner."},
+{t:"structure",q:"Which relative clause is correct?",o:["The scientist, whose work has been widely cited, received the award.","The scientist, who is work has been widely cited, received the award.","The scientist which work has been widely cited received the award.","The scientist, that work has been widely cited, received the award."],c:0,e:"Whose shows possession. Who is means who is."},
+{t:"structure",q:"Which uses ellipsis correctly?",o:["While some supported the plan, others opposed it.","While some the plan supporting, others opposed.","While some supported plan, others opposed.","While some supporting the plan, others opposed."],c:0,e:"Ellipsis keeps parallel structure."},
+{t:"structure",q:"Which uses a reduced relative correctly?",o:["The students selected for the program will be notified.","The students selecting for the program will be notified.","The students been selected will be notified.","The students having selecting will be notified."],c:0,e:"Past participle for passive: selected = who were selected."},
+{t:"structure",q:"Which uses 'do' for emphasis correctly?",o:["I do believe this is the right decision.","I believe do this is the right decision.","I do believing this is the right decision.","Do I believe this is the right decision."],c:0,e:"Emphatic do + base verb."},
+{t:"structure",q:"Which conditional is correct for hypothetical past?",o:["Had the company invested earlier, it would not have gone bankrupt.","If the company would have invested earlier, it not had gone bankrupt.","Had the company invested earlier, it will not go bankrupt.","If the company had invested earlier, it would not go bankrupt."],c:0,e:"Third conditional inversion: Had + subject + past participle."},
+{t:"structure",q:"Which uses a wh-cleft correctly?",o:["What the team needs is more time and resources.","What the team needs are more time and resources.","That the team needs is more time and resources.","What does the team need is more time."],c:0,e:"Wh-cleft: What X needs is Y. Singular verb."},
+{t:"structure",q:"Which places the adverb correctly?",o:["She carefully considered all the options.","She considered carefully all the options.","She considered all carefully the options.","Carefully she considered all the options."],c:0,e:"Mid-position: before the main verb."},
+{t:"structure",q:"Which uses 'only when' inversion correctly?",o:["Only when the last passenger had boarded did the plane take off.","Only when the last passenger had boarded the plane took off.","Only when the last passenger boarded did the plane took off.","The plane took off only when, did it."],c:0,e:"Only when + clause triggers inversion."},
+{t:"structure",q:"Which uses 'on no account' correctly?",o:["On no account should confidential information be shared.","On no account confidential information should be shared.","On no account should to share confidential information.","No account on should information be shared."],c:0,e:"On no account + inversion."},
+{t:"structure",q:"Which comparative is correct?",o:["This method is far less efficient than the previous one.","This method is far more less efficient than the previous one.","This method is far the less efficient.","This method is less far efficient."],c:0,e:"Far + less + adj + than. No 'more less'."},
+{t:"structure",q:"Which uses passive reporting correctly?",o:["It is believed that the suspect has fled the country.","It is believing that the suspect has fled.","The suspect is believed that has fled.","It believes that the suspect has fled."],c:0,e:"It + passive verb + that-clause."},
+{t:"structure",q:"Which uses 'not until' inversion correctly?",o:["Not until he received the letter did he understand the severity.","Not until he received the letter he understood the severity.","Not until did he receive the letter he understood.","He did not understand until not until he received."],c:0,e:"Not until + clause triggers inversion."},
+{t:"structure",q:"Which avoids a dangling modifier?",o:["After finishing the report, she submitted it to her supervisor.","After finishing the report, it was submitted to her supervisor.","After finishing the report, the submission happened.","Finishing the report, it was submitted."],c:0,e:"Same subject for both clauses avoids dangling."},
+{t:"structure",q:"Which uses an absolute phrase correctly?",o:["The weather having improved, we decided to go ahead.","The weather having improved, the picnic decided to go ahead.","Having improved the weather, we decided to go ahead.","The weather been improved, we decided."],c:0,e:"Absolute: Noun + participle with logical subject match."},
+{t:"structure",q:"Which structures contrast correctly?",o:["Much as I admire her courage, I cannot support her decision.","Much although I admire her courage, I cannot support.","As much I admire her courage, I cannot support.","Much I admire her courage as, I cannot support."],c:0,e:"Much as + clause = concessive."},
+{t:"structure",q:"Which concessive clause is correct?",o:["However hard he tried, he couldn't solve the problem.","However he tried hard, he couldn't solve it.","How hard he tried however, he couldn't solve it.","Hard however he tried, he couldn't."],c:0,e:"However + adverb + subject + verb."},
+{t:"structure",q:"Which uses existential 'there' correctly?",o:["There is likely to be significant opposition to the changes.","There is likely that there will be significant opposition.","There are likely to been significant opposition.","It is likely there to be significant opposition."],c:0,e:"There + is + likely to be + noun phrase."}
+];
+
+var CATS={grammar:{l:"Grammar",i:"fa-spell-check",c:"#C62828"},collocation:{l:"Collocation",i:"fa-link",c:"#00695C"},idiom:{l:"Idiom",i:"fa-comment-dots",c:"#E65100"},vocabulary:{l:"Vocabulary",i:"fa-book",c:"#2E7D32"},structure:{l:"Structure",i:"fa-sitemap",c:"#1565C0"}};
+
+var MODES=[
+{id:"classic",name:"Classic",icon:"fa-chess-board",desc:"Standard rules. Wrong answer sends you back to start. Pure skill.",tag:"Standard"},
+{id:"lives",name:"Three Lives",icon:"fa-heart",desc:"You get 3 lives. Lose one per wrong answer. Game over when all lives are gone.",tag:"Forgiving"},
+{id:"shields",name:"Shield System",icon:"fa-shield-alt",desc:"Earn a shield every 4 correct answers. Use it to block one send-back.",tag:"Strategic"},
+{id:"powerups",name:"Power-Ups",icon:"fa-bolt",desc:"Special tiles on the board: Skip, Double Roll, Shield, and Peek powers.",tag:"Chaotic"},
+{id:"boss",name:"Boss Spaces",icon:"fa-dragon",desc:"Every 10th space is a boss. Wrong = go back 10 spaces, not to start.",tag:"Challenging"},
+{id:"time",name:"Time Attack",icon:"fa-clock",desc:"15-minute timer. Score = spaces reached when time runs out.",tag:"Intense"}
+];
+
+var G={name:"",mode:"classic",pos:0,rolls:0,correct:0,wrong:0,sentBack:0,lives:3,shields:0,powerTiles:{},board:[],visited:{},catStats:{},log:[],rolling:false,timer:0,timerInt:null,gameOver:false,
+setup:{formUrl:"",ids:{name:"",rolls:"",correct:"",wrong:"",back:"",acc:"",mode:"",gr:"",co:"",id:"",vo:"",st:"",date:""}}};
+
+function resetCS(){G.catStats={grammar:{t:0,c:0},collocation:{t:0,c:0},idiom:{t:0,c:0},vocabulary:{t:0,c:0},structure:{t:0,c:0}};}
+
+/* ===== CRITICAL FIX: Shuffle answer options ===== */
+function shufOpts(q){
+  var correctAnswer = q.o[q.c];
+  var idx = [0,1,2,3];
+  for(var i=idx.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=idx[i];idx[i]=idx[j];idx[j]=t;}
+  var newO = [];
+  var newC = 0;
+  for(var i=0;i<idx.length;i++){
+    newO.push(q.o[idx[i]]);
+    if(idx[i] === q.c) newC = i;
+  }
+  return {t:q.t, q:q.q, o:newO, c:newC, e:q.e};
+}
+
+function shuf(a){var b=a.slice();for(var i=b.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=b[i];b[i]=b[j];b[j]=t;}return b;}
+function tst(m,t){var e=document.getElementById("tst");e.textContent=m;e.className="tst "+t+" show";setTimeout(function(){e.classList.remove("show");},3000);}
+function esc(s){var d=document.createElement("div");d.textContent=s;return d.innerHTML;}
+
+var DD={1:[5],2:[3,7],3:[3,5,7],4:[1,3,7,9],5:[1,3,5,7,9],6:[1,4,7,3,6,9]};
+var DR={1:{x:0,y:0},2:{x:90,y:0},3:{x:0,y:-90},4:{x:0,y:90},5:{x:-90,y:0},6:{x:0,y:180}};
+
+function buildDice(){
+  var cube=document.getElementById("dCube");var fc=["f1","f6","f3","f4","f2","f5"];var fn=[1,6,3,4,2,5];var h="";
+  for(var f=0;f<6;f++){var n=fn[f],dots=DD[n]||[];h+='<div class="df '+fc[f]+'">';for(var d=1;d<=9;d++){var s=false;for(var k=0;k<dots.length;k++){if(dots[k]===d){s=true;break;}}h+='<span class="dd'+(s?" on":"")+'"></span>';}h+='</div>';}
+  cube.innerHTML=h;
+}
+
+function showDF(n){var dots=document.querySelectorAll(".df .dd");var a=DD[n]||[];for(var i=0;i<dots.length;i++){var d=i+1;var f=false;for(var j=0;j<a.length;j++){if(a[j]===d){f=true;break;}}if(f)dots[i].classList.add("on");else dots[i].classList.remove("on");}}
+
+function rollDice(){
+  if(G.rolling||G.pos===50||G.gameOver)return;
+  G.rolling=true;document.getElementById("rollBtn").disabled=true;
+  var cube=document.getElementById("dCube");cube.classList.add("roll");
+  var iv=setInterval(function(){showDF(Math.floor(Math.random()*6)+1);},80);
+  setTimeout(function(){
+    clearInterval(iv);var r=Math.floor(Math.random()*6)+1;showDF(r);cube.classList.remove("roll");
+    var fr=DR[r];cube.style.transform="rotateX("+(fr.x+720)+"deg) rotateY("+(fr.y+720)+"deg)";
+    setTimeout(function(){G.rolling=false;movePlayer(r);},900);
+  },1000);
+}
+
+/* ===== BOARD GENERATION WITH POWER-UPS ===== */
+function genBoard(){
+  var bt={};var ts=Object.keys(CATS);
+  for(var i=0;i<ts.length;i++)bt[ts[i]]=shuf(QB.filter(function(q){return q.t===ts[i];}));
+  var b=[];
+  for(var i=0;i<ts.length;i++){var p=bt[ts[i]];for(var j=0;j<10&&j<p.length;j++)b.push(p[j]);}
+  if(b.length<50){var u={};for(var k=0;k<b.length;k++)u[k]=true;var rm=shuf(QBANK.filter(function(q,i){return!u[i];}));var ri=0;while(b.length<50&&ri<rm.length){b.push(rm[ri]);ri++;}}
+
+  // Shuffle which questions go where
+  b = shuf(b).slice(0,50);
+
+  // Shuffle each question's answer options (THE FIX)
+  for(var i=0;i<b.length;i++) b[i] = shufOpts(b[i]);
+
+  // Assign power-up tiles for powerups mode
+  G.powerTiles = {};
+  if(G.mode === "powerups"){
+    var puTypes = ["skip","double","shield","peek"];
+    var puNames = {skip:"Skip Ahead",double:"Double Roll",shield:"Shield",peek:"Peek Answer"};
+    var puIcons = {skip:"fa-forward",double:"fa-angles-up",shield:"fa-shield-alt",peek:"fa-eye"};
+    // Place 8 power-ups on specific spaces, avoiding 1 and 50
+    var available = [];
+    for(var s=2;s<=49;s++) available.push(s);
+    available = shuf(available);
+    var puCount = 0;
+    while(puCount < 8 && puCount < available.length){
+      var sp = available[puCount];
+      var puType = puTypes[puCount % 4];
+      G.powerTiles[sp] = {type: puType, name: puNames[puType], icon: puIcons[puType]};
+      puCount++;
+    }
+  }
+
+  G.board = b;
+}
+
+function gcp(s){var r=Math.ceil(s/10);var c=(s-1)%10;var gr=6-r;var gc=(r%2===0)?(10-c):(c+1);return{gr:gr,gc:gc};}
+
+function renderBoard(){
+  var bd=document.getElementById("board");var h="";
+  for(var s=1;s<=50;s++){
+    var p=gcp(s);var q=G.board[s-1];var cat=CATS[q.t];
+    var cls="c";if(s===1)cls+=" c1";else if(s===50)cls+=" c50";
+    else if(G.powerTiles[s]) cls+=" pu-"+G.powerTiles[s].type;
+    else cls+=" t"+q.t[0];
+    if(G.pos===s)cls+=" cu";if(G.visited[s]&&G.pos!==s)cls+=" vi";
+    var iconStr = G.powerTiles[s] ? '<i class="fas '+G.powerTiles[s].icon+' ci"></i><span class="cl">'+(G.powerTiles[s]?G.powerTiles[s].name:cat.l)+'</span>' :
+      (s===1?'<i class="fas fa-flag ci"></i><span class="cl">Start</span>':s===50?'<i class="fas fa-trophy ci"></i><span class="cl">Finish</span>':'<i class="fas '+cat.i+' ci"></i><span class="cl">'+cat.l+'</span>');
+    h+='<div class="'+cls+'" data-space="'+s+'" style="grid-row:'+p.gr+';grid-column:'+p.gc+'"><span class="cn">'+s+'</span>'+iconStr+'</div>';
+  }
+  bd.innerHTML=h;
+}
+
+function updCells(){
+  var cs=document.querySelectorAll(".c");
+  for(var i=0;i<cs.length;i++){var s=parseInt(cs[i].getAttribute("data-space"));cs[i].classList.toggle("cu",G.pos===s);if(G.pos!==s)cs[i].classList.toggle("vi",!!G.visited[s]);else cs[i].classList.remove("vi");}
+  if(G.pos>0)posTk(G.pos);else document.getElementById("tk").style.display="none";
+}
+
+function posTk(sn){
+  var c=document.querySelector('.c[data-space="'+sn+'"]');if(!c)return;
+  var tk=document.getElementById("tk");tk.style.display="block";
+  var r=c.getBoundingClientRect();tk.style.left=(r.left+r.width/2)+"px";tk.style.top=(r.top+3)+"px";
+  tk.classList.remove("hop");void tk.offsetWidth;tk.classList.add("hop");
+}
+
+function movePlayer(st){
+  G.rolls++;var np=Math.min(G.pos+st,50);addLog("Rolled "+st+" -> Space "+np,"roll");
+  animM(G.pos,np,function(){G.pos=np;updCells();updSt();
+    // Check for power-up tile
+    if(G.powerTiles[np]){
+      var pu = G.powerTiles[np];
+      showPuNotif(pu.icon, pu.name, pu.type === "shield" ? "#7B1FA2" : pu.type === "skip" ? "#1565C0" : pu.type === "double" ? "#E65100" : "#00838F");
+      if(pu.type === "skip"){
+        addLog("Power-Up: Skip Ahead! Move forward 3 spaces.","roll");
+        G.powerTiles[np] = null; // consumed
+        setTimeout(function(){movePlayer(3);},1200);return;
+      }
+      if(pu.type === "double"){
+        addLog("Power-Up: Double Roll! Roll again with bonus.","roll");
+        G.powerTiles[np] = null;
+        setMsg("Double Roll active! Roll again for bonus!","ok");
+        document.getElementById("rollBtn").disabled=false;return;
+      }
+      if(pu.type === "shield"){
+        G.shields++;G.powerTiles[np] = null;
+        addLog("Power-Up: Shield earned! ("+G.shields+" total)","roll");
+      }
+      if(pu.type === "peek"){
+        G.powerTiles[np] = null;
+        addLog("Power-Up: Peek! Next answer will be highlighted.","roll");
+        G._peekNext = true;
+      }
+      renderBoard();updCells();
+    }
+    if(G.pos===50){setMsg("Final challenge!","");setTimeout(function(){showQ(50);},500);return;}
+    if(G.mode==="boss"&&np%10===0&&np<50){setMsg("BOSS SPACE "+np+"! Be careful!","er");}else{setMsg("Space "+np+". Answer the question!","");}
+    setTimeout(function(){showQ(np);},400);
+  });
+}
+
+function showPuNotif(icon, text, color){
+  var el = document.getElementById("puNotif");
+  el.style.display="block";el.className="pu-notif";el.style.background=color;
+  el.innerHTML='<i class="fas '+icon+'" style="font-size:1.5rem;margin-bottom:.3rem;display:block"></i>'+text;
+  setTimeout(function(){el.classList.add("out");},1500);
+  setTimeout(function(){el.style.display="none";el.classList.remove("out");},1800);
+}
+
+function animM(from,to,cb){
+  if(from===to){cb();return;}var cur=from;
+  var st=function(){cur++;G.pos=cur;updCells();
+    var c=document.querySelector('.c[data-space="'+cur+'"]');if(c){c.classList.add("fa");setTimeout(function(){c.classList.remove("fa");},200);}
+    if(cur<to)setTimeout(st,130);else cb();};
+  setTimeout(st,130);
+}
+
+function animBack(from,cb){
+  if(from<=1){G.pos=0;updCells();cb();return;}var cur=from;
+  var st=function(){cur--;G.pos=cur;updCells();if(cur>1)setTimeout(st,35);else{G.pos=0;updCells();cb();}};
+  setTimeout(st,35);
+}
+
+function animBack10(from,cb){
+  var target = Math.max(1, from - 10);
+  if(from<=target+1){G.pos=target;updCells();cb();return;}var cur=from;
+  var st=function(){cur--;G.pos=cur;updCells();if(cur>target)setTimeout(st,35);else{G.pos=target;updCells();cb();}};
+  setTimeout(st,35);
+}
+
+/* ===== SHOW QUESTION (with peek support) ===== */
+function showQ(sn){
+  var q=G.board[sn-1];var cat=CATS[q.t];
+  var bc={grammar:"#C62828",collocation:"#00695C",idiom:"#E65100",vocabulary:"#2E7D32",structure:"#1565C0"};
+  document.getElementById("qBadge").textContent=cat.l;document.getElementById("qBadge").style.background=bc[q.t];
+  document.getElementById("qNum").textContent=sn;document.getElementById("qText").textContent=q.q;
+  var lt=["A","B","C","D"];var oh="";
+  for(var i=0;i<q.o.length;i++){
+    var peekStyle = "";
+    if(G._peekNext && i === q.c) peekStyle = 'border-color:#00838F!important;background:#E0F7FA!important;';
+    oh+='<div class="qi'+(peekStyle?' peek-hl':'')+'" data-idx="'+i+'"><div class="qr"></div><div class="qx"><span class="ql">'+lt[i]+'.</span> '+esc(q.o[i])+'</div></div>';
+  }
+  document.getElementById("qOpts").innerHTML=oh;
+  var fb=document.getElementById("qFb");fb.classList.remove("show","fc","fw");
+  document.getElementById("qModal").classList.add("open");
+  var opts=document.querySelectorAll(".qi");
+  for(var i=0;i<opts.length;i++){(function(oe,ix){
+    oe.addEventListener("click",function(){
+      for(var j=0;j<opts.length;j++)opts[j].classList.add("dis");
+      var ok=(ix===q.c);G.catStats[q.t].t++;
+      if(ok){
+        G.catStats[q.t].c++;G.correct++;G.visited[sn]=true;oe.classList.add("ca");fb.className="qf show fc";fb.innerHTML='<i class="fas fa-check-circle"></i><div><strong>Correct!</strong> '+q.e+'</div>';addLog("Space "+sn+" ("+cat.l+"): Correct","lok");
+      }else{
+        G.wrong++;oe.classList.add("wa");opts[q.c].classList.add("ca");fb.className="qf show fw";fb.innerHTML='<i class="fas fa-times-circle"></i><div><strong>Incorrect.</strong> Answer: <strong>'+lt[q.c]+'. '+esc(q.o[q.c])+'</strong>.<br>'+q.e+'</div>';addLog("Space "+sn+" ("+cat.l+"): Wrong","lwr");
+      }
+      G._peekNext = false;updSt();
+      setTimeout(function(){
+        document.getElementById("qModal").classList.remove("open");
+        if(ok){
+          if(sn===50){endGame(true);}
+          else{setMsg("Correct! Roll again.","ok");document.getElementById("rollBtn").disabled=false;}
+        }else{
+          handleWrong(sn);
+        }
+      },2500);
+    });
+  })(opts[i],i);}
+}
+
+function handleWrong(sn){
+  var mode = G.mode;
+
+  if(mode === "lives"){
+    G.lives--;
+    if(G.lives <= 0){
+      addLog("Lives: 0 - GAME OVER","lwr");
+      endGame(false);
+      return;
+    }
+    addLog("Wrong! Lives remaining: "+G.lives,"lwr");
+    setMsg("Wrong! "+G.lives+" lives remaining.","er");
+    // Stay on same space, just lose a life
+    document.getElementById("rollBtn").disabled=false;
+  }else if(mode === "shields"){
+    if(G.shields > 0){
+      G.shields--;
+      addLog("Shield used! Stay on Space "+sn,"lok");
+      showPuNotif("fa-shield-alt","Shield Used!","#7B1FA2");
+      setMsg("Shield blocked the send-back! Stay on Space "+sn+".","ok");
+    }else{
+      addLog("No shields! Back to START","lwr");
+      setMsg("No shields! Going back to START...","er");
+      G.sentBack++;updSt();var fr=G.pos;animBack(fr,function(){setMsg("Back at start. Roll again!","er");document.getElementById("rollBtn").disabled=false;updSt();});
+      return;
+    }
+    document.getElementById("rollBtn").disabled=false;
+  }else if(mode === "boss" && sn%10===0 && sn<50){
+    addLog("Boss wrong! Back 10 spaces from "+sn,"lwr");
+    setMsg("Boss failed! Back 10 spaces...","er");
+    G.sentBack++;updSt();var fr=G.pos;animBack10(fr,function(){setMsg("Now at Space "+G.pos+". Roll again!","er");document.getElementById("rollBtn").disabled=false;updSt();});
+    return;
+  }else{
+    // Classic or time or powerups
+    G.sentBack++;
+    addLog("Wrong - back to START","lwr");
+    setMsg("Wrong! Going back to START...","er");
+    updSt();var fr=G.pos;animBack(fr,function(){setMsg("Back at start. Roll again!","er");document.getElementById("rollBtn").disabled=false;updSt();});
+    return;
+  }
+}
+
+function setMsg(m,c){var e=document.getElementById("sMsg");e.textContent=m;e.className="sm"+(c?" "+c:"");}
+
+function buildSbar(){
+  var h="";
+  h+='<div class="sc"><i class="fas fa-map-marker-alt"></i> Space: <span id="sP">0</span>/50</div>';
+  h+='<div class="sc"><i class="fas fa-dice"></i> Rolls: <span id="sR">0</span></div>';
+  h+='<div class="sc"><i class="fas fa-check"></i> Correct: <span id="sC">0</span></div>';
+  h+='<div class="sc"><i class="fas fa-times"></i> Wrong: <span id="sW">0</span></div>';
+  h+='<div class="sc"><i class="fas fa-arrow-down"></i> Sent Back: <span id="sB">0</span></div>';
+  h+='<div class="sc"><i class="fas fa-percentage"></i> Accuracy: <span id="sA">--</span></div>';
+  if(G.mode==="lives")h+='<div class="sc" id="livesChip"><i class="fas fa-heart"></i> Lives: <span id="sL">3</span></div>';
+  if(G.mode==="shields")h+='<div class="sc"><i class="fas fa-shield-alt"></i> Shields: <span id="sSh">0</span></div>';
+  if(G.mode==="time")h+='<div class="sc" id="timerChip"><i class="fas fa-clock"></i> Time: <span id="sT">15:00</span></div>';
+  document.getElementById("sbar").innerHTML=h;
+}
+
+function updSt(){
+  document.getElementById("sP").textContent=G.pos;
+  document.getElementById("sR").textContent=G.rolls;
+  document.getElementById("sC").textContent=G.correct;
+  document.getElementById("sW").textContent=G.wrong;
+  document.getElementById("sB").textContent=G.sentBack;
+  var t=G.correct+G.wrong;document.getElementById("sA").textContent=t>0?Math.round((G.correct/t)*100)+"%":"--";
+  document.getElementById("bProg").textContent=Math.round((G.pos/50)*100)+"%";
+  if(G.mode==="lives"){var el=document.getElementById("sL");if(el)el.textContent=G.lives;var chip=document.getElementById("livesChip");if(chip&&G.lives<=1)chip.classList.add("timer-warn");}
+  if(G.mode==="shields"){var el=document.getElementById("sSh");if(el)el.textContent=G.shields;}
+}
+
+function startTimer(){
+  G.timer=900;
+  G.timerInt=setInterval(function(){
+    G.timer--;var m=Math.floor(G.timer/60);var s=G.timer%60;
+    var el=document.getElementById("sT");if(el)el.textContent=m+":"+(s<10?"0":"")+s;
+    var chip=document.getElementById("timerChip");if(chip&&G.timer<=60)chip.classList.add("timer-warn");
+    if(G.timer<=0){clearInterval(G.timerInt);G.gameOver=true;document.getElementById("rollBtn").disabled=true;setMsg("Time is up!","er");endGame(false);}
+  },1000);
+}
+
+function addLog(m,t){G.log.push({m:m,t:t});var p=document.getElementById("logP");var c=t==="roll"?"lr":t==="lok"?"lok":"lwr";p.innerHTML+='<div class="le"><span class="'+c+'">'+esc(m)+'</span></div>';p.scrollTop=p.scrollHeight;}
+
+function endGame(won){
+  G.gameOver=true;if(G.timerInt)clearInterval(G.timerInt);
+  document.getElementById("rollBtn").disabled=true;
+  if(G.mode==="time"&&!won){
+    // For time attack, finishing is a bonus but not required to show results
+    won = G.pos === 50;
+  }
+  setTimeout(function(){
+    document.getElementById("gameScreen").style.display="none";document.getElementById("vicS").style.display="block";document.getElementById("tk").style.display="none";
+    var t=G.correct+G.wrong;var a=t>0?Math.round((G.correct/t)*100):0;
+    var cc={grammar:"#C62828",collocation:"#00695C",idiom:"#E65100",vocabulary:"#2E7D32",structure:"#1565C0"};
+    var modeLabel = MODES.filter(function(m){return m.id===G.mode;})[0].name;
+    var h='<div class="vi2"><i class="fas fa-'+(won?'trophy':'skull-crossbones')+'"></i></div>';
+    h+='<h2 class="vt">'+(won?'Quest Complete!':'Game Over')+'</h2>';
+    h+='<p class="vs">'+modeLabel+' mode'+(won?' - You conquered the board!':' - Better luck next time!')+'</p>';
+    h+='<div class="vb2">'+G.rolls+'</div><div class="vl2">total rolls'+(G.mode==="time"?' | Time: '+Math.floor((900-G.timer)/60)+'m '+((900-G.timer)%60)+'s':'')+'</div>';
+    h+='<div class="vbr"><div class="vbc"><h4>Accuracy</h4><div class="vbs">'+a+'%</div><div class="vbr2"><div class="vbf" style="width:'+a+'%;background:#4CAF50"></div></div></div>';
+    h+='<div class="vbc"><h4>Sent Back</h4><div class="vbs">'+G.sentBack+'</div><div class="vbr2"><div class="vbf" style="width:'+Math.min(100,G.sentBack*10)+'%;background:#E53935"></div></div></div>';
+    var ts=Object.keys(CATS);for(var i=0;i<ts.length;i++){var s=G.catStats[ts[i]];var p=s.t>0?Math.round((s.c/s.t)*100):0;h+='<div class="vbc"><h4>'+CATS[ts[i]].l+'</h4><div class="vbs">'+s.c+'/'+s.t+'</div><div class="vbr2"><div class="vbf" style="width:'+p+'%;background:'+cc[ts[i]]+'"></div></div></div>';}
+    h+='</div><div class="va2"><button class="bo" id="vC"><i class="fas fa-download"></i> CSV</button><button class="bo" id="vS"><i class="fas fa-paper-plane"></i> Submit</button><button class="bgold" id="vN"><i class="fas fa-redo"></i> Play Again</button></div>';
+    document.getElementById("vicC").innerHTML=h;
+    document.getElementById("vC").addEventListener("click",expCSV);document.getElementById("vS").addEventListener("click",subSheet);
+    document.getElementById("vN").addEventListener("click",function(){goToModeScreen();});
+    if(won&&a>=70)confetti();
+  },800);
+}
+
+function goToModeScreen(){
+  document.getElementById("vicS").style.display="none";document.getElementById("gameScreen").style.display="none";
+  document.getElementById("modeScreen").style.display="flex";
+}
+
+function newG(){
+  G.pos=0;G.rolls=0;G.correct=0;G.wrong=0;G.sentBack=0;G.lives=3;G.shields=0;G._peekNext=false;
+  G.visited={};G.log=[];G.gameOver=false;G.powerTiles={};
+  if(G.timerInt)clearInterval(G.timerInt);G.timer=0;G.timerInt=null;
+  resetCS();document.getElementById("logP").innerHTML="";
+  buildSbar();genBoard();renderBoard();updSt();
+  setMsg("Roll the dice to begin!","");document.getElementById("rollBtn").disabled=false;
+  document.getElementById("dCube").style.transform="rotateX(-20deg) rotateY(20deg)";showDF(1);
+  if(G.mode==="time")startTimer();
+}
+
+function expCSV(){
+  var t=G.correct+G.wrong;var a=t>0?Math.round((G.correct/t)*100)+"%":"0%";var n=new Date().toISOString();var gs=G.catStats;
+  var ml=MODES.filter(function(m){return m.id===G.mode;})[0].name;
+  var c="Name,Mode,Rolls,Correct,Wrong,SentBack,Accuracy,Grammar,Collocation,Idiom,Vocabulary,Structure,Time,Finished\n";
+  c+='"'+G.name+'","'+ml+'",'+G.rolls+","+G.correct+","+G.wrong+","+G.sentBack+","+a+","+gs.grammar.c+"/"+gs.grammar.t+","+gs.collocation.c+"/"+gs.collocation.t+","+gs.idiom.c+"/"+gs.idiom.t+","+gs.vocabulary.c+"/"+gs.vocabulary.t+","+gs.structure.c+"/"+gs.structure.t+',"'+n+'",'+(G.pos===50?"Yes":"No")+"\n";
+  c+="\nLog\nEvent\n";for(var i=0;i<G.log.length;i++)c+='"'+G.log[i].m.replace(/"/g,"")+'"\n';
+  var b=new Blob([c],{type:"text/csv"});var u=URL.createObjectURL(b);var x=document.createElement("a");x.href=u;x.download="quest_"+G.name.replace(/\s+/g,"_")+"_"+n.slice(0,10)+".csv";document.body.appendChild(x);x.click();document.body.removeChild(x);URL.revokeObjectURL(u);tst("CSV downloaded!","ok");
+}
+
+function subSheet(){
+  var cf=G.setup;if(!cf.formUrl||!cf.ids.name){tst("Google Sheets not configured.","er");return;}
+  var t=G.correct+G.wrong;var a=t>0?Math.round((G.correct/t)*100)+"%":"0%";var gs=G.catStats;var n=new Date().toLocaleString();var ids=cf.ids;var ml=MODES.filter(function(m){return m.id===G.mode;})[0].name;
+  var fs=[{n:ids.name,v:G.name},{n:ids.rolls,v:G.rolls},{n:ids.correct,v:G.correct},{n:ids.wrong,v:G.wrong},{n:ids.back,v:G.sentBack},{n:ids.acc,v:a},{n:ids.mode,v:ml},{n:ids.gr,v:gs.grammar.c+"/"+gs.grammar.t},{n:ids.co,v:gs.collocation.c+"/"+gs.collocation.t},{n:ids.id,v:gs.idiom.c+"/"+gs.idiom.t},{n:ids.vo,v:gs.vocabulary.c+"/"+gs.vocabulary.t},{n:ids.st,v:gs.structure.c+"/"+gs.structure.t},{n:ids.date,v:n}];
+  var fh='<form id="sf" target="snkF" method="POST" action="'+esc(cf.formUrl)+'">';for(var i=0;i<fs.length;i++)fh+='<input name="'+esc(fs[i].n)+'" value="'+esc(String(fs[i].v))+'">';fh+='</form>';
+  var d=document.createElement("div");d.style.display="none";d.innerHTML=fh;document.body.appendChild(d);d.querySelector("form").submit();setTimeout(function(){if(d.parentNode)document.body.removeChild(d);},2000);tst("Submitted!","ok");
+}
+
+/* ===== SETUP MODAL ===== */
+document.getElementById("setBtn").addEventListener("click",function(){var c=G.setup;document.getElementById("cUrl").value=c.formUrl;document.getElementById("cNm").value=c.ids.name;document.getElementById("cRl").value=c.ids.rolls;document.getElementById("cCr").value=c.ids.correct;document.getElementById("cWr").value=c.ids.wrong;document.getElementById("cBk").value=c.ids.back;document.getElementById("cAc").value=c.ids.acc;document.getElementById("cMd").value=c.ids.mode;document.getElementById("cGr").value=c.ids.gr;document.getElementById("cCo").value=c.ids.co;document.getElementById("cId").value=c.ids.id;document.getElementById("cVo").value=c.ids.vo;document.getElementById("cSt").value=c.ids.st;document.getElementById("cDt").value=c.ids.date;document.getElementById("setModal").classList.add("open");});
+document.getElementById("clSet").addEventListener("click",function(){document.getElementById("setModal").classList.remove("open");});
+document.getElementById("setModal").addEventListener("click",function(e){if(e.target===document.getElementById("setModal"))document.getElementById("setModal").classList.remove("open");});
+document.getElementById("savSet").addEventListener("click",function(){G.setup.formUrl=document.getElementById("cUrl").value.trim();var i=G.setup.ids;i.name=document.getElementById("cNm").value.trim();i.rolls=document.getElementById("cRl").value.trim();i.correct=document.getElementById("cCr").value.trim();i.wrong=document.getElementById("cWr").value.trim();i.back=document.getElementById("cBk").value.trim();i.acc=document.getElementById("cAc").value.trim();i.mode=document.getElementById("cMd").value.trim();i.gr=document.getElementById("cGr").value.trim();i.co=document.getElementById("cCo").value.trim();i.id=document.getElementById("cId").value.trim();i.vo=document.getElementById("cVo").value.trim();i.st=document.getElementById("cSt").value.trim();i.date=document.getElementById("cDt").value.trim();try{localStorage.setItem("sq_setup",JSON.stringify(G.setup));}catch(e){}document.getElementById("setModal").classList.remove("open");tst("Saved!","ok");});
+document.getElementById("clrSet").addEventListener("click",function(){var inp=document.querySelectorAll(".sff input");for(var i=0;i<inp.length;i++)inp[i].value="";G.setup={formUrl:"",ids:{name:"",rolls:"",correct:"",wrong:"",back:"",acc:"",mode:"",gr:"",co:"",id:"",vo:"",st:"",date:""}};try{localStorage.removeItem("sq_setup");}catch(e){}tst("Cleared.","in");});
+
+/* ===== MODE SELECTOR ===== */
+var selectedMode = "classic";
+function buildModeGrid(){
+  var h = "";
+  for(var i=0;i<MODES.length;i++){
+    var m = MODES[i];
+    h += '<div class="mode-card'+(m.id===selectedMode?" sel":"")+'" data-mode="'+m.id+'">';
+    h += '<div class="mc-icon"><i class="fas '+m.icon+'"></i></div>';
+    h += '<div class="mc-name">'+m.name+'</div>';
+    h += '<div class="mc-desc">'+m.desc+'</div>';
+    h += '<span class="mc-tag">'+m.tag+'</span>';
+    h += '</div>';
+  }
+  document.getElementById("modeGrid").innerHTML = h;
+  document.querySelectorAll(".mode-card").forEach(function(card){
+    card.addEventListener("click", function(){
+      selectedMode = this.getAttribute("data-mode");
+      document.querySelectorAll(".mode-card").forEach(function(c){c.classList.remove("sel");});
+      this.classList.add("sel");
+    });
+  });
+}
+
+/* ===== START FLOW ===== */
+var ni=document.getElementById("nameIn");var sb=document.getElementById("startBtn");
+ni.addEventListener("input",function(){sb.disabled=ni.value.trim().length<2;});
+ni.addEventListener("keydown",function(e){if(e.key==="Enter"&&!sb.disabled)sb.click();});
+sb.addEventListener("click",function(){
+  G.name=ni.value.trim();
+  document.getElementById("startScreen").style.display="none";
+  document.getElementById("modeScreen").style.display="flex";
+  selectedMode = "classic";
+  buildModeGrid();
+});
+
+document.getElementById("modeBtn").addEventListener("click",function(){
+  G.mode = selectedMode;
+  document.getElementById("modeScreen").style.display="none";
+  document.getElementById("gameScreen").style.display="block";
+  document.getElementById("sTag").textContent=G.name;
+  document.getElementById("mTag").textContent=MODES.filter(function(m){return m.id===G.mode;})[0].name;
+  try{var sv=localStorage.getItem("sq_setup");if(sv)G.setup=JSON.parse(sv);}catch(e){}
+  buildDice();newG();
+});
+
+document.getElementById("rollBtn").addEventListener("click",rollDice);
+document.getElementById("csvBtn").addEventListener("click",expCSV);
+document.getElementById("submitBtn").addEventListener("click",subSheet);
+document.getElementById("newBtn").addEventListener("click",function(){if(G.rolls>0&&!confirm("New game? Progress lost."))return;if(G.timerInt)clearInterval(G.timerInt);newG();});
+document.getElementById("logTgl").addEventListener("click",function(){var p=document.getElementById("logP");p.classList.toggle("open");this.innerHTML=p.classList.contains("open")?'<i class="fas fa-scroll"></i> Hide Log':'<i class="fas fa-scroll"></i> Game Log';});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")document.getElementById("setModal").classList.remove("open");});
+window.addEventListener("DOMContentLoaded",function(){ni.focus();});
+
+function confetti(){var c=document.getElementById("cnf");var x=c.getContext("2d");c.width=window.innerWidth;c.height=window.innerHeight;var cols=["#FFD54F","#C9A84C","#E8583A","#4CAF50","#FF8F00","#C62828","#7B1FA2"];var ps=[];for(var i=0;i<100;i++)ps.push({x:Math.random()*c.width,y:Math.random()*c.height-c.height,w:Math.max(4,Math.random()*10),h:Math.max(4,Math.random()*6),co:cols[Math.floor(Math.random()*cols.length)],vx:(Math.random()-.5)*5,vy:Math.random()*3+2,r:Math.random()*360,rs:(Math.random()-.5)*12,o:1});var f=0;function an(){x.clearRect(0,0,c.width,c.height);var a=false;for(var i=0;i<ps.length;i++){var p=ps[i];p.x+=p.vx;p.y+=p.vy;p.r+=p.rs;p.vy+=0.06;if(f>80)p.o-=0.012;if(p.o<0)p.o=0;if(p.o>0&&p.y<c.height+60){a=true;x.save();x.translate(p.x,p.y);x.rotate(p.r*Math.PI/180);x.globalAlpha=p.o;x.fillStyle=p.co;x.fillRect(-p.w/2,-p.h/2,p.w,p.h);x.restore();}}f++;if(a&&f<250)requestAnimationFrame(an);else x.clearRect(0,0,c.width,c.height);}an();}
+</script>
+</body>
+</html>
