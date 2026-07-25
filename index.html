@@ -627,7 +627,7 @@
                             <span>50 minutes</span>
                             <span>2 tasks</span>
                         </div>
-                        <button class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">Start Test</button>
+                        <button id="startWritingTestBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">Start Test</button>
                     </div>
                 </div>
 
@@ -1161,6 +1161,15 @@
         }
 
         startReadingTestBtn.addEventListener('click', showReadingTest);
+        
+        // Writing Test Button - Navigate to writing test page
+        const startWritingTestBtn = document.getElementById('startWritingTestBtn');
+        if (startWritingTestBtn) {
+            startWritingTestBtn.addEventListener('click', () => {
+                window.location.href = 'toefl_writing_test.html';
+            });
+        }
+        
         closeReadingModalBtn.addEventListener('click', hideReadingTest);
         startTestFromNameBtn.addEventListener('click', startTestAfterName);
         
