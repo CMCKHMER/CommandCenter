@@ -1,2 +1,1 @@
-(index.html is a source file, so no need to ignore it)
-(empty)
+Nothing needs to be added to .gitignore since only a single HTML file was added and no build artifacts, dependencies, or temporary files were detected in the changes.
