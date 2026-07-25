@@ -310,6 +310,20 @@
     const TIME_T1 = 20 * 60; 
     const TIME_T2 = 10 * 60;
 
+    // Initialize when DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
+        // Attach word count listeners
+        const t1Input = document.getElementById('response-t1');
+        const t2Input = document.getElementById('response-t2');
+        
+        if (t1Input) {
+            t1Input.addEventListener('input', () => updateWordCount('response-t1', 'wc-t1'));
+        }
+        if (t2Input) {
+            t2Input.addEventListener('input', () => updateWordCount('response-t2', 'wc-t2'));
+        }
+    });
+
     function startTest() {
         const nameInput = document.getElementById('username').value.trim();
         if (!nameInput) {
@@ -330,13 +344,18 @@
 
     function switchScreen(screenId) {
         document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-        document.getElementById(screenId).classList.add('active');
+        const target = document.getElementById(screenId);
+        if (target) {
+            target.classList.add('active');
+        }
         window.scrollTo(0, 0);
     }
 
     function startTimer(duration, displayId, callback) {
         let timer = duration, minutes, seconds;
         const display = document.getElementById(displayId);
+        
+        if (!display) return;
         
         clearInterval(timerInterval); // Clear any existing timer
 
@@ -359,12 +378,11 @@
     function updateWordCount(inputId, countId) {
         const text = document.getElementById(inputId).value;
         const count = text.trim().split(/\s+/).filter(word => word.length > 0).length;
-        document.getElementById(countId).textContent = `Words: ${count}`;
+        const countDisplay = document.getElementById(countId);
+        if (countDisplay) {
+            countDisplay.textContent = `Words: ${count}`;
+        }
     }
-
-    // Attach word count listeners
-    document.getElementById('response-t1').addEventListener('input', () => updateWordCount('response-t1', 'wc-t1'));
-    document.getElementById('response-t2').addEventListener('input', () => updateWordCount('response-t2', 'wc-t2'));
 
     function finishTask1() {
         clearInterval(timerInterval);
