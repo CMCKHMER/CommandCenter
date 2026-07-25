@@ -720,53 +720,166 @@
     <!-- TOEFL Reading Test Modal -->
     <div id="toeflReadingModal" class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden">
         <div class="min-h-screen flex items-center justify-center p-4">
-            <div class="modal-content bg-[#1a1f2e] w-full max-w-4xl rounded-xl shadow-2xl flex flex-col max-h-[90vh]">
+            <div class="modal-content bg-[#1a1f2e] w-full max-w-5xl rounded-xl shadow-2xl flex flex-col max-h-[90vh]">
                 <div class="p-6 flex justify-between items-center border-b border-gray-700">
-                    <h2 class="text-2xl font-bold">TOEFL Reading Test</h2>
+                    <div>
+                        <h2 class="text-2xl font-bold">TOEFL Reading Test</h2>
+                        <p class="text-gray-400 text-sm mt-1">Answer all questions before time runs out</p>
+                    </div>
                     <div class="flex items-center space-x-4">
-                        <span id="timerDisplay" class="text-xl font-mono bg-gray-800 px-3 py-1 rounded">60:00</span>
-                        <button id="closeReadingModalBtn" class="text-xl focus:outline-none">&times;</button>
+                        <span id="timerDisplay" class="text-xl font-mono bg-red-900 text-red-100 px-4 py-2 rounded-lg font-bold">60:00</span>
+                        <button id="closeReadingModalBtn" class="text-2xl hover:text-red-400 focus:outline-none">&times;</button>
                     </div>
                 </div>
+                
+                <!-- Name Input Section -->
+                <div id="nameInputSection" class="p-6 border-b border-gray-700 bg-[#2d3748]">
+                    <label class="block text-lg font-bold mb-3">Enter Your Full Name:</label>
+                    <input type="text" id="studentName" placeholder="Your name here..." class="w-full px-4 py-3 bg-[#1a1f2e] border border-gray-600 rounded-lg focus:outline-none focus:border-blue-500 text-lg">
+                    <button id="startTestFromName" class="mt-4 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold">Start Test</button>
+                </div>
+
                 <div class="overflow-y-auto flex-grow p-6">
                     <div id="readingTestContent">
-                        <h3 id="testTitle" class="text-xl font-bold mb-4">Sample Academic Passage</h3>
-                        <p id="readingPassage" class="mb-6 leading-relaxed text-justify">
-                            The development of agriculture stands as one of humanity's most pivotal achievements, fundamentally altering social structures, population densities, and the relationship between humans and the environment. Archaeological evidence suggests that the transition from hunting-gathering to farming began independently in several regions around the world sometime after the end of the last Ice Age, approximately 10,000 to 12,000 years ago. This shift, often referred to as the Neolithic Revolution, involved the domestication of plants and animals.
-                            <br><br>
-                            Early agricultural societies, such as those in the Fertile Crescent (modern-day Middle East), began cultivating cereals like wheat and barley and domesticating animals like goats and sheep. This stable food supply allowed populations to settle in permanent villages, leading to increasingly complex social hierarchies, specialized labor, and technological advancements. However, the transition was not uniform or rapid everywhere, and it brought challenges, including increased susceptibility to disease due to higher population densities and potential nutritional deficiencies compared to diverse hunter-gatherer diets.
-                            <br><br>
-                            The impact of agriculture extended beyond immediate survival. It facilitated the rise of cities, complex political systems, and written language, laying the groundwork for what we consider "civilization." Understanding this transition helps historians and anthropologists grasp the roots of modern societal structures and environmental interactions.
-                        </p>
+                        <h3 id="testTitle" class="text-2xl font-bold mb-4 text-blue-400">The Origins of Agriculture and the Neolithic Revolution</h3>
+                        <p class="text-sm text-gray-400 mb-4 italic">Time: 60 minutes | Questions: 10 | Total Points: 100</p>
+                        
+                        <div class="bg-[#2d3748] p-6 rounded-lg mb-8 leading-relaxed text-justify border-l-4 border-blue-600">
+                            <p class="mb-4"><strong>Paragraph 1:</strong> The development of agriculture stands as one of humanity's most pivotal achievements, fundamentally altering social structures, population densities, and the relationship between humans and the environment. Archaeological evidence suggests that the transition from hunting-gathering to farming began independently in several regions around the world sometime after the end of the last Ice Age, approximately 10,000 to 12,000 years ago. This shift, often referred to as the Neolithic Revolution, involved the domestication of plants and animals, marking a departure from the nomadic lifestyle that had characterized human existence for millennia.</p>
+                            
+                            <p class="mb-4"><strong>Paragraph 2:</strong> Early agricultural societies, such as those in the Fertile Crescent (modern-day Middle East), began cultivating cereals like wheat and barley and domesticating animals like goats and sheep. This stable food supply allowed populations to settle in permanent villages, leading to increasingly complex social hierarchies, specialized labor, and technological advancements. The ability to store surplus food meant that not everyone needed to be involved in food production, enabling some individuals to pursue other activities such as craftsmanship, trade, religious practices, and governance. This specialization laid the foundation for the development of cities and civilizations.</p>
+                            
+                            <p class="mb-4"><strong>Paragraph 3:</strong> However, the transition to agriculture was not uniform or rapid everywhere, and it brought significant challenges. Increased population densities in settled communities led to greater susceptibility to infectious diseases, as pathogens could spread more easily among closely living populations. Additionally, archaeological evidence from early agricultural settlements suggests potential nutritional deficiencies compared to the diverse diets of hunter-gatherers. Skeletal remains indicate that early farmers sometimes suffered from anemia, dental problems, and stunted growth, likely due to a less varied diet heavily reliant on a few staple crops.</p>
+                            
+                            <p class="mb-4"><strong>Paragraph 4:</strong> The environmental impact of agriculture was profound and lasting. Forests were cleared to create farmland, leading to habitat loss and changes in local ecosystems. Irrigation systems, while enabling cultivation in arid regions, sometimes resulted in soil salinization, reducing land productivity over time. Some historians argue that certain ancient civilizations, such as the Sumerians in Mesopotamia, may have collapsed partly due to environmental degradation caused by intensive agricultural practices. The alteration of landscapes for farming also contributed to soil erosion and changes in water tables, effects that continue to influence modern environmental challenges.</p>
+                            
+                            <p class="mb-4"><strong>Paragraph 5:</strong> Despite these challenges, the impact of agriculture extended far beyond immediate survival needs. It facilitated the rise of cities, complex political systems, and written language, laying the groundwork for what we consider "civilization." The need to record harvests, track seasons, and manage resources drove the development of writing systems in regions like Mesopotamia and Egypt. Agricultural surplus also enabled the support of larger armies, leading to territorial expansion and the formation of empires. Trade networks expanded as communities exchanged surplus goods, fostering cultural exchange and technological diffusion across vast distances.</p>
+                            
+                            <p class="mb-4"><strong>Paragraph 6:</strong> Understanding this transition helps historians and anthropologists grasp the roots of modern societal structures and environmental interactions. The Neolithic Revolution represents a fundamental turning point in human history, one that continues to shape our world today. Modern debates about sustainable agriculture, food security, and environmental conservation can trace their origins back to these early experiments in farming. By studying the successes and failures of ancient agricultural societies, we gain valuable insights into how human innovation can both solve and create problems, offering lessons that remain relevant in our contemporary globalized world.</p>
+                        </div>
+
                         <form id="readingQuestionsForm">
-                            <div class="question mb-6 p-4 bg-[#2d3748] rounded-lg">
-                                <p class="font-bold mb-2">1. According to the passage, the Neolithic Revolution refers to:</p>
-                                <label class="block mb-2"><input type="radio" name="q1" value="a" class="mr-2"> a) The end of the last Ice Age.</label>
-                                <label class="block mb-2"><input type="radio" name="q1" value="b" class="mr-2"> b) The development of agriculture and domestication.</label>
-                                <label class="block mb-2"><input type="radio" name="q1" value="c" class="mr-2"> c) The rise of cities and civilizations.</label>
-                                <label class="block mb-2"><input type="radio" name="q1" value="d" class="mr-2"> d) The transition to hunting and gathering.</label>
+                            <div class="question mb-6 p-5 bg-[#2d3748] rounded-lg border border-gray-700">
+                                <p class="font-bold mb-3 text-blue-300">1. According to paragraph 1, the Neolithic Revolution refers to:</p>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q1" value="a" class="mr-3"> a) The end of the last Ice Age and climate change</label>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q1" value="b" class="mr-3"> b) The development of agriculture and domestication of plants and animals</label>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q1" value="c" class="mr-3"> c) The rise of the first cities and civilizations</label>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q1" value="d" class="mr-3"> d) The transition from farming back to hunting and gathering</label>
                             </div>
-                            <div class="question mb-6 p-4 bg-[#2d3748] rounded-lg">
-                                <p class="font-bold mb-2">2. The passage suggests that early agricultural societies:</p>
-                                <label class="block mb-2"><input type="radio" name="q2" value="a" class="mr-2"> a) Were less susceptible to disease.</label>
-                                <label class="block mb-2"><input type="radio" name="q2" value="b" class="mr-2"> b) Led to more complex social structures.</label>
-                                <label class="block mb-2"><input type="radio" name="q2" value="c" class="mr-2"> c) Resulted in more diverse diets.</label>
-                                <label class="block mb-2"><input type="radio" name="q2" value="d" class="mr-2"> d) Prevented technological advancements.</label>
+
+                            <div class="question mb-6 p-5 bg-[#2d3748] rounded-lg border border-gray-700">
+                                <p class="font-bold mb-3 text-blue-300">2. The word "pivotal" in paragraph 1 is closest in meaning to:</p>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q2" value="a" class="mr-3"> a) Minor</label>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q2" value="b" class="mr-3"> b) Critical or crucial</label>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q2" value="c" class="mr-3"> c) Recent</label>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q2" value="d" class="mr-3"> d) Controversial</label>
                             </div>
-                            <div class="question mb-6 p-4 bg-[#2d3748] rounded-lg">
-                                <p class="font-bold mb-2">3. Which of the following is mentioned as a challenge brought by agriculture?</p>
-                                <label class="block mb-2"><input type="radio" name="q3" value="a" class="mr-2"> a) Decreased population density.</label>
-                                <label class="block mb-2"><input type="radio" name="q3" value="b" class="mr-2"> b) Increased susceptibility to disease.</label>
-                                <label class="block mb-2"><input type="radio" name="q3" value="c" class="mr-2"> c) Uniform and rapid transition everywhere.</label>
-                                <label class="block mb-2"><input type="radio" name="q3" value="d" class="mr-2"> d) Simplified social hierarchies.</label>
+
+                            <div class="question mb-6 p-5 bg-[#2d3748] rounded-lg border border-gray-700">
+                                <p class="font-bold mb-3 text-blue-300">3. According to paragraph 2, what was a major consequence of having a stable food supply?</p>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q3" value="a" class="mr-3"> a) People became more nomadic</label>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q3" value="b" class="mr-3"> b) Populations decreased significantly</label>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q3" value="c" class="mr-3"> c) Not everyone needed to produce food, allowing for specialization</label>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q3" value="d" class="mr-3"> d) Trade networks collapsed</label>
                             </div>
-                            <!-- Add more questions as needed -->
+
+                            <div class="question mb-6 p-5 bg-[#2d3748] rounded-lg border border-gray-700">
+                                <p class="font-bold mb-3 text-blue-300">4. Which of the following is mentioned in paragraph 3 as a challenge brought by agriculture?</p>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q4" value="a" class="mr-3"> a) Decreased population density</label>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q4" value="b" class="mr-3"> b) Increased susceptibility to infectious diseases</label>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q4" value="c" class="mr-3"> c) More diverse and nutritious diets</label>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q4" value="d" class="mr-3"> d) Simplified social hierarchies</label>
+                            </div>
+
+                            <div class="question mb-6 p-5 bg-[#2d3748] rounded-lg border border-gray-700">
+                                <p class="font-bold mb-3 text-blue-300">5. In paragraph 3, why does the author mention skeletal remains?</p>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q5" value="a" class="mr-3"> a) To show that early farmers were healthier than hunter-gatherers</label>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q5" value="b" class="mr-3"> b) To provide evidence of nutritional deficiencies in early agricultural societies</label>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q5" value="c" class="mr-3"> c) To demonstrate advanced medical knowledge of early civilizations</label>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q5" value="d" class="mr-3"> d) To prove that hunter-gatherers had no health problems</label>
+                            </div>
+
+                            <div class="question mb-6 p-5 bg-[#2d3748] rounded-lg border border-gray-700">
+                                <p class="font-bold mb-3 text-blue-300">6. According to paragraph 4, what environmental problem resulted from irrigation in arid regions?</p>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q6" value="a" class="mr-3"> a) Deforestation</label>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q6" value="b" class="mr-3"> b) Soil salinization</label>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q6" value="c" class="mr-3"> c) Air pollution</label>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q6" value="d" class="mr-3"> d) Loss of biodiversity in oceans</label>
+                            </div>
+
+                            <div class="question mb-6 p-5 bg-[#2d3748] rounded-lg border border-gray-700">
+                                <p class="font-bold mb-3 text-blue-300">7. The author mentions the Sumerians in paragraph 4 in order to:</p>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q7" value="a" class="mr-3"> a) Provide an example of a civilization that may have collapsed due to environmental degradation</label>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q7" value="b" class="mr-3"> b) Show that they were the first to develop agriculture</label>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q7" value="c" class="mr-3"> c) Demonstrate their superior irrigation technology</label>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q7" value="d" class="mr-3"> d) Explain why they conquered neighboring regions</label>
+                            </div>
+
+                            <div class="question mb-6 p-5 bg-[#2d3748] rounded-lg border border-gray-700">
+                                <p class="font-bold mb-3 text-blue-300">8. According to paragraph 5, what drove the development of writing systems?</p>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q8" value="a" class="mr-3"> a) The desire to create literature and poetry</label>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q8" value="b" class="mr-3"> b) The need to record harvests, track seasons, and manage resources</label>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q8" value="c" class="mr-3"> c) Religious ceremonies and rituals</label>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q8" value="d" class="mr-3"> d) Communication with distant empires</label>
+                            </div>
+
+                            <div class="question mb-6 p-5 bg-[#2d3748] rounded-lg border border-gray-700">
+                                <p class="font-bold mb-3 text-blue-300">9. Which sentence best expresses the main idea of paragraph 6?</p>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q9" value="a" class="mr-3"> a) Ancient agricultural techniques are no longer relevant today</label>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q9" value="b" class="mr-3"> b) The Neolithic Revolution was a turning point that continues to influence modern society and environmental issues</label>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q9" value="c" class="mr-3"> c) Historians disagree about the importance of the Neolithic Revolution</label>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q9" value="d" class="mr-3"> d) Modern agriculture has solved all the problems created by early farming</label>
+                            </div>
+
+                            <div class="question mb-6 p-5 bg-[#2d3748] rounded-lg border border-gray-700">
+                                <p class="font-bold mb-3 text-blue-300">10. Look at the word "surplus" in paragraph 5. What does it mean in this context?</p>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q10" value="a" class="mr-3"> a) Shortage or scarcity</label>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q10" value="b" class="mr-3"> b) Average amount</label>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q10" value="c" class="mr-3"> c) Extra or excess amount</label>
+                                <label class="block mb-2 cursor-pointer hover:bg-[#3d4758] p-2 rounded"><input type="radio" name="q10" value="d" class="mr-3"> d) Poor quality</label>
+                            </div>
                         </form>
                     </div>
                 </div>
-                <div class="p-6 border-t border-gray-700 flex justify-end">
-                    <button id="submitReadingAnswersBtn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg">Submit Answers</button>
+                <div class="p-6 border-t border-gray-700 flex justify-between items-center bg-[#2d3748]">
+                    <div class="text-gray-400">
+                        <span id="questionsAnswered">0</span> of 10 questions answered
+                    </div>
+                    <button id="submitReadingAnswersBtn" class="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-bold text-lg">Submit Answers</button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Score Results Modal -->
+    <div id="scoreModal" class="fixed inset-0 bg-black bg-opacity-80 z-50 hidden">
+        <div class="min-h-screen flex items-center justify-center p-4">
+            <div class="modal-content bg-[#1a1f2e] w-full max-w-md rounded-xl shadow-2xl p-8 text-center">
+                <div class="mb-6">
+                    <div class="w-20 h-20 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-3xl font-bold mb-2">Test Completed!</h2>
+                    <p id="resultName" class="text-xl text-blue-400 mb-4"></p>
+                </div>
+                <div class="bg-[#2d3748] rounded-lg p-6 mb-6">
+                    <p class="text-gray-400 mb-2">Your Score</p>
+                    <p id="finalScore" class="text-5xl font-bold text-green-400 mb-2"></p>
+                    <p id="scorePercentage" class="text-xl text-gray-300"></p>
+                </div>
+                <div class="space-y-3 mb-6">
+                    <div class="flex justify-between p-3 bg-[#2d3748] rounded">
+                        <span class="text-gray-400">Correct Answers:</span>
+                        <span id="correctCount" class="font-bold text-green-400"></span>
+                    </div>
+                    <div class="flex justify-between p-3 bg-[#2d3748] rounded">
+                        <span class="text-gray-400">Time Remaining:</span>
+                        <span id="timeRemaining" class="font-bold text-blue-400"></span>
+                    </div>
+                </div>
+                <button id="closeScoreModalBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold">Return to Tests</button>
             </div>
         </div>
     </div>
@@ -920,9 +1033,24 @@
         const submitReadingAnswersBtn = document.getElementById('submitReadingAnswersBtn');
         const timerDisplay = document.getElementById('timerDisplay');
         const readingQuestionsForm = document.getElementById('readingQuestionsForm');
+        const nameInputSection = document.getElementById('nameInputSection');
+        const studentNameInput = document.getElementById('studentName');
+        const startTestFromNameBtn = document.getElementById('startTestFromName');
+        const questionsAnsweredSpan = document.getElementById('questionsAnswered');
+        
+        // Score modal elements
+        const scoreModal = document.getElementById('scoreModal');
+        const closeScoreModalBtn = document.getElementById('closeScoreModalBtn');
+        const resultNameEl = document.getElementById('resultName');
+        const finalScoreEl = document.getElementById('finalScore');
+        const scorePercentageEl = document.getElementById('scorePercentage');
+        const correctCountEl = document.getElementById('correctCount');
+        const timeRemainingEl = document.getElementById('timeRemaining');
 
         let timerInterval;
         let timeLeft = 60 * 60; // 60 minutes in seconds
+        let studentName = '';
+        let testStarted = false;
 
         function startTimer() {
             clearInterval(timerInterval);
@@ -935,7 +1063,6 @@
                 if (timeLeft <= 0) {
                     clearInterval(timerInterval);
                     alert("Time's up! Submitting answers...");
-                    // Optionally auto-submit here
                     submitReadingAnswers();
                 }
             }, 1000);
@@ -951,59 +1078,116 @@
             timerDisplay.textContent = '60:00';
         }
 
+        function updateQuestionsAnsweredCount() {
+            const answered = document.querySelectorAll('#readingQuestionsForm input[type="radio"]:checked').length;
+            questionsAnsweredSpan.textContent = answered;
+        }
+
+        // Add event listeners to all radio buttons to update count
+        readingQuestionsForm.addEventListener('change', updateQuestionsAnsweredCount);
+
         function showReadingTest() {
             resetTimer();
             toeflReadingModal.classList.remove('hidden');
-            startTimer();
+            nameInputSection.style.display = 'block';
+            document.getElementById('readingTestContent').style.display = 'none';
+            document.querySelector('.p-6.border-t.border-gray-700').style.display = 'none';
+            testStarted = false;
+            studentName = '';
+            studentNameInput.value = '';
+            readingQuestionsForm.reset();
+            updateQuestionsAnsweredCount();
         }
 
         function hideReadingTest() {
             stopTimer();
             toeflReadingModal.classList.add('hidden');
             resetTimer();
-            readingQuestionsForm.reset(); // Clear answers when closing
+            nameInputSection.style.display = 'block';
+            document.getElementById('readingTestContent').style.display = 'block';
+            document.querySelector('.p-6.border-t.border-gray-700').style.display = 'flex';
+        }
+
+        function startTestAfterName() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert('Please enter your name before starting the test.');
+                return;
+            }
+            studentName = name;
+            testStarted = true;
+            nameInputSection.style.display = 'none';
+            document.getElementById('readingTestContent').style.display = 'block';
+            document.querySelector('.p-6.border-t.border-gray-700').style.display = 'flex';
+            startTimer();
         }
 
         function submitReadingAnswers() {
-            // Stop timer and prevent further updates
             stopTimer();
 
-            // Get selected answers (example for 3 questions)
-            const q1Answer = document.querySelector('input[name="q1"]:checked');
-            const q2Answer = document.querySelector('input[name="q2"]:checked');
-            const q3Answer = document.querySelector('input[name="q3"]:checked');
+            const answers = {};
+            for (let i = 1; i <= 10; i++) {
+                const answer = document.querySelector(`input[name="q${i}"]:checked`);
+                answers[`q${i}`] = answer ? answer.value : null;
+            }
 
-            // Example answer key (replace with correct answers)
-            const answerKey = { q1: 'b', q2: 'b', q3: 'b' };
+            const answerKey = {
+                q1: 'b', q2: 'b', q3: 'c', q4: 'b', q5: 'b',
+                q6: 'b', q7: 'a', q8: 'b', q9: 'b', q10: 'c'
+            };
+
             let score = 0;
+            for (let i = 1; i <= 10; i++) {
+                if (answers[`q${i}`] === answerKey[`q${i}`]) score++;
+            }
 
-            if (q1Answer && q1Answer.value === answerKey.q1) score++;
-            if (q2Answer && q2Answer.value === answerKey.q2) score++;
-            if (q3Answer && q3Answer.value === answerKey.q3) score++;
-
-            const totalQuestions = 3; // Update based on actual number of questions
+            const totalQuestions = 10;
             const percentage = Math.round((score / totalQuestions) * 100);
+            const finalScore = score * 10;
 
-            alert(`Test submitted!\nCorrect Answers: ${score}/${totalQuestions}\nScore: ${percentage}%`);
+            const timeRemainingMinutes = Math.floor(timeLeft / 60);
+            const timeRemainingSeconds = timeLeft % 60;
+            const timeRemainingStr = `${timeRemainingMinutes}:${timeRemainingSeconds.toString().padStart(2, '0')}`;
 
-            // Reset and close modal after submission
-            hideReadingTest();
+            resultNameEl.textContent = studentName ? `Student: ${studentName}` : 'Anonymous Student';
+            finalScoreEl.textContent = `${finalScore}/100`;
+            scorePercentageEl.textContent = `${percentage}%`;
+            correctCountEl.textContent = `${score}/${totalQuestions}`;
+            timeRemainingEl.textContent = timeRemainingStr;
+
+            scoreModal.classList.remove('hidden');
+            readingQuestionsForm.reset();
+            updateQuestionsAnsweredCount();
         }
 
         startReadingTestBtn.addEventListener('click', showReadingTest);
         closeReadingModalBtn.addEventListener('click', hideReadingTest);
+        startTestFromNameBtn.addEventListener('click', startTestAfterName);
+        
         submitReadingAnswersBtn.addEventListener('click', (e) => {
-            e.preventDefault(); // Prevent default form submission
+            e.preventDefault();
+            if (!testStarted) {
+                alert('Please enter your name and start the test first.');
+                return;
+            }
             submitReadingAnswers();
         });
 
-        // Optional: Close modal if clicked outside content
+        closeScoreModalBtn.addEventListener('click', () => {
+            scoreModal.classList.add('hidden');
+            hideReadingTest();
+        });
+
         toeflReadingModal.addEventListener('click', (e) => {
-            if (e.target === toeflReadingModal) {
+            if (e.target === toeflReadingModal) hideReadingTest();
+        });
+
+        scoreModal.addEventListener('click', (e) => {
+            if (e.target === scoreModal) {
+                scoreModal.classList.add('hidden');
                 hideReadingTest();
             }
         });
-
     </script>
 </body>
 </html>
