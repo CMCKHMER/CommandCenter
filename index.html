@@ -108,10 +108,11 @@
     <div id="mainContent" class="transition-all duration-300 ease-in-out">
 
         <!-- Hero Section -->
-        <section id="home" class="py-20 px-4 bg-gradient-to-b from-[#0f1419] to-[#1a1f2e] text-center">
-            <div class="max-w-4xl mx-auto">
-                <h1 id="heroTitle" class="text-5xl font-bold mb-4">Aii Language Center</h1>
-                <p id="heroSubtitle" class="text-xl text-blue-400 mb-8">Master English with confidence</p>
+        <section id="home" class="py-20 px-4 bg-gradient-to-b from-[#0f1419] to-[#1a1f2e] text-center relative">
+            <div class="absolute inset-0 z-0">
+                <img src="Gemini_Generated_Image_2v9h2x2v9h2x2v9h(1).png" alt="Aii Banner" class="w-full h-full object-cover opacity-30">
+            </div>
+            <div class="max-w-4xl mx-auto relative z-10">
                 <div class="space-x-4">
                     <button id="ctaBtn1" class="activity-link bg-gradient-to-r from-blue-500 to-blue-700 text-white px-6 py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-blue-800 shadow-lg">Explore Courses</button>
                     <button id="ctaBtn2" class="activity-link bg-gradient-to-r from-blue-500 to-blue-700 text-white px-6 py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-blue-800 shadow-lg">Join Now</button>
@@ -901,19 +902,13 @@
         };
 
         function applyConfig(config) {
-            document.getElementById('heroTitle').textContent = config.hero_title || defaultConfig.hero_title;
-            document.getElementById('heroSubtitle').textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
             document.getElementById('ctaBtn1').textContent = config.cta_button_1 || defaultConfig.cta_button_1;
             document.getElementById('ctaBtn2').textContent = config.cta_button_2 || defaultConfig.cta_button_2;
-            document.getElementById('heroTitle').style.color = config.text_color || defaultConfig.text_color;
-            document.getElementById('heroSubtitle').style.color = config.primary_action || defaultConfig.primary_action;
             document.getElementById('ctaBtn1').style.background = `linear-gradient(135deg, ${config.primary_action || defaultConfig.primary_action} 0%, ${config.secondary_action || defaultConfig.secondary_action} 100%)`;
             document.getElementById('ctaBtn2').style.background = `linear-gradient(135deg, ${config.primary_action || defaultConfig.primary_action} 0%, ${config.secondary_action || defaultConfig.secondary_action} 100%)`;
             const font = config.font_family || defaultConfig.font_family;
             document.body.style.fontFamily = `${font}, sans-serif`;
             const size = config.font_size || defaultConfig.font_size;
-            document.getElementById('heroTitle').style.fontSize = `${size * 3.5}px`;
-            document.getElementById('heroSubtitle').style.fontSize = `${size * 1.4}px`;
         }
         applyConfig(defaultConfig);
 
