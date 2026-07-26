@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading Future Connect 1 - Aii Language Center</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Outfit', sans-serif; }
+        .blank {
+            display: inline-block;
+            min-width: 110px;
+            padding: 2px 10px;
+            margin: 0 4px;
+            border-bottom: 2px dashed #3b82f6;
+            border-radius: 6px;
+            background: #1a1f2e;
+            color: #3b82f6;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            vertical-align: baseline;
+        }
+        .blank:hover { background: #2d3748; }
+        .blank.filled { color: #e5e7eb; border-bottom-style: solid; }
+        .blank.selected { outline: 2px solid #3b82f6; background: #2d3748; }
+        .blank.correct { color: #4ade80; border-color: #4ade80; cursor: default; }
+        .blank.wrong { color: #f87171; border-color: #f87171; cursor: default; }
+        .word {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 4px;
+            background: #2d3748;
+            border: 1px solid #4a5568;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            user-select: none;
+        }
+        .word:hover { border-color: #3b82f6; color: #3b82f6; transform: translateY(-2px); }
+        .word.used { opacity: 0.3; pointer-events: none; }
+    </style>
+</head>
+<body class="bg-[#0f1419] text-[#e5e7eb] min-h-screen">
+
+    <nav class="bg-[#1a1f2e] py-4 px-6 flex justify-between items-center sticky top-0 z-10">
+        <div class="flex items-center space-x-2">
+            <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
+                <span class="font-bold">Aii</span>
+            </div>
+            <h1 class="text-xl font-bold">Reading Future Connect 1</h1>
+        </div>
+        <a href="index.html" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition">&larr; Back to Home</a>
+    </nav>
+
+    <main class="max-w-4xl mx-auto py-12 px-4">
+
+        <div class="text-center mb-10">
+            <h2 class="text-3xl font-bold mb-2">Fill in the Blanks</h2>
+            <p class="text-gray-400">Read the passage and complete each blank with the correct word from the word bank.</p>
+        </div>
+
+        <!-- Word Bank -->
+        <div class="bg-[#1a1f2e] p-6 rounded-xl border border-gray-800 mb-8">
+            <h3 class="font-bold mb-3 text-blue-400">Word Bank</h3>
+            <div id="wordBank" class="flex flex-wrap"></div>
+        </div>
+
+        <!-- Passage -->
+        <div class="bg-[#1a1f2e] p-8 rounded-xl border border-gray-800 leading-loose text-lg mb-8">
+            <h3 class="text-xl font-bold mb-4 text-blue-400">My School Day</h3>
+            <p id="passage" class="text-justify"></p>
+        </div>
+
+        <!-- Controls -->
+        <div class="flex flex-wrap justify-center gap-4 mb-8">
+            <button id="checkBtn" class="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold">Check Answers</button>
+            <button id="resetBtn" class="bg-gray-700 hover:bg-gray-600 text-white px-8 py-3 rounded-lg font-semibold">Reset</button>
+        </div>
+
+        <p class="text-center text-gray-400 text-sm mb-4">Tip: click a blank to remove its word and try another one.</p>
+
+        <!-- Result -->
+        <div id="resultBox" class="hidden text-center bg-[#1a1f2e] p-6 rounded-xl border border-gray-800">
+            <p class="text-2xl font-bold mb-2">Your Score</p>
+            <p id="scoreText" class="text-4xl font-bold text-green-400"></p>
+            <p id="scoreNote" class="text-gray-400 mt-2"></p>
+        </div>
+    </main>
+
+    <script>
+        // Passage segments; "[n]" marks blank number n (1-based, matching answers[n-1])
+        const segments = [
+            'Every morning, I wake up at six o\'clock and get ready for ',
+            '. First, I brush my teeth and wash my ',
+            '. Then I eat breakfast with my family. My mother usually cooks rice and ',
+            ' for us. After breakfast, I put on my uniform and pack my ',
+            ' with books and pencils. I walk to school with my best ',
+            '. Our first lesson starts at seven thirty. My favorite subject is ',
+            ' because I love reading stories. At noon, we have lunch in the school ',
+            '. In the afternoon, we play football in the ',
+            '. When school finishes, I go home and do my ',
+            ' before dinner. I always feel happy because I learn something new every day.'
+        ];
+        const answers = [
+            'school', 'face', 'eggs', 'bag', 'friend',
+            'English', 'canteen', 'playground', 'homework'
+        ];
+
+        const wordBankEl = document.getElementById('wordBank');
+        const passageEl = document.getElementById('passage');
+        const resultBox = document.getElementById('resultBox');
+        const scoreText = document.getElementById('scoreText');
+        const scoreNote = document.getElementById('scoreNote');
+        let selectedBlank = null;
+
+        // Build the passage with blank slots
+        function buildPassage() {
+            passageEl.innerHTML = '';
+            segments.forEach((seg, i) => {
+                passageEl.appendChild(document.createTextNode(seg));
+                if (i < answers.length) {
+                    const b = document.createElement('span');
+                    b.className = 'blank';
+                    b.dataset.index = i;
+                    b.textContent = '(' + (i + 1) + ')';
+                    b.addEventListener('click', () => onBlankClick(b));
+                    passageEl.appendChild(b);
+                }
+            });
+        }
+
+        // Build the word bank (shuffled)
+        function buildWordBank() {
+            wordBankEl.innerHTML = '';
+            const words = answers.map((w, i) => i).sort(() => Math.random() - 0.5);
+            words.forEach(i => {
+                const w = document.createElement('span');
+                w.className = 'word';
+                w.textContent = answers[i];
+                w.dataset.word = answers[i];
+                w.addEventListener('click', () => onWordClick(w));
+                wordBankEl.appendChild(w);
+            });
+        }
+
+        function onBlankClick(blank) {
+            if (blank.classList.contains('correct')) return;
+            // Return the word to the bank
+            if (blank.dataset.word) {
+                const bankWord = wordBankEl.querySelector('.word[data-word="' + blank.dataset.word + '"]');
+                if (bankWord) bankWord.classList.remove('used');
+                delete blank.dataset.word;
+                blank.textContent = '(' + (parseInt(blank.dataset.index, 10) + 1) + ')';
+                blank.classList.remove('filled');
+            }
+            blank.classList.remove('wrong');
+            document.querySelectorAll('.blank.selected').forEach(b => b.classList.remove('selected'));
+            blank.classList.add('selected');
+            selectedBlank = blank;
+        }
+
+        function onWordClick(wordEl) {
+            if (!selectedBlank) {
+                // No blank selected: select the first unfilled blank
+                selectedBlank = document.querySelector('.blank:not(.filled):not(.correct)');
+                if (!selectedBlank) return;
+            }
+            selectedBlank.dataset.word = wordEl.dataset.word;
+            selectedBlank.textContent = wordEl.dataset.word;
+            selectedBlank.classList.add('filled');
+            selectedBlank.classList.remove('selected', 'wrong');
+            wordEl.classList.add('used');
+            selectedBlank = null;
+        }
+
+        function checkAnswers() {
+            let score = 0;
+            selectedBlank = null;
+            document.querySelectorAll('.blank').forEach(blank => {
+                const i = parseInt(blank.dataset.index, 10);
+                blank.classList.remove('selected');
+                if (blank.dataset.word === answers[i]) {
+                    blank.classList.add('correct');
+                    blank.classList.remove('wrong');
+                    score++;
+                } else {
+                    blank.classList.add('wrong');
+                    blank.classList.remove('correct');
+                }
+            });
+            const total = answers.length;
+            scoreText.textContent = score + ' / ' + total;
+            scoreNote.textContent = score === total
+                ? 'Perfect! Excellent reading skills!'
+                : 'Click the red blanks to fix them, then check again.';
+            resultBox.classList.remove('hidden');
+            resultBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function resetAll() {
+            selectedBlank = null;
+            resultBox.classList.add('hidden');
+            buildPassage();
+            buildWordBank();
+        }
+
+        document.getElementById('checkBtn').addEventListener('click', checkAnswers);
+        document.getElementById('resetBtn').addEventListener('click', resetAll);
+
+        resetAll();
+    </script>
+</body>
+</html>
