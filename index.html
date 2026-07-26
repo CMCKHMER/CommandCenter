@@ -406,6 +406,14 @@
                 </defs>
             </svg>
             
+            <!-- Hero Image Decoration -->
+            <div class="absolute top-20 right-10 w-64 h-64 rounded-full overflow-hidden opacity-20 blur-sm hidden lg:block">
+                <img src="photo_2026-07-18_18-14-12.jpg" alt="Education" class="w-full h-full object-cover">
+            </div>
+            <div class="absolute bottom-20 left-10 w-48 h-48 rounded-full overflow-hidden opacity-15 blur-sm hidden lg:block">
+                <img src="Gemini_Generated_Image_2v9h2x2v9h2x2v9h(1).png" alt="Learning" class="w-full h-full object-cover">
+            </div>
+            
             <!-- Geometric Shapes -->
             <div class="geo-shape" style="top: 10%; left: 5%; width: 100px; height: 100px; background: linear-gradient(45deg, #0ea5e9, #14b8a6); clip-path: polygon(50% 0%, 0% 100%, 100% 100%);"></div>
             <div class="geo-shape" style="top: 60%; left: 15%; width: 80px; height: 80px; background: linear-gradient(45deg, #f59e0b, #fbbf24); clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%); transform: rotate(45deg);"></div>
@@ -527,23 +535,41 @@
                 <h2 class="text-3xl font-bold mb-12 text-center theme-heading">Our Courses</h2>
                 <p class="text-center theme-text-muted mb-10">Choose the perfect course for your learning level</p>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-                    <div class="theme-card p-6 rounded-xl">
-                        <h3 class="text-xl font-bold mb-2 theme-heading">Pre-Kid Program</h3>
-                        <p class="theme-text-muted mb-4">Introduction to English for young learners. Building foundational listening and speaking skills through play and interactive activities.</p>
-                        <p class="text-sm theme-badge-blue inline-block px-2 py-1 rounded">Ages 3-5</p>
-                        <button class="mt-4 btn-3d glow-effect text-sm px-4 py-2">Learn More →</button>
+                    <!-- Pre-Kid Program -->
+                    <div class="theme-card p-0 rounded-xl overflow-hidden">
+                        <div class="h-48 overflow-hidden">
+                            <img src="photo_2026-07-18_18-14-12.jpg" alt="Pre-Kid Program" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2 theme-heading">Pre-Kid Program</h3>
+                            <p class="theme-text-muted mb-4">Introduction to English for young learners. Building foundational listening and speaking skills through play and interactive activities.</p>
+                            <p class="text-sm theme-badge-blue inline-block px-2 py-1 rounded">Ages 3-5</p>
+                            <button class="mt-4 btn-3d glow-effect text-sm px-4 py-2">Learn More →</button>
+                        </div>
                     </div>
-                    <div class="theme-card p-6 rounded-xl">
-                        <h3 class="text-xl font-bold mb-2 theme-heading">Kid Program</h3>
-                        <p class="theme-text-muted mb-4">Comprehensive English curriculum for children. Develop reading, writing, speaking, and listening skills with engaging lessons and games.</p>
-                        <p class="text-sm theme-badge-blue inline-block px-2 py-1 rounded">Ages 6-12</p>
-                        <button class="mt-4 btn-3d glow-effect text-sm px-4 py-2">Learn More →</button>
+                    <!-- Kid Program -->
+                    <div class="theme-card p-0 rounded-xl overflow-hidden">
+                        <div class="h-48 overflow-hidden">
+                            <img src="Gemini_Generated_Image_2v9h2x2v9h2x2v9h(1).png" alt="Kid Program" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2 theme-heading">Kid Program</h3>
+                            <p class="theme-text-muted mb-4">Comprehensive English curriculum for children. Develop reading, writing, speaking, and listening skills with engaging lessons and games.</p>
+                            <p class="text-sm theme-badge-blue inline-block px-2 py-1 rounded">Ages 6-12</p>
+                            <button class="mt-4 btn-3d glow-effect text-sm px-4 py-2">Learn More →</button>
+                        </div>
                     </div>
-                    <div class="theme-card p-6 rounded-xl">
-                        <h3 class="text-xl font-bold mb-2 theme-heading">GEP Program</h3>
-                        <p class="theme-text-muted mb-4">Advanced English program for high achievers. Prepare for examinations and advanced proficiency with intensive training and expert instruction.</p>
-                        <p class="text-sm theme-badge-yellow inline-block px-2 py-1 rounded">Advanced</p>
-                        <button class="mt-4 btn-3d btn-3d-gold glow-effect text-sm px-4 py-2">Learn More →</button>
+                    <!-- GEP Program -->
+                    <div class="theme-card p-0 rounded-xl overflow-hidden">
+                        <div class="h-48 overflow-hidden">
+                            <img src="photo_2026-07-18_18-14-12.jpg" alt="GEP Program" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2 theme-heading">GEP Program</h3>
+                            <p class="theme-text-muted mb-4">Advanced English program for high achievers. Prepare for examinations and advanced proficiency with intensive training and expert instruction.</p>
+                            <p class="text-sm theme-badge-yellow inline-block px-2 py-1 rounded">Advanced</p>
+                            <button class="mt-4 btn-3d btn-3d-gold glow-effect text-sm px-4 py-2">Learn More →</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -609,97 +635,94 @@
             <div class="max-w-6xl mx-auto">
                 <h2 class="text-3xl font-bold mb-12 text-center theme-heading">Learning Resources</h2>
                 <p class="text-center theme-text-muted mb-10">Explore our library of PDFs, videos, and interactive games</p>
+                
+                <!-- Resource Categories with Images -->
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 text-center">
                     <!-- PDFs -->
-                    <div class="theme-card p-4 rounded-lg cursor-pointer flex flex-col items-center justify-center">
-                        <svg class="resource-icon mb-2" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="5" y="5" width="30" height="30" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
-                            <path d="M15 10h10v5h-10z" fill="none" stroke="currentColor" stroke-width="2"/>
-                            <path d="M15 20h10" stroke="currentColor" stroke-width="2"/>
-                            <path d="M15 25h10" stroke="currentColor" stroke-width="2"/>
-                            <circle cx="25" cy="15" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
-                            <text x="22" y="17" font-size="8" fill="currentColor">cat</text>
-                        </svg>
-                        <h3 class="font-bold theme-heading">PDFs</h3>
+                    <div class="theme-card p-0 rounded-lg overflow-hidden cursor-pointer flex flex-col items-center">
+                        <div class="h-24 overflow-hidden w-full">
+                            <img src="photo_2026-07-18_18-14-12.jpg" alt="PDFs" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="p-3">
+                            <h3 class="font-bold theme-heading">PDFs</h3>
+                        </div>
                     </div>
                     <!-- Videos -->
-                    <div class="theme-card p-4 rounded-lg cursor-pointer flex flex-col items-center justify-center">
-                        <svg class="resource-icon mb-2" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="5" y="5" width="30" height="30" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
-                            <rect x="15" y="15" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2"/>
-                            <polygon points="25,15 30,20 25,25" fill="currentColor"/>
-                        </svg>
-                        <h3 class="font-bold theme-heading">Videos</h3>
+                    <div class="theme-card p-0 rounded-lg overflow-hidden cursor-pointer flex flex-col items-center">
+                        <div class="h-24 overflow-hidden w-full">
+                            <img src="Gemini_Generated_Image_2v9h2x2v9h2x2v9h(1).png" alt="Videos" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="p-3">
+                            <h3 class="font-bold theme-heading">Videos</h3>
+                        </div>
                     </div>
                     <!-- Games -->
-                    <div class="theme-card p-4 rounded-lg cursor-pointer flex flex-col items-center justify-center">
-                        <svg class="resource-icon mb-2" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="20" cy="20" r="15" fill="none" stroke="currentColor" stroke-width="2"/>
-                            <path d="M15 15l10 10" stroke="currentColor" stroke-width="2"/>
-                            <path d="M25 15l-10 10" stroke="currentColor" stroke-width="2"/>
-                        </svg>
-                        <h3 class="font-bold theme-heading">Games</h3>
+                    <div class="theme-card p-0 rounded-lg overflow-hidden cursor-pointer flex flex-col items-center">
+                        <div class="h-24 overflow-hidden w-full">
+                            <img src="photo_2026-07-18_18-14-12.jpg" alt="Games" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="p-3">
+                            <h3 class="font-bold theme-heading">Games</h3>
+                        </div>
+                    </div>
+                    <!-- Worksheets -->
+                    <div class="theme-card p-0 rounded-lg overflow-hidden cursor-pointer flex flex-col items-center">
+                        <div class="h-24 overflow-hidden w-full">
+                            <img src="Gemini_Generated_Image_2v9h2x2v9h2x2v9h(1).png" alt="Worksheets" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="p-3">
+                            <h3 class="font-bold theme-heading">Worksheets</h3>
+                        </div>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <!-- Grammar Guide -->
-                    <div class="theme-card p-6 rounded-xl">
-                        <svg class="cover-svg mb-4" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="0" y="0" width="400" height="200" fill="rgba(26, 31, 46, 0.95)"/>
-                            <rect x="50" y="40" width="300" height="120" rx="8" fill="none" stroke="currentColor" stroke-width="2"/>
-                            <path d="M100 80h200" stroke="currentColor" stroke-width="2"/>
-                            <path d="M100 110h200" stroke="currentColor" stroke-width="2"/>
-                            <path d="M100 140h200" stroke="currentColor" stroke-width="2"/>
-                            <circle cx="250" cy="90" r="20" fill="none" stroke="currentColor" stroke-width="2"/>
-                            <text x="240" y="95" font-size="16" fill="currentColor">cat</text>
-                        </svg>
-                        <h3 class="text-xl font-bold mb-2 theme-heading">Grammar Guide</h3>
-                        <p class="theme-text-muted mb-4">Complete reference for English grammar rules</p>
-                        <button class="btn-3d glow-effect text-sm px-4 py-2">Download PDF →</button>
+                    <div class="theme-card p-0 rounded-xl overflow-hidden">
+                        <div class="h-48 overflow-hidden">
+                            <img src="photo_2026-07-18_18-14-12.jpg" alt="Grammar Guide" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2 theme-heading">Grammar Guide</h3>
+                            <p class="theme-text-muted mb-4">Complete reference for English grammar rules</p>
+                            <button class="btn-3d glow-effect text-sm px-4 py-2">Download PDF →</button>
+                        </div>
                     </div>
 
                     <!-- Pronunciation Videos -->
-                    <div class="theme-card p-6 rounded-xl">
-                        <div class="w-full h-32 theme-card rounded mb-4 flex items-center justify-center">
-                            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" class="w-16 h-16">
-                                <rect x="5" y="5" width="30" height="30" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
-                                <rect x="15" y="15" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2"/>
-                                <polygon points="25,15 30,20 25,25" fill="currentColor"/>
-                            </svg>
+                    <div class="theme-card p-0 rounded-xl overflow-hidden">
+                        <div class="h-48 overflow-hidden">
+                            <img src="Gemini_Generated_Image_2v9h2x2v9h2x2v9h(1).png" alt="Pronunciation Videos" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
                         </div>
-                        <h3 class="text-xl font-bold mb-2 theme-heading">Pronunciation Videos</h3>
-                        <p class="theme-text-muted mb-4">Learn correct pronunciation from native speakers</p>
-                        <button class="btn-3d glow-effect text-sm px-4 py-2">Watch Videos →</button>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2 theme-heading">Pronunciation Videos</h3>
+                            <p class="theme-text-muted mb-4">Learn correct pronunciation from native speakers</p>
+                            <button class="btn-3d glow-effect text-sm px-4 py-2">Watch Videos →</button>
+                        </div>
                     </div>
 
                     <!-- Vocabulary Games -->
-                    <div class="theme-card p-6 rounded-xl">
-                        <div class="w-full h-32 theme-card rounded mb-4 flex items-center justify-center">
-                            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" class="w-16 h-16">
-                                <circle cx="20" cy="20" r="15" fill="none" stroke="currentColor" stroke-width="2"/>
-                                <path d="M15 15l10 10" stroke="currentColor" stroke-width="2"/>
-                                <path d="M25 15l-10 10" stroke="currentColor" stroke-width="2"/>
-                            </svg>
+                    <div class="theme-card p-0 rounded-xl overflow-hidden">
+                        <div class="h-48 overflow-hidden">
+                            <img src="photo_2026-07-18_18-14-12.jpg" alt="Vocabulary Games" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
                         </div>
-                        <h3 class="text-xl font-bold mb-2 theme-heading">Vocabulary Games</h3>
-                        <p class="theme-text-muted mb-4">Fun interactive games to expand your vocabulary</p>
-                        <button class="btn-3d btn-3d-gold glow-effect text-sm px-4 py-2">Play Games →</button>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2 theme-heading">Vocabulary Games</h3>
+                            <p class="theme-text-muted mb-4">Fun interactive games to expand your vocabulary</p>
+                            <button class="btn-3d btn-3d-gold glow-effect text-sm px-4 py-2">Play Games →</button>
+                        </div>
                     </div>
 
                     <!-- Study Materials -->
-                    <div class="theme-card p-6 rounded-xl">
-                        <div class="w-full h-32 theme-card rounded mb-4 flex items-center justify-center">
-                            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" class="w-16 h-16">
-                                <rect x="5" y="5" width="30" height="30" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
-                                <path d="M15 10h10v5h-10z" fill="none" stroke="currentColor" stroke-width="2"/>
-                                <path d="M15 20h10" stroke="currentColor" stroke-width="2"/>
-                                <path d="M15 25h10" stroke="currentColor" stroke-width="2"/>
-                            </svg>
+                    <div class="theme-card p-0 rounded-xl overflow-hidden">
+                        <div class="h-48 overflow-hidden">
+                            <img src="Gemini_Generated_Image_2v9h2x2v9h2x2v9h(1).png" alt="Study Materials" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
                         </div>
-                        <h3 class="text-xl font-bold mb-2 theme-heading">Study Materials</h3>
-                        <p class="theme-text-muted mb-4">Downloadable worksheets and practice exercises</p>
-                        <button class="btn-3d glow-effect text-sm px-4 py-2">Download →</button>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2 theme-heading">Study Materials</h3>
+                            <p class="theme-text-muted mb-4">Downloadable worksheets and practice exercises</p>
+                            <button class="btn-3d glow-effect text-sm px-4 py-2">Download →</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -712,25 +735,45 @@
                 <p class="text-center theme-text-muted mb-10">Tips, tricks, and insights for language learning</p>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <article class="theme-card p-6 rounded-xl">
-                        <h3 class="text-lg font-bold mb-2 theme-heading">5 Tips to Master English Pronunciation</h3>
-                        <p class="theme-text-muted text-sm mb-4">Learn effective techniques to improve your English pronunciation and sound like a native speaker.</p>
-                        <p class="text-xs theme-text-muted">March 15, 2024</p>
+                    <article class="theme-card p-0 rounded-xl overflow-hidden">
+                        <div class="h-40 overflow-hidden">
+                            <img src="photo_2026-07-18_18-14-12.jpg" alt="Blog post 1" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold mb-2 theme-heading">5 Tips to Master English Pronunciation</h3>
+                            <p class="theme-text-muted text-sm mb-4">Learn effective techniques to improve your English pronunciation and sound like a native speaker.</p>
+                            <p class="text-xs theme-text-muted">March 15, 2024</p>
+                        </div>
                     </article>
-                    <article class="theme-card p-6 rounded-xl">
-                        <h3 class="text-lg font-bold mb-2 theme-heading">Common English Mistakes & How to Avoid Them</h3>
-                        <p class="theme-text-muted text-sm mb-4">Discover the most common mistakes learners make and practical strategies to overcome them.</p>
-                        <p class="text-xs theme-text-muted">March 10, 2024</p>
+                    <article class="theme-card p-0 rounded-xl overflow-hidden">
+                        <div class="h-40 overflow-hidden">
+                            <img src="Gemini_Generated_Image_2v9h2x2v9h2x2v9h(1).png" alt="Blog post 2" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold mb-2 theme-heading">Common English Mistakes & How to Avoid Them</h3>
+                            <p class="theme-text-muted text-sm mb-4">Discover the most common mistakes learners make and practical strategies to overcome them.</p>
+                            <p class="text-xs theme-text-muted">March 10, 2024</p>
+                        </div>
                     </article>
-                    <article class="theme-card p-6 rounded-xl">
-                        <h3 class="text-lg font-bold mb-2 theme-heading">The Power of Immersion Learning</h3>
-                        <p class="theme-text-muted text-sm mb-4">Understand how immersion techniques can accelerate your English learning journey.</p>
-                        <p class="text-xs theme-text-muted">March 5, 2024</p>
+                    <article class="theme-card p-0 rounded-xl overflow-hidden">
+                        <div class="h-40 overflow-hidden">
+                            <img src="photo_2026-07-18_18-14-12.jpg" alt="Blog post 3" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold mb-2 theme-heading">The Power of Immersion Learning</h3>
+                            <p class="theme-text-muted text-sm mb-4">Understand how immersion techniques can accelerate your English learning journey.</p>
+                            <p class="text-xs theme-text-muted">March 5, 2024</p>
+                        </div>
                     </article>
-                    <article class="theme-card p-6 rounded-xl">
-                        <h3 class="text-lg font-bold mb-2 theme-heading">Build Your Business English Vocabulary</h3>
-                        <p class="theme-text-muted text-sm mb-4">Essential vocabulary and phrases for succeeding in professional English environments.</p>
-                        <p class="text-xs theme-text-muted">February 28, 2024</p>
+                    <article class="theme-card p-0 rounded-xl overflow-hidden">
+                        <div class="h-40 overflow-hidden">
+                            <img src="Gemini_Generated_Image_2v9h2x2v9h2x2v9h(1).png" alt="Blog post 4" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold mb-2 theme-heading">Build Your Business English Vocabulary</h3>
+                            <p class="theme-text-muted text-sm mb-4">Essential vocabulary and phrases for succeeding in professional English environments.</p>
+                            <p class="text-xs theme-text-muted">February 28, 2024</p>
+                        </div>
                     </article>
                 </div>
             </div>
