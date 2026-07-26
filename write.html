@@ -880,7 +880,7 @@ document.getElementById("modeBtn").addEventListener("click",function(){
 
 document.getElementById("rollBtn").addEventListener("click",rollDice);
 document.getElementById("csvBtn").addEventListener("click",expCSV);
-document.getElementById("submitBtn").addEventListener("click",subSheet);
+document.getElementById("subBtn").addEventListener("click",subSheet);
 document.getElementById("newBtn").addEventListener("click",function(){if(G.rolls>0&&!confirm("New game? Progress lost."))return;if(G.timerInt)clearInterval(G.timerInt);newG();});
 document.getElementById("logTgl").addEventListener("click",function(){var p=document.getElementById("logP");p.classList.toggle("open");this.innerHTML=p.classList.contains("open")?'<i class="fas fa-scroll"></i> Hide Log':'<i class="fas fa-scroll"></i> Game Log';});
 document.addEventListener("keydown",function(e){if(e.key==="Escape")document.getElementById("setModal").classList.remove("open");});
