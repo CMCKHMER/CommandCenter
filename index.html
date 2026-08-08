@@ -357,7 +357,7 @@
             <a href="#toefl" class="panel-link">TOEFL Test</a>
             <a href="#worksheet-uploads" class="panel-link">Worksheet Uploads</a>
             <a href="#games" class="panel-link">Learning Games</a>
-            <a href="#worksheets" class="panel-link">Worksheets</a>
+            <a href="#worksheet-uploads" class="panel-link">Worksheets</a>
         </nav>
     </div>
     <div id="panelOverlay"></div>
@@ -405,14 +405,6 @@
                     </linearGradient>
                 </defs>
             </svg>
-            
-            <!-- Hero Image Decoration -->
-            <div class="absolute top-20 right-10 w-64 h-64 rounded-full overflow-hidden opacity-20 blur-sm hidden lg:block">
-                <img src="photo_2026-07-18_18-14-12.jpg" alt="Education" class="w-full h-full object-cover">
-            </div>
-            <div class="absolute bottom-20 left-10 w-48 h-48 rounded-full overflow-hidden opacity-15 blur-sm hidden lg:block">
-                <img src="Gemini_Generated_Image_2v9h2x2v9h2x2v9h(1).png" alt="Learning" class="w-full h-full object-cover">
-            </div>
             
             <!-- Geometric Shapes -->
             <div class="geo-shape" style="top: 10%; left: 5%; width: 100px; height: 100px; background: linear-gradient(45deg, #0ea5e9, #14b8a6); clip-path: polygon(50% 0%, 0% 100%, 100% 100%);"></div>
@@ -537,8 +529,8 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
                     <!-- Pre-Kid Program -->
                     <div class="theme-card p-0 rounded-xl overflow-hidden">
-                        <div class="h-48 overflow-hidden">
-                            <img src="photo_2026-07-18_18-14-12.jpg" alt="Pre-Kid Program" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                        <div class="h-48 overflow-hidden bg-gradient-to-br from-blue-100 to-cyan-100 dark:from-blue-900/30 dark:to-cyan-900/30 flex items-center justify-center">
+                            <div class="text-6xl">📚</div>
                         </div>
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2 theme-heading">Pre-Kid Program</h3>
@@ -549,8 +541,8 @@
                     </div>
                     <!-- Kid Program -->
                     <div class="theme-card p-0 rounded-xl overflow-hidden">
-                        <div class="h-48 overflow-hidden">
-                            <img src="Gemini_Generated_Image_2v9h2x2v9h2x2v9h(1).png" alt="Kid Program" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                        <div class="h-48 overflow-hidden bg-gradient-to-br from-green-100 to-teal-100 dark:from-green-900/30 dark:to-teal-900/30 flex items-center justify-center">
+                            <div class="text-6xl">🎓</div>
                         </div>
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2 theme-heading">Kid Program</h3>
@@ -561,8 +553,8 @@
                     </div>
                     <!-- GEP Program -->
                     <div class="theme-card p-0 rounded-xl overflow-hidden">
-                        <div class="h-48 overflow-hidden">
-                            <img src="photo_2026-07-18_18-14-12.jpg" alt="GEP Program" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                        <div class="h-48 overflow-hidden bg-gradient-to-br from-yellow-100 to-orange-100 dark:from-yellow-900/30 dark:to-orange-900/30 flex items-center justify-center">
+                            <div class="text-6xl">🏆</div>
                         </div>
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2 theme-heading">GEP Program</h3>
@@ -636,93 +628,69 @@
                 <h2 class="text-3xl font-bold mb-12 text-center theme-heading">Learning Resources</h2>
                 <p class="text-center theme-text-muted mb-10">Explore our library of PDFs, videos, and interactive games</p>
                 
-                <!-- Resource Categories with Images -->
+                <!-- Resource Categories with Icons -->
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 text-center">
                     <!-- PDFs -->
-                    <div class="theme-card p-0 rounded-lg overflow-hidden cursor-pointer flex flex-col items-center">
-                        <div class="h-24 overflow-hidden w-full">
-                            <img src="photo_2026-07-18_18-14-12.jpg" alt="PDFs" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
-                        </div>
-                        <div class="p-3">
-                            <h3 class="font-bold theme-heading">PDFs</h3>
-                        </div>
+                    <div class="theme-card p-6 rounded-lg overflow-hidden cursor-pointer flex flex-col items-center">
+                        <div class="text-5xl mb-3">📄</div>
+                        <h3 class="font-bold theme-heading">PDFs</h3>
                     </div>
                     <!-- Videos -->
-                    <div class="theme-card p-0 rounded-lg overflow-hidden cursor-pointer flex flex-col items-center">
-                        <div class="h-24 overflow-hidden w-full">
-                            <img src="Gemini_Generated_Image_2v9h2x2v9h2x2v9h(1).png" alt="Videos" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
-                        </div>
-                        <div class="p-3">
-                            <h3 class="font-bold theme-heading">Videos</h3>
-                        </div>
+                    <div class="theme-card p-6 rounded-lg overflow-hidden cursor-pointer flex flex-col items-center">
+                        <div class="text-5xl mb-3">🎬</div>
+                        <h3 class="font-bold theme-heading">Videos</h3>
                     </div>
                     <!-- Games -->
-                    <div class="theme-card p-0 rounded-lg overflow-hidden cursor-pointer flex flex-col items-center">
-                        <div class="h-24 overflow-hidden w-full">
-                            <img src="photo_2026-07-18_18-14-12.jpg" alt="Games" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
-                        </div>
-                        <div class="p-3">
-                            <h3 class="font-bold theme-heading">Games</h3>
-                        </div>
+                    <div class="theme-card p-6 rounded-lg overflow-hidden cursor-pointer flex flex-col items-center">
+                        <div class="text-5xl mb-3">🎮</div>
+                        <h3 class="font-bold theme-heading">Games</h3>
                     </div>
                     <!-- Worksheets -->
-                    <div class="theme-card p-0 rounded-lg overflow-hidden cursor-pointer flex flex-col items-center">
-                        <div class="h-24 overflow-hidden w-full">
-                            <img src="Gemini_Generated_Image_2v9h2x2v9h2x2v9h(1).png" alt="Worksheets" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
-                        </div>
-                        <div class="p-3">
-                            <h3 class="font-bold theme-heading">Worksheets</h3>
-                        </div>
+                    <div class="theme-card p-6 rounded-lg overflow-hidden cursor-pointer flex flex-col items-center">
+                        <div class="text-5xl mb-3">📝</div>
+                        <h3 class="font-bold theme-heading">Worksheets</h3>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <!-- Grammar Guide -->
-                    <div class="theme-card p-0 rounded-xl overflow-hidden">
-                        <div class="h-48 overflow-hidden">
-                            <img src="photo_2026-07-18_18-14-12.jpg" alt="Grammar Guide" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                    <div class="theme-card p-6 rounded-xl overflow-hidden">
+                        <div class="flex items-center mb-4">
+                            <div class="text-4xl mr-4">📖</div>
+                            <h3 class="text-xl font-bold theme-heading">Grammar Guide</h3>
                         </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2 theme-heading">Grammar Guide</h3>
-                            <p class="theme-text-muted mb-4">Complete reference for English grammar rules</p>
-                            <button class="btn-3d glow-effect text-sm px-4 py-2">Download PDF →</button>
-                        </div>
+                        <p class="theme-text-muted mb-4">Complete reference for English grammar rules</p>
+                        <button class="btn-3d glow-effect text-sm px-4 py-2">Download PDF →</button>
                     </div>
 
                     <!-- Pronunciation Videos -->
-                    <div class="theme-card p-0 rounded-xl overflow-hidden">
-                        <div class="h-48 overflow-hidden">
-                            <img src="Gemini_Generated_Image_2v9h2x2v9h2x2v9h(1).png" alt="Pronunciation Videos" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                    <div class="theme-card p-6 rounded-xl overflow-hidden">
+                        <div class="flex items-center mb-4">
+                            <div class="text-4xl mr-4">🗣️</div>
+                            <h3 class="text-xl font-bold theme-heading">Pronunciation Videos</h3>
                         </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2 theme-heading">Pronunciation Videos</h3>
-                            <p class="theme-text-muted mb-4">Learn correct pronunciation from native speakers</p>
-                            <button class="btn-3d glow-effect text-sm px-4 py-2">Watch Videos →</button>
-                        </div>
+                        <p class="theme-text-muted mb-4">Learn correct pronunciation from native speakers</p>
+                        <button class="btn-3d glow-effect text-sm px-4 py-2">Watch Videos →</button>
                     </div>
 
                     <!-- Vocabulary Games -->
-                    <div class="theme-card p-0 rounded-xl overflow-hidden">
-                        <div class="h-48 overflow-hidden">
-                            <img src="photo_2026-07-18_18-14-12.jpg" alt="Vocabulary Games" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                    <div class="theme-card p-6 rounded-xl overflow-hidden">
+                        <div class="flex items-center mb-4">
+                            <div class="text-4xl mr-4">🎯</div>
+                            <h3 class="text-xl font-bold theme-heading">Vocabulary Games</h3>
                         </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2 theme-heading">Vocabulary Games</h3>
-                            <p class="theme-text-muted mb-4">Fun interactive games to expand your vocabulary</p>
-                            <button class="btn-3d btn-3d-gold glow-effect text-sm px-4 py-2">Play Games →</button>
-                        </div>
+                        <p class="theme-text-muted mb-4">Fun interactive games to expand your vocabulary</p>
+                        <button class="btn-3d btn-3d-gold glow-effect text-sm px-4 py-2">Play Games →</button>
                     </div>
 
                     <!-- Study Materials -->
-                    <div class="theme-card p-0 rounded-xl overflow-hidden">
-                        <div class="h-48 overflow-hidden">
-                            <img src="Gemini_Generated_Image_2v9h2x2v9h2x2v9h(1).png" alt="Study Materials" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                    <div class="theme-card p-6 rounded-xl overflow-hidden">
+                        <div class="flex items-center mb-4">
+                            <div class="text-4xl mr-4">📚</div>
+                            <h3 class="text-xl font-bold theme-heading">Study Materials</h3>
                         </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2 theme-heading">Study Materials</h3>
-                            <p class="theme-text-muted mb-4">Downloadable worksheets and practice exercises</p>
-                            <button class="btn-3d glow-effect text-sm px-4 py-2">Download →</button>
-                        </div>
+                        <p class="theme-text-muted mb-4">Downloadable worksheets and practice exercises</p>
+                        <button class="btn-3d glow-effect text-sm px-4 py-2">Download →</button>
                     </div>
                 </div>
             </div>
@@ -735,45 +703,29 @@
                 <p class="text-center theme-text-muted mb-10">Tips, tricks, and insights for language learning</p>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <article class="theme-card p-0 rounded-xl overflow-hidden">
-                        <div class="h-40 overflow-hidden">
-                            <img src="photo_2026-07-18_18-14-12.jpg" alt="Blog post 1" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-lg font-bold mb-2 theme-heading">5 Tips to Master English Pronunciation</h3>
-                            <p class="theme-text-muted text-sm mb-4">Learn effective techniques to improve your English pronunciation and sound like a native speaker.</p>
-                            <p class="text-xs theme-text-muted">March 15, 2024</p>
-                        </div>
+                    <article class="theme-card p-6 rounded-xl overflow-hidden">
+                        <div class="text-5xl mb-4">📝</div>
+                        <h3 class="text-lg font-bold mb-2 theme-heading">5 Tips to Master English Pronunciation</h3>
+                        <p class="theme-text-muted text-sm mb-4">Learn effective techniques to improve your English pronunciation and sound like a native speaker.</p>
+                        <p class="text-xs theme-text-muted">March 15, 2024</p>
                     </article>
-                    <article class="theme-card p-0 rounded-xl overflow-hidden">
-                        <div class="h-40 overflow-hidden">
-                            <img src="Gemini_Generated_Image_2v9h2x2v9h2x2v9h(1).png" alt="Blog post 2" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-lg font-bold mb-2 theme-heading">Common English Mistakes & How to Avoid Them</h3>
-                            <p class="theme-text-muted text-sm mb-4">Discover the most common mistakes learners make and practical strategies to overcome them.</p>
-                            <p class="text-xs theme-text-muted">March 10, 2024</p>
-                        </div>
+                    <article class="theme-card p-6 rounded-xl overflow-hidden">
+                        <div class="text-5xl mb-4">⚠️</div>
+                        <h3 class="text-lg font-bold mb-2 theme-heading">Common English Mistakes & How to Avoid Them</h3>
+                        <p class="theme-text-muted text-sm mb-4">Discover the most common mistakes learners make and practical strategies to overcome them.</p>
+                        <p class="text-xs theme-text-muted">March 10, 2024</p>
                     </article>
-                    <article class="theme-card p-0 rounded-xl overflow-hidden">
-                        <div class="h-40 overflow-hidden">
-                            <img src="photo_2026-07-18_18-14-12.jpg" alt="Blog post 3" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-lg font-bold mb-2 theme-heading">The Power of Immersion Learning</h3>
-                            <p class="theme-text-muted text-sm mb-4">Understand how immersion techniques can accelerate your English learning journey.</p>
-                            <p class="text-xs theme-text-muted">March 5, 2024</p>
-                        </div>
+                    <article class="theme-card p-6 rounded-xl overflow-hidden">
+                        <div class="text-5xl mb-4">🌊</div>
+                        <h3 class="text-lg font-bold mb-2 theme-heading">The Power of Immersion Learning</h3>
+                        <p class="theme-text-muted text-sm mb-4">Understand how immersion techniques can accelerate your English learning journey.</p>
+                        <p class="text-xs theme-text-muted">March 5, 2024</p>
                     </article>
-                    <article class="theme-card p-0 rounded-xl overflow-hidden">
-                        <div class="h-40 overflow-hidden">
-                            <img src="Gemini_Generated_Image_2v9h2x2v9h2x2v9h(1).png" alt="Blog post 4" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-lg font-bold mb-2 theme-heading">Build Your Business English Vocabulary</h3>
-                            <p class="theme-text-muted text-sm mb-4">Essential vocabulary and phrases for succeeding in professional English environments.</p>
-                            <p class="text-xs theme-text-muted">February 28, 2024</p>
-                        </div>
+                    <article class="theme-card p-6 rounded-xl overflow-hidden">
+                        <div class="text-5xl mb-4">💼</div>
+                        <h3 class="text-lg font-bold mb-2 theme-heading">Build Your Business English Vocabulary</h3>
+                        <p class="theme-text-muted text-sm mb-4">Essential vocabulary and phrases for succeeding in professional English environments.</p>
+                        <p class="text-xs theme-text-muted">February 28, 2024</p>
                     </article>
                 </div>
             </div>
@@ -1031,6 +983,15 @@
                             <span>6 tasks</span>
                         </div>
                         <button class="w-full btn-3d glow-effect px-4 py-2">Start Test</button>
+                    </div>
+                    <div class="theme-card p-6 rounded-xl">
+                        <h3 class="text-xl font-bold mb-2 theme-heading">Reading Test</h3>
+                        <p class="theme-text-muted text-sm mb-4">Practice with academic passages and answer comprehension questions</p>
+                        <div class="flex justify-between text-xs mb-4 theme-text-muted">
+                            <span>60 minutes</span>
+                            <span>10 questions</span>
+                        </div>
+                        <button onclick="window.location.href='toefl_reading_test.html'" class="w-full btn-3d glow-effect px-4 py-2">Start Test</button>
                     </div>
                     <div class="theme-card p-6 rounded-xl">
                         <h3 class="text-xl font-bold mb-2 theme-heading">Writing Test</h3>
@@ -1299,7 +1260,7 @@
     <script>
         // ✅ NEW: Navigate directly to RF.html
         function goToRF() {
-            window.location.href = 'RF.html';
+            window.location.href = 'toefl_writing_test.html';
         }
 
         // Authentication Modal Logic
