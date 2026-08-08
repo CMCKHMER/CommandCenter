@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOEFL Reading Practice Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Outfit', sans-serif; background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 25%, #0891b2 75%, #06b6d4 100%); background-attachment: fixed; min-height: 100vh; }
+        .hero-headline { font-family: 'Poppins', sans-serif; }
+        .hero-body { font-family: 'Nunito', sans-serif; }
+        .theme-card { background: linear-gradient(135deg, rgba(26, 31, 46, 0.95) 0%, rgba(45, 55, 72, 0.9) 100%); border: 1px solid rgba(14, 165, 233, 0.2); backdrop-filter: blur(10px); transition: all 0.3s ease; }
+        .btn-3d { position: relative; display: inline-block; padding: 16px 40px; font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #ffffff; background: linear-gradient(135deg, #0077b6 0%, #00b4d8 50%, #90e0ef 100%); border: none; border-radius: 12px; cursor: pointer; transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55); box-shadow: 0 8px 0 #005f91, 0 15px 20px rgba(0, 119, 182, 0.4); }
+        .btn-3d:hover { transform: translateY(-4px) scale(1.02); }
+        .btn-3d-gold { background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 50%, #fcd34d 100%); box-shadow: 0 8px 0 #d97706; }
+        .gradient-text { background: linear-gradient(135deg, #ffffff 0%, #90e0ef 50%, #fbbf24 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .theme-input { background: linear-gradient(135deg, rgba(45, 55, 72, 0.9) 0%, rgba(26, 31, 46, 0.95) 100%); border: 1px solid rgba(14, 165, 233, 0.2); color: #e2e8f0; }
+        .theme-input:focus { outline: none; border-color: rgba(14, 165, 233, 0.6); box-shadow: 0 0 20px rgba(14, 165, 233, 0.3); }
+        .timer-badge { background: linear-gradient(135deg, #0ea5e9, #14b8a6); color: white; padding: 0.75rem 1.5rem; border-radius: 12px; font-weight: 700; font-size: 1.2rem; font-family: 'Poppins', sans-serif; box-shadow: 0 0 20px rgba(14, 165, 233, 0.5); }
+        .timer-warning { background: linear-gradient(135deg, #f59e0b, #fbbf24); animation: pulse 1s infinite; }
+        .timer-danger { background: linear-gradient(135deg, #ef4444, #f87171); animation: pulse 0.5s infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        .answer-option { background: linear-gradient(135deg, rgba(45, 55, 72, 0.8) 0%, rgba(26, 31, 46, 0.9) 100%); border: 2px solid rgba(14, 165, 233, 0.2); border-radius: 12px; padding: 1rem 1.5rem; cursor: pointer; transition: all 0.3s ease; margin-bottom: 0.75rem; }
+        .answer-option:hover { border-color: rgba(14, 165, 233, 0.6); transform: translateX(5px); }
+        .answer-option.selected { border-color: rgba(14, 165, 233, 1); background: linear-gradient(135deg, rgba(14, 165, 233, 0.2) 0%, rgba(6, 182, 212, 0.3) 100%); }
+        .question-nav { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.5rem; }
+        .question-btn { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, rgba(45, 55, 72, 0.8) 0%, rgba(26, 31, 46, 0.9) 100%); border: 2px solid rgba(14, 165, 233, 0.2); border-radius: 8px; color: #e2e8f0; font-weight: 600; cursor: pointer; transition: all 0.3s ease; }
+        .question-btn:hover { border-color: rgba(14, 165, 233, 0.6); transform: scale(1.05); }
+        .question-btn.active { border-color: rgba(14, 165, 233, 1); background: linear-gradient(135deg, rgba(14, 165, 233, 0.3) 0%, rgba(6, 182, 212, 0.4) 100%); }
+        .question-btn.answered { background: linear-gradient(135deg, rgba(16, 185, 129, 0.3) 0%, rgba(5, 150, 105, 0.4) 100%); border-color: rgba(16, 185, 129, 0.6); }
+        .progress-bar { background: rgba(45, 55, 72, 0.8); border-radius: 10px; overflow: hidden; height: 12px; }
+        .progress-fill { height: 100%; border-radius: 10px; background: linear-gradient(90deg, #0ea5e9 0%, #14b8a6 50%, #f59e0b 100%); box-shadow: 0 0 10px rgba(14, 165, 233, 0.5); transition: width 0.5s ease; }
+        .reading-passage { background: linear-gradient(135deg, rgba(45, 55, 72, 0.5) 0%, rgba(26, 31, 46, 0.7) 100%); border: 1px solid rgba(14, 165, 233, 0.2); border-radius: 16px; padding: 2rem; max-height: 500px; overflow-y: auto; line-height: 1.8; color: #e2e8f0; }
+        .result-score { font-size: 4rem; font-weight: 800; font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #fcd34d 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hidden { display: none !important; }
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .split-view { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        @media (max-width: 1024px) { .split-view { grid-template-columns: 1fr; } }
+        .back-btn { position: fixed; top: 20px; left: 20px; z-index: 100; background: linear-gradient(135deg, rgba(45, 55, 72, 0.9) 0%, rgba(26, 31, 46, 0.95) 100%); border: 1px solid rgba(14, 165, 233, 0.3); color: #e2e8f0; padding: 0.75rem 1.5rem; border-radius: 12px; cursor: pointer; transition: all 0.3s ease; font-weight: 600; }
+        .back-btn:hover { border-color: rgba(14, 165, 233, 0.6); transform: translateX(-5px); }
+    </style>
+</head>
+<body class="text-[#e2e8f0]">
+    <button onclick="window.location.href='index.html'" class="back-btn">← Back to Home</button>
+    <div class="container mx-auto px-4 py-8 max-w-7xl">
+        <header id="main-header" class="theme-card rounded-2xl p-6 mb-8 sticky top-4 z-50">
+            <div class="flex justify-between items-center flex-wrap gap-4">
+                <div><h1 class="text-3xl font-bold gradient-text hero-headline">📚 TOEFL Reading Practice</h1><p class="text-gray-400 hero-body mt-1">Full Mock Test with Timer & Auto-Grading</p></div>
+                <div class="flex items-center gap-4">
+                    <div id="timer" class="timer-badge">60:00</div>
+                    <div class="theme-card px-4 py-2 rounded-xl"><span class="font-semibold text-blue-300">Question:</span><span id="current-q" class="font-bold text-white ml-2">1</span><span class="text-gray-400 mx-1">/</span><span id="total-q" class="font-bold text-white">10</span></div>
+                </div>
+            </div>
+            <div class="mt-4"><div class="progress-bar"><div id="progress-fill" class="progress-fill" style="width: 0%"></div></div><p class="text-right text-sm text-gray-400 mt-1"><span id="answered-count">0</span> of <span id="total-questions">10</span> answered</p></div>
+        </header>
+        <div id="start-screen" class="theme-card rounded-2xl p-12 text-center fade-in">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-5xl font-bold gradient-text hero-headline mb-6">TOEFL Reading Section</h2>
+                <p class="text-xl text-gray-300 hero-body mb-8">Simulate the real TOEFL iBT Reading section with authentic academic passages and questions.</p>
+                <div class="grid md:grid-cols-3 gap-6 mb-10">
+                    <div class="theme-card rounded-xl p-6"><div class="text-4xl mb-4">⏱️</div><h3 class="font-bold text-lg text-blue-300 mb-2">60 Minutes</h3><p class="text-gray-400 text-sm">Complete all questions within the time limit</p></div>
+                    <div class="theme-card rounded-xl p-6"><div class="text-4xl mb-4">📖</div><h3 class="font-bold text-lg text-blue-300 mb-2">3 Passages</h3><p class="text-gray-400 text-sm">Academic texts from various disciplines</p></div>
+                    <div class="theme-card rounded-xl p-6"><div class="text-4xl mb-4">❓</div><h3 class="font-bold text-lg text-blue-300 mb-2">10 Questions</h3><p class="text-gray-400 text-sm">Multiple choice with instant feedback</p></div>
+                </div>
+                <div class="theme-card rounded-xl p-6 mb-10 text-left">
+                    <h3 class="font-bold text-xl text-blue-300 mb-4">Test Instructions:</h3>
+                    <ul class="space-y-3 text-gray-300">
+                        <li class="flex items-start"><span class="text-blue-400 mr-3">▸</span><span>You will read 3 academic passages similar to those found in university textbooks.</span></li>
+                        <li class="flex items-start"><span class="text-blue-400 mr-3">▸</span><span>Answer 10 multiple-choice questions testing comprehension, vocabulary, and inference skills.</span></li>
+                        <li class="flex items-start"><span class="text-blue-400 mr-3">▸</span><span>You can navigate between questions using the question navigator panel.</span></li>
+                        <li class="flex items-start"><span class="text-blue-400 mr-3">▸</span><span>The timer will count down from 60 minutes. When time expires, the test will automatically submit.</span></li>
+                        <li class="flex items-start"><span class="text-blue-400 mr-3">▸</span><span>After submission, you will receive instant scoring with detailed explanations.</span></li>
+                    </ul>
+                </div>
+                <div class="mb-8"><label class="block text-left font-semibold mb-3 text-blue-200">Enter Your Name</label><input type="text" id="username" placeholder="Your full name" class="theme-input w-full px-6 py-4 rounded-xl text-lg" autocomplete="off"></div>
+                <button onclick="startTest()" class="btn-3d btn-3d-gold text-lg px-12 py-5">🚀 Start Reading Test</button>
+            </div>
+        </div>
+        <div id="test-content" class="hidden">
+            <div class="split-view">
+                <div class="theme-card rounded-2xl p-6"><div class="flex items-center gap-3 mb-4"><span class="text-2xl">📖</span><h2 id="passage-title" class="text-xl font-bold text-blue-300">Reading Passage</h2></div><div id="reading-passage" class="reading-passage"></div></div>
+                <div class="space-y-6">
+                    <div class="theme-card rounded-2xl p-6">
+                        <div class="flex items-center gap-3 mb-4"><span class="text-2xl">❓</span><h2 id="question-type" class="text-xl font-bold text-blue-300">Question</h2></div>
+                        <p id="question-text" class="text-lg text-gray-200 mb-6 leading-relaxed"></p>
+                        <div id="answer-options" class="space-y-3"></div>
+                        <div class="flex gap-4 mt-6"><button id="prev-btn" onclick="previousQuestion()" class="flex-1 theme-card px-6 py-3 rounded-xl font-semibold">← Previous</button><button id="next-btn" onclick="nextQuestion()" class="flex-1 btn-3d px-6 py-3">Next →</button><button id="submit-btn" onclick="submitTest()" class="flex-1 btn-3d btn-3d-gold px-6 py-3 hidden">Submit Test ✓</button></div>
+                    </div>
+                    <div class="theme-card rounded-2xl p-6"><h3 class="font-bold text-lg text-blue-300 mb-4 flex items-center gap-2"><span>📍</span> Question Navigator</h3><div id="question-nav" class="question-nav"></div><p class="text-xs text-gray-400 mt-3"><span class="inline-block w-3 h-3 bg-green-500/30 border border-green-500/60 rounded mr-2"></span>Answered<span class="inline-block w-3 h-3 bg-blue-500/30 border border-blue-500/60 rounded ml-4 mr-2"></span>Current</p></div>
+                </div>
+            </div>
+        </div>
+        <div id="results-screen" class="hidden theme-card rounded-2xl p-12 fade-in">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-10"><h2 class="text-4xl font-bold gradient-text hero-headline mb-4">Test Results</h2><p id="result-name" class="text-xl text-gray-300 hero-body"></p></div>
+                <div class="theme-card rounded-2xl p-8 mb-8 text-center"><div class="text-gray-400 mb-2">Your Score</div><div id="score-display" class="result-score mb-4">0/10</div><div id="score-percentage" class="text-2xl font-bold text-blue-300 mb-4">0%</div><div id="score-message" class="text-xl text-gray-300"></div></div>
+                <div class="theme-card rounded-xl p-6 mb-8"><div class="flex justify-between items-center"><span class="text-gray-400">Time Taken:</span><span id="time-taken" class="font-bold text-xl text-blue-300"></span></div></div>
+                <div class="mb-8"><h3 class="text-2xl font-bold gradient-text mb-6">Detailed Review</h3><div id="review-container" class="space-y-4"></div></div>
+                <div class="flex gap-4 justify-center flex-wrap"><button onclick="retakeTest()" class="btn-3d px-8 py-4">🔄 Retake Test</button><button onclick="window.location.href='index.html'" class="btn-3d btn-3d-gold px-8 py-4">🏠 Back to Home</button></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const testData = { passages: [
+            { title: "The Origins of Agriculture", content: '<p class="mb-4"><strong>The Transition from Hunting-Gathering to Farming</strong></p><p class="mb-4">For most of human history, our ancestors survived by hunting wild animals and gathering wild plants. This lifestyle, known as hunting-gathering, required constant movement as groups followed animal migrations and seasonal plant availability. However, around 10,000 years ago, a revolutionary change began to occur independently in several regions around the world: humans started to domesticate plants and animals, giving rise to agriculture.</p><p class="mb-4">The exact reasons for this transition remain debated among archaeologists and anthropologists. One theory suggests that climate changes at the end of the last Ice Age created conditions favorable for certain plants, particularly grains like wheat and barley in the Fertile Crescent. As these plants became more abundant, human populations grew, eventually reaching a point where hunting and gathering could no longer sustain them. This population pressure forced communities to find new ways to produce food.</p><p class="mb-4">Another perspective argues that agriculture was not adopted out of necessity but rather as a result of experimentation and gradual accumulation of knowledge about plant cultivation. Evidence from sites like Gobelki Tepe in modern-day Turkey suggests that religious or social factors may have played a role. The construction of massive stone monuments would have required a settled population with surplus food, implying that some form of agriculture preceded these structures.</p><p class="mb-4">The consequences of agricultural adoption were profound and far-reaching. Settled life allowed for the accumulation of material possessions and the development of more complex social structures. Populations increased dramatically, as farming could support more people per unit of land than hunting-gathering. However, this transition also brought challenges: agricultural diets were often less varied and nutritious than those of hunter-gatherers, leading to health problems such as dental issues and nutritional deficiencies. Additionally, living in close proximity to domesticated animals facilitated the spread of diseases from animals to humans.</p><p class="mb-4">Despite these drawbacks, agriculture spread across the globe over the following millennia, fundamentally transforming human societies and laying the foundation for what we now call civilization. The ability to produce surplus food enabled specialization of labor, the rise of cities, and the development of writing, mathematics, and other hallmarks of complex societies.</p>',
+              questions: [
+                { id: 1, type: "Factual Information", text: "According to paragraph 2, what is one theory about why humans began practicing agriculture?", options: ["Humans wanted to settle in one place permanently", "Climate changes made certain plants more abundant", "Religious beliefs required food offerings", "Wild animals became too difficult to hunt"], correct: 1 },
+                { id: 2, type: "Negative Fact", text: "All of the following are mentioned as consequences of adopting agriculture EXCEPT:", options: ["Increased population density", "Development of complex social structures", "Improved nutrition and health", "Spread of diseases from animals to humans"], correct: 2 },
+                { id: 3, type: "Inference", text: "What can be inferred from paragraph 3 about the site of Gobelki Tepe?", options: ["It was primarily used for agricultural purposes", "It predates the development of any form of agriculture", "It suggests that settlement may have preceded full agriculture", "It was built by hunter-gatherers who refused to farm"], correct: 2 }
+              ]},
+            { title: "Ocean Currents and Climate", content: '<p class="mb-4"><strong>The Global Conveyor Belt</strong></p><p class="mb-4">Ocean currents play a crucial role in regulating Earths climate by distributing heat from the equator toward the poles. The global system of interconnected currents, often called the global conveyor belt or thermohaline circulation, moves vast amounts of water around the planet over centuries. This circulation is driven by differences in water density, which are determined by temperature (thermo) and salinity (haline).</p><p class="mb-4">Warm surface waters from the tropics flow toward higher latitudes, releasing heat into the atmosphere along the way. As this water cools and becomes saltier through evaporation, it becomes denser and sinks. This sinking occurs primarily in the North Atlantic Ocean near Greenland and in the Antarctic. The deep, cold water then flows southward, eventually rising again in the Pacific and Indian Oceans, completing the cycle.</p><p class="mb-4">One of the most well-known components of this system is the Gulf Stream, which carries warm water from the Gulf of Mexico across the Atlantic toward Europe. Without this current, Western Europe would be significantly colder. London, for example, lies at roughly the same latitude as Calgary, Canada, but experiences much milder winters due to the warming influence of the Gulf Stream.</p><p class="mb-4">Scientists are concerned about potential disruptions to this circulation system due to climate change. As global temperatures rise, ice sheets in Greenland are melting, adding fresh water to the North Atlantic. Fresh water is less dense than salt water, which could interfere with the sinking process that drives the conveyor belt. Some climate models suggest that a significant slowdown or shutdown of thermohaline circulation could lead to dramatic regional climate changes, including cooling in parts of Europe even as the rest of the world warms.</p><p class="mb-4">Understanding ocean currents is therefore essential for predicting future climate patterns. Researchers use various methods to study these currents, including satellite observations, floating instruments called Argo floats, and analysis of chemical tracers in seawater. Despite advances in technology, many aspects of ocean circulation remain poorly understood, highlighting the need for continued research in this critical area of climate science.</p>',
+              questions: [
+                { id: 4, type: "Vocabulary", text: "The word crucial in paragraph 1 is closest in meaning to:", options: ["Interesting", "Essential", "Complicated", "Recent"], correct: 1 },
+                { id: 5, type: "Sentence Simplification", text: "Which sentence best expresses the essential information in paragraph 2 about water sinking?", options: ["Water sinks only when it is both cold and salty.", "As tropical water cools and becomes saltier, it becomes dense enough to sink, mainly in the North Atlantic and Antarctic regions.", "The North Atlantic and Antarctic are the only places where water can sink.", "Evaporation makes water cooler and denser in the tropics."], correct: 1 },
+                { id: 6, type: "Purpose", text: "Why does the author mention London and Calgary in paragraph 3?", options: ["To show that both cities experience similar weather patterns", "To illustrate how ocean currents affect regional climates", "To demonstrate that latitude is the main factor in determining climate", "To compare two cities at different longitudes"], correct: 1 }
+              ]},
+            { title: "The Mystery of Dark Matter", content: '<p class="mb-4"><strong>Invisible Mass in the Universe</strong></p><p class="mb-4">Dark matter is one of the greatest mysteries in modern astronomy. It refers to a hypothetical form of matter that does not emit, absorb, or reflect electromagnetic radiation, making it invisible to telescopes. Scientists estimate that dark matter makes up approximately 27 percent of the universes total mass-energy content, while ordinary matter accounts for only about 5 percent.</p><p class="mb-4">The existence of dark matter was first proposed in the 1930s by Swiss astronomer Fritz Zwicky, who noticed that galaxies in the Coma Cluster were moving much faster than expected based on the visible mass. He concluded that there must be additional unseen mass providing extra gravitational pull. Later, in the 1970s, American astronomer Vera Rubin made similar observations when studying the rotation curves of spiral galaxies. She found that stars at the edges of galaxies were orbiting just as fast as those near the center, contrary to what Newtons laws of gravity would predict if only visible matter were present.</p><p class="mb-4">Several candidates have been proposed for what dark matter might be. One possibility is WIMPs (Weakly Interacting Massive Particles), hypothetical particles that interact only through gravity and the weak nuclear force. Another candidate is axions, extremely light particles that were originally proposed to solve a problem in particle physics. Some scientists have also suggested that dark matter could consist of MACHOs (Massive Compact Halo Objects), such as black holes or brown dwarfs, though observations have largely ruled out these objects as the primary component of dark matter.</p><p class="mb-4">Detecting dark matter directly has proven extremely challenging. Several experiments around the world are attempting to capture rare interactions between dark matter particles and ordinary matter. These detectors are typically located deep underground to shield them from cosmic rays and other background radiation. So far, no definitive detection has been made, though some experiments have reported intriguing signals that require further investigation.</p><p class="mb-4">An alternative theory proposes that dark matter does not exist at all. Instead, proponents of Modified Newtonian Dynamics (MOND) suggest that our understanding of gravity needs to be revised at very low accelerations. While MOND can explain some observations, it struggles to account for all the evidence, particularly the patterns seen in the cosmic microwave background radiation. Most astronomers therefore continue to favor the dark matter hypothesis, even as its true nature remains elusive.</p>',
+              questions: [
+                { id: 7, type: "Factual Information", text: "According to paragraph 2, what observation led Fritz Zwicky to propose the existence of dark matter?", options: ["Galaxies were emitting unusual radiation", "Galaxies in a cluster were moving faster than expected", "Stars at galaxy edges were orbiting slower than expected", "Telescopes detected invisible particles"], correct: 1 },
+                { id: 8, type: "Rhetorical Purpose", text: "Why does the author mention WIMPs, axions, and MACHOs in paragraph 3?", options: ["To prove that dark matter definitely exists", "To show different theories about what dark matter might consist of", "To argue that MACHOs are the most likely candidate", "To explain why dark matter cannot be detected"], correct: 1 },
+                { id: 9, type: "Inference", text: "What can be inferred from paragraph 4 about dark matter detection experiments?", options: ["They have successfully detected dark matter particles", "They are conducted on the surface to maximize exposure", "They require protection from interference from other radiation sources", "They have conclusively proven that dark matter does not exist"], correct: 2 },
+                { id: 10, type: "Prose Summary", text: "Which statement best summarizes the current state of dark matter research?", options: ["Dark matter has been definitively proven to exist and its composition is well understood.", "Strong indirect evidence supports dark matters existence, but its exact nature remains unknown despite extensive research.", "Most scientists now believe that Modified Newtonian Dynamics explains all observations without needing dark matter.", "Dark matter makes up most of the universe but has no effect on visible matter."], correct: 1 }
+              ]}
+        ]};
+
+        let currentQuestionIndex = 0, userAnswers = {}, testStartTime, timerInterval, timeRemaining = 60 * 60, allQuestions = [];
+
+        function initTest() {
+            allQuestions = [];
+            testData.passages.forEach((passage, passageIndex) => { passage.questions.forEach(q => { allQuestions.push({ ...q, passageIndex: passageIndex }); }); });
+            document.getElementById('total-q').textContent = allQuestions.length;
+            document.getElementById('total-questions').textContent = allQuestions.length;
+        }
+
+        function startTest() {
+            const username = document.getElementById('username').value.trim();
+            if (!username) { alert('Please enter your name before starting the test.'); return; }
+            initTest();
+            document.getElementById('start-screen').classList.add('hidden');
+            document.getElementById('test-content').classList.remove('hidden');
+            testStartTime = new Date();
+            startTimer();
+            renderQuestionNavigator();
+            showQuestion(0);
+        }
+
+        function startTimer() {
+            updateTimerDisplay();
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                updateTimerDisplay();
+                if (timeRemaining <= 300 && timeRemaining > 60) document.getElementById('timer').classList.add('timer-warning');
+                else if (timeRemaining <= 60) { document.getElementById('timer').classList.remove('timer-warning'); document.getElementById('timer').classList.add('timer-danger'); }
+                if (timeRemaining <= 0) { clearInterval(timerInterval); submitTest(); }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeRemaining / 60), seconds = timeRemaining % 60;
+            document.getElementById('timer').textContent = minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0');
+        }
+
+        function renderQuestionNavigator() {
+            const navContainer = document.getElementById('question-nav');
+            navContainer.innerHTML = '';
+            allQuestions.forEach((q, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'question-btn';
+                btn.textContent = index + 1;
+                btn.onclick = () => showQuestion(index);
+                if (index === currentQuestionIndex) btn.classList.add('active');
+                if (userAnswers[q.id] !== undefined) btn.classList.add('answered');
+                navContainer.appendChild(btn);
+            });
+        }
+
+        function showQuestion(index) {
+            currentQuestionIndex = index;
+            const question = allQuestions[index];
+            const passage = testData.passages[question.passageIndex];
+            document.getElementById('passage-title').textContent = passage.title;
+            document.getElementById('reading-passage').innerHTML = passage.content;
+            document.getElementById('question-type').textContent = 'Question ' + (index + 1) + ': ' + question.type;
+            document.getElementById('question-text').textContent = question.text;
+            document.getElementById('current-q').textContent = index + 1;
+            const optionsContainer = document.getElementById('answer-options');
+            optionsContainer.innerHTML = '';
+            question.options.forEach((option, optIndex) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'answer-option';
+                if (userAnswers[question.id] === optIndex) optionDiv.classList.add('selected');
+                optionDiv.innerHTML = '<span class="font-semibold text-blue-300 mr-3">' + String.fromCharCode(65 + optIndex) + '.</span>' + option;
+                optionDiv.onclick = () => selectAnswer(question.id, optIndex);
+                optionsContainer.appendChild(optionDiv);
+            });
+            document.getElementById('prev-btn').disabled = index === 0;
+            document.getElementById('prev-btn').style.opacity = index === 0 ? '0.5' : '1';
+            if (index === allQuestions.length - 1) {
+                document.getElementById('next-btn').classList.add('hidden');
+                document.getElementById('submit-btn').classList.remove('hidden');
+            } else {
+                document.getElementById('next-btn').classList.remove('hidden');
+                document.getElementById('submit-btn').classList.add('hidden');
+            }
+            updateProgress();
+            renderQuestionNavigator();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function selectAnswer(questionId, answerIndex) { userAnswers[questionId] = answerIndex; showQuestion(currentQuestionIndex); }
+        function previousQuestion() { if (currentQuestionIndex > 0) showQuestion(currentQuestionIndex - 1); }
+        function nextQuestion() { if (currentQuestionIndex < allQuestions.length - 1) showQuestion(currentQuestionIndex + 1); }
+
+        function updateProgress() {
+            const answeredCount = Object.keys(userAnswers).length;
+            const percentage = (answeredCount / allQuestions.length) * 100;
+            document.getElementById('progress-fill').style.width = percentage + '%';
+            document.getElementById('answered-count').textContent = answeredCount;
+        }
+
+        function submitTest() {
+            clearInterval(timerInterval);
+            const endTime = new Date();
+            const timeTaken = Math.floor((endTime - testStartTime) / 1000);
+            let correctCount = 0;
+            allQuestions.forEach(q => { if (userAnswers[q.id] === q.correct) correctCount++; });
+            displayResults(correctCount, timeTaken);
+        }
+
+        function displayResults(score, timeTaken) {
+            document.getElementById('test-content').classList.add('hidden');
+            document.getElementById('main-header').classList.add('hidden');
+            document.getElementById('results-screen').classList.remove('hidden');
+            document.getElementById('result-name').textContent = document.getElementById('username').value;
+            const percentage = Math.round((score / allQuestions.length) * 100);
+            document.getElementById('score-display').textContent = score + '/' + allQuestions.length;
+            document.getElementById('score-percentage').textContent = percentage + '%';
+            const scoreMessage = document.getElementById('score-message');
+            const scoreDisplay = document.getElementById('score-display');
+            if (percentage >= 80) { scoreMessage.textContent = "Excellent! You are well prepared for the TOEFL Reading section."; scoreDisplay.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)'; scoreDisplay.style.webkitBackgroundClip = 'text'; scoreDisplay.style.webkitTextFillColor = 'transparent'; }
+            else if (percentage >= 60) { scoreMessage.textContent = "Good job! With more practice, you can improve your score."; }
+            else { scoreMessage.textContent = "Keep practicing! Focus on reading comprehension strategies."; scoreDisplay.style.background = 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)'; scoreDisplay.style.webkitBackgroundClip = 'text'; scoreDisplay.style.webkitTextFillColor = 'transparent'; }
+            const minutes = Math.floor(timeTaken / 60), seconds = timeTaken % 60;
+            document.getElementById('time-taken').textContent = minutes + 'm ' + seconds + 's';
+            const reviewContainer = document.getElementById('review-container');
+            reviewContainer.innerHTML = '';
+            allQuestions.forEach((q, index) => {
+                const userAnswer = userAnswers[q.id];
+                const isCorrect = userAnswer === q.correct;
+                const reviewItem = document.createElement('div');
+                reviewItem.className = 'theme-card rounded-xl p-6 ' + (isCorrect ? 'border-green-500/50' : 'border-red-500/50');
+                reviewItem.innerHTML = '<div class="flex items-start gap-4"><div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center ' + (isCorrect ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400') + ' font-bold text-xl">' + (isCorrect ? '✓' : '✗') + '</div><div class="flex-1"><div class="flex items-center gap-2 mb-2"><span class="text-blue-300 font-semibold">Question ' + (index + 1) + '</span><span class="text-gray-500">(' + q.type + ')</span></div><p class="text-gray-200 mb-3">' + q.text + '</p><div class="space-y-2"><div class="' + (isCorrect ? 'text-green-400' : 'text-red-400') + '"><span class="font-semibold">Your answer:</span> ' + (userAnswer !== undefined ? q.options[userAnswer] : 'Not answered') + '</div>' + (!isCorrect ? '<div class="text-green-400"><span class="font-semibold">Correct answer:</span> ' + q.options[q.correct] + '</div>' : '') + '</div></div></div>';
+                reviewContainer.appendChild(reviewItem);
+            });
+        }
+
+        function retakeTest() { location.reload(); }
+        initTest();
+    </script>
+</body>
+</html>
