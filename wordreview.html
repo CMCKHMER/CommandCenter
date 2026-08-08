@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aii Language Center - Reading Future Connect 2 Vocabulary Study List</title>
+    <style>
+        :root {
+            --bg-color: #f0f2f5; --paper-color: #ffffff; --text-color: #2c3e50;
+            --primary-color: #003355; --accent-color: #ff9f43; --border-color: #bdc3c7;
+            --frame-bg: #f8f9fa; --success-color: #27ae60;
+            --font-main: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', sans-serif;
+            --font-ui: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body.dark-mode {
+            --bg-color: #1a1a1a; --paper-color: #2d2d2d; --text-color: #ecf0f1;
+            --primary-color: #64b5f6; --accent-color: #ffb74d; --border-color: #555;
+            --frame-bg: #383838; --success-color: #81c784;
+        }
+        body { font-family: var(--font-ui); background-color: var(--bg-color); color: var(--text-color); margin: 0; padding: 30px 20px; display: flex; flex-direction: column; align-items: center; }
+        .controls { background: var(--paper-color); padding: 12px 20px; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 25px; width: 100%; max-width: 900px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; border: 1px solid var(--border-color); }
+        select, button { padding: 8px 12px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 14px; background-color: var(--paper-color); color: var(--text-color); font-family: var(--font-ui); }
+        button { background-color: var(--primary-color); color: white; border: none; cursor: pointer; font-weight: 600; }
+        button:hover { opacity: 0.9; }
+        button.quiz-btn { background-color: var(--accent-color); }
+        button.print-btn { background-color: var(--success-color); }
+        
+        .worksheet-container { background: var(--paper-color); width: 100%; max-width: 900px; padding: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.08); min-height: 950px; border: 2px solid var(--primary-color); display: flex; flex-direction: column; }
+        .header-area { border-bottom: 3px dashed var(--accent-color); padding: 25px 40px 20px 40px; display: flex; flex-direction: column; align-items: center; gap: 12px; background: linear-gradient(to bottom, var(--paper-color), var(--frame-bg)); }
+        .brand-title { font-family: var(--font-main); font-size: 32px; font-weight: 900; color: var(--primary-color); text-align: center; margin: 0; text-shadow: 1px 1px 0px rgba(255,255,255,0.4), 2px 2px 0px rgba(0,0,0,0.1); }
+        .subtitle { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--text-color); opacity: 0.7; }
+        .student-info-bar { display: flex; justify-content: space-between; width: 100%; max-width: 550px; margin-top: 10px; gap: 20px; }
+        .info-field { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+        .info-label { font-family: var(--font-main); font-size: 13px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+        .info-input { border: none; border-bottom: 2px dashed var(--border-color); background: transparent; font-family: var(--font-main); font-size: 17px; padding: 4px 0; outline: none; color: var(--text-color); }
+        
+        .content-area { padding: 30px 40px 40px 40px; flex-grow: 1; }
+        h2.unit-title { text-align: center; color: var(--primary-color); margin-bottom: 20px; font-family: var(--font-main); font-size: 22px; font-weight: 700; border-bottom: 1px dashed var(--border-color); padding-bottom: 10px; }
+        
+        .vocab-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        .vocab-table th { background-color: var(--primary-color); color: white; padding: 8px; text-align: left; border: 1px solid var(--border-color); font-family: var(--font-main); }
+        .vocab-table td { padding: 6px 8px; border: 1px solid var(--border-color); vertical-align: top; }
+        .vocab-table tr:nth-child(even) { background-color: var(--frame-bg); }
+        .word-cell { font-weight: bold; color: var(--primary-color); font-family: var(--font-main); }
+        .pos-cell { font-style: italic; color: var(--accent-color); font-size: 12px; }
+        .def-cell, .sent-cell { transition: all 0.3s ease; }
+        
+        /* Quiz Mode Styles */
+        .quiz-mode .def-cell, .quiz-mode .sent-cell { 
+            color: transparent; 
+            background-color: var(--frame-bg);
+            user-select: none;
+        }
+        .quiz-mode .def-cell::after, .quiz-mode .sent-cell::after {
+            content: "••••••••••••••••••••";
+            color: var(--border-color);
+            letter-spacing: 2px;
+        }
+
+        .footer-area { border-top: 2px solid var(--primary-color); padding: 15px 40px; display: flex; flex-direction: column; gap: 8px; margin-top: auto; }
+        .footer-brand { display: flex; justify-content: space-between; font-size: 12px; opacity: 0.6; }
+        .footer-teacher-info { font-size: 11px; opacity: 0.7; border-top: 1px dashed var(--border-color); padding-top: 8px; }
+
+        @media print {
+            @page { size: A4; margin: 0.5cm; }
+            body { background: white !important; color: black !important; padding: 0 !important; font-size: 8pt !important; }
+            .controls, .no-print { display: none !important; }
+            .worksheet-container { box-shadow: none !important; border: 1px solid #000 !important; width: 100% !important; max-width: 100% !important; background: white !important; color: black !important; min-height: auto !important; }
+            .header-area { border-bottom: 2px solid #000 !important; padding: 5px 10px 4px 10px !important; background: white !important; }
+            .brand-title { text-shadow: none !important; color: #000 !important; font-size: 14pt !important; margin: 0 !important; }
+            .subtitle { font-size: 7pt !important; color: #000 !important; opacity: 1 !important; margin: 2px 0 !important; }
+            .student-info-bar { max-width: 100% !important; margin-top: 3px !important; gap: 8px !important; }
+            .info-label { color: #000 !important; opacity: 1 !important; font-size: 7pt !important; }
+            .info-input { border-bottom: 1px solid #000 !important; color: #000 !important; font-size: 8pt !important; }
+            h2.unit-title { font-size: 10pt !important; color: #000 !important; border-bottom: 1px solid #000 !important; margin: 4px 0 !important; padding: 3px 0 !important; }
+            .footer-area { border-top: 1px solid #000 !important; padding: 4px 10px !important; font-size: 6pt !important; margin-top: 5px !important; }
+            .content-area { padding: 8px 10px !important; }
+            .vocab-table { font-size: 7pt !important; }
+            .vocab-table th { background-color: #000 !important; color: #fff !important; padding: 3px 4px !important; border: 1px solid #000 !important; }
+            .vocab-table td { padding: 2px 4px !important; border: 1px solid #000 !important; line-height: 1.1 !important; }
+            .word-cell { color: #000 !important; }
+            .pos-cell { color: #000 !important; }
+            /* Force show definitions when printing */
+            .quiz-mode .def-cell, .quiz-mode .sent-cell { color: #000 !important; background-color: transparent !important; }
+            .quiz-mode .def-cell::after, .quiz-mode .sent-cell::after { content: "" !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="controls no-print">
+        <div id="unit-selector-container">
+            <label for="unit-select">Select Unit:</label>
+            <select id="unit-select"></select>
+        </div>
+        <button class="quiz-btn" id="quiz-toggle" onclick="toggleQuizMode()">️ Quiz Mode (Hide Answers)</button>
+        <button class="print-btn" onclick="window.print()">🖨️ Print / Save PDF</button>
+        <button class="theme-btn" id="theme-toggle" onclick="toggleTheme()">🌙 Dark Mode</button>
+    </div>
+
+    <div class="worksheet-container" id="worksheet">
+        <div class="header-area">
+            <h1 class="brand-title">Aii Language Center</h1>
+            <div class="subtitle">Reading Future Connect 2 - Vocabulary Study List</div>
+            <div class="student-info-bar">
+                <div class="info-field">
+                    <span class="info-label">Name:</span>
+                    <input type="text" class="info-input" placeholder="__________________________">
+                </div>
+                <div class="info-field">
+                    <span class="info-label">Date:</span>
+                    <input type="text" class="info-input" placeholder="__________________________">
+                </div>
+            </div>
+        </div>
+
+        <div class="content-area">
+            <h2 class="unit-title" id="unit-title">Loading...</h2>
+            <table class="vocab-table" id="vocab-table">
+                <thead>
+                    <tr>
+                        <th style="width: 15%;">Word</th>
+                        <th style="width: 10%;">PoS</th>
+                        <th style="width: 35%;">English Definition</th>
+                        <th style="width: 40%;">Sample Sentence</th>
+                    </tr>
+                </thead>
+                <tbody id="vocab-tbody"></tbody>
+            </table>
+        </div>
+
+        <div class="footer-area">
+            <div class="footer-brand">
+                <span>Aii Language Center • Reading Future Connect 2</span>
+                <span id="page-indicator">Unit 1 of 16</span>
+            </div>
+            <div class="footer-teacher-info">
+                Teacher Info: ESL Teacher Ry Mam &nbsp;|&nbsp; Time: 8–9 AM / 2–3 PM &nbsp;|&nbsp; Room #213 &nbsp;|&nbsp; CAP
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const vocabularyData = {
+            1: { title: "Unit 1. New Media Art", words: [
+                { word: "Instead", pos: "adv.", def: "used to something is changed for another thing", sent: "She lied to her mom instead of telling the truth." },
+                { word: "media", pos: "n.", def: "the internet, newspapers, televisions, etc., as a group", sent: "The local media tells the community about new events." },
+                { word: "art", pos: "n.", def: "Making of things such as paintings or drawings", sent: "This painting is a beautiful work of art." },
+                { word: "bring", pos: "v.", def: "to take someone or something with you", sent: "Did you bring an umbrella with you?" },
+                { word: "unique", pos: "adj.", def: "not like anything else", sent: "Every snowflake is unique because each one is different." },
+                { word: "experience", pos: "n.", def: "knowledge or skill from doing things", sent: "His experiences in cooking made him a good chef." },
+                { word: "special", pos: "adj.", def: "better or more important than other things", sent: "Special events are marked on the calendar." },
+                { word: "follow", pos: "v.", def: "to go after someone else", sent: "The baby ducks are following their mother home." },
+                { word: "Interact", pos: "v.", def: "to communicate with each other", sent: "The two are interacting with each other." },
+                { word: "different", pos: "adj.", def: "being not like something else", sent: "The fruits have different shape and color." },
+                { word: "stand", pos: "v.", def: "to straighten your body by putting all of your weight on your feet", sent: "They are all standing together." },
+                { word: "technology", pos: "n.", def: "the use of science to solve problems in life", sent: "Technology is used worldwide." },
+                { word: "movement", pos: "n.", def: "an act of going from one position or place to another", sent: "There was a lot of movement on the field." },
+                { word: "person", pos: "n.", def: "a human being", sent: "She's an extremely kind person." },
+                { word: "control", pos: "v.", def: "to have power over something or someone", sent: "He is controlling the robot with a remote control." }
+            ]},
+            2: { title: "Unit 2. Music in the City", words: [
+                { word: "music", pos: "n.", def: "sounds put together that people enjoy", sent: "I listen to many kinds of music." },
+                { word: "become", pos: "v.", def: "to begin to be", sent: "We have become great friends." },
+                { word: "want", pos: "v.", def: "to have a desire or need for something", sent: "I want to buy a new bicycle." },
+                { word: "artist", pos: "n.", def: "a person who makes art", sent: "My mother is an artist and paints large pictures." },
+                { word: "musician", pos: "n.", def: "a person who writes, sings, or plays music", sent: "My sister is a musician and plays guitar in a popular band." },
+                { word: "sign", pos: "n.", def: "a flat thing with words or pictures that give information", sent: "There is a stop sign at the end of my street." },
+                { word: "let", pos: "v.", def: "to say someone may do something", sent: "My mom and dad let me watch TV after I do my homework." },
+                { word: "enjoy", pos: "v.", def: "to like something, someone or somewhere", sent: "I enjoy reading books." },
+                { word: "city", pos: "n.", def: "a place where many people live and work", sent: "Seoul is the biggest city." },
+                { word: "bus stop", pos: "n.", def: "a place where buses stop to load and unload passengers", sent: "There are people waiting for the bus at the bus stop." },
+                { word: "street", pos: "n.", def: "a road that has houses or buildings on the side", sent: "There are many cars on our street today." },
+                { word: "make", pos: "v.", def: "to build or put something together", sent: "He made a bicycle with wings." },
+                { word: "since", pos: "conj.", def: "from a time in the past until now", sent: "He's been artistic since he was a baby." },
+                { word: "play", pos: "v.", def: "to perform a piece of music on a musical instrument", sent: "The band is playing music." },
+                { word: "maybe", pos: "adv.", def: "used to suggest something is possible", sent: "Alice thinks that maybe it will rain." }
+            ]},
+            3: { title: "Unit 3. Online Guitar Lessons", words: [
+                { word: "cancel", pos: "v.", def: "to stop doing or planning to do something", sent: "We have to cancel the game because it started to rain." },
+                { word: "do", pos: "v.", def: "to make something happen", sent: "She is doing her homework." },
+                { word: "lesson", pos: "n.", def: "an activity that you do in order to learn something", sent: "I have a piano lesson after school on Monday." },
+                { word: "nervous", pos: "adj.", def: "being worried and afraid", sent: "I was really nervous the first time I swam in the ocean." },
+                { word: "free", pos: "adj.", def: "does not cost any money", sent: "She will give one free bottle for every bottle bought." },
+                { word: "start", pos: "v.", def: "to begin doing something", sent: "We start school at 8 o'clock in the morning." },
+                { word: "reason", pos: "n.", def: "a cause for something", sent: "He explains his reason for being late." },
+                { word: "course", pos: "n.", def: "a number of classes about one main topic", sent: "Tim is taking a course in math." },
+                { word: "cost", pos: "v.", def: "to cause someone to pay an amount of money", sent: "The train ticket will cost $75 dollars each way." },
+                { word: "hour", pos: "n.", def: "a word used to measure time", sent: "There are 60 minutes in one hour." },
+                { word: "online", pos: "adj.", def: "on the internet", sent: "I need to get online to do my homework." },
+                { word: "learn", pos: "v.", def: "to gain knowledge by studying or practicing", sent: "The students are learning math from their teacher." },
+                { word: "watch", pos: "v.", def: "to look at someone or something for a period of time", sent: "Many people are watching the news show." },
+                { word: "face-to-face", pos: "adj.", def: "meeting in person", sent: "He wanted to have face-to-face meetings, so he is coming to the office now." },
+                { word: "change", pos: "v.", def: "to make something different", sent: "He changed the temperature." }
+            ]},
+            4: { title: "Unit 4. Twyla Tharp", words: [
+                { word: "modern", pos: "adj.", def: "connected to the present time; new", sent: "Their house is very modern." },
+                { word: "ballet", pos: "n.", def: "a performance of telling a story through music and dancing", sent: "The woman is practicing ballet." },
+                { word: "open", pos: "v.", def: "to be ready to operate or provide a service", sent: "A new church is being opened." },
+                { word: "dancer", pos: "n.", def: "a person who dances", sent: "The man is a dancer." },
+                { word: "natural", pos: "adj.", def: "coming from nature; usual or expected", sent: "The natural yogurt didn't have any added sugar." },
+                { word: "create", pos: "v.", def: "to make something new", sent: "I create new dance moves." },
+                { word: "skip", pos: "v.", def: "to not do something", sent: "I skip breakfast when I'm late for school." },
+                { word: "way", pos: "n.", def: "a method that you use to do or achieve something", sent: "There are three different ways to move the rock." },
+                { word: "movement", pos: "n.", def: "to changes position or moves from one place to another", sent: "There was a lot of movement on the field." },
+                { word: "decide", pos: "v.", def: "to make a choice", sent: "She is trying to decide on what to eat." },
+                { word: "combine", pos: "v.", def: "to mix or join two or more things together", sent: "You can combine blue and red to make purple." },
+                { word: "stage", pos: "n.", def: "an area in a theater which actors or singers stand on", sent: "There are no actors on the stage." },
+                { word: "work", pos: "v.", def: "to do a job", sent: "My dad works at a school." },
+                { word: "famous", pos: "adj.", def: "very well known", sent: "I want to be a famous movie star." },
+                { word: "movie", pos: "n.", def: "a story that can be watched on a screen", sent: "I watch movies on the weekends." }
+            ]},
+            5: { title: "Unit 5. DNA from Extinct Animals", words: [
+                { word: "extinct", pos: "adj.", def: "gone; no longer existing", sent: "Dinosaurs have been extinct for about 65 million years." },
+                { word: "again", pos: "adv.", def: "do something one more time", sent: "I want to play my video game again." },
+                { word: "born", pos: "v.", def: "to be brought to life", sent: "The mother dog born four puppies." },
+                { word: "study", pos: "v.", def: "to find out more about a particular subject or problem", sent: "I study math in the library after school." },
+                { word: "take", pos: "v.", def: "to bring something away to another place", sent: "She always takes my pens to her room." },
+                { word: "relative", pos: "n.", def: "a member of your family", sent: "They are close relatives." },
+                { word: "bring", pos: "v.", def: "to get something for someone and take it to them", sent: "He brings a big chicken for everyone." },
+                { word: "back", pos: "adv.", def: "into the place or position where someone or something was before", sent: "He is going back home." },
+                { word: "freeze", pos: "v.", def: "to become hard because of cold air", sent: "When water freezes, it turns into ice." },
+                { word: "egg", pos: "n.", def: "what a baby can grow from", sent: "The chick came out from its egg." },
+                { word: "copy", pos: "n.", def: "something that is made to be exactly like another thing", sent: "She is working on a copy of the painting." },
+                { word: "scientist", pos: "n.", def: "a person who studies the natural world based on facts", sent: "The scientist is looking into the microscope." },
+                { word: "life", pos: "n.", def: "living things such as plants and animals", sent: "Water gives life to the plants." },
+                { word: "see", pos: "v.", def: "to use your eyes to notice things", sent: "The teacher sees the student sleeping on his desk." },
+                { word: "after", pos: "prep.", def: "at a time following something or someone", sent: "We arrived at the party just after 8 p.m." }
+            ]},
+            6: { title: "Unit 6. The Clever Octopus", words: [
+                { word: "smart", pos: "adj.", def: "able to learn things quickly", sent: "The smart student works hard in school." },
+                { word: "brain", pos: "n.", def: "the part in your head that controls your body", sent: "I think with my brain." },
+                { word: "creature", pos: "n.", def: "an unknown thing", sent: "There is a creature in the museum." },
+                { word: "bounce", pos: "v.", def: "to move one way, hit something, and move the other way", sent: "The ball bounces on the ground." },
+                { word: "pipe", pos: "n.", def: "a long, hollow tube", sent: "They are fixing the pipes below the sink." },
+                { word: "octopus", pos: "n.", def: "an animal that lives in the ocean and has 8 arms", sent: "I saw an octopus when I went swimming in the sea." },
+                { word: "similar", pos: "adj.", def: "almost the same as something else", sent: "My sister looks very similar to me." },
+                { word: "clever", pos: "adj.", def: "having the ability to understand things easily", sent: "Sarah is very clever and can solve problems quickly." },
+                { word: "pass", pos: "v.", def: "to do well enough for a good grade or the next level", sent: "I hope we pass the math test." },
+                { word: "escape", pos: "v.", def: "to get away from a place where you are being kept", sent: "The mouse could not escape from the trap we set." },
+                { word: "gap", pos: "n.", def: "a space between two people or things", sent: "I saw the gap between her two front teeth when she smiled." },
+                { word: "finally", pos: "adv.", def: "after a long time", sent: "They have finally reached the finish line." },
+                { word: "compare", pos: "v.", def: "to look for differences or similarities", sent: "It is important to compare prices of stores when shopping." },
+                { word: "name", pos: "n.", def: "a way a person is called", sent: "My mother's name is Mary." },
+                { word: "push", pos: "v.", def: "moving something or someone away", sent: "He pushed the button." }
+            ]},
+            7: { title: "Unit 7. How a Frog Grows", words: [
+                { word: "life cycle", pos: "n.", def: "changes in an animal's body from baby to adult", sent: "The teacher is explaining the life cycle of a frog." },
+                { word: "frog", pos: "n.", def: "a small green animal that lives near water", sent: "There is a frog sitting on a lily pad." },
+                { word: "stage", pos: "n.", def: "a particular time that something reaches as it grows or develops", sent: "These are the plant's growth stages." },
+                { word: "grow", pos: "v.", def: "to get bigger and taller in size", sent: "My plants grow if I water them." },
+                { word: "lay", pos: "v.", def: "to make an egg that comes out of the body", sent: "My hens lay five eggs every week." },
+                { word: "look", pos: "v.", def: "to turn one's eyes towards something to see it", sent: "He is looking at the pictures on the wall." },
+                { word: "each", pos: "det.", def: "every one of two or more things or people, considered separately", sent: "Each of the girls has a lollipop." },
+                { word: "pond", pos: "n.", def: "a small area of water", sent: "There are lily pads on the pond." },
+                { word: "leg", pos: "n.", def: "one of the long parts of your body that your feet are joined to", sent: "She has long legs." },
+                { word: "breathe", pos: "v.", def: "to move air into and out of your body", sent: "It is hard to breathe when I run." },
+                { word: "tadpole", pos: "n.", def: "a small creature that has a long tail, lives in water", sent: "The teacher is holding a picture of a tadpole." },
+                { word: "front", pos: "n.", def: "the part that faces forward", sent: "Our garage is at the front of the house, not the back." },
+                { word: "underwater", pos: "adj.", def: "below the surface of an area of water", sent: "There are many underwater fish and plants in the ocean." },
+                { word: "tail", pos: "n.", def: "the part of an animal's body that comes out of the back end", sent: "The animal has a long tail." },
+                { word: "gill", pos: "n.", def: "the organs on the sides of the fish used for breathing", sent: "The shark uses its gills to breathe underwater." }
+            ]},
+            8: { title: "Unit 8. Snake Skin", words: [
+                { word: "skin", pos: "n.", def: "the outside piece of tissue that covers the body of a person or animal", sent: "He has red spots all over his skin." },
+                { word: "lose", pos: "v.", def: "to become unable to find someone or something", sent: "He loses his sight without his glasses." },
+                { word: "underneath", pos: "adv.", def: "below or beneath", sent: "The tunnel goes right underneath the city." },
+                { word: "animal", pos: "n.", def: "any living creature that is not a plant or a person", sent: "We see lots of animals at the zoo." },
+                { word: "rip", pos: "n.", def: "a long hole or opening in something", sent: "He ripped off his tie." },
+                { word: "come off", pos: "v.", def: "to be able to be removed", sent: "Does this hood come off?" },
+                { word: "rub", pos: "v.", def: "to move something back and forth while pressing it", sent: "My dog likes when I rub his belly." },
+                { word: "reason", pos: "n.", def: "a cause for something", sent: "The thick fog is the reason for the accident." },
+                { word: "snake", pos: "n.", def: "an animal with a long thin body and no legs, that often has a poisonous bite", sent: "The snake has a long body." },
+                { word: "swim", pos: "v.", def: "to move in water by moving your hands and feet", sent: "There are people swimming in the pool." },
+                { word: "stretch", pos: "v.", def: "to make something wider or longer by pulling it", sent: "She stretches her body." },
+                { word: "shed", pos: "v.", def: "to lose a covering, such as leaves, hair, or skin", sent: "The snake sheds its skin." },
+                { word: "interesting", pos: "adj.", def: "attracting your attention and interest", sent: "This book has a lot of interesting facts about animals." },
+                { word: "layer", pos: "n.", def: "an amount of something that is on top of, under, or between other things", sent: "A fresh layer of snow covered the street." },
+                { word: "sock", pos: "n.", def: "a kind of clothes you wear on your feet under your shoes", sent: "I wear white socks at the gym." }
+            ]},
+            9: { title: "Unit 9. Smart Glasses for the Blind", words: [
+                { word: "smart", pos: "adj.", def: "able to learn things quickly", sent: "He is a smart boy." },
+                { word: "blind", pos: "adj.", def: "Unable to see", sent: "The blind man is walking with a stick." },
+                { word: "tell", pos: "v.", def: "to say something to someone", sent: "She wants to tell the teacher something." },
+                { word: "glasses", pos: "n.", def: "a thing we wear to see better", sent: "I really like my new reading glasses." },
+                { word: "document", pos: "n.", def: "a paper that gives information", sent: "You should keep all of your bank documents in a safe place." },
+                { word: "buy", pos: "v.", def: "to spend money on something", sent: "The boy buys flowers for his grandmother." },
+                { word: "appear", pos: "v.", def: "to perform publicly in a film, play, or concert", sent: "That actress has appeared in many famous movies." },
+                { word: "around", pos: "prep.", def: "being any location or place", sent: "She put the necklace around her neck." },
+                { word: "bright", pos: "adj.", def: "a strong color", sent: "My favorite shirt is bright orange." },
+                { word: "partly", pos: "adv.", def: "not fully", sent: "It's noisy, so I only partly heard what you said." },
+                { word: "in front of", pos: "pron.", def: "further forward or facing someone or something", sent: "The puppy is in front of the girl." },
+                { word: "directions", pos: "n.", def: "instructions on how to go to a place", sent: "The map shows directions to get to the treasure." },
+                { word: "object", pos: "n.", def: "something you can touch or see that is not alive", sent: "He saw many objects on the desk." },
+                { word: "give", pos: "v.", def: "to put something in someone's hand", sent: "The delivery man gives the box to the lady." },
+                { word: "engineer", pos: "n.", def: "a person who designs and builds things", sent: "The engineers are building a tower." }
+            ]},
+            10: { title: "Unit 10. Reading with Your Fingers", words: [
+                { word: "sight", pos: "n.", def: "the ability to see", sent: "He got his sight back after eye surgery." },
+                { word: "letter", pos: "n.", def: "a thing you write to another person", sent: "I like to write letters to my grandmother." },
+                { word: "read", pos: "v.", def: "to say words out loud for someone", sent: "My dad reads books to me." },
+                { word: "finger", pos: "n.", def: "the 5 parts of the hand that help you hold things", sent: "I have five fingers on each hand." },
+                { word: "dot", pos: "n.", def: "a small, round mark", sent: "I have a polka dot dress." },
+                { word: "raise", pos: "v.", def: "higher than other parts", sent: "Place the book on a raised shelf." },
+                { word: "learn", pos: "v.", def: "to gain knowledge by studying or practicing", sent: "Where did you learn to speak French so well?" },
+                { word: "blind", pos: "adj.", def: "not being able to see, having no sight", sent: "People who are blind use their fingers to read." },
+                { word: "idea", pos: "n.", def: "a thought or picture in your mind", sent: "I have a great idea for a new game to play." },
+                { word: "accident", pos: "n.", def: "a sudden event that causes injury or damage", sent: "Sorry I dropped the cup. It was an accident." },
+                { word: "dark", pos: "adj.", def: "not light", sent: "I can't see your dark shirt when the light is off." },
+                { word: "even though", pos: "adv.", def: "despite something or someone", sent: "He went to work even though he wasn't well." },
+                { word: "develop", pos: "v.", def: "to make something new", sent: "The company develops new software." },
+                { word: "soldier", pos: "n.", def: "a person who fights for their country", sent: "He was a soldier in the army for 8 years." },
+                { word: "child", pos: "n.", def: "a young girl or boy", sent: "Joy can't walk to school alone. She's a child." }
+            ]},
+            11: { title: "Unit 11. Stevie Wonder", words: [
+                { word: "instrument", pos: "n.", def: "a tool that is used to make music", sent: "The piano is my favorite instrument." },
+                { word: "musician", pos: "n.", def: "a person who writes, sings, or plays music", sent: "My brother is a musician and plays guitar in a popular band." },
+                { word: "catch", pos: "v.", def: "to stop and hold something that is moving", sent: "I learned how to catch a ball when I was 4 years old." },
+                { word: "sing", pos: "v.", def: "to make music with your voice", sent: "I can sing many different songs." },
+                { word: "quiet", pos: "adj.", def: "making very little noise", sent: "You should be quiet when the teacher is talking." },
+                { word: "problem", pos: "n.", def: "something that is hard or bad", sent: "The car has a problem, so we can't drive it." },
+                { word: "everyone", pos: "pron.", def: "all people", sent: "Everyone I know likes the same band." },
+                { word: "life", pos: "n.", def: "the time from when a person is born until he or she dies", sent: "He had a happy life." },
+                { word: "carefully", pos: "adv.", def: "in a way that is safe or correct", sent: "He is carefully walking away from the scene." },
+                { word: "amazing", pos: "adj.", def: "hard to believe and causing surprise", sent: "He gave an amazing performance in the play." },
+                { word: "hear", pos: "v.", def: "the ability to use your ears to listen", sent: "Mr. Chuck has a hearing problem." },
+                { word: "award", pos: "n.", def: "something you get for being excellent", sent: "The boy received an award for his talents." },
+                { word: "classroom", pos: "n.", def: "a room where students learn from teachers", sent: "My classroom is very large and has 40 students." },
+                { word: "fantastic", pos: "adj.", def: "very good or wonderful", sent: "We had a fantastic trip." },
+                { word: "difficult", pos: "adj.", def: "not easy to work with", sent: "My brother is difficult to talk to when he is angry." }
+            ]},
+            12: { title: "Unit 12. Helen Keller", words: [
+                { word: "both", pos: "pron.", def: "each one of two things", sent: "Both of them are happy." },
+                { word: "get", pos: "v.", def: "to change to a new feeling, situation, or state", sent: "She got an award." },
+                { word: "communicate", pos: "v.", def: "to give information to other people", sent: "He asked us to communicate with the rest of the group." },
+                { word: "including", pos: "prep.", def: "having someone or something as a part of a group", sent: "He was fully dressed, including shoes." },
+                { word: "famous", pos: "adj.", def: "known by many people", sent: "The fans are happy to see the famous star in the middle." },
+                { word: "deaf", pos: "adj.", def: "unable to hear", sent: "She is deaf but she can read your lips to communicate." },
+                { word: "easy", pos: "adj.", def: "being not hard or difficult", sent: "The camera is easy to use." },
+                { word: "sick", pos: "adj.", def: "having poor health", sent: "My sister is sick with a bad cold." },
+                { word: "tutor", pos: "n.", def: "a teacher who works with one student", sent: "She's in my tutor group at school." },
+                { word: "hard", pos: "adj.", def: "not easy", sent: "It is a hard question." },
+                { word: "know", pos: "v.", def: "to have information", sent: "Do you know where the library is?" },
+                { word: "adventure", pos: "n.", def: "an exciting and maybe dangerous activity", sent: "I went on an adventure in Peru last summer." },
+                { word: "book", pos: "n.", def: "a collection of pages with words and pictures in it that people read", sent: "I am reading a history book for school." },
+                { word: "skill", pos: "n.", def: "a talent or ability", sent: "Starting a fire outside is a skill." },
+                { word: "respect", pos: "v.", def: "to feel admiration for someone or something", sent: "Students should respect their teachers and do what they say." }
+            ]},
+            13: { title: "Unit 13. 3D Food Printing", words: [
+                { word: "printing", pos: "n.", def: "the act or process of making a book, magazine, etc.", sent: "She runs her own printing business." },
+                { word: "effort", pos: "n.", def: "hard work to do something", sent: "I made an effort to study well." },
+                { word: "fresh", pos: "adj.", def: "food that was recently made or collected", sent: "We keep chickens in our yard so we always have fresh eggs." },
+                { word: "food", pos: "n.", def: "a thing to eat", sent: "My favorite food is pizza." },
+                { word: "printer", pos: "n.", def: "a machine that is connected to a computer and makes a copy of something", sent: "I need to use the printer to print my essay for the teacher." },
+                { word: "ingredient", pos: "n.", def: "one of the things that is used to cook food", sent: "There are ten ingredients in the cake recipe." },
+                { word: "more", pos: "det.", def: "(comparative of many) a large number of people or things", sent: "The tall building has more windows." },
+                { word: "new", pos: "adj.", def: "made a short time before", sent: "What are the new school rules?" },
+                { word: "design", pos: "v.", def: "a plan for how something will look or look like", sent: "I asked her to design a dress for me." },
+                { word: "eat", pos: "v.", def: "to put food into your mouth, chew it, and swallow it", sent: "What do you want to eat for dinner?" },
+                { word: "bakery", pos: "n.", def: "a place or shop selling pastries or bread and cake", sent: "The bakery has many kinds of breads." },
+                { word: "push", pos: "v.", def: "to press something to make a machine start working", sent: "Can they push a heavy rock off the road?" },
+                { word: "shape", pos: "n.", def: "a form that has height, width, and/or length", sent: "My birthday cake has a round shape." },
+                { word: "restaurant", pos: "n.", def: "a place to eat food outside the house", sent: "We eat at a restaurant on my birthday!" },
+                { word: "already", pos: "adv.", def: "before now", sent: "I already finished my homework, so I went outside to play." }
+            ]},
+            14: { title: "Unit 14. Microwave Popcorn", words: [
+                { word: "fine", pos: "adj.", def: "being good enough", sent: "I was sick yesterday, but I feel fine this morning." },
+                { word: "sound", pos: "n.", def: "a noise; something you can hear", sent: "The gun made a loud sound." },
+                { word: "need", pos: "v.", def: "used when saying that someone should do something or has to do something", sent: "Everyone needs air, water and food to live." },
+                { word: "a few", pos: "pron.", def: "some, or a small number of something", sent: "We've been having a few problems with the new computer." },
+                { word: "fold", pos: "v.", def: "to bend one part of something over another part", sent: "I folded the piece of paper to make a hat." },
+                { word: "special", pos: "adj.", def: "better or more important than other things", sent: "The cake in the middle is special." },
+                { word: "bag", pos: "n.", def: "a container made of paper, cloth, or thin plastic which usually opens at the top", sent: "The man is carrying a lot of bags." },
+                { word: "plain", pos: "adj.", def: "not having anything added or extra", sent: "The plain dress was only one color." },
+                { word: "by yourself", pos: "pron.", def: "without other people; alone", sent: "Are you able to do that all by yourself?" },
+                { word: "minute", pos: "n.", def: "a very short period of time", sent: "There are 60 seconds in one minute." },
+                { word: "oil", pos: "n.", def: "a liquid that comes from a plant or animal that is used for cooking", sent: "The oil is used for cooking." },
+                { word: "save", pos: "v.", def: "to keep money and not spend it", sent: "I save 1 dollar every week." },
+                { word: "microwave", pos: "n.", def: "a type of oven that heats food quickly", sent: "I use microwave to warm that food." },
+                { word: "way", pos: "n.", def: "a method that you use to do", sent: "They are communicating in an odd way." },
+                { word: "popcorn", pos: "n.", def: "a corn heated or cooked with salt, sugar, or oil", sent: "The man on the right is eating popcorn." }
+            ]},
+            15: { title: "Unit 15. How a Factory Makes Food", words: [
+                { word: "make", pos: "v.", def: "to build or put something together", sent: "I enjoy making clothes to wear to school." },
+                { word: "degree", pos: "n.", def: "a unit for measuring temperature", sent: "The temperature will be 5 degrees colder tomorrow." },
+                { word: "cook", pos: "v.", def: "to get food ready", sent: "My dad cooks the vegetables before dinner." },
+                { word: "harvest", pos: "v.", def: "to collect food from the place where it grows", sent: "We have to harvest something." },
+                { word: "factory", pos: "n.", def: "a place where people use machines to make things", sent: "The company makes toys in a factory." },
+                { word: "step", pos: "n.", def: "a movement where you put one foot in front of the other", sent: "I walk ten steps from my bedroom to the bathroom." },
+                { word: "blade", pos: "n.", def: "a flat, sharp tool used to cut", sent: "That knife has a very sharp blade." },
+                { word: "potato chip", pos: "n.", def: "a very thin, often round piece of fried potato", sent: "My favorite snack is a potato chip." },
+                { word: "machine", pos: "n.", def: "a thing that has parts and uses power to work", sent: "Cars are the best machines ever made." },
+                { word: "ship", pos: "v.", def: "to send something by boat, plane, or truck", sent: "The boxes will be shipped to another location." },
+                { word: "peel", pos: "v.", def: "to take the skin off a vegetable or fruit", sent: "He is peeling many carrots." },
+                { word: "best", pos: "adj.", def: "when something is better than everything else", sent: "My grades are the best in the class." },
+                { word: "slice", pos: "n.", def: "a thin piece of food", sent: "It is a slice of chocolate cake." },
+                { word: "delicious", pos: "adj.", def: "very pleasant to taste or smell", sent: "His meal looks delicious." },
+                { word: "take place", pos: "v.", def: "to happen, especially after being planned or arranged", sent: "A concert is taking place in the auditorium." }
+            ]},
+            16: { title: "Unit 16. Number Cakes", words: [
+                { word: "use", pos: "v.", def: "to do something with another thing", sent: "I use a fork to eat my food." },
+                { word: "butter", pos: "n.", def: "an ingredient made from milk that is spread on food or used in cooking", sent: "Do you want butter or jam on your toast?" },
+                { word: "mean", pos: "v.", def: "to carry an idea or information", sent: "I do not know what any words in Spanish mean." },
+                { word: "cupcake", pos: "n.", def: "a small round cake", sent: "There are four cupcakes on the table." },
+                { word: "remember", pos: "v.", def: "to have or keep something in your mind", sent: "He remembered his childhood in this place." },
+                { word: "first", pos: "adv.", def: "someone or something that is before others or is number one", sent: "When did you first meet him?" },
+                { word: "call", pos: "v.", def: "to give something or someone a specified name", sent: "This dog is called Bobby." },
+                { word: "spoon", pos: "n.", def: "something we use to eat", sent: "I eat soup with a spoon." },
+                { word: "sugar", pos: "n.", def: "white or brown crystals used to make food sweet", sent: "He puts a lot of sugar in his coffee." },
+                { word: "number", pos: "n.", def: "something you use when you count", sent: "What's our flight number?" },
+                { word: "need", pos: "v.", def: "to not have something that you must have", sent: "Everyone needs air, water and food to live." },
+                { word: "flour", pos: "n.", def: "a powder made from a grain that is used for making bread, cakes", sent: "The recipe says we need three cups of flour." },
+                { word: "recipe", pos: "n.", def: "a set of instructions for making food", sent: "He put a big cookie on the table." },
+                { word: "put", pos: "v.", def: "to move something to a particular place or position", sent: "He put a big cookie on the table." },
+                { word: "last", pos: "adj.", def: "being the only one left", sent: "Who wants to eat the last piece of pie and finish it?" }
+            ]}
+        };
+
+        let currentUnit = 1;
+        const unitSelect = document.getElementById('unit-select');
+        const unitTitle = document.getElementById('unit-title');
+        const vocabTbody = document.getElementById('vocab-tbody');
+        const pageIndicator = document.getElementById('page-indicator');
+        const quizToggleBtn = document.getElementById('quiz-toggle');
+        const themeToggleBtn = document.getElementById('theme-toggle');
+
+        function init() {
+            Object.keys(vocabularyData).forEach(unitNum => {
+                const option = document.createElement('option');
+                option.value = unitNum;
+                option.textContent = vocabularyData[unitNum].title;
+                unitSelect.appendChild(option);
+            });
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const unitParam = urlParams.get('unit');
+            const startUnit = unitParam && vocabularyData[unitParam] ? parseInt(unitParam) : 1;
+
+            loadUnit(startUnit);
+            unitSelect.value = startUnit;
+
+            unitSelect.addEventListener('change', (e) => {
+                const newUnit = parseInt(e.target.value);
+                loadUnit(newUnit);
+                updateURL(newUnit);
+            });
+        }
+
+        function updateURL(unit) {
+            const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + "?unit=" + unit;
+            window.history.pushState({ path: newUrl }, '', newUrl);
+        }
+
+        function loadUnit(unitNum) {
+            currentUnit = unitNum;
+            const unitData = vocabularyData[unitNum];
+            unitTitle.textContent = unitData.title;
+            pageIndicator.textContent = `Unit ${unitNum} of ${Object.keys(vocabularyData).length}`;
+            
+            vocabTbody.innerHTML = '';
+            unitData.words.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="word-cell">${item.word}</td>
+                    <td class="pos-cell">${item.pos}</td>
+                    <td class="def-cell">${item.def}</td>
+                    <td class="sent-cell"><em>"${item.sent}"</em></td>
+                `;
+                vocabTbody.appendChild(row);
+            });
+        }
+
+        function toggleQuizMode() {
+            const table = document.getElementById('vocab-table');
+            if (table.classList.contains('quiz-mode')) {
+                table.classList.remove('quiz-mode');
+                quizToggleBtn.textContent = '👁️ Quiz Mode (Hide Answers)';
+            } else {
+                table.classList.add('quiz-mode');
+                quizToggleBtn.textContent = '👁️‍🗨️ Show Answers';
+            }
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            themeToggleBtn.textContent = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
+        }
+
+        init();
+    </script>
+</body>
+</html>
