@@ -161,7 +161,11 @@ body{font-family:'Crimson Text',serif;background:var(--bg);color:var(--fg);overf
     <div class="endings-row" id="endings-dots"></div>
   </div>
 </div>
-<audio id="bg-music" loop preload="auto"></audio>
+<audio id="bg-music" loop preload="auto">
+  <source src="background.mp3" type="audio/mpeg">
+  <source src="background.ogg" type="audio/ogg">
+  <source src="background.wav" type="audio/wav">
+</audio>
 
 <div id="game-screen">
   <div id="prog"></div>
@@ -224,10 +228,14 @@ window.addEventListener('load',function(){setTimeout(function(){for(var k in BOO
    MUSIC
    ================================================================ */
 var music={el:document.getElementById('bg-music'),loaded:false,playing:false,
+init:function(){var self=this;this.el.load();this.el.addEventListener('canplaythrough',function h(){self.loaded=true;document.getElementById('music-label-text').textContent='Music playing';document.getElementById('music-label').classList.add('active');var n=document.getElementById('music-name');n.textContent=self.el.currentSrc.split('/').pop()||'background music';n.style.display='block';document.getElementById('music-zone').classList.add('has-music');self.el.removeEventListener('canplaythrough',h);},false);if(this.el.readyState>=3){this.loaded=true;}},
 loadFile:function(file){var self=this,url=URL.createObjectURL(file);this.el.src=url;this.el.load();this.loaded=true;this.el.addEventListener('canplaythrough',function h(){self.el.removeEventListener('canplaythrough',h);document.getElementById('music-label-text').textContent='Music loaded — click to change';document.getElementById('music-label').classList.add('active');var n=document.getElementById('music-name');n.textContent=file.name;n.style.display='block';document.getElementById('music-zone').classList.add('has-music');showToast('Track loaded: '+file.name);});},
-play:function(){if(!this.loaded)return;this.el.play().catch(function(){});this.playing=true;},
+play:function(){if(!this.loaded)return;this.el.play().catch(function(e){console.log('Autoplay prevented:',e);});this.playing=true;},
 fadeIn:function(dur){var self=this,tgt=.3,st=this.el.volume,t0=performance.now();(function s(now){var p=Math.min((now-t0)/dur,1);self.el.volume=st+(tgt-st)*p;if(p<1)requestAnimationFrame(s);})(performance.now());},
 fadeOut:function(dur){var self=this,st=this.el.volume,t0=performance.now();(function s(now){var p=Math.min((now-t0)/dur,1);self.el.volume=st*(1-p);if(p<1)requestAnimationFrame(s);})(performance.now());}};
+
+// Initialize music on page load if file exists
+music.init();
 
 document.getElementById('music-input').addEventListener('change',function(e){if(e.target.files&&e.target.files[0]){music.loadFile(e.target.files[0]);music.el.volume=0.2;music.play();}});
 var dragOv=document.getElementById('drag-overlay'),dragCt=0;
