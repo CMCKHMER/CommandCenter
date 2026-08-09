@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aii Language Center - Reading Future Connect 2 Word Test</title>
+    <style>
+        :root {
+            --bg-color: #f0f2f5;
+            --paper-color: #ffffff;
+            --text-color: #2c3e50;
+            --primary-color: #003355;
+            --accent-color: #ff9f43;
+            --border-color: #bdc3c7;
+            --frame-bg: #f8f9fa;
+            --success-color: #27ae60;
+            --shadow-light: 0 2px 8px rgba(0,0,0,0.08);
+            --font-main: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', sans-serif;
+            --font-ui: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body.dark-mode {
+            --bg-color: #1a1a1a;
+            --paper-color: #2d2d2d;
+            --text-color: #ecf0f1;
+            --primary-color: #64b5f6;
+            --accent-color: #ffb74d;
+            --border-color: #555;
+            --frame-bg: #383838;
+            --success-color: #81c784;
+            --shadow-light: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        body { font-family: var(--font-ui); background-color: var(--bg-color); color: var(--text-color); margin: 0; padding: 30px 20px; display: flex; flex-direction: column; align-items: center; transition: background-color 0.3s, color 0.3s; }
+        .controls { background: var(--paper-color); padding: 12px 20px; border-radius: 6px; box-shadow: var(--shadow-light); margin-bottom: 25px; width: 100%; max-width: 900px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; border: 1px solid var(--border-color); }
+        select, button { padding: 8px 12px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 14px; background-color: var(--paper-color); color: var(--text-color); font-family: var(--font-ui); }
+        button { background-color: var(--primary-color); color: white; border: none; cursor: pointer; font-weight: 600; transition: opacity 0.2s; }
+        button:hover { opacity: 0.9; }
+        button.print-btn { background-color: var(--success-color); }
+        button.theme-btn { background-color: #555; }
+
+        .worksheet-container { background: var(--paper-color); width: 100%; max-width: 900px; padding: 0; box-shadow: var(--shadow-light); min-height: 950px; position: relative; border: 2px solid var(--primary-color); display: flex; flex-direction: column; }
+        .header-area { border-bottom: 3px dashed var(--accent-color); padding: 25px 40px 20px 40px; display: flex; flex-direction: column; align-items: center; gap: 12px; background: linear-gradient(to bottom, var(--paper-color), var(--frame-bg)); }
+        .brand-title { font-family: var(--font-main); font-size: 32px; font-weight: 900; color: var(--primary-color); text-align: center; margin: 0; text-shadow: 1px 1px 0px rgba(255,255,255,0.4), 2px 2px 0px rgba(0,0,0,0.1); }
+        .subtitle { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--text-color); opacity: 0.7; }
+        .progress-bar-container { width: 100%; max-width: 350px; height: 10px; background: var(--border-color); border-radius: 5px; overflow: hidden; margin-top: 5px; }
+        .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent-color), var(--success-color)); border-radius: 5px; transition: width 0.4s ease; }
+        .student-info-bar { display: flex; justify-content: space-between; width: 100%; max-width: 550px; margin-top: 10px; gap: 20px; }
+        .info-field { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+        .info-label { font-family: var(--font-main); font-size: 13px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+        .info-input { border: none; border-bottom: 2px dashed var(--border-color); background: transparent; font-family: var(--font-main); font-size: 17px; padding: 4px 0; outline: none; }
+        .info-input:focus { border-bottom-color: var(--accent-color); }
+        .content-area { padding: 30px 40px 40px 40px; flex-grow: 1; }
+        .section-badge { display: inline-block; padding: 5px 14px; border-radius: 15px; font-family: var(--font-main); font-size: 13px; font-weight: bold; color: white; text-transform: uppercase; margin-bottom: 8px; }
+        h2.unit-title { text-align: center; color: var(--primary-color); margin-bottom: 20px; font-family: var(--font-main); font-size: 22px; font-weight: 700; border-bottom: 1px dashed var(--border-color); padding-bottom: 10px; }
+        
+        .test-instructions { background: var(--frame-bg); padding: 15px; border-radius: 8px; border-left: 4px solid var(--accent-color); margin-bottom: 25px; font-family: var(--font-main); font-size: 15px; line-height: 1.6; }
+        
+        .vocabulary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px; }
+        .word-column, .definition-column { background: var(--frame-bg); padding: 15px; border-radius: 8px; border: 1px dashed var(--border-color); }
+        .column-title { font-family: var(--font-main); font-size: 16px; font-weight: bold; color: var(--primary-color); margin-bottom: 15px; text-align: center; }
+        
+        .word-item { background: var(--paper-color); padding: 10px; margin: 8px 0; border: 2px solid var(--border-color); border-radius: 6px; cursor: pointer; transition: all 0.2s; font-family: var(--font-main); font-size: 15px; }
+        .word-item:hover { border-color: var(--accent-color); transform: translateX(5px); }
+        .word-item.selected { background-color: var(--accent-color); color: white; border-color: var(--accent-color); }
+        .word-item.matched { background-color: var(--success-color); color: white; border-color: var(--success-color); opacity: 0.6; pointer-events: none; }
+        
+        .definition-item { background: var(--paper-color); padding: 10px; margin: 8px 0; border: 2px solid var(--border-color); border-radius: 6px; cursor: pointer; transition: all 0.2s; font-family: var(--font-main); font-size: 14px; line-height: 1.4; }
+        .definition-item:hover { border-color: var(--accent-color); transform: translateX(5px); }
+        .definition-item.selected { background-color: var(--accent-color); color: white; border-color: var(--accent-color); }
+        .definition-item.matched { background-color: var(--success-color); color: white; border-color: var(--success-color); opacity: 0.6; pointer-events: none; }
+        
+        .pos-tag { display: inline-block; padding: 2px 6px; background: var(--primary-color); color: white; border-radius: 4px; font-size: 11px; margin-left: 8px; font-weight: bold; }
+        
+        .score-display { background: var(--frame-bg); padding: 15px; border-radius: 8px; text-align: center; margin-top: 20px; font-family: var(--font-main); font-size: 18px; font-weight: bold; }
+        .score-display.correct { color: var(--success-color); }
+        
+        .footer-area { border-top: 2px solid var(--primary-color); padding: 15px 40px; display: flex; flex-direction: column; gap: 8px; margin-top: auto; }
+        .footer-brand { display: flex; justify-content: space-between; font-size: 12px; opacity: 0.6; }
+        .footer-teacher-info { font-size: 11px; opacity: 0.7; border-top: 1px dashed var(--border-color); padding-top: 8px; }
+
+        @media print {
+            @page { margin: 0.5cm; size: A4; }
+            body { background: white !important; color: black !important; padding: 0; }
+            .controls, .no-print { display: none !important; }
+            .worksheet-container { box-shadow: none !important; border: 2px solid #000 !important; width: 100% !important; max-width: 100% !important; background: white !important; color: black !important; min-height: auto !important; }
+            .header-area { border-bottom: 3px solid #000 !important; padding: 15px 20px 10px 20px !important; background: white !important; }
+            .brand-title { text-shadow: none !important; color: #000 !important; font-size: 26px !important; }
+            .student-info-bar { max-width: 100% !important; margin-top: 8px !important; }
+            .info-input { border-bottom: 2px solid #000 !important; color: #000 !important; }
+            .info-label { color: #000 !important; opacity: 1 !important; }
+            .section-badge { border: 2px solid #000 !important; color: #000 !important; background: white !important; }
+            .footer-area { border-top: 2px solid #000 !important; padding: 10px 20px !important; }
+            .content-area { padding: 15px 20px !important; }
+            .word-item, .definition-item { border: 2px solid #000 !important; }
+            .pos-tag { background: #000 !important; color: #fff !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="controls no-print">
+        <div id="unit-selector-container">
+            <label for="unit-select">Select Unit:</label>
+            <select id="unit-select"></select>
+        </div>
+        <button class="print-btn" onclick="window.print()">🖨️ Print / Save PDF</button>
+        <button class="theme-btn" id="theme-toggle" onclick="toggleTheme()">🌙 Dark Mode</button>
+        <button id="copy-link-btn" onclick="copyShareableLink()">🔗 Copy Share Link</button>
+    </div>
+
+    <div class="worksheet-container" id="worksheet">
+        <div class="header-area">
+            <h1 class="brand-title">Aii Language Center</h1>
+            <div class="subtitle">Reading Future Connect 2 - Word Test</div>
+            <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="progress-bar-fill" style="width: 0%"></div>
+            </div>
+            <div class="student-info-bar">
+                <div class="info-field">
+                    <span class="info-label">Name:</span>
+                    <input type="text" class="info-input" placeholder="__________________________">
+                </div>
+                <div class="info-field">
+                    <span class="info-label">Date:</span>
+                    <input type="text" class="info-input" placeholder="__________________________">
+                </div>
+            </div>
+        </div>
+
+        <div class="content-area">
+            <div style="text-align: center;">
+                <span class="section-badge" id="section-badge">Loading...</span>
+            </div>
+            <h2 class="unit-title" id="unit-title">Loading...</h2>
+            
+            <div class="test-instructions">
+                <strong>Instructions:</strong> Match each vocabulary word on the left with its correct definition on the right. Click on a word, then click on its matching definition. When matched correctly, both will turn green!
+            </div>
+            
+            <div class="vocabulary-grid">
+                <div class="word-column">
+                    <div class="column-title">Words</div>
+                    <div id="words-container"></div>
+                </div>
+                <div class="definition-column">
+                    <div class="column-title">Definitions</div>
+                    <div id="definitions-container"></div>
+                </div>
+            </div>
+            
+            <div class="score-display" id="score-display">
+                Matched: <span id="matched-count">0</span> / <span id="total-count">15</span>
+            </div>
+        </div>
+
+        <div class="footer-area">
+            <div class="footer-brand">
+                <span>Aii Language Center • Reading Future Connect 2</span>
+                <span id="page-indicator">Unit 1 of 16</span>
+            </div>
+            <div class="footer-teacher-info">
+                Teacher Info: ESL Teacher Ry Mam &nbsp;|&nbsp; Time: 8–9 AM / 2–3 PM &nbsp;|&nbsp; Room #213 &nbsp;|&nbsp; CAP
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const vocabularyData = {
+            1: {
+                title: "Unit 1. New Media Art",
+                words: [
+                    { word: "person", pos: "n.", def: "a human being" },
+                    { word: "media", pos: "n.", def: "the internet, newspapers, televisions, etc., as a group" },
+                    { word: "movement", pos: "n.", def: "an act of going from one position or place to another" },
+                    { word: "instead", pos: "adv.", def: "used to something is changed for another thing" },
+                    { word: "special", pos: "adj.", def: "better or more important than other things" },
+                    { word: "control", pos: "v.", def: "to have power over something or someone" },
+                    { word: "art", pos: "n.", def: "Making of things such as paintings or drawings" },
+                    { word: "unique", pos: "adj.", def: "not like anything else" },
+                    { word: "stand", pos: "v.", def: "to straighten your body by putting all of your weight on your feet" },
+                    { word: "technology", pos: "n.", def: "the use of science to solve problems in life" },
+                    { word: "bring", pos: "v.", def: "to take someone or something with you" },
+                    { word: "different", pos: "adj.", def: "being not like something else" },
+                    { word: "follow", pos: "v.", def: "to go after someone else" },
+                    { word: "experience", pos: "n.", def: "knowledge or skill from doing things" },
+                    { word: "interact", pos: "v.", def: "to communicate with each other" }
+                ]
+            },
+            2: {
+                title: "Unit 2. Music in the City",
+                words: [
+                    { word: "similar", pos: "adj.", def: "almost the same as something else" },
+                    { word: "clever", pos: "adj.", def: "having the ability to understand things easily" },
+                    { word: "brain", pos: "n.", def: "the part in your head that controls your body" },
+                    { word: "name", pos: "n.", def: "a way a person is called" },
+                    { word: "escape", pos: "v.", def: "to get away from a place where you are being kept" },
+                    { word: "gap", pos: "n.", def: "a space between two people or things" },
+                    { word: "smart", pos: "adj.", def: "able to learn things quickly" },
+                    { word: "creature", pos: "n.", def: "an unknown thing" },
+                    { word: "pipe", pos: "n.", def: "a long, hollow tube" },
+                    { word: "pass", pos: "v.", def: "to do well enough for a good grade or the next level" },
+                    { word: "compare", pos: "v.", def: "to look for differences or similarities" },
+                    { word: "bounce", pos: "v.", def: "to move one way, hit something, and move the other way" },
+                    { word: "finally", pos: "adv.", def: "after a long time" },
+                    { word: "octopus", pos: "n.", def: "an animal that lives in the ocean and has 8 arms" },
+                    { word: "push", pos: "v.", def: "moving something or someone away" }
+                ]
+            },
+            3: {
+                title: "Unit 3. Online Guitar Lessons",
+                words: [
+                    { word: "breathe", pos: "v.", def: "to move air into and out of your body" },
+                    { word: "gill", pos: "n.", def: "the organs on the sides of the fish used for breathing" },
+                    { word: "life cycle", pos: "n.", def: "changes in an animal's body from baby to adult" },
+                    { word: "tadpole", pos: "n.", def: "a small creature that has a long tail, lives in water" },
+                    { word: "front", pos: "n.", def: "the part that faces forward" },
+                    { word: "frog", pos: "n.", def: "a small green animal that lives near water" },
+                    { word: "grow", pos: "v.", def: "to get bigger and taller in size" },
+                    { word: "lay", pos: "v.", def: "to make an egg that comes out of the body" },
+                    { word: "stage", pos: "n.", def: "a particular time that something reaches as it grows or develops" },
+                    { word: "pond", pos: "n.", def: "a small area of water" },
+                    { word: "each", pos: "det.", def: "every one of two or more things or people, considered separately" },
+                    { word: "underwater", pos: "adj.", def: "below the surface of an area of water" },
+                    { word: "look", pos: "v.", def: "to turn one's eyes towards something to see it" },
+                    { word: "tail", pos: "n.", def: "the part of an animal's body that comes out of the back end" },
+                    { word: "leg", pos: "n.", def: "one of the long parts of your body that your feet are joined to" }
+                ]
+            },
+            4: {
+                title: "Unit 4. Twyla Tharp",
+                words: [
+                    { word: "reason", pos: "n.", def: "a cause for something" },
+                    { word: "swim", pos: "v.", def: "to move in water by moving your hands and feet" },
+                    { word: "come off", pos: "v.", def: "to be able to be removed" },
+                    { word: "rip", pos: "n.", def: "a long hole or opening in something" },
+                    { word: "interesting", pos: "adj.", def: "attracting your attention and interest" },
+                    { word: "snake", pos: "n.", def: "an animal with a long thin body and no legs, that often has a poisonous bite" },
+                    { word: "rub", pos: "v.", def: "to move something back and forth while pressing it" },
+                    { word: "animal", pos: "n.", def: "any living creature that is not a plant or a person" },
+                    { word: "layer", pos: "n.", def: "an amount of something that is on top of, under, or between other things" },
+                    { word: "skin", pos: "n.", def: "the outside piece of tissue that covers the body of a person or animal" },
+                    { word: "lose", pos: "v.", def: "to become unable to find someone or something" },
+                    { word: "stretch", pos: "v.", def: "to make something wider or longer by pulling it" },
+                    { word: "shed", pos: "v.", def: "to lose a covering, such as leaves, hair, or skin" },
+                    { word: "sock", pos: "n.", def: "a kind of clothes you wear on your feet under your shoes" },
+                    { word: "underneath", pos: "adv.", def: "below or beneath" }
+                ]
+            },
+            5: {
+                title: "Unit 5. DNA from Extinct Animals",
+                words: [
+                    { word: "buy", pos: "v.", def: "to spend money on something" },
+                    { word: "tell", pos: "v.", def: "to say something to someone" },
+                    { word: "smart", pos: "adj.", def: "able to learn things quickly" },
+                    { word: "glasses", pos: "n.", def: "a thing we wear to see better" },
+                    { word: "bright", pos: "adj.", def: "a strong color" },
+                    { word: "document", pos: "n.", def: "a paper that gives information" },
+                    { word: "directions", pos: "n.", def: "instructions on how to go to a place" },
+                    { word: "blind", pos: "adj.", def: "Unable to see" },
+                    { word: "in front of", pos: "pron.", def: "further forward or facing someone or something" },
+                    { word: "object", pos: "n.", def: "something you can touch or see that is not alive" },
+                    { word: "engineer", pos: "n.", def: "a person who designs and builds things" },
+                    { word: "appear", pos: "v.", def: "to perform publicly in a film, play, or concert" },
+                    { word: "give", pos: "v.", def: "to put something in someone's hand" },
+                    { word: "around", pos: "prep.", def: "being any location or place" },
+                    { word: "partly", pos: "adv.", def: "not fully" }
+                ]
+            },
+            6: {
+                title: "Unit 6. The Clever Octopus",
+                words: [
+                    { word: "sight", pos: "n.", def: "the ability to see" },
+                    { word: "idea", pos: "n.", def: "a thought or picture in your mind" },
+                    { word: "even though", pos: "adv.", def: "despite something or someone" },
+                    { word: "dot", pos: "n.", def: "a small, round mark" },
+                    { word: "dark", pos: "adj.", def: "not light" },
+                    { word: "learn", pos: "v.", def: "to gain knowledge by studying or practicing" },
+                    { word: "read", pos: "v.", def: "to say words out loud for someone" },
+                    { word: "letter", pos: "n.", def: "a thing you write to another person" }
+                ]
+            },
+            7: {
+                title: "Unit 7. How a Frog Grows",
+                words: [
+                    { word: "carefully", pos: "adv.", def: "in a way that is safe or correct" },
+                    { word: "catch", pos: "v.", def: "to stop and hold something that is moving" },
+                    { word: "difficult", pos: "adj.", def: "not easy to work with" },
+                    { word: "everyone", pos: "pron.", def: "all people" },
+                    { word: "problem", pos: "n.", def: "something that is hard or bad" },
+                    { word: "classroom", pos: "n.", def: "a room where students learn from teachers" },
+                    { word: "musician", pos: "n.", def: "a person who writes, sings, or plays music" },
+                    { word: "life", pos: "n.", def: "the time from when a person is born until he or she dies" },
+                    { word: "sing", pos: "v.", def: "to make music with your voice" },
+                    { word: "award", pos: "n.", def: "something you get for being excellent" },
+                    { word: "hear", pos: "v.", def: "the ability to use your ears to listen" },
+                    { word: "fantastic", pos: "adj.", def: "very good or wonderful" },
+                    { word: "quiet", pos: "adj.", def: "making very little noise" },
+                    { word: "instrument", pos: "n.", def: "a tool that is used to make music" },
+                    { word: "maybe", pos: "adv.", def: "used to suggest something is possible" }
+                ]
+            },
+            8: {
+                title: "Unit 8. Snake Skin",
+                words: [
+                    { word: "play", pos: "v.", def: "to perform a piece of music on a musical instrument" },
+                    { word: "want", pos: "v.", def: "to have a desire or need for something" },
+                    { word: "sign", pos: "n.", def: "a flat thing with words or pictures that give information" },
+                    { word: "bus stop", pos: "n.", def: "a place where buses stop to load and unload passengers" },
+                    { word: "since", pos: "conj.", def: "from a time in the past until now" },
+                    { word: "street", pos: "n.", def: "a road that has houses or buildings on the side" },
+                    { word: "artist", pos: "n.", def: "a person who makes art" },
+                    { word: "music", pos: "n.", def: "sounds put together that people enjoy" },
+                    { word: "become", pos: "v.", def: "to begin to be" },
+                    { word: "musician", pos: "n.", def: "a person who writes, sings, or plays music" },
+                    { word: "let", pos: "v.", def: "to say someone may do something" },
+                    { word: "enjoy", pos: "v.", def: "to like something, someone or somewhere" },
+                    { word: "city", pos: "n.", def: "a place where many people live and work" },
+                    { word: "make", pos: "v.", def: "to build or put something together" },
+                    { word: "maybe", pos: "adv.", def: "used to suggest something is possible" }
+                ]
+            },
+            9: {
+                title: "Unit 9. Smart Glasses for the Blind",
+                words: [
+                    { word: "both", pos: "pron.", def: "each one of two things" },
+                    { word: "easy", pos: "adj.", def: "being not hard or difficult" },
+                    { word: "deaf", pos: "adj.", def: "unable to hear" },
+                    { word: "skill", pos: "n.", def: "a talent or ability" },
+                    { word: "know", pos: "v.", def: "to have information" },
+                    { word: "tutor", pos: "n.", def: "a teacher who works with one student" },
+                    { word: "sick", pos: "adj.", def: "having poor health" },
+                    { word: "get", pos: "v.", def: "to change to a new feeling, situation, or state" },
+                    { word: "including", pos: "prep.", def: "having someone or something as a part of a group" },
+                    { word: "book", pos: "n.", def: "a collection of pages with words and pictures in it that people read" },
+                    { word: "hard", pos: "adj.", def: "not easy" },
+                    { word: "adventure", pos: "n.", def: "an exciting and maybe dangerous activity" },
+                    { word: "communicate", pos: "v.", def: "to give information to other people" },
+                    { word: "respect", pos: "v.", def: "to feel admiration for someone or something" },
+                    { word: "famous", pos: "adj.", def: "known by many people" }
+                ]
+            },
+            10: {
+                title: "Unit 10. Reading with Your Fingers",
+                words: [
+                    { word: "cancel", pos: "v.", def: "to stop doing or planning to do something" },
+                    { word: "do", pos: "v.", def: "to make something happen" },
+                    { word: "lesson", pos: "n.", def: "an activity that you do in order to learn something" },
+                    { word: "nervous", pos: "adj.", def: "being worried and afraid" },
+                    { word: "free", pos: "adj.", def: "does not cost any money" },
+                    { word: "start", pos: "v.", def: "to begin doing something" },
+                    { word: "reason", pos: "n.", def: "a cause for something" },
+                    { word: "course", pos: "n.", def: "a number of classes about one main topic" },
+                    { word: "cost", pos: "v.", def: "to cause someone to pay an amount of money" },
+                    { word: "hour", pos: "n.", def: "a word used to measure time" },
+                    { word: "online", pos: "adj.", def: "on the internet" },
+                    { word: "learn", pos: "v.", def: "to gain knowledge by studying or practicing" },
+                    { word: "watch", pos: "v.", def: "to look at someone or something for a period of time" },
+                    { word: "face-to-face", pos: "adj.", def: "meeting in person" },
+                    { word: "change", pos: "v.", def: "to make something different" }
+                ]
+            },
+            11: {
+                title: "Unit 11. Stevie Wonder",
+                words: [
+                    { word: "modern", pos: "adj.", def: "connected to the present time; new" },
+                    { word: "ballet", pos: "n.", def: "a performance of telling a story through music and dancing" },
+                    { word: "open", pos: "v.", def: "to be ready to operate or provide a service" },
+                    { word: "dancer", pos: "n.", def: "a person who dances" },
+                    { word: "natural", pos: "adj.", def: "coming from nature; usual or expected" },
+                    { word: "create", pos: "v.", def: "to make something new" },
+                    { word: "skip", pos: "v.", def: "to not do something" },
+                    { word: "way", pos: "n.", def: "a method that you use to do or achieve something" },
+                    { word: "movement", pos: "n.", def: "to changes position or moves from one place to another" },
+                    { word: "decide", pos: "v.", def: "to make a choice" },
+                    { word: "combine", pos: "v.", def: "to mix or join two or more things together" },
+                    { word: "stage", pos: "n.", def: "an area in a theater which actors or singers stand on" },
+                    { word: "work", pos: "v.", def: "to do a job" },
+                    { word: "famous", pos: "adj.", def: "very well known" },
+                    { word: "movie", pos: "n.", def: "a story that can be watched on a screen" }
+                ]
+            },
+            12: {
+                title: "Unit 12. Helen Keller",
+                words: [
+                    { word: "extinct", pos: "adj.", def: "gone; no longer existing" },
+                    { word: "again", pos: "adv.", def: "do something one more time" },
+                    { word: "born", pos: "v.", def: "to be brought to life" },
+                    { word: "study", pos: "v.", def: "to find out more about a particular subject or problem" },
+                    { word: "take", pos: "v.", def: "to bring something away to another place" },
+                    { word: "relative", pos: "n.", def: "a member of your family" },
+                    { word: "bring", pos: "v.", def: "to get something for someone and take it to them" },
+                    { word: "back", pos: "adv.", def: "into the place or position where someone or something was before" },
+                    { word: "freeze", pos: "v.", def: "to become hard because of cold air" },
+                    { word: "egg", pos: "n.", def: "what a baby can grow from" },
+                    { word: "copy", pos: "n.", def: "something that is made to be exactly like another thing" },
+                    { word: "scientist", pos: "n.", def: "a person who studies the natural world based on facts" },
+                    { word: "life", pos: "n.", def: "living things such as plants and animals" },
+                    { word: "see", pos: "v.", def: "to use your eyes to notice things" },
+                    { word: "after", pos: "prep.", def: "at a time following something or someone" }
+                ]
+            },
+            13: {
+                title: "Unit 13. 3D Food Printing",
+                words: [
+                    { word: "effort", pos: "n.", def: "hard work to do something" },
+                    { word: "shape", pos: "n.", def: "a form that has height, width, and/or length" },
+                    { word: "eat", pos: "v.", def: "to put food into your mouth, chew it, and swallow it" },
+                    { word: "push", pos: "v.", def: "to press something to make a machine start working" },
+                    { word: "bakery", pos: "n.", def: "a place or shop selling pastries or bread and cake" },
+                    { word: "more", pos: "det.", def: "(comparative of many) a large number of people or things" },
+                    { word: "ingredient", pos: "n.", def: "one of the things that is used to cook food" },
+                    { word: "food", pos: "n.", def: "a thing to eat" },
+                    { word: "restaurant", pos: "n.", def: "a place to eat food outside the house" },
+                    { word: "already", pos: "adv.", def: "before now" },
+                    { word: "design", pos: "v.", def: "a plan for how something will look or look like" },
+                    { word: "printer", pos: "n.", def: "a machine that is connected to a computer and makes a copy of something" },
+                    { word: "new", pos: "adj.", def: "made a short time before" },
+                    { word: "fresh", pos: "adj.", def: "food that was recently made or collected" },
+                    { word: "printing", pos: "n.", def: "the act or process of making a book, magazine, etc." }
+                ]
+            },
+            14: {
+                title: "Unit 14. Microwave Popcorn",
+                words: [
+                    { word: "minute", pos: "n.", def: "a very short period of time" },
+                    { word: "special", pos: "adj.", def: "better or more important than other things" },
+                    { word: "by yourself", pos: "pron.", def: "without other people; alone" },
+                    { word: "save", pos: "v.", def: "to keep money and not spend it" },
+                    { word: "a few", pos: "pron.", def: "some, or a small number of something" },
+                    { word: "need", pos: "v.", def: "used when saying that someone should do something or has to do something" },
+                    { word: "fine", pos: "adj.", def: "being good enough" },
+                    { word: "sound", pos: "n.", def: "a noise; something you can hear" },
+                    { word: "way", pos: "n.", def: "a method that you use to do" },
+                    { word: "fold", pos: "v.", def: "to bend one part of something over another part" },
+                    { word: "plain", pos: "adj.", def: "not having anything added or extra" },
+                    { word: "microwave", pos: "n.", def: "a type of oven that heats food quickly" },
+                    { word: "bag", pos: "n.", def: "a container made of paper, cloth, or thin plastic which usually opens at the top" },
+                    { word: "popcorn", pos: "n.", def: "a corn heated or cooked with salt, sugar, or oil" },
+                    { word: "oil", pos: "n.", def: "a liquid that comes from a plant or animal that is used for cooking" }
+                ]
+            },
+            15: {
+                title: "Unit 15. How a Factory Makes Food",
+                words: [
+                    { word: "delicious", pos: "adj.", def: "very pleasant to taste or smell" },
+                    { word: "take place", pos: "v.", def: "to happen, especially after being planned or arranged" },
+                    { word: "peel", pos: "v.", def: "to take the skin off a vegetable or fruit" },
+                    { word: "degree", pos: "n.", def: "a unit for measuring temperature" },
+                    { word: "step", pos: "n.", def: "a movement where you put one foot in front of the other" },
+                    { word: "factory", pos: "n.", def: "a place where people use machines to make things" },
+                    { word: "harvest", pos: "v.", def: "to collect food from the place where it grows" },
+                    { word: "cook", pos: "v.", def: "to get food ready" },
+                    { word: "make", pos: "v.", def: "to build or put something together" },
+                    { word: "ship", pos: "v.", def: "to send something by boat, plane, or truck" },
+                    { word: "potato chip", pos: "n.", def: "a very thin, often round piece of fried potato" },
+                    { word: "machine", pos: "n.", def: "a thing that has parts and uses power to work" },
+                    { word: "blade", pos: "n.", def: "a flat, sharp tool used to cut" },
+                    { word: "best", pos: "adj.", def: "when something is better than everything else" },
+                    { word: "slice", pos: "n.", def: "a thin piece of food" }
+                ]
+            },
+            16: {
+                title: "Unit 16. Number Cakes",
+                words: [
+                    { word: "remember", pos: "v.", def: "to have or keep something in your mind" },
+                    { word: "call", pos: "v.", def: "to give something or someone a specified name" },
+                    { word: "last", pos: "adj.", def: "being the only one left" },
+                    { word: "flour", pos: "n.", def: "a powder made from a grain that is used for making bread, cakes" },
+                    { word: "first", pos: "adv.", def: "someone or something that is before others or is number one" },
+                    { word: "spoon", pos: "n.", def: "something we use to eat" },
+                    { word: "number", pos: "n.", def: "something you use when you count" },
+                    { word: "recipe", pos: "n.", def: "a set of instructions for making food" },
+                    { word: "cupcake", pos: "n.", def: "a small round cake" },
+                    { word: "butter", pos: "n.", def: "an ingredient made from milk that is spread on food or used in cooking" },
+                    { word: "need", pos: "v.", def: "to not have something that you must have" },
+                    { word: "sugar", pos: "n.", def: "white or brown crystals used to make food sweet" },
+                    { word: "mean", pos: "v.", def: "to carry an idea or information" },
+                    { word: "put", pos: "v.", def: "to move something to a particular place or position" },
+                    { word: "use", pos: "v.", def: "to do something with another thing" }
+                ]
+            }
+        };
+
+        let currentUnit = 1;
+        let selectedWord = null;
+        let selectedDefinition = null;
+        let matchedPairs = 0;
+
+        const unitSelect = document.getElementById('unit-select');
+        const unitTitle = document.getElementById('unit-title');
+        const sectionBadge = document.getElementById('section-badge');
+        const wordsContainer = document.getElementById('words-container');
+        const definitionsContainer = document.getElementById('definitions-container');
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const pageIndicator = document.getElementById('page-indicator');
+        const progressBarFill = document.getElementById('progress-bar-fill');
+        const matchedCount = document.getElementById('matched-count');
+        const totalCount = document.getElementById('total-count');
+
+        function init() {
+            Object.keys(vocabularyData).forEach(unitNum => {
+                const option = document.createElement('option');
+                option.value = unitNum;
+                option.textContent = vocabularyData[unitNum].title;
+                unitSelect.appendChild(option);
+            });
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const unitParam = urlParams.get('unit');
+            const startUnit = unitParam && vocabularyData[unitParam] ? parseInt(unitParam) : 1;
+
+            loadUnit(startUnit);
+            unitSelect.value = startUnit;
+
+            unitSelect.addEventListener('change', (e) => {
+                const newUnit = parseInt(e.target.value);
+                loadUnit(newUnit);
+                updateURL(newUnit);
+            });
+        }
+
+        function updateURL(unit) {
+            const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + "?unit=" + unit;
+            window.history.pushState({ path: newUrl }, '', newUrl);
+        }
+
+        function loadUnit(unitNum) {
+            currentUnit = unitNum;
+            const unitData = vocabularyData[unitNum];
+            
+            unitTitle.textContent = unitData.title;
+            pageIndicator.textContent = `Unit ${unitNum} of ${Object.keys(vocabularyData).length}`;
+            sectionBadge.textContent = "Vocabulary Matching";
+            sectionBadge.style.backgroundColor = "#003355";
+            
+            const progress = (unitNum / Object.keys(vocabularyData).length) * 100;
+            progressBarFill.style.width = `${progress}%`;
+
+            // Reset matching state
+            selectedWord = null;
+            selectedDefinition = null;
+            matchedPairs = 0;
+            matchedCount.textContent = '0';
+            totalCount.textContent = unitData.words.length;
+
+            // Shuffle words and definitions
+            const shuffledWords = [...unitData.words].sort(() => Math.random() - 0.5);
+            const shuffledDefs = [...unitData.words].sort(() => Math.random() - 0.5);
+
+            // Render words
+            wordsContainer.innerHTML = '';
+            shuffledWords.forEach((item, index) => {
+                const wordDiv = document.createElement('div');
+                wordDiv.className = 'word-item';
+                wordDiv.dataset.word = item.word;
+                wordDiv.dataset.index = index;
+                wordDiv.innerHTML = `${item.word} <span class="pos-tag">${item.pos}</span>`;
+                wordDiv.addEventListener('click', () => selectWord(wordDiv));
+                wordsContainer.appendChild(wordDiv);
+            });
+
+            // Render definitions
+            definitionsContainer.innerHTML = '';
+            shuffledDefs.forEach((item, index) => {
+                const defDiv = document.createElement('div');
+                defDiv.className = 'definition-item';
+                defDiv.dataset.word = item.word;
+                defDiv.dataset.index = index;
+                defDiv.textContent = item.def;
+                defDiv.addEventListener('click', () => selectDefinition(defDiv));
+                definitionsContainer.appendChild(defDiv);
+            });
+        }
+
+        function selectWord(element) {
+            if (element.classList.contains('matched')) return;
+            
+            // Clear previous word selection
+            document.querySelectorAll('.word-item').forEach(w => w.classList.remove('selected'));
+            
+            selectedWord = element;
+            element.classList.add('selected');
+            
+            checkMatch();
+        }
+
+        function selectDefinition(element) {
+            if (element.classList.contains('matched')) return;
+            
+            // Clear previous definition selection
+            document.querySelectorAll('.definition-item').forEach(d => d.classList.remove('selected'));
+            
+            selectedDefinition = element;
+            element.classList.add('selected');
+            
+            checkMatch();
+        }
+
+        function checkMatch() {
+            if (selectedWord && selectedDefinition) {
+                if (selectedWord.dataset.word === selectedDefinition.dataset.word) {
+                    // Correct match!
+                    selectedWord.classList.add('matched');
+                    selectedDefinition.classList.add('matched');
+                    selectedWord.classList.remove('selected');
+                    selectedDefinition.classList.remove('selected');
+                    
+                    matchedPairs++;
+                    matchedCount.textContent = matchedPairs;
+                    
+                    selectedWord = null;
+                    selectedDefinition = null;
+                    
+                    // Check if all matched
+                    if (matchedPairs === vocabularyData[currentUnit].words.length) {
+                        setTimeout(() => {
+                            alert('🎉 Congratulations! You matched all the words!');
+                        }, 500);
+                    }
+                } else {
+                    // Wrong match - shake animation
+                    selectedWord.style.animation = 'shake 0.5s';
+                    selectedDefinition.style.animation = 'shake 0.5s';
+                    
+                    setTimeout(() => {
+                        selectedWord.classList.remove('selected');
+                        selectedDefinition.classList.remove('selected');
+                        selectedWord.style.animation = '';
+                        selectedDefinition.style.animation = '';
+                        selectedWord = null;
+                        selectedDefinition = null;
+                    }, 500);
+                }
+            }
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            themeToggleBtn.textContent = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
+        }
+
+        function copyShareableLink() {
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(() => {
+                const btn = document.getElementById('copy-link-btn');
+                const originalText = btn.textContent;
+                btn.textContent = "✅ Link Copied!";
+                btn.style.backgroundColor = "#2ecc71";
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.backgroundColor = "#ff9800";
+                }, 2000);
+            }).catch(() => {
+                alert("Failed to copy link. Please copy manually from the address bar.");
+            });
+        }
+
+        // Add shake animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-10px); }
+                75% { transform: translateX(10px); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        init();
+    </script>
+</body>
+</html>
