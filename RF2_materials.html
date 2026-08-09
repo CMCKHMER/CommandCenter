@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading Future Connect 2 Materials</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Outfit', sans-serif; }
+        
+        /* Global Theme Styles */
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 25%, #0891b2 75%, #06b6d4 100%);
+            background-attachment: fixed;
+        }
+
+        .theme-section {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 58, 95, 0.85) 50%, rgba(8, 145, 178, 0.8) 100%);
+            backdrop-filter: blur(10px);
+        }
+
+        .theme-card {
+            background: linear-gradient(135deg, rgba(26, 31, 46, 0.95) 0%, rgba(45, 55, 72, 0.9) 100%);
+            border: 1px solid rgba(14, 165, 233, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .theme-card:hover {
+            border-color: rgba(14, 165, 233, 0.5);
+            box-shadow: 0 0 30px rgba(14, 165, 233, 0.2), 0 0 60px rgba(20, 184, 166, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .theme-heading {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, #90e0ef 50%, #fbbf24 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .theme-text {
+            font-family: 'Nunito', sans-serif;
+            color: #e2e8f0;
+        }
+
+        .theme-text-muted {
+            font-family: 'Nunito', sans-serif;
+            color: #94a3b8;
+        }
+
+        /* 3D Button Styles */
+        .btn-3d {
+            position: relative;
+            display: inline-block;
+            padding: 16px 40px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #ffffff;
+            background: linear-gradient(135deg, #0077b6 0%, #00b4d8 50%, #90e0ef 100%);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 
+                0 8px 0 #005f91,
+                0 15px 20px rgba(0, 119, 182, 0.4),
+                0 0 30px rgba(0, 180, 216, 0.3);
+            transform-style: preserve-3d;
+            overflow: hidden;
+        }
+        
+        .btn-3d::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .btn-3d:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 
+                0 12px 0 #005f91,
+                0 20px 30px rgba(0, 119, 182, 0.5),
+                0 0 50px rgba(0, 180, 216, 0.6),
+                0 0 80px rgba(144, 224, 239, 0.4);
+        }
+        
+        .btn-3d:hover::before {
+            left: 100%;
+        }
+        
+        .btn-3d:active {
+            transform: translateY(4px);
+            box-shadow: 
+                0 4px 0 #005f91,
+                0 8px 15px rgba(0, 119, 182, 0.3);
+        }
+
+        .icon-svg { width: 60px; height: 60px; fill: currentColor; }
+    </style>
+</head>
+<body class="text-[#e5e7eb] min-h-screen">
+
+    <!-- Navigation -->
+    <nav class="theme-card py-4 px-6 flex justify-between items-center sticky top-0 z-10">
+        <div class="flex items-center space-x-2">
+            <a href="index.html" class="text-xl font-bold theme-heading">← Back to Home</a>
+        </div>
+        <h1 class="text-2xl font-bold theme-heading">Reading Future Connect 2 Materials</h1>
+        <div></div>
+    </nav>
+
+    <!-- Main Content -->
+    <section class="py-16 theme-section px-4 min-h-screen">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold mb-4 text-center theme-heading">Reading Future Connect 2 Materials</h2>
+            <p class="text-center theme-text-muted mb-12">Select an activity to begin your learning journey</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Test Card -->
+                <div class="theme-card p-6 rounded-xl flex flex-col items-center">
+                    <svg class="icon-svg mb-3" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="10" y="10" width="30" height="30" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <path d="M15 20h20" stroke="currentColor" stroke-width="2"/>
+                        <path d="M15 25h20" stroke="currentColor" stroke-width="2"/>
+                        <path d="M15 30h12" stroke="currentColor" stroke-width="2"/>
+                        <circle cx="35" cy="15" r="8" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <path d="M35 12v6M32 15h6" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    <h3 class="text-xl font-bold mb-2 theme-heading">Test</h3>
+                    <p class="theme-text-muted mb-4 text-center">Comprehensive test exercises to assess your understanding and progress.</p>
+                    <button onclick="window.location.href='Test.html'" class="btn-3d glow-effect text-sm px-4 py-2">Start Test →</button>
+                </div>
+
+                <!-- Unit Test Card -->
+                <div class="theme-card p-6 rounded-xl flex flex-col items-center">
+                    <svg class="icon-svg mb-3" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="8" y="8" width="34" height="34" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <path d="M15 18h20" stroke="currentColor" stroke-width="2"/>
+                        <path d="M15 23h20" stroke="currentColor" stroke-width="2"/>
+                        <path d="M15 28h20" stroke="currentColor" stroke-width="2"/>
+                        <path d="M15 33h14" stroke="currentColor" stroke-width="2"/>
+                        <circle cx="38" cy="13" r="6" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <path d="M38 10v6M35 13h6" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    <h3 class="text-xl font-bold mb-2 theme-heading">Unit Test</h3>
+                    <p class="theme-text-muted mb-4 text-center">Unit-based assessments to reinforce learning from each section.</p>
+                    <button onclick="window.location.href='unittest.html'" class="btn-3d glow-effect text-sm px-4 py-2">Start Unit Test →</button>
+                </div>
+
+                <!-- Word Card -->
+                <div class="theme-card p-6 rounded-xl flex flex-col items-center">
+                    <svg class="icon-svg mb-3" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="10" y="12" width="30" height="26" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <path d="M15 20h20" stroke="currentColor" stroke-width="2"/>
+                        <path d="M15 25h20" stroke="currentColor" stroke-width="2"/>
+                        <path d="M15 30h16" stroke="currentColor" stroke-width="2"/>
+                        <circle cx="25" cy="17" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    <h3 class="text-xl font-bold mb-2 theme-heading">Word</h3>
+                    <p class="theme-text-muted mb-4 text-center">Vocabulary building exercises to expand your word knowledge.</p>
+                    <button onclick="window.location.href='word.html'" class="btn-3d glow-effect text-sm px-4 py-2">Start Word →</button>
+                </div>
+
+                <!-- Word Review Card -->
+                <div class="theme-card p-6 rounded-xl flex flex-col items-center">
+                    <svg class="icon-svg mb-3" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="10" y="12" width="30" height="26" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <path d="M15 20h20" stroke="currentColor" stroke-width="2"/>
+                        <path d="M15 25h20" stroke="currentColor" stroke-width="2"/>
+                        <path d="M15 30h16" stroke="currentColor" stroke-width="2"/>
+                        <path d="M35 15l5-5M40 10v5h-5" stroke="currentColor" stroke-width="2" fill="none"/>
+                        <circle cx="20" cy="35" r="6" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <path d="M18 35l1.5 1.5L22 33" stroke="currentColor" stroke-width="2" fill="none"/>
+                    </svg>
+                    <h3 class="text-xl font-bold mb-2 theme-heading">Word Review</h3>
+                    <p class="theme-text-muted mb-4 text-center">Review and reinforce vocabulary you've learned previously.</p>
+                    <button onclick="window.location.href='wordreview.html'" class="btn-3d glow-effect text-sm px-4 py-2">Start Review →</button>
+                </div>
+
+                <!-- Word Test Card -->
+                <div class="theme-card p-6 rounded-xl flex flex-col items-center">
+                    <svg class="icon-svg mb-3" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="10" y="12" width="30" height="26" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <path d="M15 20h20" stroke="currentColor" stroke-width="2"/>
+                        <path d="M15 25h20" stroke="currentColor" stroke-width="2"/>
+                        <path d="M15 30h16" stroke="currentColor" stroke-width="2"/>
+                        <circle cx="35" cy="17" r="8" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <path d="M35 13v8M31 17h8" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    <h3 class="text-xl font-bold mb-2 theme-heading">Word Test</h3>
+                    <p class="theme-text-muted mb-4 text-center">Test your vocabulary knowledge with interactive quizzes.</p>
+                    <button onclick="window.location.href='wordtest.html'" class="btn-3d glow-effect text-sm px-4 py-2">Start Word Test →</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Glow effect on hover
+        document.querySelectorAll('.btn-3d').forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                this.style.boxShadow = '0 12px 0 #005f91, 0 20px 30px rgba(0, 119, 182, 0.5), 0 0 50px rgba(0, 180, 216, 0.6), 0 0 80px rgba(144, 224, 239, 0.4)';
+            });
+            button.addEventListener('mouseleave', function() {
+                this.style.boxShadow = '0 8px 0 #005f91, 0 15px 20px rgba(0, 119, 182, 0.4), 0 0 30px rgba(0, 180, 216, 0.3)';
+            });
+        });
+    </script>
+</body>
+</html>
