@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aii Language Center - Reading Future Connect 2 Review Test</title>
+    <style>
+        :root {
+            --bg-color: #f0f2f5;
+            --paper-color: #ffffff;
+            --text-color: #2c3e50;
+            --primary-color: #003355;
+            --accent-color: #ff9f43;
+            --border-color: #bdc3c7;
+            --frame-bg: #f8f9fa;
+            --success-color: #27ae60;
+            --shadow-light: 0 2px 8px rgba(0,0,0,0.08);
+            --font-main: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', sans-serif;
+            --font-ui: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body.dark-mode {
+            --bg-color: #1a1a1a;
+            --paper-color: #2d2d2d;
+            --text-color: #ecf0f1;
+            --primary-color: #64b5f6;
+            --accent-color: #ffb74d;
+            --border-color: #555;
+            --frame-bg: #383838;
+            --success-color: #81c784;
+            --shadow-light: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        body {
+            font-family: var(--font-ui);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .controls {
+            background: var(--paper-color);
+            padding: 12px 20px;
+            border-radius: 6px;
+            box-shadow: var(--shadow-light);
+            margin-bottom: 25px;
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            border: 1px solid var(--border-color);
+        }
+
+        select, button {
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 14px;
+            background-color: var(--paper-color);
+            color: var(--text-color);
+            font-family: var(--font-ui);
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: opacity 0.2s, transform 0.1s;
+        }
+
+        button:hover { opacity: 0.9; }
+        button:active { transform: scale(0.98); }
+        button.print-btn { background-color: var(--success-color); }
+        button.theme-btn { background-color: #555; }
+
+        .hidden { display: none !important; }
+
+        .worksheet-container {
+            background: var(--paper-color);
+            width: 100%;
+            max-width: 900px;
+            padding: 0;
+            box-shadow: var(--shadow-light);
+            min-height: 950px;
+            position: relative;
+            border: 2px solid var(--primary-color);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header-area {
+            border-bottom: 3px dashed var(--accent-color);
+            padding: 25px 40px 20px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(to bottom, var(--paper-color), var(--frame-bg));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-area::before, .header-area::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border: 3px solid var(--accent-color);
+            opacity: 0.15;
+            border-radius: 50%;
+        }
+        .header-area::before { top: -20px; left: -20px; }
+        .header-area::after { bottom: -20px; right: -20px; }
+
+        .brand-title {
+            font-family: var(--font-main);
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--primary-color);
+            text-align: center;
+            margin: 0;
+            line-height: 1.1;
+            text-shadow: 1px 1px 0px rgba(255,255,255,0.4), 2px 2px 0px rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            font-family: var(--font-ui);
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-color);
+            opacity: 0.7;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            max-width: 350px;
+            height: 10px;
+            background: var(--border-color);
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 5px;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-color), var(--success-color));
+            border-radius: 5px;
+            transition: width 0.4s ease;
+        }
+
+        .student-info-bar {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 550px;
+            margin-top: 10px;
+            gap: 20px;
+        }
+
+        .info-field { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+
+        .info-label {
+            font-family: var(--font-main);
+            font-size: 13px;
+            font-weight: bold;
+            color: var(--text-color);
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .info-input {
+            border: none;
+            border-bottom: 2px dashed var(--border-color);
+            background: transparent;
+            font-family: var(--font-main);
+            font-size: 17px;
+            color: var(--text-color);
+            padding: 4px 0;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .info-input:focus { border-bottom-color: var(--accent-color); }
+
+        .content-area { padding: 30px 40px 40px 40px; flex-grow: 1; }
+
+        .section-badge {
+            display: inline-block;
+            padding: 5px 14px;
+            border-radius: 15px;
+            font-family: var(--font-main);
+            font-size: 13px;
+            font-weight: bold;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h2.unit-title {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-family: var(--font-main);
+            font-size: 22px;
+            font-weight: 700;
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: var(--frame-bg);
+            border-radius: 8px;
+            border: 1px dashed var(--border-color);
+        }
+
+        .question-text {
+            font-family: var(--font-main);
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-color);
+        }
+
+        .options-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .option-item {
+            margin: 8px 0;
+            padding: 10px;
+            background: var(--paper-color);
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: var(--font-main);
+            font-size: 15px;
+        }
+
+        .option-item:hover {
+            border-color: var(--accent-color);
+            transform: translateX(5px);
+        }
+
+        .option-item.selected {
+            background-color: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        .option-item.correct {
+            background-color: var(--success-color);
+            color: white;
+            border-color: var(--success-color);
+        }
+
+        .reading-passage {
+            font-family: var(--font-main);
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: var(--paper-color);
+            border-left: 4px solid var(--accent-color);
+            border-radius: 4px;
+        }
+
+        .blank-answer {
+            display: inline-block;
+            min-width: 100px;
+            border-bottom: 2px solid var(--text-color);
+            margin: 0 4px;
+            text-align: center;
+            color: var(--success-color);
+            font-weight: bold;
+        }
+
+        .footer-area { border-top: 2px solid var(--primary-color); padding: 15px 40px; display: flex; flex-direction: column; gap: 8px; margin-top: auto; font-family: var(--font-ui); }
+        .footer-brand { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--text-color); opacity: 0.6; }
+        .footer-teacher-info { font-size: 11px; color: var(--text-color); opacity: 0.7; border-top: 1px dashed var(--border-color); padding-top: 8px; }
+
+        @media print {
+            @page { margin: 0.5cm; size: A4; }
+            body { background: white !important; color: black !important; padding: 0; -webkit-print-color-adjust: exact; }
+            .controls, .no-print { display: none !important; }
+            .worksheet-container { box-shadow: none !important; border: 2px solid #000 !important; width: 100% !important; max-width: 100% !important; background: white !important; color: black !important; min-height: auto !important; }
+            .header-area { border-bottom: 3px solid #000 !important; padding: 15px 20px 10px 20px !important; background: white !important; }
+            .header-area::before, .header-area::after { display: none !important; }
+            .brand-title { text-shadow: none !important; color: #000 !important; font-size: 26px !important; }
+            .student-info-bar { max-width: 100% !important; margin-top: 8px !important; }
+            .info-input { border-bottom: 2px solid #000 !important; color: #000 !important; }
+            .info-label { color: #000 !important; opacity: 1 !important; }
+            .section-badge { border: 2px solid #000 !important; color: #000 !important; background: white !important; }
+            .footer-area { border-top: 2px solid #000 !important; padding: 10px 20px !important; }
+            .content-area { padding: 15px 20px !important; }
+            .question-container { border: 1px solid #000 !important; background: white !important; }
+            .option-item { border: 2px solid #000 !important; }
+            .reading-passage { border-left: 4px solid #000 !important; }
+            .blank-answer { border-bottom: 2px solid #000 !important; color: black !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="controls no-print">
+        <div id="unit-selector-container">
+            <label for="unit-select">Select Test Section:</label>
+            <select id="unit-select"></select>
+        </div>
+        <button class="print-btn" onclick="window.print()">🖨️ Print / Save PDF</button>
+        <button class="theme-btn" id="theme-toggle" onclick="toggleTheme()">🌙 Dark Mode</button>
+        <button id="copy-link-btn" onclick="copyShareableLink()">🔗 Copy Share Link</button>
+    </div>
+
+    <div class="worksheet-container" id="worksheet">
+        <div class="header-area">
+            <h1 class="brand-title">Aii Language Center</h1>
+            <div class="subtitle">Reading Future Connect 2 - Review Test</div>
+            <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="progress-bar-fill" style="width: 0%"></div>
+            </div>
+            <div class="student-info-bar">
+                <div class="info-field">
+                    <span class="info-label">Name:</span>
+                    <input type="text" class="info-input" placeholder="__________________________">
+                </div>
+                <div class="info-field">
+                    <span class="info-label">Date:</span>
+                    <input type="text" class="info-input" placeholder="__________________________">
+                </div>
+            </div>
+        </div>
+
+        <div class="content-area">
+            <div style="text-align: center;">
+                <span class="section-badge" id="section-badge">Loading...</span>
+            </div>
+            <h2 class="unit-title" id="unit-title">Loading...</h2>
+            <div id="questions-container"></div>
+        </div>
+
+        <div class="footer-area">
+            <div class="footer-brand">
+                <span>Aii Language Center • Reading Future Connect 2</span>
+                <span id="page-indicator">Section 1 of 4</span>
+            </div>
+            <div class="footer-teacher-info">
+                Teacher Info: ESL Teacher Ry Mam &nbsp;|&nbsp; Time: 8–9 AM / 2–3 PM &nbsp;|&nbsp; Room #213 &nbsp;|&nbsp; CAP
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const testSections = [
+            {
+                id: 1,
+                title: "Review Test 1 (Units 1-4)",
+                badge: "Vocabulary & Comprehension",
+                badgeColor: "--skill-short-a",
+                questions: [
+                    {
+                        type: "multiple-choice",
+                        question: "Art is becoming much more interesting because the viewer can _________ with it.",
+                        options: ["interact", "media", "stand", "different"],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "Luke Jerram is an artist who has been putting pianos in cities _________ 2008.",
+                        options: ["since", "become", "enjoy", "maybe"],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "Twyla Tharp studied ballet and _________ dance in New York.",
+                        options: ["modern", "skip", "combine", "stage"],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "_________ guitar lessons can save you money, and some are even free.",
+                        options: ["Media", "Online", "Tutor", "Face-to-face"],
+                        correct: 1
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "You can _________ a teacher if you like children and teaching.",
+                        options: ["skip", "combine", "become", "decide"],
+                        correct: 2
+                    },
+                    {
+                        type: "reading-passage",
+                        passage: "Before I fall asleep, this is what I do. I look at the moon and stars high. I read my favorite book. Then I shut off the light and think about tomorrow. After that, I stop thinking. The next thing I know it's morning, and I'm wide awake!",
+                        question: "What is the passage mainly about?",
+                        options: [
+                            "A bedtime routine",
+                            "Reading books at night",
+                            "Looking at the stars"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What did the French soldiers use to communicate at night?",
+                        options: [
+                            "They used 'night writing.'",
+                            "They didn't communicate at night.",
+                            "They used braille."
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What does braille look like?",
+                        options: [
+                            "Raised dots",
+                            "Night writing",
+                            "Letters on a page"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "reading-passage",
+                        passage: "As a child, life was not easy for Helen Keller. She didn't know how to communicate with people because she was deaf and blind. A tutor, Anne Sullivan, started working with Helen. Anne taught Helen how to read and communicate by using her hands. This changed Helen's life. Using these new skills, Helen studied hard and went to a famous school for women. She went on to write books and have an amazing life.",
+                        question: "Why was life difficult for Helen when she was young?",
+                        options: [
+                            "She was deaf and blind",
+                            "She didn't have a tutor",
+                            "She couldn't go to school"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What is the main idea of Unit 1?",
+                        options: [
+                            "New media art allows viewers to interact with art",
+                            "Art is only for looking at",
+                            "Technology is bad for art"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What does 'unique' mean?",
+                        options: [
+                            "Not like anything else",
+                            "Very common",
+                            "Old and traditional"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What is a 'musician'?",
+                        options: [
+                            "A person who writes, sings, or plays music",
+                            "A person who makes art",
+                            "A person who teaches"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What does 'face-to-face' mean?",
+                        options: [
+                            "Meeting in person",
+                            "Online communication",
+                            "Writing letters"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What is 'modern' dance?",
+                        options: [
+                            "Dance connected to the present time; new",
+                            "Very old traditional dance",
+                            "Dance from the 1800s"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What is a 'tutor'?",
+                        options: [
+                            "A teacher who works with one student",
+                            "A school principal",
+                            "A classroom assistant"
+                        ],
+                        correct: 0
+                    }
+                ]
+            },
+            {
+                id: 2,
+                title: "Review Test 2 (Units 5-8)",
+                badge: "Vocabulary & Comprehension",
+                badgeColor: "--skill-blends",
+                questions: [
+                    {
+                        type: "multiple-choice",
+                        question: "Cooking can take a lot of time and _________.",
+                        options: ["potato", "effort", "designs", "harvest", "plain"],
+                        correct: 1
+                    },
+                    {
+                        type: "reading-passage",
+                        passage: "3D food printing is a fast and easy way to make food. Cooking can take a lot of effort, but 3D food printing does not. Then you wait and watch as the 3D food printer prints out shapes of the food for you to eat. Some restaurants already use 3D printers to make designs for candy, chocolate, and pancakes. One 3D printer uses fresh ingredients to make brownies, pasta, and pizza.",
+                        question: "Which is NOT true about the passage?",
+                        options: [
+                            "One 3D printer uses fresh ingredients.",
+                            "Most restaurants already use 3D printing.",
+                            "3D printing is a fast and easy way to make food."
+                        ],
+                        correct: 1
+                    },
+                    {
+                        type: "reading-passage",
+                        passage: "You do not need to buy popcorn from the store. You can make popcorn in the microwave with just a bag and some popcorn kernels. Put the kernels in a brown paper bag. Fold the top of the bag to close it. Then put the bag in the microwave for a few minutes. When the popping sounds stop, your popcorn is done. Making popcorn this way is easy and does not cost a lot of money.",
+                        question: "What should you do when the popping sounds stop?",
+                        options: [
+                            "Put the bag back in the microwave",
+                            "Your popcorn is done",
+                            "Add more kernels"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        type: "reading-passage",
+                        passage: "Farmers harvest potatoes. A potato is turned into chips in a factory. A machine peels the potatoes. Blades cut the potatoes into thin slices. Machines wash, dry, and fry the chips. Then a different machine adds salt. Chips are put in bags. The factory ships them to stores. This process is how potato chips are made.",
+                        question: "What cuts the potatoes into thin slices?",
+                        options: [
+                            "Machines",
+                            "Blades",
+                            "Robots"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What does 'extinct' mean?",
+                        options: [
+                            "Gone; no longer existing",
+                            "Very old",
+                            "Living in zoos"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What is a 'relative'?",
+                        options: [
+                            "A member of your family",
+                            "A close friend",
+                            "A neighbor"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What does 'clever' mean?",
+                        options: [
+                            "Having the ability to understand things easily",
+                            "Very strong",
+                            "Very fast"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What is a 'life cycle'?",
+                        options: [
+                            "Changes in an animal's body from baby to adult",
+                            "A circle of life",
+                            "A type of plant"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What does 'shed' mean?",
+                        options: [
+                            "To lose a covering, such as leaves, hair, or skin",
+                            "To grow new skin",
+                            "To clean something"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What is a 'factory'?",
+                        options: [
+                            "A place where people use machines to make things",
+                            "A farm",
+                            "A store"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What does 'harvest' mean?",
+                        options: [
+                            "To collect food from the place where it grows",
+                            "To plant seeds",
+                            "To eat food"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What is a 'potato chip'?",
+                        options: [
+                            "A very thin, often round piece of fried potato",
+                            "A whole potato",
+                            "A type of vegetable"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What does 'ship' mean in Unit 15?",
+                        options: [
+                            "To send something by boat, plane, or truck",
+                            "A large boat",
+                            "To travel by water"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What is a 'recipe'?",
+                        options: [
+                            "A set of instructions for making food",
+                            "A type of food",
+                            "A cooking tool"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What does 'take place' mean?",
+                        options: [
+                            "To happen, especially after being planned or arranged",
+                            "To move somewhere",
+                            "To stand in one spot"
+                        ],
+                        correct: 0
+                    }
+                ]
+            },
+            {
+                id: 3,
+                title: "Review Test 3 (Units 9-12)",
+                badge: "Vocabulary & Comprehension",
+                badgeColor: "--skill-digraphs",
+                questions: [
+                    {
+                        type: "reading-passage",
+                        passage: "A camera is put on the smart glasses. Objects appear brighter and bigger so that partly blind people can see better. In some smart glasses, a computer voice tells the person what is in front of them. They guess the feelings of the people they see in front of them. They say what color clothing people are wearing. They can also give directions.",
+                        question: "Engineers have made smart glasses for people who are partly blind.",
+                        options: [
+                            "True",
+                            "False"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "reading-passage",
+                        passage: "Most people use sight to read. However, not all people do. Some people require raised dots to read. This is called braille. Braille was developed around 1825 by Louis Braille. He became blind when he was a child because of an accident. Even though he was blind, he was a good student. He learned about how French soldiers used 'night writing.' This was how soldiers communicated quietly in the dark. Using this idea, Louis created a way for blind people to read and write.",
+                        question: "How did the French soldiers communicate at night?",
+                        options: [
+                            "They used 'night writing.'",
+                            "They didn't communicate at night.",
+                            "They used braille."
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What does braille look like?",
+                        options: [
+                            "Raised dots",
+                            "Night writing",
+                            "Letters on a page"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "reading-passage",
+                        passage: "As a child, life was not easy for Helen Keller. She didn't know how to communicate with people because she was deaf and blind. A tutor, Anne Sullivan, started working with Helen. Anne taught Helen how to read and communicate by using her hands. This changed Helen's life. Using these new skills, Helen studied hard and went to a famous school for women. She went on to write books and have an amazing life.",
+                        question: "Why was life difficult for Helen when she was young?",
+                        options: [
+                            "She was deaf and blind",
+                            "She didn't have a tutor",
+                            "She couldn't go to school"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What is an 'instrument'?",
+                        options: [
+                            "A tool that is used to make music",
+                            "A type of book",
+                            "A machine"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What does 'communicate' mean?",
+                        options: [
+                            "To give information to other people",
+                            "To listen to music",
+                            "To read a book"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What does 'including' mean?",
+                        options: [
+                            "Having someone or something as a part of a group",
+                            "Excluding something",
+                            "Ignoring something"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What does 'deaf' mean?",
+                        options: [
+                            "Unable to hear",
+                            "Unable to see",
+                            "Unable to speak"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What is a 'tutor'?",
+                        options: [
+                            "A teacher who works with one student",
+                            "A school principal",
+                            "A classroom assistant"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What does 'adventure' mean?",
+                        options: [
+                            "An exciting and maybe dangerous activity",
+                            "A boring activity",
+                            "A type of food"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What is a 'skill'?",
+                        options: [
+                            "A talent or ability",
+                            "A type of food",
+                            "A machine"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What does 'respect' mean?",
+                        options: [
+                            "To feel admiration for someone or something",
+                            "To ignore someone",
+                            "To dislike someone"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What does 'printing' mean?",
+                        options: [
+                            "The act or process of making a book, magazine, etc.",
+                            "Drawing by hand",
+                            "Writing with a pen"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What does 'effort' mean?",
+                        options: [
+                            "Hard work to do something",
+                            "Easy work",
+                            "No work at all"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What does 'fresh' mean?",
+                        options: [
+                            "Food that was recently made or collected",
+                            "Old food",
+                            "Frozen food"
+                        ],
+                        correct: 0
+                    }
+                ]
+            },
+            {
+                id: 4,
+                title: "Review Test 4 (Units 13-16)",
+                badge: "Vocabulary & Comprehension",
+                badgeColor: "--skill-long-vowels",
+                questions: [
+                    {
+                        type: "reading-passage",
+                        passage: "Some people learn guitar through online courses. There are lots of good reasons to take online courses. Students can study online at any time. Online lessons can start in the morning or at night, whenever you want. There are also certain online courses that are cheap or free. Students can even learn alone through online lessons, which makes some students feel less nervous.",
+                        question: "When can students study online?",
+                        options: [
+                            "Only in the morning",
+                            "At any time",
+                            "Only at night"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        type: "reading-passage",
+                        passage: "When she was young, Twyla Tharp took many dance lessons. Tharp created her own kind of dancing by mixing ballet and natural movements like running, walking, and skipping. Tharp became very famous for her new way of dancing. She created dances for stage, movies, and television. Today, some of her dances are still done regularly by dance schools around the world.",
+                        question: "What did Twyla Tharp mix to create her own kind of dancing?",
+                        options: [
+                            "Ballet and natural movements",
+                            "Running and skipping",
+                            "Stage and television"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What can show us when foods began to be made?",
+                        options: [
+                            "Old cookbooks",
+                            "New recipes",
+                            "Modern kitchens"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What does 'destroyed' mean?",
+                        options: [
+                            "Ruined or damaged badly",
+                            "Built or created",
+                            "Cleaned"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What is 'climate'?",
+                        options: [
+                            "The weather conditions in an area",
+                            "A type of animal",
+                            "A type of food"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What does 'homeless' mean?",
+                        options: [
+                            "Without a home",
+                            "Having many homes",
+                            "Living in a mansion"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What is a 'conservationist'?",
+                        options: [
+                            "A person who works to protect the environment",
+                            "A person who destroys nature",
+                            "A type of animal"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What does 'migrate' mean?",
+                        options: [
+                            "To move from one place to another",
+                            "To stay in one place",
+                            "To build a home"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What does 'believed' mean?",
+                        options: [
+                            "Thought something was true",
+                            "Knew something was false",
+                            "Forgot something"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What does 'sometimes' mean?",
+                        options: [
+                            "At certain times; not always",
+                            "All the time",
+                            "Never"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What is a 'spring' in Unit 14?",
+                        options: [
+                            "A place where water comes from the ground",
+                            "A season",
+                            "A type of fish"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What does 'treat' mean?",
+                        options: [
+                            "To give medical care",
+                            "To ignore",
+                            "To harm"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What does 'instead' mean?",
+                        options: [
+                            "As an alternative or substitute",
+                            "The same as",
+                            "In addition to"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What is a 'chemical'?",
+                        options: [
+                            "A substance used in science or industry",
+                            "A type of food",
+                            "A type of animal"
+                        ],
+                        correct: 0
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "What does 'endangered' mean?",
+                        options: [
+                            "In danger of becoming extinct",
+                            "Very common",
+                            "Very strong"
+                        ],
+                        correct: 0
+                    }
+                ]
+            }
+        ];
+
+        let currentSectionId = 1;
+        let userAnswers = {};
+
+        const unitSelect = document.getElementById('unit-select');
+        const unitTitle = document.getElementById('unit-title');
+        const sectionBadge = document.getElementById('section-badge');
+        const questionsContainer = document.getElementById('questions-container');
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const pageIndicator = document.getElementById('page-indicator');
+        const progressBarFill = document.getElementById('progress-bar-fill');
+
+        function init() {
+            testSections.forEach(section => {
+                const option = document.createElement('option');
+                option.value = section.id;
+                option.textContent = section.title;
+                unitSelect.appendChild(option);
+            });
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const sectionParam = urlParams.get('section');
+            const startId = sectionParam && testSections.find(s => s.id == sectionParam) ? parseInt(sectionParam) : testSections[0].id;
+
+            loadSection(startId);
+            unitSelect.value = startId;
+
+            unitSelect.addEventListener('change', (e) => {
+                const newId = parseInt(e.target.value);
+                loadSection(newId);
+                updateURL(newId);
+            });
+        }
+
+        function updateURL(id) {
+            const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + "?section=" + id;
+            window.history.pushState({ path: newUrl }, '', newUrl);
+        }
+
+        function loadSection(id) {
+            currentSectionId = id;
+            const section = testSections.find(s => s.id === id);
+            if (!section) return;
+
+            unitTitle.textContent = section.title;
+            pageIndicator.textContent = `Section ${id} of ${testSections.length}`;
+            
+            const progress = (id / testSections.length) * 100;
+            progressBarFill.style.width = `${progress}%`;
+
+            sectionBadge.textContent = section.badge;
+            sectionBadge.style.backgroundColor = `var(${section.badgeColor})`;
+
+            questionsContainer.innerHTML = '';
+            section.questions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question-container';
+                
+                if (q.type === 'multiple-choice') {
+                    questionDiv.innerHTML = `
+                        <div class="question-text">${index + 1}. ${q.question}</div>
+                        <ul class="options-list">
+                            ${q.options.map((opt, i) => `
+                                <li class="option-item" data-index="${i}" onclick="selectOption(${id}, ${index}, ${i})">${opt}</li>
+                            `).join('')}
+                        </ul>
+                    `;
+                } else if (q.type === 'reading-passage') {
+                    questionDiv.innerHTML = `
+                        <div class="reading-passage">${q.passage}</div>
+                        <div class="question-text">${index + 1}. ${q.question}</div>
+                        <ul class="options-list">
+                            ${q.options.map((opt, i) => `
+                                <li class="option-item" data-index="${i}" onclick="selectOption(${id}, ${index}, ${i})">${opt}</li>
+                            `).join('')}
+                        </ul>
+                    `;
+                }
+                
+                questionsContainer.appendChild(questionDiv);
+            });
+
+            // Restore previous answers if any
+            if (userAnswers[id]) {
+                Object.keys(userAnswers[id]).forEach(qIndex => {
+                    const answer = userAnswers[id][qIndex];
+                    const options = questionsContainer.querySelectorAll(`.question-container:nth-child(${parseInt(qIndex) + 1}) .option-item`);
+                    if (options[answer]) {
+                        options[answer].classList.add('selected');
+                    }
+                });
+            }
+        }
+
+        function selectOption(sectionId, questionIndex, optionIndex) {
+            if (!userAnswers[sectionId]) {
+                userAnswers[sectionId] = {};
+            }
+            userAnswers[sectionId][questionIndex] = optionIndex;
+
+            const container = questionsContainer.children[questionIndex];
+            const options = container.querySelectorAll('.option-item');
+            
+            options.forEach(opt => opt.classList.remove('selected'));
+            options[optionIndex].classList.add('selected');
+
+            // Check if correct
+            const section = testSections.find(s => s.id === sectionId);
+            if (section.questions[questionIndex].correct === optionIndex) {
+                options[optionIndex].classList.add('correct');
+            }
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            themeToggleBtn.textContent = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
+        }
+
+        function copyShareableLink() {
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(() => {
+                const btn = document.getElementById('copy-link-btn');
+                const originalText = btn.textContent;
+                btn.textContent = "✅ Link Copied!";
+                btn.style.backgroundColor = "#2ecc71";
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.backgroundColor = "#ff9800";
+                }, 2000);
+            }).catch(() => {
+                alert("Failed to copy link. Please copy manually from the address bar.");
+            });
+        }
+
+        init();
+    </script>
+</body>
+</html>

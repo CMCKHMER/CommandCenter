@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aii Language Center - Reading Future Connect 2 Review Test</title>
+    <style>
+        :root {
+            --bg-color: #f0f2f5;
+            --paper-color: #ffffff;
+            --text-color: #2c3e50;
+            --primary-color: #003355;
+            --accent-color: #ff9f43;
+            --border-color: #bdc3c7;
+            --frame-bg: #f8f9fa;
+            --success-color: #27ae60;
+            --shadow-light: 0 2px 8px rgba(0,0,0,0.08);
+            --font-main: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', sans-serif;
+            --font-ui: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body.dark-mode {
+            --bg-color: #1a1a1a;
+            --paper-color: #2d2d2d;
+            --text-color: #ecf0f1;
+            --primary-color: #64b5f6;
+            --accent-color: #ffb74d;
+            --border-color: #555;
+            --frame-bg: #383838;
+            --success-color: #81c784;
+            --shadow-light: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        body { font-family: var(--font-ui); background-color: var(--bg-color); color: var(--text-color); margin: 0; padding: 30px 20px; display: flex; flex-direction: column; align-items: center; transition: background-color 0.3s, color 0.3s; }
+        .controls { background: var(--paper-color); padding: 12px 20px; border-radius: 6px; box-shadow: var(--shadow-light); margin-bottom: 25px; width: 100%; max-width: 900px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; border: 1px solid var(--border-color); }
+        select, button { padding: 8px 12px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 14px; background-color: var(--paper-color); color: var(--text-color); font-family: var(--font-ui); }
+        button { background-color: var(--primary-color); color: white; border: none; cursor: pointer; font-weight: 600; transition: opacity 0.2s; }
+        button:hover { opacity: 0.9; }
+        button.print-btn { background-color: var(--success-color); }
+        button.theme-btn { background-color: #555; }
+
+        .worksheet-container { background: var(--paper-color); width: 100%; max-width: 900px; padding: 0; box-shadow: var(--shadow-light); min-height: 950px; position: relative; border: 2px solid var(--primary-color); display: flex; flex-direction: column; }
+        .header-area { border-bottom: 3px dashed var(--accent-color); padding: 25px 40px 20px 40px; display: flex; flex-direction: column; align-items: center; gap: 12px; background: linear-gradient(to bottom, var(--paper-color), var(--frame-bg)); }
+        .brand-title { font-family: var(--font-main); font-size: 32px; font-weight: 900; color: var(--primary-color); text-align: center; margin: 0; text-shadow: 1px 1px 0px rgba(255,255,255,0.4), 2px 2px 0px rgba(0,0,0,0.1); }
+        .subtitle { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--text-color); opacity: 0.7; }
+        .progress-bar-container { width: 100%; max-width: 350px; height: 10px; background: var(--border-color); border-radius: 5px; overflow: hidden; margin-top: 5px; }
+        .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent-color), var(--success-color)); border-radius: 5px; transition: width 0.4s ease; }
+        .student-info-bar { display: flex; justify-content: space-between; width: 100%; max-width: 550px; margin-top: 10px; gap: 20px; }
+        .info-field { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+        .info-label { font-family: var(--font-main); font-size: 13px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+        .info-input { border: none; border-bottom: 2px dashed var(--border-color); background: transparent; font-family: var(--font-main); font-size: 17px; padding: 4px 0; outline: none; }
+        .info-input:focus { border-bottom-color: var(--accent-color); }
+        .content-area { padding: 30px 40px 40px 40px; flex-grow: 1; }
+        .section-badge { display: inline-block; padding: 5px 14px; border-radius: 15px; font-family: var(--font-main); font-size: 13px; font-weight: bold; color: white; text-transform: uppercase; margin-bottom: 8px; }
+        h2.unit-title { text-align: center; color: var(--primary-color); margin-bottom: 20px; font-family: var(--font-main); font-size: 22px; font-weight: 700; border-bottom: 1px dashed var(--border-color); padding-bottom: 10px; }
+        
+        .question-container { margin-bottom: 25px; padding: 15px; background-color: var(--frame-bg); border-radius: 8px; border: 1px dashed var(--border-color); }
+        .question-text { font-family: var(--font-main); font-size: 16px; font-weight: 600; margin-bottom: 12px; }
+        .options-list { list-style: none; padding: 0; margin: 0; }
+        .option-item { margin: 8px 0; padding: 10px; background: var(--paper-color); border: 2px solid var(--border-color); border-radius: 6px; cursor: pointer; transition: all 0.2s; font-family: var(--font-main); font-size: 15px; }
+        .option-item:hover { border-color: var(--accent-color); transform: translateX(5px); }
+        .option-item.selected { background-color: var(--accent-color); color: white; border-color: var(--accent-color); }
+        .option-item.correct { background-color: var(--success-color); color: white; border-color: var(--success-color); }
+        
+        .reading-passage { font-family: var(--font-main); font-size: 16px; line-height: 1.8; margin-bottom: 20px; padding: 15px; background: var(--paper-color); border-left: 4px solid var(--accent-color); border-radius: 4px; }
+        
+        .word-bank { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; padding: 10px; background: var(--paper-color); border-radius: 6px; border: 1px solid var(--border-color); }
+        .word-chip { padding: 6px 12px; background: var(--frame-bg); border: 1px solid var(--border-color); border-radius: 15px; cursor: pointer; font-family: var(--font-main); font-size: 14px; transition: all 0.2s; }
+        .word-chip:hover { background: var(--accent-color); color: white; }
+        .word-chip.used { opacity: 0.4; text-decoration: line-through; pointer-events: none; }
+        
+        .short-answer-input { width: 100%; padding: 10px; border: 2px solid var(--border-color); border-radius: 6px; font-family: var(--font-main); font-size: 15px; margin-bottom: 10px; box-sizing: border-box; }
+        .check-btn { background-color: var(--primary-color); color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: 600; }
+        .correct-answer-reveal { margin-top: 10px; padding: 10px; background-color: rgba(39, 174, 96, 0.1); border: 1px solid var(--success-color); border-radius: 6px; color: var(--success-color); font-weight: bold; display: none; }
+
+        .footer-area { border-top: 2px solid var(--primary-color); padding: 15px 40px; display: flex; flex-direction: column; gap: 8px; margin-top: auto; }
+        .footer-brand { display: flex; justify-content: space-between; font-size: 12px; opacity: 0.6; }
+        .footer-teacher-info { font-size: 11px; opacity: 0.7; border-top: 1px dashed var(--border-color); padding-top: 8px; }
+
+        @media print {
+            @page { margin: 0.5cm; size: A4; }
+            body { background: white !important; color: black !important; padding: 0; }
+            .controls, .no-print { display: none !important; }
+            .worksheet-container { box-shadow: none !important; border: 2px solid #000 !important; width: 100% !important; max-width: 100% !important; background: white !important; color: black !important; min-height: auto !important; }
+            .header-area { border-bottom: 3px solid #000 !important; padding: 15px 20px 10px 20px !important; background: white !important; }
+            .brand-title { text-shadow: none !important; color: #000 !important; font-size: 26px !important; }
+            .student-info-bar { max-width: 100% !important; margin-top: 8px !important; }
+            .info-input { border-bottom: 2px solid #000 !important; color: #000 !important; }
+            .info-label { color: #000 !important; opacity: 1 !important; }
+            .section-badge { border: 2px solid #000 !important; color: #000 !important; background: white !important; }
+            .footer-area { border-top: 2px solid #000 !important; padding: 10px 20px !important; }
+            .content-area { padding: 15px 20px !important; }
+            .question-container { border: 1px solid #000 !important; background: white !important; }
+            .option-item { border: 2px solid #000 !important; }
+            .reading-passage { border-left: 4px solid #000 !important; }
+            .correct-answer-reveal { display: block !important; border-color: #000 !important; color: #000 !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="controls no-print">
+        <div id="unit-selector-container">
+            <label for="unit-select">Select Review Test:</label>
+            <select id="unit-select"></select>
+        </div>
+        <button class="print-btn" onclick="window.print()">🖨️ Print / Save PDF</button>
+        <button class="theme-btn" id="theme-toggle" onclick="toggleTheme()">🌙 Dark Mode</button>
+        <button id="copy-link-btn" onclick="copyShareableLink()">🔗 Copy Share Link</button>
+    </div>
+
+    <div class="worksheet-container" id="worksheet">
+        <div class="header-area">
+            <h1 class="brand-title">Aii Language Center</h1>
+            <div class="subtitle">Reading Future Connect 2 - Review Test</div>
+            <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="progress-bar-fill" style="width: 0%"></div>
+            </div>
+            <div class="student-info-bar">
+                <div class="info-field">
+                    <span class="info-label">Name:</span>
+                    <input type="text" class="info-input" placeholder="__________________________">
+                </div>
+                <div class="info-field">
+                    <span class="info-label">Date:</span>
+                    <input type="text" class="info-input" placeholder="__________________________">
+                </div>
+            </div>
+        </div>
+
+        <div class="content-area">
+            <div style="text-align: center;">
+                <span class="section-badge" id="section-badge">Loading...</span>
+            </div>
+            <h2 class="unit-title" id="unit-title">Loading...</h2>
+            <div id="questions-container"></div>
+        </div>
+
+        <div class="footer-area">
+            <div class="footer-brand">
+                <span>Aii Language Center • Reading Future Connect 2</span>
+                <span id="page-indicator">Section 1 of 4</span>
+            </div>
+            <div class="footer-teacher-info">
+                Teacher Info: ESL Teacher Ry Mam &nbsp;|&nbsp; Time: 8–9 AM / 2–3 PM &nbsp;|&nbsp; Room #213 &nbsp;|&nbsp; CAP
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const testSections = [
+            {
+                id: 1, title: "Review Test 1 (Units 1-4)", badge: "Vocabulary & Comprehension", badgeColor: "#e74c3c",
+                questions: [
+                    { type: "fill-blank", question: "1. Art is becoming much more interesting because the viewer can _____________ with it.", wordBank: ["interact", "since", "modern", "Online", "become", "decide", "famous"], answer: "interact" },
+                    { type: "fill-blank", question: "2. Luke Jerram is an artist who has been putting pianos in cities _____________ 2008.", wordBank: ["interact", "since", "modern", "Online", "become", "decide", "famous"], answer: "since" },
+                    { type: "fill-blank", question: "3. Twyla Tharp studied ballet and _____________ dance in New York.", wordBank: ["interact", "since", "modern", "Online", "become", "decide", "famous"], answer: "modern" },
+                    { type: "multiple-choice", question: "4. _________ guitar lessons can save you money, and some are even free.", options: ["Media", "Online", "Tutor"], correct: 1 },
+                    { type: "multiple-choice", question: "5. You can __________ a teacher if you like children and teaching.", options: ["skip", "combine", "become"], correct: 2 },
+                    { type: "multiple-choice", question: "6. Choose the correct match: 'Art is becoming more and more interesting...'", options: ["...instead of just looking at it.", "...become a part of it.", "...is unique for each person."], correct: 0 },
+                    { type: "multiple-choice", question: "7. Choose the correct match: 'Some people interact with art...'", options: ["...instead of just looking at it.", "...and become a part of it.", "...experience will be different."], correct: 1 },
+                    { type: "reading-passage", passage: "New technology brings people together with the artists’ art. One artist uses computers to control his art. His art is a wall full of robot faces. The robots’ eyes open when you stand close to it. Then the eyes follow your movements.", question: "8. What is the passage mainly about?", options: ["a. New media art using robot faces", "b. Robots and computers", "c. Unique art viewers"], correct: 0 },
+                    { type: "reading-passage", passage: "New technology brings people together with the artists’ art. One artist uses computers to control his art. His art is a wall full of robot faces. The robots’ eyes open when you stand close to it.", question: "9. What does the artist use to control his art?", options: ["a. Robot faces", "b. His eyes", "c. Computers"], correct: 2 },
+                    { type: "reading-passage", passage: "New media art is unique for each viewer. One artist uses computers to control his art. His art is a wall full of robot faces. The robots’ eyes open when you stand close to it. Then the eyes follow your movements.", question: "10. Which is NOT true according to the passage?", options: ["a. Everyone has a different experience with the art.", "b. You cannot interact with the art.", "c. This sort of art uses technology."], correct: 1 },
+                    { type: "multiple-choice", question: "11. Choose the correctly ordered sentence:", options: ["Twyla Tharp studied ballet and modern dance.", "Studied Twyla Tharp and modern dance ballet.", "Ballet and modern dance studied Twyla Tharp."], correct: 0 },
+                    { type: "reading-passage", passage: "In 1965, Twyla Tharp decided to open her own dance school. Dancers in her school combined ballet and natural movement. For example, the dancers ran, walked, and skipped while they danced.", question: "12. What sorts of natural movements did the dancers do?", options: ["a. They sat down.", "b. They jumped.", "c. They walked."], correct: 2 },
+                    { type: "reading-passage", passage: "In the 1960s, Twyla Tharp studied ballet and modern dance in New York. In 1965, Tharp decided to open her own dance school. Dancers in her school combined ballet and natural movement.", question: "13. What is the best place for the sentence: 'In 1965, Twyla Tharp decided to open her own dance school.'?", options: ["a. ①", "b. ②", "c. ③"], correct: 1 },
+                    { type: "reading-passage", passage: "In 1965, Twyla Tharp decided to open her own dance school. Dancers in her school combined ballet and natural movement. For example, the dancers ran, walked, and skipped while they danced.", question: "14. Which is NOT true according to the passage?", options: ["a. Twyla Tharp made dances for movies in 1965.", "b. Twyla Tharp opened a dance school.", "c. Twyla Tharp still works with dancers."], correct: 0 },
+                    { type: "short-answer", question: "15. What does 'combine' mean in the passage?", answer: "To mix" }
+                ]
+            },
+            {
+                id: 2, title: "Review Test 2 (Units 5-8)", badge: "Vocabulary & Comprehension", badgeColor: "#16a085",
+                questions: [
+                    { type: "fill-blank", question: "1. The _____________ is studying the DNA of extinct animals.", wordBank: ["scientist", "clever", "egg", "relative", "rubbed", "layer", "pipe"], answer: "scientist" },
+                    { type: "fill-blank", question: "2. The octopus can use its big brain to do _____________ things.", wordBank: ["scientist", "clever", "egg", "relative", "rubbed", "layer", "pipe"], answer: "clever" },
+                    { type: "fill-blank", question: "3. The life cycle of a frog begins with a(n) _____________.", wordBank: ["scientist", "clever", "egg", "relative", "rubbed", "layer", "pipe"], answer: "egg" },
+                    { type: "multiple-choice", question: "4. A _____________ is somebody who is a part of your family.", options: ["layer", "pipe", "relative"], correct: 2 },
+                    { type: "multiple-choice", question: "5. The old man _____________ his hands together to keep warm.", options: ["stretched", "rubbed", "ripped"], correct: 1 },
+                    { type: "multiple-choice", question: "6. Choose the correct match: 'There are four stages...'", options: ["...with an egg.", "...of a frog’s life cycle.", "...start growing back legs."], correct: 1 },
+                    { type: "multiple-choice", question: "7. Choose the correct match: 'The life cycle begins...'", options: ["...with an egg.", "...of a frog’s life cycle.", "...comes out of the egg."], correct: 0 },
+                    { type: "reading-passage", passage: "The octopus is a very clever creature. There is one famous octopus named Inky. Inky lived in the National Aquarium in New Zealand. But it found a way to escape. First, it slipped out of a small gap at the top of its tank. Then it went down a pipe. Finally, it escaped into the ocean.", question: "8. What is the passage mainly about?", options: ["a. The National Aquarium of New Zealand", "b. A clever octopus named Inky", "c. The octopus’ brain size"], correct: 1 },
+                    { type: "reading-passage", passage: "There is one famous octopus named Inky. Inky lived in the National Aquarium in New Zealand. But it found a way to escape. First, it slipped out of a small gap at the top of its tank. Then it went down a pipe. Finally, it escaped into the ocean.", question: "9. Where did Inky escape to?", options: ["a. The pipe", "b. The tank", "c. The ocean"], correct: 2 },
+                    { type: "reading-passage", passage: "The octopus is a very clever creature. Compared to similar-sized animals, the octopus has a very big brain. There is one famous octopus named Inky. Inky lived in the National Aquarium in New Zealand. But it found a way to escape.", question: "10. Which is NOT true according to the passage?", options: ["a. Octopuses cannot escape from a tank.", "b. The octopus has a big brain.", "c. Inky escaped through a pipe."], correct: 0 },
+                    { type: "multiple-choice", question: "11. What does the life cycle of a frog begin with?", options: ["a. A tadpole", "b. An egg", "c. Legs"], correct: 1 },
+                    { type: "reading-passage", passage: "A snake’s skin does not stretch like other animals’. So they need to shed their skin to keep growing. It comes off like a sock. The old skin comes off when a layer of new skin grows underneath. To shed its skin, the snake rubs against a rock or a tree to make a rip. Then it uses water to help get out of the old skin.", question: "12. When does the snake’s skin come off?", options: ["a. When it stretches", "b. When a layer of new skin grows underneath", "c. When it swims in water"], correct: 1 },
+                    { type: "short-answer", question: "13. What does the snake use to help get out of its skin?", answer: "Water" },
+                    { type: "reading-passage", passage: "A snake’s skin does not stretch like other animals’. So they need to shed their skin to keep growing. It comes off like a sock. The old skin comes off when a layer of new skin grows underneath.", question: "14. Which is NOT true according to the passage?", options: ["a. Snakes shed their skin to grow.", "b. A snake’s skin comes off in many pieces.", "c. The skin of a snake doesn’t stretch."], correct: 1 },
+                    { type: "multiple-choice", question: "15. What does 'rip' mean in the passage?", options: ["a. A bump", "b. An edge", "c. A hole"], correct: 2 }
+                ]
+            },
+            {
+                id: 3, title: "Review Test 3 (Units 9-12)", badge: "Vocabulary & Comprehension", badgeColor: "#2980b9",
+                questions: [
+                    { type: "fill-blank", question: "1. Engineers are already making glasses for people who are _____________ blind.", wordBank: ["partly", "adventure", "awards", "directions", "sick", "object", "engineer"], answer: "partly" },
+                    { type: "fill-blank", question: "2. My sister loves _____________, so she is going to travel around Africa this summer.", wordBank: ["partly", "adventure", "awards", "directions", "sick", "object", "engineer"], answer: "adventure" },
+                    { type: "fill-blank", question: "3. Stevie Wonder is a famous singer who has won many _____________.", wordBank: ["partly", "adventure", "awards", "directions", "sick", "object", "engineer"], answer: "awards" },
+                    { type: "multiple-choice", question: "4. Can you give me _____________ to the hospital?", options: ["documents", "directions", "accident"], correct: 1 },
+                    { type: "multiple-choice", question: "5. I am going on a(n) _____________ to Brazil this summer.", options: ["award", "instrument", "adventure"], correct: 2 },
+                    { type: "reading-passage", passage: "A camera is put on the smart glasses. Objects appear brighter and bigger so that partly blind people can see better. In some smart glasses, a computer voice tells the person what is in front of them. They guess the feelings of the people they see in front of them. They say what color clothing people are wearing. They can also give directions.", question: "6. What is the passage mainly about?", options: ["a. What engineers do for a job", "b. Smart glasses for partly blind people", "c. Sunglasses with cameras and computers"], correct: 1 },
+                    { type: "reading-passage", passage: "Engineers have made smart glasses for people who are partly blind. A camera is put on the smart glasses. Objects appear brighter and bigger so that partly blind people can see better.", question: "7. Which is NOT true about the passage?", options: ["a. Engineers give directions for blind people to follow.", "b. Smart glasses can tell blind people about clothing color.", "c. There is a camera on the smart glasses."], correct: 0 },
+                    { type: "reading-passage", passage: "Most people use sight to read. However, not all people do. Some people require raised dots to read. This is called braille. Braille was developed around 1825 by Louis Braille. He became blind when he was a child because of an accident.", question: "8. What is the best place for the sentence: 'Braille was developed around 1825 by Louis Braille.'?", options: ["a. ①", "b. ②", "c. ③"], correct: 1 },
+                    { type: "multiple-choice", question: "9. How did the French soldiers communicate at night?", options: ["a. They used “night writing.”", "b. They didn’t communicate at night.", "c. They used braille."], correct: 0 },
+                    { type: "multiple-choice", question: "10. What does braille look like?", options: ["a. Raised dots", "b. Night writing", "c. Letters on a page"], correct: 0 },
+                    { type: "short-answer", question: "11. What did Stevie Wonder catch at school by listening?", answer: "A mouse" },
+                    { type: "multiple-choice", question: "12. Unscramble sentence: 'this / learned / He / about / school / at'", options: ["He learned about this at school.", "He about learned this at school.", "At school he learned about this."], correct: 0 },
+                    { type: "short-answer", question: "13. Why was life difficult for Helen when she was young?", answer: "Because she was deaf and blind." },
+                    { type: "short-answer", question: "14. What did Helen learn with the help of a tutor?", answer: "How to read and communicate by using her hands." },
+                    { type: "reading-passage", passage: "As a child, life was not easy for Helen Keller. She didn’t know how to communicate with people because she was deaf and blind. A tutor, Anne Sullivan, started working with Helen. Anne taught Helen how to read and communicate by using her hands.", question: "15. What is the passage mainly about?", options: ["a. Helen Keller’s tutor", "b. Helen Keller’s life", "c. Helen Keller’s school"], correct: 1 }
+                ]
+            },
+            {
+                id: 4, title: "Review Test 4 (Units 13-16)", badge: "Vocabulary & Comprehension", badgeColor: "#d35400",
+                questions: [
+                    { type: "fill-blank", question: "1. Cooking can take a lot of time and _____________.", wordBank: ["effort", "plain", "harvest", "recipe", "slice", "spoon", "microwave"], answer: "effort" },
+                    { type: "fill-blank", question: "2. Some people like their food _____________ with no salt on it.", wordBank: ["effort", "plain", "harvest", "recipe", "slice", "spoon", "microwave"], answer: "plain" },
+                    { type: "fill-blank", question: "3. After farmers _____________ the corn, they ship them to stores and restaurants.", wordBank: ["effort", "plain", "harvest", "recipe", "slice", "spoon", "microwave"], answer: "harvest" },
+                    { type: "multiple-choice", question: "4. My aunt’s _____________ for potato soup is the best.", options: ["spoon", "recipe", "microwave"], correct: 1 },
+                    { type: "multiple-choice", question: "5. The first step is to wash and _____________ the apples.", options: ["slice", "fold", "remember"], correct: 0 },
+                    { type: "reading-passage", passage: "3D food printing is a fast and easy way to make food. Cooking can take a lot of effort, but 3D food printing does not. Then you wait and watch as the 3D food printer prints out shapes of the food for you to eat. Some restaurants already use 3D printers to make designs for candy, chocolate, and pancakes.", question: "6. What is the passage mainly about?", options: ["a. Using a 3D printer to make food", "b. Using a 3D printer to make cupcakes", "c. Using a 3D printer to print out designs"], correct: 0 },
+                    { type: "reading-passage", passage: "3D food printing is a fast and easy way to make food. Cooking can take a lot of effort, but 3D food printing does not. Then you wait and watch as the 3D food printer prints out shapes of the food for you to eat.", question: "7. Which is NOT true about the passage?", options: ["a. One 3D printer uses fresh ingredients.", "b. Most restaurants already use 3D printing.", "c. 3D printing is a fast and easy way to make food."], correct: 1 },
+                    { type: "reading-passage", passage: "You do not need to buy popcorn from the store. You can make popcorn in the microwave with just a bag and some popcorn kernels. Put the kernels in a brown paper bag. Fold the top of the bag to close it. Then put the bag in the microwave for a few minutes.", question: "8. What is the best place for the sentence: 'When the popping sounds stop, the popcorn is ready.'?", options: ["a. ①", "b. ②", "c. ③"], correct: 2 },
+                    { type: "multiple-choice", question: "9. What do you need to make popcorn at home?", options: ["a. Some special corn", "b. A bag and some butter", "c. A bag and some corn"], correct: 2 },
+                    { type: "multiple-choice", question: "10. How do you know when the popcorn is ready?", options: ["a. The popping sounds stop.", "b. The popcorn starts to smell.", "c. The popcorn falls out of the bag."], correct: 0 },
+                    { type: "short-answer", question: "11. Where is a potato turned into a chip?", answer: "In a factory." },
+                    { type: "multiple-choice", question: "12. Unscramble sentence: 'cut / Blades / slices / the potatoes / into / thin'", options: ["Blades cut the potatoes into thin slices.", "The potatoes cut blades into thin slices.", "Into thin slices blades cut the potatoes."], correct: 0 },
+                    { type: "short-answer", question: "13. What can show us when foods began to be made?", answer: "Old cookbooks." },
+                    { type: "reading-passage", passage: "The first cupcakes were made in 1800. They were called “number cakes.” The name came from the numbers 1, 2, 3, 4, 1, and 1. The numbers in this recipe mean use one cup of butter and two cups of sugar.", question: "14. What do you need two cups of?", options: ["a. Flour", "b. Butter", "c. Sugar"], correct: 2 },
+                    { type: "reading-passage", passage: "Farmers harvest potatoes. A potato is turned into chips in a factory. A machine peels the potatoes. Blades cut the potatoes into thin slices. Machines wash, dry, and fry the chips. Then a different machine adds salt.", question: "15. What is the passage mainly about?", options: ["a. How a plain potato turns into delicious crunchy chips", "b. Where potatoes are harvested", "c. How to cook potatoes at home"], correct: 0 }
+                ]
+            }
+        ];
+
+        let currentSectionId = 1;
+        let userAnswers = {};
+
+        const unitSelect = document.getElementById('unit-select');
+        const unitTitle = document.getElementById('unit-title');
+        const sectionBadge = document.getElementById('section-badge');
+        const questionsContainer = document.getElementById('questions-container');
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const pageIndicator = document.getElementById('page-indicator');
+        const progressBarFill = document.getElementById('progress-bar-fill');
+
+        function init() {
+            testSections.forEach(section => {
+                const option = document.createElement('option');
+                option.value = section.id;
+                option.textContent = section.title;
+                unitSelect.appendChild(option);
+            });
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const sectionParam = urlParams.get('section');
+            const startId = sectionParam && testSections.find(s => s.id == sectionParam) ? parseInt(sectionParam) : testSections[0].id;
+
+            loadSection(startId);
+            unitSelect.value = startId;
+
+            unitSelect.addEventListener('change', (e) => {
+                const newId = parseInt(e.target.value);
+                loadSection(newId);
+                updateURL(newId);
+            });
+        }
+
+        function updateURL(id) {
+            const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + "?section=" + id;
+            window.history.pushState({ path: newUrl }, '', newUrl);
+        }
+
+        function loadSection(id) {
+            currentSectionId = id;
+            const section = testSections.find(s => s.id === id);
+            if (!section) return;
+
+            unitTitle.textContent = section.title;
+            pageIndicator.textContent = `Section ${id} of ${testSections.length}`;
+            
+            const progress = (id / testSections.length) * 100;
+            progressBarFill.style.width = `${progress}%`;
+
+            sectionBadge.textContent = section.badge;
+            sectionBadge.style.backgroundColor = section.badgeColor;
+
+            questionsContainer.innerHTML = '';
+            section.questions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question-container';
+                
+                if (q.type === 'fill-blank') {
+                    let wordBankHtml = `<div class="word-bank">`;
+                    q.wordBank.forEach(word => {
+                        wordBankHtml += `<span class="word-chip" onclick="fillBlank(this, '${word}', ${id}, ${index})">${word}</span>`;
+                    });
+                    wordBankHtml += `</div>`;
+                    
+                    questionDiv.innerHTML = `
+                        <div class="question-text">${q.question}</div>
+                        ${wordBankHtml}
+                        <div class="blank-answer-display" style="font-weight:bold; color:var(--success-color); min-height:24px;"></div>
+                    `;
+                } else if (q.type === 'multiple-choice' || q.type === 'reading-passage') {
+                    questionDiv.innerHTML = `
+                        ${q.type === 'reading-passage' ? `<div class="reading-passage">${q.passage}</div>` : ''}
+                        <div class="question-text">${q.question}</div>
+                        <ul class="options-list">
+                            ${q.options.map((opt, i) => `
+                                <li class="option-item" data-index="${i}" onclick="selectOption(${id}, ${index}, ${i})">${opt}</li>
+                            `).join('')}
+                        </ul>
+                    `;
+                } else if (q.type === 'short-answer') {
+                    questionDiv.innerHTML = `
+                        <div class="question-text">${q.question}</div>
+                        <input type="text" class="short-answer-input" placeholder="Type your answer here..." id="input-${id}-${index}">
+                        <button class="check-btn" onclick="checkShortAnswer(${id}, ${index}, '${q.answer.replace(/'/g, "\\'")}')">Check Answer</button>
+                        <div class="correct-answer-reveal" id="reveal-${id}-${index}">Correct Answer: ${q.answer}</div>
+                    `;
+                }
+                
+                questionsContainer.appendChild(questionDiv);
+            });
+
+            if (userAnswers[id]) {
+                Object.keys(userAnswers[id]).forEach(qIndex => {
+                    const answer = userAnswers[id][qIndex];
+                    const options = questionsContainer.querySelectorAll(`.question-container:nth-child(${parseInt(qIndex) + 1}) .option-item`);
+                    if (options[answer]) options[answer].classList.add('selected');
+                });
+            }
+        }
+
+        function fillBlank(chip, word, sectionId, questionIndex) {
+            if (chip.classList.contains('used')) return;
+            
+            const container = questionsContainer.children[questionIndex];
+            const display = container.querySelector('.blank-answer-display');
+            const allChips = container.querySelectorAll('.word-chip');
+            
+            allChips.forEach(c => c.classList.remove('used'));
+            chip.classList.add('used');
+            display.textContent = word;
+            
+            if (!userAnswers[sectionId]) userAnswers[sectionId] = {};
+            userAnswers[sectionId][questionIndex] = word;
+        }
+
+        function selectOption(sectionId, questionIndex, optionIndex) {
+            if (!userAnswers[sectionId]) userAnswers[sectionId] = {};
+            userAnswers[sectionId][questionIndex] = optionIndex;
+
+            const container = questionsContainer.children[questionIndex];
+            const options = container.querySelectorAll('.option-item');
+            
+            options.forEach(opt => opt.classList.remove('selected'));
+            options[optionIndex].classList.add('selected');
+
+            const section = testSections.find(s => s.id === sectionId);
+            if (section.questions[questionIndex].correct === optionIndex) {
+                options[optionIndex].classList.add('correct');
+            }
+        }
+
+        function checkShortAnswer(sectionId, questionIndex, correctAnswer) {
+            const input = document.getElementById(`input-${sectionId}-${questionIndex}`);
+            const reveal = document.getElementById(`reveal-${sectionId}-${questionIndex}`);
+            reveal.style.display = 'block';
+            
+            if (input.value.toLowerCase().trim() === correctAnswer.toLowerCase().trim()) {
+                input.style.borderColor = 'var(--success-color)';
+                input.style.backgroundColor = 'rgba(39, 174, 96, 0.1)';
+            } else {
+                input.style.borderColor = '#e74c3c';
+                input.style.backgroundColor = 'rgba(231, 76, 60, 0.1)';
+            }
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            themeToggleBtn.textContent = isDark ? "☀️ Light Mode" : " Dark Mode";
+        }
+
+        function copyShareableLink() {
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(() => {
+                const btn = document.getElementById('copy-link-btn');
+                const originalText = btn.textContent;
+                btn.textContent = "✅ Link Copied!";
+                btn.style.backgroundColor = "#2ecc71";
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.backgroundColor = "#ff9800";
+                }, 2000);
+            }).catch(() => {
+                alert("Failed to copy link. Please copy manually from the address bar.");
+            });
+        }
+
+        init();
+    </script>
+</body>
+</html>
