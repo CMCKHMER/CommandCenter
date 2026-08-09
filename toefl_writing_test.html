@@ -4,645 +4,305 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TOEFL Writing Practice Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --secondary: #64748b;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --background: #f8fafc;
-            --card-bg: #ffffff;
-            --text: #1e293b;
-            --text-light: #64748b;
-            --border: #e2e8f0;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* Header */
-        header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 12px;
-            padding: 1rem 2rem;
-            margin-bottom: 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 20px;
-            z-index: 100;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .timer-badge {
-            background: var(--text);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-        }
-
-        .timer-warning {
-            background: var(--warning);
-            animation: pulse 1s infinite;
-        }
-
-        .timer-danger {
-            background: var(--danger);
-            animation: pulse 0.5s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        /* Cards */
-        .card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 2rem;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            margin-bottom: 2rem;
-            animation: slideUp 0.5s ease-out;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Start Screen */
-        .start-screen {
-            text-align: center;
-            max-width: 500px;
-            margin: 4rem auto;
-        }
-
-        .start-screen h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--text);
-        }
-
-        .start-screen p {
-            color: var(--text-light);
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-        }
-
-        .input-group {
-            margin-bottom: 1.5rem;
-            text-align: left;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--text);
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border: 2px solid var(--border);
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .input-group input:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        .btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 0.75rem 2rem;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-
-        .btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
-        }
-
-        .btn:disabled {
-            background: var(--secondary);
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        /* Task Sections */
-        .task-section {
-            display: none;
-        }
-
-        .task-section.active {
-            display: block;
-        }
-
-        .task-header {
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid var(--border);
-        }
-
-        .task-header h2 {
-            font-size: 1.8rem;
-            color: var(--text);
-            margin-bottom: 0.5rem;
-        }
-
-        .task-header p {
-            color: var(--text-light);
-        }
-
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        @media (max-width: 768px) {
-            .content-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .reading-passage, .lecture-transcript {
-            background: #f8fafc;
-            padding: 1.5rem;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            max-height: 400px;
-            overflow-y: auto;
-        }
-
-        .reading-passage h3, .lecture-transcript h3 {
-            margin-bottom: 1rem;
-            color: var(--primary);
-            font-size: 1.2rem;
-        }
-
-        .reading-passage p, .lecture-transcript p {
-            margin-bottom: 1rem;
-            line-height: 1.8;
-        }
-
-        .writing-area {
-            margin-top: 2rem;
-        }
-
-        .writing-area label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--text);
-        }
-
-        .writing-area textarea {
-            width: 100%;
-            min-height: 300px;
-            padding: 1rem;
-            border: 2px solid var(--border);
-            border-radius: 12px;
-            font-size: 1rem;
-            line-height: 1.6;
-            resize: vertical;
-            transition: border-color 0.3s ease;
-            font-family: inherit;
-        }
-
-        .writing-area textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        .word-count {
-            text-align: right;
-            margin-top: 0.5rem;
-            color: var(--text-light);
-            font-size: 0.9rem;
-        }
-
-        .word-count.good {
-            color: var(--success);
-            font-weight: 600;
-        }
-
-        .task-instructions {
-            background: #eff6ff;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-            border-left: 4px solid var(--primary);
-        }
-
-        .task-instructions h4 {
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        /* Discussion Post Style for Task 2 */
-        .discussion-post {
-            background: #f8fafc;
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin-bottom: 1rem;
-            border: 1px solid var(--border);
-        }
-
-        .discussion-post .author {
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        /* Results Screen */
-        .results-screen {
-            display: none;
-        }
-
-        .results-screen.active {
-            display: block;
-        }
-
-        .result-card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 2rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .result-card h3 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-
-        .result-content {
-            background: #f8fafc;
-            padding: 1.5rem;
-            border-radius: 8px;
-            white-space: pre-wrap;
-            line-height: 1.8;
-        }
-
-        .download-btn {
-            background: var(--success);
-            margin-top: 1rem;
-        }
-
-        .download-btn:hover {
-            background: #059669;
-        }
-
-        /* Loading Spinner */
-        .spinner {
-            display: none;
-            width: 40px;
-            height: 40px;
-            border: 4px solid var(--border);
-            border-top: 4px solid var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 2rem auto;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        /* Progress Bar */
-        .progress-container {
-            margin-bottom: 2rem;
-        }
-
-        .progress-bar {
-            height: 8px;
-            background: var(--border);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
-            transition: width 0.5s ease;
-            width: 0%;
-        }
-
-        .progress-text {
-            text-align: center;
-            margin-top: 0.5rem;
-            color: var(--text-light);
-            font-size: 0.9rem;
-        }
+        body { font-family: 'Outfit', sans-serif; background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 25%, #0891b2 75%, #06b6d4 100%); background-attachment: fixed; min-height: 100vh; }
+        .hero-headline { font-family: 'Poppins', sans-serif; }
+        .hero-body { font-family: 'Nunito', sans-serif; }
+        .theme-card { background: linear-gradient(135deg, rgba(26, 31, 46, 0.95) 0%, rgba(45, 55, 72, 0.9) 100%); border: 1px solid rgba(14, 165, 233, 0.2); backdrop-filter: blur(10px); transition: all 0.3s ease; }
+        .btn-3d { position: relative; display: inline-block; padding: 16px 40px; font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #ffffff; background: linear-gradient(135deg, #0077b6 0%, #00b4d8 50%, #90e0ef 100%); border: none; border-radius: 12px; cursor: pointer; transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55); box-shadow: 0 8px 0 #005f91, 0 15px 20px rgba(0, 119, 182, 0.4); }
+        .btn-3d:hover { transform: translateY(-4px) scale(1.02); }
+        .btn-3d-gold { background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 50%, #fcd34d 100%); box-shadow: 0 8px 0 #d97706; }
+        .gradient-text { background: linear-gradient(135deg, #ffffff 0%, #90e0ef 50%, #fbbf24 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .theme-input { background: linear-gradient(135deg, rgba(45, 55, 72, 0.9) 0%, rgba(26, 31, 46, 0.95) 100%); border: 1px solid rgba(14, 165, 233, 0.2); color: #e2e8f0; }
+        .theme-input:focus { outline: none; border-color: rgba(14, 165, 233, 0.6); box-shadow: 0 0 20px rgba(14, 165, 233, 0.3); }
+        .timer-badge { background: linear-gradient(135deg, #0ea5e9, #14b8a6); color: white; padding: 0.75rem 1.5rem; border-radius: 12px; font-weight: 700; font-size: 1.2rem; font-family: 'Poppins', sans-serif; box-shadow: 0 0 20px rgba(14, 165, 233, 0.5); }
+        .timer-warning { background: linear-gradient(135deg, #f59e0b, #fbbf24); animation: pulse 1s infinite; }
+        .timer-danger { background: linear-gradient(135deg, #ef4444, #f87171); animation: pulse 0.5s infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        .progress-bar { background: rgba(45, 55, 72, 0.8); border-radius: 10px; overflow: hidden; height: 12px; }
+        .progress-fill { height: 100%; border-radius: 10px; background: linear-gradient(90deg, #0ea5e9 0%, #14b8a6 50%, #f59e0b 100%); box-shadow: 0 0 10px rgba(14, 165, 233, 0.5); transition: width 0.5s ease; }
+        .reading-passage { background: linear-gradient(135deg, rgba(45, 55, 72, 0.5) 0%, rgba(26, 31, 46, 0.7) 100%); border: 1px solid rgba(14, 165, 233, 0.2); border-radius: 16px; padding: 2rem; max-height: 400px; overflow-y: auto; line-height: 1.8; color: #e2e8f0; }
+        .result-score { font-size: 4rem; font-weight: 800; font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #fcd34d 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hidden { display: none !important; }
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .split-view { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        @media (max-width: 1024px) { .split-view { grid-template-columns: 1fr; } }
+        .back-btn { position: fixed; top: 20px; left: 20px; z-index: 100; background: linear-gradient(135deg, rgba(45, 55, 72, 0.9) 0%, rgba(26, 31, 46, 0.95) 100%); border: 1px solid rgba(14, 165, 233, 0.3); color: #e2e8f0; padding: 0.75rem 1.5rem; border-radius: 12px; cursor: pointer; transition: all 0.3s ease; font-weight: 600; }
+        .back-btn:hover { border-color: rgba(14, 165, 233, 0.6); transform: translateX(-5px); }
+        .writing-area textarea { background: linear-gradient(135deg, rgba(45, 55, 72, 0.9) 0%, rgba(26, 31, 46, 0.95) 100%); border: 1px solid rgba(14, 165, 233, 0.2); color: #e2e8f0; border-radius: 12px; padding: 1.5rem; line-height: 1.8; font-size: 1rem; resize: vertical; transition: all 0.3s ease; }
+        .writing-area textarea:focus { outline: none; border-color: rgba(14, 165, 233, 0.6); box-shadow: 0 0 20px rgba(14, 165, 233, 0.3); }
+        .word-count { text-align: right; margin-top: 0.5rem; color: #94a3b8; font-size: 0.9rem; }
+        .word-count.good { color: #10b981; font-weight: 600; }
+        .task-nav { display: flex; gap: 1rem; margin-bottom: 1.5rem; }
+        .task-nav-btn { flex: 1; padding: 1rem; border-radius: 12px; background: linear-gradient(135deg, rgba(45, 55, 72, 0.8) 0%, rgba(26, 31, 46, 0.9) 100%); border: 2px solid rgba(14, 165, 233, 0.2); color: #e2e8f0; font-weight: 600; cursor: pointer; transition: all 0.3s ease; }
+        .task-nav-btn:hover { border-color: rgba(14, 165, 233, 0.6); }
+        .task-nav-btn.active { border-color: rgba(14, 165, 233, 1); background: linear-gradient(135deg, rgba(14, 165, 233, 0.3) 0%, rgba(6, 182, 212, 0.4) 100%); }
+        .task-nav-btn.completed { background: linear-gradient(135deg, rgba(16, 185, 129, 0.3) 0%, rgba(5, 150, 105, 0.4) 100%); border-color: rgba(16, 185, 129, 0.6); }
+        .discussion-post { background: linear-gradient(135deg, rgba(45, 55, 72, 0.5) 0%, rgba(26, 31, 46, 0.7) 100%); border: 1px solid rgba(14, 165, 233, 0.2); border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem; }
+        .discussion-post .author { font-weight: 700; color: #90e0ef; margin-bottom: 0.5rem; }
+        .grading-criteria { background: linear-gradient(135deg, rgba(45, 55, 72, 0.5) 0%, rgba(26, 31, 46, 0.7) 100%); border: 1px solid rgba(14, 165, 233, 0.2); border-radius: 12px; padding: 1.5rem; margin-top: 1rem; }
+        .criteria-item { display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid rgba(14, 165, 233, 0.1); }
+        .criteria-item:last-child { border-bottom: none; }
+        .score-badge { background: linear-gradient(135deg, rgba(16, 185, 129, 0.3) 0%, rgba(5, 150, 105, 0.4) 100%); border: 1px solid rgba(16, 185, 129, 0.6); color: #10b981; padding: 0.25rem 0.75rem; border-radius: 8px; font-weight: 600; }
     </style>
 </head>
-<body>
-    <div class="container">
-        <header id="main-header" class="hidden">
-            <div class="logo">📝 TOEFL Writing Prep</div>
-            <div class="user-info">
-                <span id="display-name">Guest</span>
-                <div id="timer" class="timer-badge">--:--</div>
+<body class="text-[#e2e8f0]">
+    <button onclick="window.location.href='index.html'" class="back-btn">← Back to Home</button>
+    <div class="container mx-auto px-4 py-8 max-w-7xl">
+        <header id="main-header" class="theme-card rounded-2xl p-6 mb-8 sticky top-4 z-50 hidden">
+            <div class="flex justify-between items-center flex-wrap gap-4">
+                <div><h1 class="text-3xl font-bold gradient-text hero-headline">✍️ TOEFL Writing Practice</h1><p class="text-gray-400 hero-body mt-1">Full Mock Test with Timer & Auto-Grading</p></div>
+                <div class="flex items-center gap-4">
+                    <div id="timer" class="timer-badge">30:00</div>
+                    <div class="theme-card px-4 py-2 rounded-xl"><span class="font-semibold text-blue-300">Task:</span><span id="current-task" class="font-bold text-white ml-2">1</span><span class="text-gray-400 mx-1">/</span><span id="total-tasks" class="font-bold text-white">2</span></div>
+                </div>
             </div>
+            <div class="mt-4"><div class="progress-bar"><div id="progress-fill" class="progress-fill" style="width: 0%"></div></div><p class="text-right text-sm text-gray-400 mt-1">Time Progress</p></div>
         </header>
 
-        <!-- Start Screen -->
-        <div id="start-screen" class="card start-screen">
-            <h1>TOEFL Writing Practice Test</h1>
-            <p>Simulate the real TOEFL Writing section with timed tasks and authentic prompts.</p>
-            
-            <div class="input-group">
-                <label for="username">Enter Your Name</label>
-                <input type="text" id="username" placeholder="Your full name" autocomplete="off">
-            </div>
-            
-            <button class="btn" onclick="startTest()">Begin Test</button>
-        </div>
-
-        <!-- Loading Spinner -->
-        <div id="loading" class="spinner"></div>
-
-        <!-- Task 1: Integrated Writing -->
-        <div id="task1" class="task-section">
-            <div class="progress-container">
-                <div class="progress-bar">
-                    <div id="progress-fill" class="progress-fill"></div>
+        <div id="start-screen" class="theme-card rounded-2xl p-12 text-center fade-in">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-5xl font-bold gradient-text hero-headline mb-6">TOEFL Writing Section</h2>
+                <p class="text-xl text-gray-300 hero-body mb-8">Simulate the real TOEFL iBT Writing section with integrated and academic discussion tasks.</p>
+                <div class="grid md:grid-cols-3 gap-6 mb-10">
+                    <div class="theme-card rounded-xl p-6"><div class="text-4xl mb-4">⏱️</div><h3 class="font-bold text-lg text-blue-300 mb-2">30 Minutes</h3><p class="text-gray-400 text-sm">Complete both writing tasks within the time limit</p></div>
+                    <div class="theme-card rounded-xl p-6"><div class="text-4xl mb-4">📝</div><h3 class="font-bold text-lg text-blue-300 mb-2">2 Tasks</h3><p class="text-gray-400 text-sm">Integrated Writing + Academic Discussion</p></div>
+                    <div class="theme-card rounded-xl p-6"><div class="text-4xl mb-4">⭐</div><h3 class="font-bold text-lg text-blue-300 mb-2">Auto-Graded</h3><p class="text-gray-400 text-sm">Receive instant feedback with detailed scoring</p></div>
                 </div>
-                <div class="progress-text">Task 1 of 2</div>
-            </div>
-
-            <div class="card">
-                <div class="task-header">
-                    <h2>Task 1: Integrated Writing</h2>
-                    <p>Read the passage, listen to the lecture (transcript provided), then write your response.</p>
+                <div class="theme-card rounded-xl p-6 mb-10 text-left">
+                    <h3 class="font-bold text-xl text-blue-300 mb-4">Test Instructions:</h3>
+                    <ul class="space-y-3 text-gray-300">
+                        <li class="flex items-start"><span class="text-blue-400 mr-3">▸</span><span><strong>Task 1 - Integrated Writing (20 min):</strong> Read an academic passage, listen to a lecture (transcript provided), then write a response summarizing how the lecture challenges the reading.</span></li>
+                        <li class="flex items-start"><span class="text-blue-400 mr-3">▸</span><span><strong>Task 2 - Academic Discussion (10 min):</strong> Read a professor's question and student responses, then contribute your own perspective with reasons and examples.</span></li>
+                        <li class="flex items-start"><span class="text-blue-400 mr-3">▸</span><span>Your responses will be automatically graded based on TOEFL criteria: development, organization, grammar, vocabulary, and task completion.</span></li>
+                        <li class="flex items-start"><span class="text-blue-400 mr-3">▸</span><span>The timer will count down from 30 minutes total. You can navigate between tasks but cannot return after submission.</span></li>
+                    </ul>
                 </div>
-
-                <div class="task-instructions">
-                    <h4>Instructions:</h4>
-                    <p>You have <strong>20 minutes</strong> to plan and write your response. Your response will be judged on the quality of your writing and on how well your response presents the points in the lecture and their relationship to the reading passage. Typically, an effective response will be at least 150 words.</p>
-                </div>
-
-                <div class="content-grid">
-                    <div class="reading-passage">
-                        <h3>📖 Reading Passage</h3>
-                        <p><strong>The Decline of the Maya Civilization</strong></p>
-                        <p>The ancient Maya civilization, which flourished in present-day Mexico and Central America from about 2000 BCE to 1500 CE, experienced a mysterious decline around 900 CE. For many years, scholars have proposed various theories to explain this collapse.</p>
-                        <p>One prominent theory suggests that environmental degradation played a crucial role. The Maya practiced intensive agriculture to support their large population. They cleared vast areas of forest to create farmland, which led to soil erosion and depletion. As the soil became less fertile, crop yields decreased, leading to food shortages.</p>
-                        <p>Another factor was prolonged drought. Climate studies indicate that the region experienced several severe droughts during the ninth century. These droughts would have reduced water supplies needed for drinking and irrigation, putting additional stress on an already struggling agricultural system.</p>
-                        <p>Finally, some researchers point to warfare between city-states. As resources became scarce, competition intensified, leading to increased conflict. This warfare would have disrupted trade routes and further weakened the civilization's ability to cope with other challenges.</p>
-                    </div>
-
-                    <div class="lecture-transcript">
-                        <h3>🎧 Lecture Transcript</h3>
-                        <p><strong>Professor:</strong> While the traditional theories about the Maya collapse have merit, recent archaeological evidence suggests a more complex picture. Let me address each of the points from your reading.</p>
-                        <p>First, regarding environmental degradation: new evidence shows that the Maya actually developed sophisticated sustainable farming techniques. They created terraced fields on hillsides to prevent erosion and used chinampas, or raised field systems, in wetland areas. These methods allowed them to maintain soil fertility for centuries. So while some deforestation occurred, it wasn't as devastating as previously thought.</p>
-                        <p>Second, about the drought theory: yes, there were droughts, but they weren't uniform across the entire Maya region. Some areas actually received adequate rainfall during this period. Yet these areas also experienced decline. This suggests that drought alone cannot explain the collapse. Additionally, the Maya had extensive reservoir systems to store water, which should have helped them weather dry periods.</p>
-                        <p>Finally, concerning warfare: while conflict did increase, recent evidence indicates that much of this warfare was ritualistic rather than aimed at conquest or resource acquisition. The scale of violence was exaggerated in earlier interpretations. Many cities show no signs of destruction by fire or invasion. Instead, the evidence points to a gradual abandonment rather than sudden collapse due to war.</p>
-                        <p>The reality is likely a combination of factors, including political instability, changes in trade patterns, and social upheaval, rather than the simple environmental explanations presented in your reading.</p>
-                    </div>
-                </div>
-
-                <div class="writing-area">
-                    <label for="task1-response">Write your response below:</label>
-                    <textarea id="task1-response" placeholder="Summarize the points made in the lecture, being sure to explain how they cast doubt on specific points made in the reading passage..." oninput="updateWordCount('task1')"></textarea>
-                    <div class="word-count" id="task1-word-count">Words: 0</div>
-                </div>
-
-                <div style="margin-top: 2rem; text-align: right;">
-                    <button class="btn" onclick="submitTask1()">Submit Task 1 & Start Task 2</button>
-                </div>
+                <div class="mb-8"><label class="block text-left font-semibold mb-3 text-blue-200">Enter Your Name</label><input type="text" id="username" placeholder="Your full name" class="theme-input w-full px-6 py-4 rounded-xl text-lg" autocomplete="off"></div>
+                <button onclick="startTest()" class="btn-3d btn-3d-gold text-lg px-12 py-5">🚀 Start Writing Test</button>
             </div>
         </div>
 
-        <!-- Task 2: Academic Discussion -->
-        <div id="task2" class="task-section">
-            <div class="progress-container">
-                <div class="progress-bar">
-                    <div id="progress-fill-2" class="progress-fill"></div>
-                </div>
-                <div class="progress-text">Task 2 of 2</div>
+        <div id="test-content" class="hidden">
+            <div class="task-nav">
+                <button id="task1-nav" class="task-nav-btn active" onclick="showTask(1)">Task 1: Integrated Writing</button>
+                <button id="task2-nav" class="task-nav-btn" onclick="showTask(2)">Task 2: Academic Discussion</button>
             </div>
 
-            <div class="card">
-                <div class="task-header">
-                    <h2>Task 2: Writing for an Academic Discussion</h2>
-                    <p>Read the discussion and contribute your own perspective.</p>
+            <!-- Task 1: Integrated Writing -->
+            <div id="task1-content" class="fade-in">
+                <div class="split-view">
+                    <div class="space-y-6">
+                        <div class="theme-card rounded-2xl p-6">
+                            <div class="flex items-center gap-3 mb-4"><span class="text-2xl">📖</span><h2 class="text-xl font-bold text-blue-300">Reading Passage</h2></div>
+                            <div id="reading-passage" class="reading-passage"></div>
+                        </div>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="theme-card rounded-2xl p-6">
+                            <div class="flex items-center gap-3 mb-4"><span class="text-2xl">🎧</span><h2 class="text-xl font-bold text-blue-300">Lecture Transcript</h2></div>
+                            <div id="lecture-transcript" class="reading-passage"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="theme-card rounded-2xl p-6 mt-6">
+                    <div class="flex items-center gap-3 mb-4"><span class="text-2xl">✍️</span><h2 class="text-xl font-bold text-blue-300">Your Response</h2></div>
+                    <div class="task-instructions mb-4"><p class="text-gray-300">Summarize the points made in the lecture, being sure to explain how they cast doubt on specific points made in the reading passage. Typically, an effective response will be at least 150 words.</p></div>
+                    <div class="writing-area">
+                        <textarea id="task1-response" rows="12" placeholder="Write your response here. Organize your essay clearly, showing how the lecture challenges each point from the reading..." oninput="updateWordCount('task1')"></textarea>
+                        <div class="word-count" id="task1-word-count">Words: 0 / Recommended: 150+</div>
+                    </div>
+                    <div class="flex gap-4 mt-6"><button onclick="showTask(2)" class="flex-1 btn-3d px-6 py-3">Save & Go to Task 2 →</button></div>
+                </div>
+            </div>
+
+            <!-- Task 2: Academic Discussion -->
+            <div id="task2-content" class="hidden fade-in">
+                <div class="theme-card rounded-2xl p-6 mb-6">
+                    <div class="flex items-center gap-3 mb-4"><span class="text-2xl">💬</span><h2 class="text-xl font-bold text-blue-300">Academic Discussion</h2></div>
+                    <div class="task-instructions mb-4"><p class="text-gray-300">Read the professor's question and student responses below. Then contribute your own perspective to the discussion. Typically, an effective response will contain a minimum of 100 words.</p></div>
+                    
+                    <div class="discussion-post" style="background: linear-gradient(135deg, rgba(14, 165, 233, 0.1) 0%, rgba(6, 182, 212, 0.15) 100%); border-left: 4px solid #0ea5e9;">
+                        <div class="author">Professor Martinez</div>
+                        <p class="text-gray-300">This week, we're discussing the impact of artificial intelligence on the job market. Some argue that AI will eliminate millions of jobs, while others believe it will create new opportunities. What is your perspective? Will AI primarily destroy jobs, create jobs, or transform existing roles? Please explain your reasoning with specific examples.</p>
+                    </div>
+
+                    <div class="discussion-post">
+                        <div class="author">Sarah Chen</div>
+                        <p class="text-gray-300">I believe AI will primarily destroy jobs, especially in sectors like manufacturing, customer service, and even some white-collar positions like accounting and legal research. We're already seeing self-checkout kiosks replace cashiers, and chatbots handle customer inquiries. The pace of change is too fast for workers to retrain. History shows that technological revolutions always cause temporary unemployment, but this time feels different because AI can learn and adapt.</p>
+                    </div>
+
+                    <div class="discussion-post">
+                        <div class="author">Marcus Johnson</div>
+                        <p class="text-gray-300">I disagree with Sarah. AI will create more jobs than it destroys. Every major technological shift—from the Industrial Revolution to the internet—initially caused fear but ultimately led to net job growth. AI will create entirely new categories of work: AI trainers, ethics specialists, human-AI collaboration managers. Plus, by automating routine tasks, AI will free humans to focus on creative, strategic, and interpersonal work that machines cannot replicate. The key is investing in education and retraining programs.</p>
+                    </div>
                 </div>
 
-                <div class="task-instructions">
-                    <h4>Instructions:</h4>
-                    <p>You have <strong>10 minutes</strong> to read the professor's question and student responses, then write your own response. Typically, an effective response will contain a minimum of 100 words.</p>
-                </div>
-
-                <div class="discussion-post" style="background: #eff6ff; border-left: 4px solid var(--primary);">
-                    <div class="author">Professor Martinez</div>
-                    <p>This week, we're discussing the impact of artificial intelligence on the job market. Some argue that AI will eliminate millions of jobs, while others believe it will create new opportunities. What is your perspective? Will AI primarily destroy jobs, create jobs, or transform existing roles? Please explain your reasoning with specific examples.</p>
-                </div>
-
-                <div class="discussion-post">
-                    <div class="author">Sarah Chen</div>
-                    <p>I believe AI will primarily destroy jobs, especially in sectors like manufacturing, customer service, and even some white-collar positions like accounting and legal research. We're already seeing self-checkout kiosks replace cashiers, and chatbots handle customer inquiries. The pace of change is too fast for workers to retrain. History shows that technological revolutions always cause temporary unemployment, but this time feels different because AI can learn and adapt.</p>
-                </div>
-
-                <div class="discussion-post">
-                    <div class="author">Marcus Johnson</div>
-                    <p>I disagree with Sarah. AI will create more jobs than it destroys. Every major technological shift—from the Industrial Revolution to the internet—initially caused fear but ultimately led to net job growth. AI will create entirely new categories of work: AI trainers, ethics specialists, human-AI collaboration managers. Plus, by automating routine tasks, AI will free humans to focus on creative, strategic, and interpersonal work that machines cannot replicate. The key is investing in education and retraining programs.</p>
-                </div>
-
-                <div class="writing-area">
-                    <label for="task2-response">Write your response below:</label>
-                    <textarea id="task2-response" placeholder="Contribute to the discussion by explaining your viewpoint with reasons and examples..." oninput="updateWordCount('task2')"></textarea>
-                    <div class="word-count" id="task2-word-count">Words: 0</div>
-                </div>
-
-                <div style="margin-top: 2rem; text-align: right;">
-                    <button class="btn" onclick="submitTask2()">Submit Final Answer</button>
+                <div class="theme-card rounded-2xl p-6">
+                    <div class="flex items-center gap-3 mb-4"><span class="text-2xl">✍️</span><h2 class="text-xl font-bold text-blue-300">Your Response</h2></div>
+                    <div class="writing-area">
+                        <textarea id="task2-response" rows="10" placeholder="Contribute to the discussion by explaining your viewpoint with reasons and examples..." oninput="updateWordCount('task2')"></textarea>
+                        <div class="word-count" id="task2-word-count">Words: 0 / Recommended: 100+</div>
+                    </div>
+                    <div class="flex gap-4 mt-6"><button onclick="previousTask()" class="flex-1 theme-card px-6 py-3 rounded-xl font-semibold">← Back to Task 1</button><button onclick="submitTest()" class="flex-1 btn-3d btn-3d-gold px-6 py-3">Submit Test ✓</button></div>
                 </div>
             </div>
         </div>
 
-        <!-- Results Screen -->
-        <div id="results" class="results-screen">
-            <div class="card">
-                <h1 style="text-align: center; margin-bottom: 2rem; color: var(--primary);">Test Complete! 🎉</h1>
-                <p style="text-align: center; margin-bottom: 2rem; color: var(--text-light);">Thank you, <span id="final-name"></span>. Here are your responses:</p>
+        <div id="results-screen" class="hidden theme-card rounded-2xl p-12 fade-in">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-10"><h2 class="text-4xl font-bold gradient-text hero-headline mb-4">Test Results</h2><p id="result-name" class="text-xl text-gray-300 hero-body"></p></div>
+                
+                <div class="theme-card rounded-2xl p-8 mb-8 text-center">
+                    <div class="text-gray-400 mb-2">Overall Score</div>
+                    <div id="score-display" class="result-score mb-4">0/30</div>
+                    <div id="score-percentage" class="text-2xl font-bold text-blue-300 mb-4">0%</div>
+                    <div id="score-message" class="text-xl text-gray-300"></div>
+                </div>
 
-                <div class="result-card">
-                    <h3>Task 1: Integrated Writing Response</h3>
-                    <div class="result-content" id="result-task1"></div>
-                    <div style="margin-top: 1rem; color: var(--text-light);">
-                        Word Count: <span id="result-task1-count"></span>
+                <div class="theme-card rounded-xl p-6 mb-8">
+                    <div class="flex justify-between items-center"><span class="text-gray-400">Time Taken:</span><span id="time-taken" class="font-bold text-xl text-blue-300"></span></div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div class="theme-card rounded-xl p-6">
+                        <h3 class="font-bold text-lg text-blue-300 mb-4">Task 1: Integrated Writing</h3>
+                        <div class="grading-criteria">
+                            <div class="criteria-item"><span class="text-gray-400">Development & Organization</span><span id="task1-dev" class="score-badge">0/5</span></div>
+                            <div class="criteria-item"><span class="text-gray-400">Language Use</span><span id="task1-lang" class="score-badge">0/5</span></div>
+                            <div class="criteria-item"><span class="text-gray-400">Task Completion</span><span id="task1-task" class="score-badge">0/5</span></div>
+                            <div class="criteria-item" style="border-top: 1px solid rgba(14, 165, 233, 0.2); padding-top: 0.75rem;"><span class="font-bold text-blue-300">Total</span><span id="task1-total" class="score-badge" style="background: linear-gradient(135deg, rgba(14, 165, 233, 0.3) 0%, rgba(6, 182, 212, 0.4) 100%); border-color: rgba(14, 165, 233, 0.6); color: #90e0ef;">0/15</span></div>
+                        </div>
+                        <div class="mt-4"><p class="text-gray-400 text-sm mb-2">Word Count: <span id="task1-words" class="text-white">0</span></p><p class="text-gray-400 text-sm">Feedback: <span id="task1-feedback" class="text-blue-300"></span></p></div>
+                    </div>
+
+                    <div class="theme-card rounded-xl p-6">
+                        <h3 class="font-bold text-lg text-blue-300 mb-4">Task 2: Academic Discussion</h3>
+                        <div class="grading-criteria">
+                            <div class="criteria-item"><span class="text-gray-400">Relevant Contribution</span><span id="task2-dev" class="score-badge">0/5</span></div>
+                            <div class="criteria-item"><span class="text-gray-400">Language Use</span><span id="task2-lang" class="score-badge">0/5</span></div>
+                            <div class="criteria-item"><span class="text-gray-400">Task Completion</span><span id="task2-task" class="score-badge">0/5</span></div>
+                            <div class="criteria-item" style="border-top: 1px solid rgba(14, 165, 233, 0.2); padding-top: 0.75rem;"><span class="font-bold text-blue-300">Total</span><span id="task2-total" class="score-badge" style="background: linear-gradient(135deg, rgba(14, 165, 233, 0.3) 0%, rgba(6, 182, 212, 0.4) 100%); border-color: rgba(14, 165, 233, 0.6); color: #90e0ef;">0/15</span></div>
+                        </div>
+                        <div class="mt-4"><p class="text-gray-400 text-sm mb-2">Word Count: <span id="task2-words" class="text-white">0</span></p><p class="text-gray-400 text-sm">Feedback: <span id="task2-feedback" class="text-blue-300"></span></p></div>
                     </div>
                 </div>
 
-                <div class="result-card">
-                    <h3>Task 2: Academic Discussion Response</h3>
-                    <div class="result-content" id="result-task2"></div>
-                    <div style="margin-top: 1rem; color: var(--text-light);">
-                        Word Count: <span id="result-task2-count"></span>
+                <div class="theme-card rounded-xl p-6 mb-8">
+                    <h3 class="font-bold text-lg text-blue-300 mb-4">Your Responses</h3>
+                    <div class="mb-6">
+                        <h4 class="font-semibold text-blue-300 mb-2">Task 1 Response:</h4>
+                        <div id="review-task1" class="reading-passage" style="max-height: 300px;"></div>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-blue-300 mb-2">Task 2 Response:</h4>
+                        <div id="review-task2" class="reading-passage" style="max-height: 300px;"></div>
                     </div>
                 </div>
 
-                <div style="text-align: center; margin-top: 2rem;">
-                    <button class="btn download-btn" onclick="downloadResults()">📥 Download Responses as Text File</button>
-                    <button class="btn" onclick="location.reload()" style="margin-top: 1rem; background: var(--secondary);">🔄 Take Another Test</button>
-                </div>
+                <div class="flex gap-4 justify-center flex-wrap"><button onclick="retakeTest()" class="btn-3d px-8 py-4">🔄 Retake Test</button><button onclick="window.location.href='index.html'" class="btn-3d btn-3d-gold px-8 py-4">🏠 Back to Home</button></div>
             </div>
         </div>
     </div>
 
     <script>
-        let userName = '';
-        let timerInterval;
-        let currentTime;
-        let task1Time = 20 * 60; // 20 minutes in seconds
-        let task2Time = 10 * 60; // 10 minutes in seconds
-
-        // Initialize when DOM is loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add Enter key support for username input
-            const usernameInput = document.getElementById('username');
-            if (usernameInput) {
-                usernameInput.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter') {
-                        startTest();
-                    }
-                });
+        const writingTestData = {
+            task1: {
+                reading: `<p class="mb-4"><strong>The Decline of the Maya Civilization</strong></p><p class="mb-4">The ancient Maya civilization, which flourished in present-day Mexico and Central America from about 2000 BCE to 1500 CE, experienced a mysterious decline around 900 CE. For many years, scholars have proposed various theories to explain this collapse.</p><p class="mb-4">One prominent theory suggests that environmental degradation played a crucial role. The Maya practiced intensive agriculture to support their large population. They cleared vast areas of forest to create farmland, which led to soil erosion and depletion. As the soil became less fertile, crop yields decreased, leading to food shortages.</p><p class="mb-4">Another factor was prolonged drought. Climate studies indicate that the region experienced several severe droughts during the ninth century. These droughts would have reduced water supplies needed for drinking and irrigation, putting additional stress on an already struggling agricultural system.</p><p class="mb-4">Finally, some researchers point to warfare between city-states. As resources became scarce, competition intensified, leading to increased conflict. This warfare would have disrupted trade routes and further weakened the civilization's ability to cope with other challenges.</p>`,
+                lecture: `<p class="mb-4"><strong>Professor:</strong> While the traditional theories about the Maya collapse have merit, recent archaeological evidence suggests a more complex picture. Let me address each of the points from your reading.</p><p class="mb-4">First, regarding environmental degradation: new evidence shows that the Maya actually developed sophisticated sustainable farming techniques. They created terraced fields on hillsides to prevent erosion and used chinampas, or raised field systems, in wetland areas. These methods allowed them to maintain soil fertility for centuries. So while some deforestation occurred, it wasn't as devastating as previously thought.</p><p class="mb-4">Second, about the drought theory: yes, there were droughts, but they weren't uniform across the entire Maya region. Some areas actually received adequate rainfall during this period. Yet these areas also experienced decline. This suggests that drought alone cannot explain the collapse. Additionally, the Maya had extensive reservoir systems to store water, which should have helped them weather dry periods.</p><p class="mb-4">Finally, concerning warfare: while conflict did increase, recent evidence indicates that much of this warfare was ritualistic rather than aimed at conquest or resource acquisition. The scale of violence was exaggerated in earlier interpretations. Many cities show no signs of destruction by fire or invasion. Instead, the evidence points to a gradual abandonment rather than sudden collapse due to war.</p>`
             }
-        });
+        };
+
+        let currentTask = 1;
+        let testStartTime;
+        let timerInterval;
+        let timeRemaining = 30 * 60;
+        let userName = '';
 
         function startTest() {
-            const usernameInput = document.getElementById('username');
-            userName = usernameInput.value.trim() || 'Test Taker';
+            const username = document.getElementById('username').value.trim();
+            if (!username) { alert('Please enter your name before starting the test.'); return; }
+            userName = username;
             
-            // Show loading spinner
             document.getElementById('start-screen').classList.add('hidden');
-            document.getElementById('loading').style.display = 'block';
+            document.getElementById('test-content').classList.remove('hidden');
+            document.getElementById('main-header').classList.remove('hidden');
             
-            setTimeout(() => {
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('main-header').classList.remove('hidden');
-                document.getElementById('display-name').textContent = userName;
-                document.getElementById('task1').classList.add('active');
-                
-                // Update progress bar
-                document.getElementById('progress-fill').style.width = '50%';
-                
-                // Start Task 1 timer
-                startTimer(task1Time, 'task1');
-            }, 800);
+            testStartTime = new Date();
+            startTimer();
+            
+            document.getElementById('reading-passage').innerHTML = writingTestData.task1.reading;
+            document.getElementById('lecture-transcript').innerHTML = writingTestData.task1.lecture;
+            
+            updateProgress();
         }
 
-        function startTimer(duration, task) {
-            currentTime = duration;
+        function startTimer() {
             updateTimerDisplay();
-            
             timerInterval = setInterval(() => {
-                currentTime--;
+                timeRemaining--;
                 updateTimerDisplay();
+                updateProgress();
                 
-                // Update progress bar for visual feedback
-                const totalTime = task === 'task1' ? task1Time : task2Time;
-                const elapsed = totalTime - currentTime;
-                const percentage = (elapsed / totalTime) * 100;
-                
-                if (task === 'task1') {
-                    document.getElementById('progress-fill').style.width = percentage + '%';
-                } else {
-                    document.getElementById('progress-fill-2').style.width = percentage + '%';
+                if (timeRemaining <= 300 && timeRemaining > 60) {
+                    document.getElementById('timer').classList.add('timer-warning');
+                } else if (timeRemaining <= 60) {
+                    document.getElementById('timer').classList.remove('timer-warning');
+                    document.getElementById('timer').classList.add('timer-danger');
                 }
                 
-                if (currentTime <= 0) {
+                if (timeRemaining <= 0) {
                     clearInterval(timerInterval);
-                    if (task === 'task1') {
-                        submitTask1();
-                    } else {
-                        submitTask2();
-                    }
+                    submitTest();
                 }
             }, 1000);
         }
 
         function updateTimerDisplay() {
-            const minutes = Math.floor(currentTime / 60);
-            const seconds = currentTime % 60;
-            const timerElement = document.getElementById('timer');
-            
-            timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            
-            // Update timer color based on remaining time
-            timerElement.classList.remove('timer-warning', 'timer-danger');
-            
-            if (currentTime <= 60) {
-                timerElement.classList.add('timer-danger');
-            } else if (currentTime <= 180) {
-                timerElement.classList.add('timer-warning');
+            const minutes = Math.floor(timeRemaining / 60);
+            const seconds = timeRemaining % 60;
+            document.getElementById('timer').textContent = minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0');
+        }
+
+        function updateProgress() {
+            const totalTime = 30 * 60;
+            const elapsed = totalTime - timeRemaining;
+            const percentage = (elapsed / totalTime) * 100;
+            document.getElementById('progress-fill').style.width = percentage + '%';
+        }
+
+        function showTask(taskNum) {
+            if (taskNum === 1) {
+                document.getElementById('task1-content').classList.remove('hidden');
+                document.getElementById('task2-content').classList.add('hidden');
+                document.getElementById('task1-nav').classList.add('active');
+                document.getElementById('task2-nav').classList.remove('active');
+                document.getElementById('current-task').textContent = '1';
+            } else {
+                const task1Words = getWordCount('task1');
+                if (task1Words < 100) {
+                    if (!confirm('Task 1 has fewer than 100 words. Are you sure you want to proceed to Task 2?')) {
+                        return;
+                    }
+                }
+                document.getElementById('task1-content').classList.add('hidden');
+                document.getElementById('task2-content').classList.remove('hidden');
+                document.getElementById('task1-nav').classList.remove('active');
+                document.getElementById('task1-nav').classList.add('completed');
+                document.getElementById('task2-nav').classList.add('active');
+                document.getElementById('current-task').textContent = '2';
             }
+            currentTask = taskNum;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function previousTask() {
+            showTask(1);
+            document.getElementById('task1-nav').classList.remove('completed');
         }
 
         function updateWordCount(task) {
@@ -654,10 +314,9 @@
             const text = textarea.value.trim();
             const wordCount = text ? text.split(/\s+/).length : 0;
             
-            wordCountElement.textContent = `Words: ${wordCount}`;
-            
-            // Visual feedback for recommended word count
             const minWords = task === 'task1' ? 150 : 100;
+            wordCountElement.textContent = `Words: ${wordCount} / Recommended: ${minWords}+`;
+            
             if (wordCount >= minWords) {
                 wordCountElement.classList.add('good');
             } else {
@@ -665,85 +324,111 @@
             }
         }
 
-        function submitTask1() {
-            clearInterval(timerInterval);
-            
-            // Show loading
-            document.getElementById('task1').classList.remove('active');
-            document.getElementById('loading').style.display = 'block';
-            
-            setTimeout(() => {
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('task2').classList.add('active');
-                
-                // Reset timer for Task 2
-                startTimer(task2Time, 'task2');
-                
-                // Scroll to top
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }, 800);
+        function getWordCount(task) {
+            const textarea = document.getElementById(`${task}-response`);
+            if (!textarea) return 0;
+            const text = textarea.value.trim();
+            return text ? text.split(/\s+/).length : 0;
         }
 
-        function submitTask2() {
-            clearInterval(timerInterval);
+        function gradeWriting(text, minWords) {
+            const wordCount = text.trim() ? text.trim().split(/\s+/).length : 0;
+            const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0).length;
+            const avgSentenceLength = wordCount / (sentences || 1);
             
-            // Show loading
-            document.getElementById('task2').classList.remove('active');
-            document.getElementById('loading').style.display = 'block';
+            const transitions = ['however', 'therefore', 'furthermore', 'moreover', 'in addition', 'on the other hand', 'consequently', 'thus', 'hence', 'accordingly', 'first', 'second', 'finally', 'in conclusion', 'to summarize'];
+            const transitionCount = transitions.filter(t => text.toLowerCase().includes(t)).length;
             
-            setTimeout(() => {
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('main-header').classList.add('hidden');
-                document.getElementById('results').classList.add('active');
-                
-                // Display results
-                const task1Response = document.getElementById('task1-response').value;
-                const task2Response = document.getElementById('task2-response').value;
-                
-                document.getElementById('result-task1').textContent = task1Response || '(No response provided)';
-                document.getElementById('result-task2').textContent = task2Response || '(No response provided)';
-                
-                // Calculate final word counts
-                const task1Words = task1Response.trim() ? task1Response.trim().split(/\s+/).length : 0;
-                const task2Words = task2Response.trim() ? task2Response.trim().split(/\s+/).length : 0;
-                
-                document.getElementById('result-task1-count').textContent = task1Words;
-                document.getElementById('result-task2-count').textContent = task2Words;
-                document.getElementById('final-name').textContent = userName;
-                
-                // Scroll to top
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }, 800);
+            const words = text.toLowerCase().match(/\b[a-z]+\b/g) || [];
+            const complexWords = words.filter(w => w.length > 8).length;
+            
+            let devScore = 0;
+            if (wordCount >= minWords) devScore += 2;
+            else if (wordCount >= minWords * 0.7) devScore += 1;
+            if (transitionCount >= 3) devScore += 2;
+            else if (transitionCount >= 1) devScore += 1;
+            if (sentences >= 5) devScore += 1;
+            
+            let langScore = 0;
+            if (avgSentenceLength >= 12) langScore += 2;
+            else if (avgSentenceLength >= 8) langScore += 1;
+            if (complexWords >= 5) langScore += 2;
+            else if (complexWords >= 2) langScore += 1;
+            if (wordCount >= minWords * 1.2) langScore += 1;
+            
+            let taskScore = 0;
+            if (wordCount >= minWords) taskScore += 3;
+            else if (wordCount >= minWords * 0.7) taskScore += 2;
+            else if (wordCount >= minWords * 0.5) taskScore += 1;
+            if (text.toLowerCase().includes('example') || text.toLowerCase().includes('for instance')) taskScore += 2;
+            
+            return {
+                development: Math.min(5, devScore),
+                language: Math.min(5, langScore),
+                taskCompletion: Math.min(5, taskScore),
+                wordCount: wordCount
+            };
         }
 
-        function downloadResults() {
+        function getFeedback(score) {
+            if (score >= 13) return "Excellent! Your response demonstrates strong writing skills.";
+            if (score >= 10) return "Good work! Consider adding more specific examples and varied vocabulary.";
+            if (score >= 7) return "Fair attempt. Focus on organizing your ideas more clearly and using transition words.";
+            return "Needs improvement. Try to write more and develop your ideas with specific examples.";
+        }
+
+        function submitTest() {
+            clearInterval(timerInterval);
+            
             const task1Response = document.getElementById('task1-response').value;
             const task2Response = document.getElementById('task2-response').value;
             
-            const content = `TOEFL Writing Practice Test Results\n`;
-            content += `=====================================\n`;
-            content += `Name: ${userName}\n`;
-            content += `Date: ${new Date().toLocaleDateString()}\n\n`;
+            const task1Grade = gradeWriting(task1Response, 150);
+            const task1Total = task1Grade.development + task1Grade.language + task1Grade.taskCompletion;
             
-            content += `TASK 1: Integrated Writing\n`;
-            content += `-------------------------------------\n`;
-            content += `Word Count: ${document.getElementById('result-task1-count').textContent}\n\n`;
-            content += `${task1Response || '(No response provided)'}\n\n`;
+            const task2Grade = gradeWriting(task2Response, 100);
+            const task2Total = task2Grade.development + task2Grade.language + task2Grade.taskCompletion;
             
-            content += `TASK 2: Academic Discussion\n`;
-            content += `-------------------------------------\n`;
-            content += `Word Count: ${document.getElementById('result-task2-count').textContent}\n\n`;
-            content += `${task2Response || '(No response provided)'}\n`;
+            const overallScore = task1Total + task2Total;
+            const percentage = Math.round((overallScore / 30) * 100);
             
-            const blob = new Blob([content], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `TOEFL_Writing_${userName.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.txt`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
+            const endTime = new Date();
+            const timeTaken = Math.floor((endTime - testStartTime) / 1000);
+            const timeTakenMinutes = Math.floor(timeTaken / 60);
+            const timeTakenSeconds = timeTaken % 60;
+            
+            document.getElementById('test-content').classList.add('hidden');
+            document.getElementById('main-header').classList.add('hidden');
+            document.getElementById('results-screen').classList.remove('hidden');
+            
+            document.getElementById('result-name').textContent = userName;
+            document.getElementById('score-display').textContent = overallScore + '/30';
+            document.getElementById('score-percentage').textContent = percentage + '%';
+            document.getElementById('score-message').textContent = getFeedback(overallScore);
+            document.getElementById('time-taken').textContent = timeTakenMinutes + 'm ' + timeTakenSeconds + 's';
+            
+            document.getElementById('task1-dev').textContent = task1Grade.development + '/5';
+            document.getElementById('task1-lang').textContent = task1Grade.language + '/5';
+            document.getElementById('task1-task').textContent = task1Grade.taskCompletion + '/5';
+            document.getElementById('task1-total').textContent = task1Total + '/15';
+            document.getElementById('task1-words').textContent = task1Grade.wordCount;
+            document.getElementById('task1-feedback').textContent = getFeedback(task1Total);
+            
+            document.getElementById('task2-dev').textContent = task2Grade.development + '/5';
+            document.getElementById('task2-lang').textContent = task2Grade.language + '/5';
+            document.getElementById('task2-task').textContent = task2Grade.taskCompletion + '/5';
+            document.getElementById('task2-total').textContent = task2Total + '/15';
+            document.getElementById('task2-words').textContent = task2Grade.wordCount;
+            document.getElementById('task2-feedback').textContent = getFeedback(task2Total);
+            
+            document.getElementById('review-task1').textContent = task1Response || '(No response provided)';
+            document.getElementById('review-task2').textContent = task2Response || '(No response provided)';
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function retakeTest() {
+            location.reload();
         }
     </script>
 </body>
