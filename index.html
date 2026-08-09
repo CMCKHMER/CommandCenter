@@ -3,16 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aii Language Center</title>
+    <title>CMC Network</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800;900&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Outfit', sans-serif; }
         
         /* Hero Section Typography */
         .hero-headline { font-family: 'Poppins', sans-serif; }
         .hero-body { font-family: 'Nunito', sans-serif; }
+        
+        /* 3D Indented Fancy Text Effect */
+        .text-3d-fancy {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 900;
+            font-size: clamp(3rem, 8vw, 6rem);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            background: linear-gradient(
+                135deg,
+                #ffffff 0%,
+                #e0f2fe 15%,
+                #7dd3fc 30%,
+                #0ea5e9 45%,
+                #0284c7 60%,
+                #0369a1 75%,
+                #075985 85%,
+                #0c4a6e 100%
+            );
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0px 4px 0px rgba(2, 132, 199, 0.8))
+                    drop-shadow(0px 8px 0px rgba(3, 105, 161, 0.6))
+                    drop-shadow(0px 12px 0px rgba(7, 89, 133, 0.4))
+                    drop-shadow(0px 16px 20px rgba(0, 0, 0, 0.5))
+                    drop-shadow(0px 20px 40px rgba(14, 165, 233, 0.3));
+            transform: perspective(500px) rotateX(5deg);
+            transform-style: preserve-3d;
+            animation: gradientShift 3s ease infinite, float3D 2s ease-in-out infinite;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .text-3d-fancy::before {
+            content: attr(data-text);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.1) 0%,
+                rgba(125, 211, 252, 0.2) 50%,
+                rgba(14, 165, 233, 0.3) 100%
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            z-index: 1;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        @keyframes float3D {
+            0%, 100% { transform: perspective(500px) rotateX(5deg) translateY(0px); }
+            50% { transform: perspective(500px) rotateX(3deg) translateY(-5px); }
+        }
         
         /* 3D Button Styles */
         .btn-3d {
@@ -369,7 +432,7 @@
             <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
                 <span class="font-bold">CMC</span>
             </div>
-            <h1 class="text-xl font-bold">Presents Aii Language Center Hub</h1>
+            <h1 class="text-xl font-bold">CMC Network Hub</h1>
         </div>
         <div class="hidden md:flex space-x-6">
             <a href="#home" class="hover:text-blue-400 transition">Home</a>
@@ -379,7 +442,7 @@
             <a href="#contact" class="hover:text-blue-400 transition">Contact</a>
         </div>
         <div class="flex items-center space-x-4">
-            <button id="authTrigger" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition">Join Aii</button>
+            <button id="authTrigger" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition">Join CMC</button>
             <select class="bg-[#2d3748] text-white px-2 py-1 rounded">
                 <option>English</option>
                 <option>ខ្មែរ</option>
@@ -454,9 +517,8 @@
             
             <!-- Hero Content -->
             <div class="max-w-5xl mx-auto relative z-10 pt-20">
-                <h1 class="hero-headline text-5xl md:text-7xl font-extrabold mb-6 leading-tight">
-                    <span class="gradient-text">Empower Your Future</span><br>
-                    <span class="gradient-text" style="background: linear-gradient(135deg, #90e0ef 0%, #ffffff 50%, #fcd34d 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Through Learning</span>
+                <h1 class="mb-6 leading-tight">
+                    <span class="text-3d-fancy" data-text="CMC NETWORK">CMC NETWORK</span>
                 </h1>
                 <p class="hero-body text-xl md:text-2xl text-gray-200 mb-10 max-w-3xl mx-auto leading-relaxed">
                     Discover a revolutionary approach to education where innovation meets excellence. 
@@ -494,7 +556,7 @@
             <div class="min-h-screen flex items-center justify-center p-4">
                 <div class="modal-content bg-[#1a1f2e] w-full max-w-md rounded-xl shadow-2xl">
                     <div class="p-6">
-                        <h2 class="text-2xl font-bold mb-6 text-center">Join Aii Language Center</h2>
+                        <h2 class="text-2xl font-bold mb-6 text-center">Join CMC Network</h2>
                         <div class="flex border-b border-gray-700 mb-6">
                             <button id="loginTab" class="flex-1 py-2 font-medium text-gray-400 bg-gray-800 rounded-t-lg hover:text-white">Login</button>
                             <button id="signupTab" class="flex-1 py-2 font-medium text-gray-400 bg-gray-800 rounded-t-lg hover:text-white">Sign Up</button>
@@ -1056,7 +1118,7 @@
             <div class="max-w-6xl mx-auto">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <div>
-                        <h3 class="text-xl font-bold mb-4">Aii Language Center</h3>
+                        <h3 class="text-xl font-bold mb-4">CMC Network</h3>
                         <p class="text-gray-400 text-sm">Empowering learners worldwide through quality English education.</p>
                     </div>
                     <div>
@@ -1084,7 +1146,7 @@
                     </div>
                 </div>
                 <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500 text-sm">
-                    <p>&copy; 2024 Aii Language Center. All rights reserved.</p>
+                    <p>&copy; 2024 CMC Network. All rights reserved.</p>
                 </div>
             </div>
         </footer>
@@ -1370,7 +1432,7 @@
 
         // Apply default config
         const defaultConfig = {
-            hero_title: 'Aii Language Center',
+            hero_title: 'CMC Network',
             hero_subtitle: 'Master English with confidence',
             cta_button_1: 'Explore Courses',
             cta_button_2: 'Join Now',
