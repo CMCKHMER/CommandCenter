@@ -964,16 +964,15 @@
                 <p class="text-center theme-text-muted mb-10">Prepare for the TOEFL exam with our comprehensive practice tests</p>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-                    <!-- Reading Test Card -->
                     <div class="theme-card p-6 rounded-xl">
                         <h3 class="text-xl font-bold mb-2 theme-heading">Reading Test</h3>
                         <p class="theme-text-muted text-sm mb-4">Comprehensive reading comprehension exercises with academic passages and questions</p>
                         <div class="flex justify-between text-xs mb-4 theme-text-muted">
-                            <span>60 minutes</span>
-                            <span>30 questions</span>
+                            <span>54 minutes</span>
+                            <span>10 questions</span>
                         </div>
                         <!-- Button triggers the modal -->
-                        <button id="startReadingTestBtn" class="w-full btn-3d glow-effect px-4 py-2">Start Test</button>
+                        <button onclick="window.location.href='toefl_reading_test.html'" class="w-full btn-3d glow-effect px-4 py-2">Start Test</button>
                     </div>
                     <!-- Other Test Cards (Listening, Speaking) -->
                     <div class="theme-card p-6 rounded-xl">
@@ -1396,7 +1395,6 @@
         applyConfig(defaultConfig);
 
         // --- TOEFL READING TEST LOGIC ---
-        const startReadingTestBtn = document.getElementById('startReadingTestBtn');
         const toeflReadingModal = document.getElementById('toeflReadingModal');
         const closeReadingModalBtn = document.getElementById('closeReadingModalBtn');
         const submitReadingAnswersBtn = document.getElementById('submitReadingAnswersBtn');
@@ -1529,7 +1527,6 @@
             updateQuestionsAnsweredCount();
         }
 
-        startReadingTestBtn.addEventListener('click', showReadingTest);
         closeReadingModalBtn.addEventListener('click', hideReadingTest);
         startTestFromNameBtn.addEventListener('click', startTestAfterName);
         
