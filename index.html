@@ -268,6 +268,70 @@
             100% { transform: translate(var(--tx, 50px), var(--ty, -100px)); opacity: 0; }
         }
 
+        /* Neuron Trail Effect */
+        .neuron-particle {
+            position: fixed;
+            pointer-events: none;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.8) 0%, rgba(20, 184, 166, 0.4) 50%, transparent 70%);
+            box-shadow: 0 0 10px rgba(14, 165, 233, 0.6), 0 0 20px rgba(20, 184, 166, 0.3);
+            z-index: 9999;
+            transition: transform 0.1s ease-out, opacity 0.3s ease;
+        }
+
+        .neuron-node {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(14, 165, 233, 0.9);
+            box-shadow: 0 0 15px rgba(14, 165, 233, 0.8), 0 0 30px rgba(20, 184, 166, 0.5);
+            z-index: 10000;
+            pointer-events: none;
+        }
+
+        .neuron-connector {
+            position: fixed;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.5), transparent);
+            transform-origin: left center;
+            z-index: 9998;
+            pointer-events: none;
+        }
+
+        /* Roll In/Out Animation for Hero Text */
+        .roll-animation {
+            animation: rollInOut 4s ease-in-out infinite;
+        }
+
+        @keyframes rollInOut {
+            0%, 100% {
+                opacity: 0;
+                transform: perspective(1000px) rotateX(-90deg) translateY(50px);
+                filter: blur(10px);
+            }
+            10%, 90% {
+                opacity: 1;
+                transform: perspective(1000px) rotateX(0deg) translateY(0px);
+                filter: blur(0px);
+            }
+            45%, 55% {
+                opacity: 1;
+                transform: perspective(1000px) rotateX(0deg) translateY(0px);
+                filter: blur(0px);
+            }
+            65% {
+                opacity: 1;
+                transform: perspective(1000px) rotateX(0deg) translateY(0px);
+                filter: blur(0px);
+            }
+            75% {
+                opacity: 0;
+                transform: perspective(1000px) rotateX(90deg) translateY(-50px);
+                filter: blur(10px);
+            }
+        }
+
         /* Global Theme Styles */
         body {
             background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 25%, #0891b2 75%, #06b6d4 100%);
@@ -518,7 +582,7 @@
             <!-- Hero Content -->
             <div class="max-w-5xl mx-auto relative z-10 pt-20">
                 <h1 class="mb-6 leading-tight">
-                    <span class="text-3d-fancy" data-text="CMC NETWORK">CMC NETWORK</span>
+                    <span class="text-3d-fancy roll-animation" data-text="CMC NETWORK">CMC NETWORK</span>
                 </h1>
                 <p class="hero-body text-xl md:text-2xl text-gray-200 mb-10 max-w-3xl mx-auto leading-relaxed">
                     Discover a revolutionary approach to education where innovation meets excellence. 
@@ -1616,6 +1680,173 @@
                 hideReadingTest();
             }
         });
+
+        // Neuron Trail Effect - Mouse Following Particles
+        const neuronParticles = [];
+        const maxParticles = 15;
+        const particleTrail = [];
+        let mouseX = 0, mouseY = 0;
+        let lastMouseX = 0, lastMouseY = 0;
+
+        // Create neuron trail on mouse move
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+            // Create new particle at mouse position
+            if (particleTrail.length < maxParticles) {
+                createNeuronParticle(mouseX, mouseY);
+            }
+
+            // Update existing particles
+            updateNeuronParticles();
+
+            lastMouseX = mouseX;
+            lastMouseY = mouseY;
+        });
+
+        function createNeuronParticle(x, y) {
+            const particle = document.createElement('div');
+            particle.className = 'neuron-particle';
+            particle.style.left = x + 'px';
+            particle.style.top = y + 'px';
+            
+            // Random size between 4 and 12
+            const size = Math.random() * 8 + 4;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            
+            document.body.appendChild(particle);
+            particleTrail.push({
+                element: particle,
+                x: x,
+                y: y,
+                age: 0,
+                vx: (Math.random() - 0.5) * 2,
+                vy: (Math.random() - 0.5) * 2
+            });
+
+            // Create connecting line to previous particle
+            if (particleTrail.length > 1) {
+                createConnector(particleTrail[particleTrail.length - 2], particleTrail[particleTrail.length - 1]);
+            }
+        }
+
+        function createConnector(p1, p2) {
+            const connector = document.createElement('div');
+            connector.className = 'neuron-connector';
+            
+            const dx = p2.x - p1.x;
+            const dy = p2.y - p1.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+            
+            connector.style.width = distance + 'px';
+            connector.style.left = p1.x + 'px';
+            connector.style.top = (p1.y + 4) + 'px';
+            connector.style.transform = `rotate(${angle}deg)`;
+            connector.style.opacity = '0.6';
+            
+            document.body.appendChild(connector);
+            
+            p1.connectors = p1.connectors || [];
+            p1.connectors.push(connector);
+        }
+
+        function updateNeuronParticles() {
+            for (let i = particleTrail.length - 1; i >= 0; i--) {
+                const p = particleTrail[i];
+                p.age++;
+                
+                // Move particle slightly towards mouse
+                p.x += p.vx;
+                p.y += p.vy;
+                
+                // Add some drift
+                p.vx += (Math.random() - 0.5) * 0.5;
+                p.vy += (Math.random() - 0.5) * 0.5;
+                
+                // Limit velocity
+                p.vx = Math.max(-3, Math.min(3, p.vx));
+                p.vy = Math.max(-3, Math.min(3, p.vy));
+                
+                p.element.style.left = p.x + 'px';
+                p.element.style.top = p.y + 'px';
+                
+                // Fade out based on age
+                const opacity = Math.max(0, 1 - p.age / 50);
+                p.element.style.opacity = opacity;
+                
+                // Remove old particles
+                if (p.age > 50 || opacity <= 0) {
+                    if (p.connectors) {
+                        p.connectors.forEach(conn => conn.remove());
+                    }
+                    p.element.remove();
+                    particleTrail.splice(i, 1);
+                }
+            }
+
+            // Update connectors
+            for (let i = 0; i < particleTrail.length - 1; i++) {
+                const p1 = particleTrail[i];
+                const p2 = particleTrail[i + 1];
+                
+                if (p1.connectors && p1.connectors.length > 0) {
+                    const connector = p1.connectors[p1.connectors.length - 1];
+                    const dx = p2.x - p1.x;
+                    const dy = p2.y - p1.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+                    
+                    connector.style.width = distance + 'px';
+                    connector.style.left = p1.x + 'px';
+                    connector.style.top = (p1.y + 4) + 'px';
+                    connector.style.transform = `rotate(${angle}deg)`;
+                }
+            }
+        }
+
+        // Create initial nodes that follow mouse with delay
+        const neuronNodes = [];
+        const numNodes = 8;
+
+        for (let i = 0; i < numNodes; i++) {
+            const node = document.createElement('div');
+            node.className = 'neuron-node';
+            node.style.display = 'none';
+            document.body.appendChild(node);
+            neuronNodes.push({
+                element: node,
+                x: window.innerWidth / 2,
+                y: window.innerHeight / 2,
+                delay: i * 100,
+                lastUpdate: Date.now()
+            });
+        }
+
+        // Animate nodes following mouse
+        function animateNodes() {
+            const now = Date.now();
+            
+            neuronNodes.forEach((node, index) => {
+                if (now - node.lastUpdate >= node.delay) {
+                    const ease = 0.1 + (index * 0.05);
+                    node.x += (mouseX - node.x) * ease;
+                    node.y += (mouseY - node.y) * ease;
+                    
+                    node.element.style.display = 'block';
+                    node.element.style.left = (node.x - 4) + 'px';
+                    node.element.style.top = (node.y - 4) + 'px';
+                    
+                    node.lastUpdate = now;
+                }
+            });
+
+            requestAnimationFrame(animateNodes);
+        }
+
+        animateNodes();
     </script>
 </body>
 </html>
