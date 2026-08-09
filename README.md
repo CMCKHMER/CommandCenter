@@ -1,109 +1,86 @@
 # Command Center
 
-Command Center is a static HTML-based project. This repository contains HTML content intended to serve as a front-end "command center" or dashboard. This README describes the project, how to preview the HTML files locally, the repository structure, and how to contribute.
+A static, HTML-first dashboard (CMC Network) used for educational materials, interactive exercises, and teacher resources.
 
-> NOTE: Edit the sections below to reflect the exact purpose, features, and file structure of this repository.
+> This README was updated automatically to match the repository contents. Please review and edit any project-specific details.
 
 ---
 
-## Table of Contents
+## What this is
+Command Center (CMC Network) is a static front-end dashboard serving learning materials (PDFs, interactive games, worksheets, and story content) for students and teachers.
 
-- [About](#about)
-- [Features](#features)
-- [Getting Started](#getting-started)
-- [Running Locally](#running-locally)
-- [Project Structure](#project-structure)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
+### Stack
+- Language(s): HTML (primary)
+- Framework / runtime: Static HTML + Tailwind via CDN
+- Notable libraries: Tailwind CSS (via CDN), Google Fonts
 
-## About
+## How it's organized
+```
+.gitattributes         # Git attributes
+.github/               # GitHub workflows or issue templates (if present)
+.gitignore
+LICENSE
+README.md
+index.html             # Main dashboard / entry point (CMC Network)
+RF.html                # Reading Future materials (legacy page)
+RF2_materials.html     # Reading Future Connect 2 materials (links from dashboard)
+Test.html
+syntex.html            # Syntax / grammar game
+toefl_reading_test.html
+toefl_writing_test.html
+unittest.html
+word.html
+wordreview.html
+wordtest.html
+write.html             # Writing practice page
+The_Hallow_Below_story/ # Interactive story/book (has its own index.html)
+assets/screenshot.svg  # Placeholder screenshot added for README
+```
 
-Command Center is an HTML-first project that provides a simple dashboard or control-panel interface. It's lightweight and easy to preview in any modern web browser.
+How it fits together: index.html is the main dashboard that links to other static pages (RF, RF2 materials, games like syntex.html, write.html, and the The_Hallow_Below_story book folder). The site is static — pages are navigated by anchor links and standard hyperlinks; interactive behaviour is implemented with client-side JS embedded in the HTML files.
 
-## Features
-
-- Static, dependency-free HTML pages
-- Easy to preview locally by opening files in a browser or using a simple static server
-- Responsive layout (if implemented in CSS)
-
-(Modify this list to describe the real features of your project.)
-
-## Getting Started
-
-These instructions will help you get a local copy of the project up and running for development and testing purposes.
-
-Prerequisites
-- A modern web browser (Chrome, Firefox, Edge, Safari)
-- Git (if you want to clone the repository)
-- Optional: a simple static server such as Python's http.server or Node's http-server
-
-Clone the repository
+## How to run it
+The site is static. The fastest way to preview locally:
 
 ```bash
+# Clone
 git clone https://github.com/CMCKHMER/CommandCenter.git
 cd CommandCenter
-```
 
-## Running Locally
+# Option A: Open directly
+# double-click index.html or open it in your browser
 
-Option 1 — Open directly
-- Open `index.html` (or the relevant HTML file) in your web browser.
-
-Option 2 — Serve with a simple local server
-- Using Python 3:
-
-```bash
-# from the repository root
+# Option B: Serve with Python's simple HTTP server
 python -m http.server 8000
-# then open http://localhost:8000 in your browser
-```
+# then open http://localhost:8000
 
-- Using Node (http-server):
-
-```bash
+# Option C: Serve with npx http-server
 npx http-server -p 8000
-# then open http://localhost:8000 in your browser
 ```
 
-## Project Structure
+## Project details & usage notes
+- index.html is the primary entry point and implements the dashboard UI and navigation to the site's learning modules.
+- The `The_Hallow_Below_story/` directory contains an interactive story with its own index.html — useful as an example of multi-page content in this repo.
+- Several pages appear to be learning modules or tests (TOEFL pages, word exercises). Inspect each HTML file to find the source content and any assets embedded inline.
 
-This repository is currently HTML-first. Example structure (update to match your repo):
+## Screenshots
+A placeholder screenshot has been added at assets/screenshot.svg — replace it with a real PNG/JPEG screenshot if you want images in the README.
 
-- index.html — entry point
-- assets/ — images, fonts, icons
-- css/ — stylesheets
-- js/ — JavaScript files (if any)
-
-Update this section to list the actual files and folders in your repository.
-
-## Usage
-
-Describe how to use the app or the purpose of each HTML page. If there are interactive controls, document them here and provide examples of typical workflows.
+![Dashboard screenshot](assets/screenshot.svg)
 
 ## Contributing
-
-Contributions are welcome. To contribute:
-
+Contributions are welcome:
 1. Fork the repository
-2. Create a feature branch (git checkout -b feature/my-feature)
-3. Commit your changes (git commit -m "Add my feature")
-4. Push to the branch (git push origin feature/my-feature)
-5. Open a Pull Request
+2. Create a branch: `git checkout -b feature/my-change`
+3. Commit: `git commit -m "Describe your change"`
+4. Push and open a PR
 
-Please include descriptive commit messages and a short summary of your changes in the PR description.
+If you have large media files (images, PDFs), consider using LFS or hosting them externally and linking.
 
 ## License
-
-No license is specified for this repository. If you want to allow others to use and contribute to this project, add a LICENSE file (for example, MIT, Apache 2.0, or GPL-3.0). If you tell me which license you'd like, I can add a LICENSE file for you.
+This project is released under the MIT License — see [LICENSE](LICENSE).
 
 ## Contact
-
 Repository owner: CMCKHMER
 
-If you want an email or other contact added here, provide the details and I'll include them.
-
----
-
-Feel free to update this README with project-specific details, screenshots, or links to live demos.
+If you'd like an email or project maintainer added here, tell me and I will update the README.
