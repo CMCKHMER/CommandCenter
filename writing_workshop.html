@@ -7,82 +7,762 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="min-h-screen" style="background:linear-gradient(135deg,#0f172a,#1e3a5f,#0891b2);font-family:sans-serif;">
-    <a href="index.html" style="position:fixed;top:1rem;right:1rem;padding:0.5rem 1rem;background:rgba(14,165,233,0.2);border:1px solid rgba(14,165,233,0.4);border-radius:8px;color:#90e0ef;text-decoration:none;">Back</a>
+    <a href="index.html" style="position:fixed;top:1rem;right:1rem;padding:0.5rem 1rem;background:rgba(14,165,233,0.2);border:1px solid rgba(14,165,233,0.4);border-radius:8px;color:#90e0ef;text-decoration:none;">← Back to Home</a>
     <header style="padding:3rem 1rem;text-align:center;">
-        <h1 style="font-size:2.5rem;font-weight:700;color:#fff;margin-bottom:1rem;">Writing Workshop</h1>
+        <h1 style="font-size:2.5rem;font-weight:700;color:#fff;margin-bottom:0.5rem;">📝 Guided Writing Workshop</h1>
+        <p style="color:#94a3b8;font-size:1.1rem;">Improve your sentence structure, paragraph organization, and creative expression</p>
     </header>
     <main style="padding:2rem;max-width:72rem;margin:0 auto;">
         <div style="background:rgba(26,31,46,0.95);border:1px solid rgba(14,165,233,0.2);border-radius:1rem;overflow:hidden;">
-            <div style="display:flex;border-bottom:1px solid #374151;">
-                <button onclick="show('prompts')" style="flex:1;padding:1rem;background:rgba(14,165,233,0.3);color:#fff;border:none;">Prompts</button>
-                <button onclick="show('templates')" style="flex:1;padding:1rem;background:rgba(45,55,72,0.5);color:#94a3b8;border:none;">Templates</button>
-                <button onclick="show('sentences')" style="flex:1;padding:1rem;background:rgba(45,55,72,0.5);color:#94a3b8;border:none;">Sentences</button>
-                <button onclick="show('paragraphs')" style="flex:1;padding:1rem;background:rgba(45,55,72,0.5);color:#94a3b8;border:none;">Paragraphs</button>
-                <button onclick="show('creative')" style="flex:1;padding:1rem;background:rgba(45,55,72,0.5);color:#94a3b8;border:none;">Creative</button>
+            <!-- Navigation Tabs -->
+            <div style="display:flex;flex-wrap:wrap;border-bottom:1px solid #374151;">
+                <button onclick="show('prompts')" id="btn-prompts" style="flex:1;min-width:120px;padding:1rem;background:rgba(14,165,233,0.3);color:#fff;border:none;cursor:pointer;font-weight:600;">🎯 Prompts</button>
+                <button onclick="show('templates')" id="btn-templates" style="flex:1;min-width:120px;padding:1rem;background:rgba(45,55,72,0.5);color:#94a3b8;border:none;cursor:pointer;font-weight:600;">📋 Templates</button>
+                <button onclick="show('sentences')" id="btn-sentences" style="flex:1;min-width:120px;padding:1rem;background:rgba(45,55,72,0.5);color:#94a3b8;border:none;cursor:pointer;font-weight:600;">✏️ Sentences</button>
+                <button onclick="show('paragraphs')" id="btn-paragraphs" style="flex:1;min-width:120px;padding:1rem;background:rgba(45,55,72,0.5);color:#94a3b8;border:none;cursor:pointer;font-weight:600;">📑 Paragraphs</button>
+                <button onclick="show('creative')" id="btn-creative" style="flex:1;min-width:120px;padding:1rem;background:rgba(45,55,72,0.5);color:#94a3b8;border:none;cursor:pointer;font-weight:600;">🎨 Creative</button>
             </div>
+
+            <!-- PROMPTS SECTION -->
             <div id="prompts" style="padding:1.5rem;">
-                <h2 style="color:#fff;font-size:1.5rem;margin-bottom:1rem;">Writing Prompts</h2>
+                <h2 style="color:#fff;font-size:1.5rem;margin-bottom:1rem;">🎯 Writing Prompts</h2>
+                <p style="color:#94a3b8;margin-bottom:1.5rem;">Choose a category and start writing with guided prompts!</p>
                 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:1.5rem;">
-                    <div onclick="showPrompt('creative')" style="background:rgba(45,55,72,0.7);border-left:4px solid #f59e0b;padding:1rem;border-radius:0.5rem;cursor:pointer;"><h3 style="color:#fff;">Creative</h3><p style="color:#94a3b8;font-size:0.875rem;">Fantastical worlds</p></div>
-                    <div onclick="showPrompt('narrative')" style="background:rgba(45,55,72,0.7);border-left:4px solid #10b981;padding:1rem;border-radius:0.5rem;cursor:pointer;"><h3 style="color:#fff;">Narrative</h3><p style="color:#94a3b8;font-size:0.875rem;">Personal stories</p></div>
-                    <div onclick="showPrompt('expository')" style="background:rgba(45,55,72,0.7);border-left:4px solid #8b5cf6;padding:1rem;border-radius:0.5rem;cursor:pointer;"><h3 style="color:#fff;">Expository</h3><p style="color:#94a3b8;font-size:0.875rem;">Facts & details</p></div>
-                    <div onclick="showPrompt('persuasive')" style="background:rgba(45,55,72,0.7);border-left:4px solid #ef4444;padding:1rem;border-radius:0.5rem;cursor:pointer;"><h3 style="color:#fff;">Persuasive</h3><p style="color:#94a3b8;font-size:0.875rem;">Arguments</p></div>
+                    <div onclick="showPrompt('creative')" style="background:rgba(45,55,72,0.7);border-left:4px solid #f59e0b;padding:1rem;border-radius:0.5rem;cursor:pointer;transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'"><h3 style="color:#fff;">Creative</h3><p style="color:#94a3b8;font-size:0.875rem;">Fantastical worlds & imagination</p></div>
+                    <div onclick="showPrompt('narrative')" style="background:rgba(45,55,72,0.7);border-left:4px solid #10b981;padding:1rem;border-radius:0.5rem;cursor:pointer;transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'"><h3 style="color:#fff;">Narrative</h3><p style="color:#94a3b8;font-size:0.875rem;">Personal stories & experiences</p></div>
+                    <div onclick="showPrompt('expository')" style="background:rgba(45,55,72,0.7);border-left:4px solid #8b5cf6;padding:1rem;border-radius:0.5rem;cursor:pointer;transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'"><h3 style="color:#fff;">Expository</h3><p style="color:#94a3b8;font-size:0.875rem;">Facts, details & explanations</p></div>
+                    <div onclick="showPrompt('persuasive')" style="background:rgba(45,55,72,0.7);border-left:4px solid #ef4444;padding:1rem;border-radius:0.5rem;cursor:pointer;transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'"><h3 style="color:#fff;">Persuasive</h3><p style="color:#94a3b8;font-size:0.875rem;">Arguments & opinions</p></div>
                 </div>
                 <div id="parea" style="display:none;background:rgba(14,165,233,0.1);border:2px dashed rgba(14,165,233,0.3);border-radius:0.75rem;padding:1.5rem;">
-                    <h3 id="pt" style="color:#fff;margin-bottom:0.5rem;"></h3>
-                    <p id="ptx" style="color:#e2e8f0;margin-bottom:1rem;"></p>
-                    <div style="margin-bottom:1rem;"><strong style="color:#90e0ef;">Tips:</strong><ul id="tips" style="color:#94a3b8;margin-top:0.5rem;"></ul></div>
-                    <textarea id="wi" style="width:100%;min-height:150px;background:rgba(45,55,72,0.9);border:1px solid rgba(14,165,233,0.2);color:#e2e8f0;padding:1rem;border-radius:0.5rem;" placeholder="Start writing..."></textarea>
-                    <button onclick="checkWriting()" style="margin-top:1rem;padding:0.75rem 2rem;background:linear-gradient(135deg,#f59e0b,#fbbf24);border:none;border-radius:0.5rem;color:#fff;font-weight:700;cursor:pointer;">Check Writing</button>
+                    <h3 id="pt" style="color:#fff;font-size:1.25rem;margin-bottom:0.5rem;"></h3>
+                    <p id="ptx" style="color:#e2e8f0;margin-bottom:1rem;font-size:1.1rem;"></p>
+                    <div style="margin-bottom:1rem;"><strong style="color:#90e0ef;">💡 Tips:</strong><ul id="tips" style="color:#94a3b8;margin-top:0.5rem;padding-left:1.5rem;"></ul></div>
+                    <div style="margin-bottom:1rem;"><strong style="color:#90e0ef;">📚 Useful Vocabulary:</strong><span id="vocab" style="color:#94a3b8;margin-left:0.5rem;"></span></div>
+                    <textarea id="wi" style="width:100%;min-height:200px;background:rgba(45,55,72,0.9);border:1px solid rgba(14,165,233,0.2);color:#e2e8f0;padding:1rem;border-radius:0.5rem;font-size:1rem;" placeholder="Start writing your response here..."></textarea>
+                    <div style="display:flex;gap:1rem;margin-top:1rem;flex-wrap:wrap;">
+                        <button onclick="checkWriting()" style="padding:0.75rem 2rem;background:linear-gradient(135deg,#f59e0b,#fbbf24);border:none;border-radius:0.5rem;color:#fff;font-weight:700;cursor:pointer;">✓ Check Writing</button>
+                        <button onclick="clearWriting()" style="padding:0.75rem 2rem;background:rgba(45,55,72,0.7);border:1px solid rgba(14,165,233,0.3);border-radius:0.5rem;color:#94a3b8;cursor:pointer;">Clear</button>
+                    </div>
                     <div id="wf" style="display:none;margin-top:1rem;padding:1rem;background:rgba(45,55,72,0.9);border-radius:0.5rem;color:#e2e8f0;"></div>
                 </div>
             </div>
-            <div id="templates" style="display:none;padding:1.5rem;"><h2 style="color:#fff;">Templates</h2><p style="color:#94a3b8;">Use these structures for your writing.</p></div>
-            <div id="sentences" style="display:none;padding:1.5rem;"><h2 style="color:#fff;">Sentence Building</h2><p style="color:#94a3b8;">Practice sentence structures.</p></div>
-            <div id="paragraphs" style="display:none;padding:1.5rem;"><h2 style="color:#fff;">Paragraph Organization</h2><p style="color:#94a3b8;">Learn paragraph structure.</p></div>
+
+            <!-- TEMPLATES SECTION -->
+            <div id="templates" style="display:none;padding:1.5rem;">
+                <h2 style="color:#fff;font-size:1.5rem;margin-bottom:1rem;">📋 Writing Templates</h2>
+                <p style="color:#94a3b8;margin-bottom:1.5rem;">Use these proven structures to organize your writing effectively.</p>
+                
+                <div style="display:grid;gap:1.5rem;">
+                    <!-- Story Structure Template -->
+                    <div style="background:rgba(45,55,72,0.7);border-radius:0.75rem;padding:1.5rem;border-left:4px solid #f59e0b;">
+                        <h3 style="color:#fff;font-size:1.25rem;margin-bottom:0.75rem;">📖 Story Structure Template</h3>
+                        <div style="display:grid;gap:0.75rem;margin-bottom:1rem;">
+                            <div style="background:rgba(14,165,233,0.1);padding:1rem;border-radius:0.5rem;">
+                                <strong style="color:#f59e0b;">1. Introduction/Beginning</strong>
+                                <p style="color:#94a3b8;font-size:0.9rem;margin-top:0.25rem;">Introduce characters, setting, and the main situation.</p>
+                                <p style="color:#e2e8f0;font-size:0.85rem;margin-top:0.5rem;"><em>Example: "It was a rainy Monday morning when I discovered the mysterious key hidden in my grandmother's attic..."</em></p>
+                            </div>
+                            <div style="background:rgba(14,165,233,0.1);padding:1rem;border-radius:0.5rem;">
+                                <strong style="color:#f59e0b;">2. Rising Action</strong>
+                                <p style="color:#94a3b8;font-size:0.9rem;margin-top:0.25rem;">Build tension with events leading to the climax.</p>
+                                <p style="color:#e2e8f0;font-size:0.85rem;margin-top:0.5rem;"><em>Example: "As I tried the key in different locks, strange things began to happen. The lights flickered, and I heard whispers..."</em></p>
+                            </div>
+                            <div style="background:rgba(14,165,233,0.1);padding:1rem;border-radius:0.5rem;">
+                                <strong style="color:#f59e0b;">3. Climax</strong>
+                                <p style="color:#94a3b8;font-size:0.9rem;margin-top:0.25rem;">The most exciting or turning point of the story.</p>
+                                <p style="color:#e2e8f0;font-size:0.85rem;margin-top:0.5rem;"><em>Example: "Finally, the key fit! The old chest creaked open, revealing a secret that would change everything..."</em></p>
+                            </div>
+                            <div style="background:rgba(14,165,233,0.1);padding:1rem;border-radius:0.5rem;">
+                                <strong style="color:#f59e0b;">4. Falling Action</strong>
+                                <p style="color:#94a3b8;font-size:0.9rem;margin-top:0.25rem;">Events after the climax leading to resolution.</p>
+                            </div>
+                            <div style="background:rgba(14,165,233,0.1);padding:1rem;border-radius:0.5rem;">
+                                <strong style="color:#f59e0b;">5. Resolution/Ending</strong>
+                                <p style="color:#94a3b8;font-size:0.9rem;margin-top:0.25rem;">How the story concludes and what we learn.</p>
+                            </div>
+                        </div>
+                        <button onclick="useTemplate('story')" style="padding:0.5rem 1.5rem;background:rgba(14,165,233,0.3);border:none;border-radius:0.5rem;color:#fff;cursor:pointer;">Use This Template</button>
+                    </div>
+
+                    <!-- Five-Paragraph Essay Template -->
+                    <div style="background:rgba(45,55,72,0.7);border-radius:0.75rem;padding:1.5rem;border-left:4px solid #10b981;">
+                        <h3 style="color:#fff;font-size:1.25rem;margin-bottom:0.75rem;">📝 Five-Paragraph Essay Template</h3>
+                        <div style="display:grid;gap:0.75rem;margin-bottom:1rem;">
+                            <div style="background:rgba(14,165,233,0.1);padding:1rem;border-radius:0.5rem;">
+                                <strong style="color:#10b981;">Paragraph 1: Introduction</strong>
+                                <ul style="color:#94a3b8;font-size:0.9rem;margin-top:0.25rem;padding-left:1.25rem;">
+                                    <li>Hook: Grab reader's attention</li>
+                                    <li>Background information</li>
+                                    <li>Thesis statement (your main argument)</li>
+                                </ul>
+                            </div>
+                            <div style="background:rgba(14,165,233,0.1);padding:1rem;border-radius:0.5rem;">
+                                <strong style="color:#10b981;">Paragraph 2: Body Paragraph 1</strong>
+                                <ul style="color:#94a3b8;font-size:0.9rem;margin-top:0.25rem;padding-left:1.25rem;">
+                                    <li>Topic sentence (first supporting point)</li>
+                                    <li>Evidence/examples</li>
+                                    <li>Explanation</li>
+                                </ul>
+                            </div>
+                            <div style="background:rgba(14,165,233,0.1);padding:1rem;border-radius:0.5rem;">
+                                <strong style="color:#10b981;">Paragraph 3: Body Paragraph 2</strong>
+                                <ul style="color:#94a3b8;font-size:0.9rem;margin-top:0.25rem;padding-left:1.25rem;">
+                                    <li>Topic sentence (second supporting point)</li>
+                                    <li>Evidence/examples</li>
+                                    <li>Explanation</li>
+                                </ul>
+                            </div>
+                            <div style="background:rgba(14,165,233,0.1);padding:1rem;border-radius:0.5rem;">
+                                <strong style="color:#10b981;">Paragraph 4: Body Paragraph 3</strong>
+                                <ul style="color:#94a3b8;font-size:0.9rem;margin-top:0.25rem;padding-left:1.25rem;">
+                                    <li>Topic sentence (third supporting point)</li>
+                                    <li>Evidence/examples</li>
+                                    <li>Explanation</li>
+                                </ul>
+                            </div>
+                            <div style="background:rgba(14,165,233,0.1);padding:1rem;border-radius:0.5rem;">
+                                <strong style="color:#10b981;">Paragraph 5: Conclusion</strong>
+                                <ul style="color:#94a3b8;font-size:0.9rem;margin-top:0.25rem;padding-left:1.25rem;">
+                                    <li>Restate thesis (in new words)</li>
+                                    <li>Summarize main points</li>
+                                    <li>Final thought/call to action</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <button onclick="useTemplate('essay')" style="padding:0.5rem 1.5rem;background:rgba(14,165,233,0.3);border:none;border-radius:0.5rem;color:#fff;cursor:pointer;">Use This Template</button>
+                    </div>
+
+                    <!-- PEEL Paragraph Template -->
+                    <div style="background:rgba(45,55,72,0.7);border-radius:0.75rem;padding:1.5rem;border-left:4px solid #8b5cf6;">
+                        <h3 style="color:#fff;font-size:1.25rem;margin-bottom:0.75rem;">🔤 PEEL Paragraph Template</h3>
+                        <p style="color:#94a3b8;margin-bottom:1rem;">Perfect for body paragraphs in essays.</p>
+                        <div style="display:grid;gap:0.75rem;margin-bottom:1rem;">
+                            <div style="background:rgba(14,165,233,0.1);padding:1rem;border-radius:0.5rem;">
+                                <strong style="color:#8b5cf6;">P - Point</strong>
+                                <p style="color:#94a3b8;font-size:0.9rem;margin-top:0.25rem;">State your main point or topic sentence.</p>
+                                <p style="color:#e2e8f0;font-size:0.85rem;margin-top:0.5rem;"><em>"Regular exercise is essential for maintaining good health."</em></p>
+                            </div>
+                            <div style="background:rgba(14,165,233,0.1);padding:1rem;border-radius:0.5rem;">
+                                <strong style="color:#8b5cf6;">E - Evidence</strong>
+                                <p style="color:#94a3b8;font-size:0.9rem;margin-top:0.25rem;">Provide facts, examples, or data to support your point.</p>
+                                <p style="color:#e2e8f0;font-size:0.85rem;margin-top:0.5rem;"><em>"Studies show that 30 minutes of daily exercise reduces heart disease risk by 35%."</em></p>
+                            </div>
+                            <div style="background:rgba(14,165,233,0.1);padding:1rem;border-radius:0.5rem;">
+                                <strong style="color:#8b5cf6;">E - Explanation</strong>
+                                <p style="color:#94a3b8;font-size:0.9rem;margin-top:0.25rem;">Explain how the evidence supports your point.</p>
+                                <p style="color:#e2e8f0;font-size:0.85rem;margin-top:0.5rem;"><em>"This demonstrates that physical activity strengthens the cardiovascular system and improves overall wellness."</em></p>
+                            </div>
+                            <div style="background:rgba(14,165,233,0.1);padding:1rem;border-radius:0.5rem;">
+                                <strong style="color:#8b5cf6;">L - Link</strong>
+                                <p style="color:#94a3b8;font-size:0.9rem;margin-top:0.25rem;">Link back to the main argument or transition to next paragraph.</p>
+                                <p style="color:#e2e8f0;font-size:0.85rem;margin-top:0.5rem;"><em>"Therefore, incorporating exercise into daily routines is crucial for long-term health benefits."</em></p>
+                            </div>
+                        </div>
+                        <button onclick="useTemplate('peel')" style="padding:0.5rem 1.5rem;background:rgba(14,165,233,0.3);border:none;border-radius:0.5rem;color:#fff;cursor:pointer;">Use This Template</button>
+                    </div>
+                </div>
+
+                <!-- Writing Area for Templates -->
+                <div id="template-area" style="display:none;margin-top:1.5rem;background:rgba(14,165,233,0.1);border:2px dashed rgba(14,165,233,0.3);border-radius:0.75rem;padding:1.5rem;">
+                    <h3 id="template-title" style="color:#fff;margin-bottom:0.5rem;"></h3>
+                    <textarea id="template-input" style="width:100%;min-height:300px;background:rgba(45,55,72,0.9);border:1px solid rgba(14,165,233,0.2);color:#e2e8f0;padding:1rem;border-radius:0.5rem;font-size:1rem;" placeholder="Start writing using the template structure..."></textarea>
+                    <div style="display:flex;gap:1rem;margin-top:1rem;">
+                        <button onclick="checkTemplate()" style="padding:0.75rem 2rem;background:linear-gradient(135deg,#f59e0b,#fbbf24);border:none;border-radius:0.5rem;color:#fff;font-weight:700;cursor:pointer;">✓ Check Writing</button>
+                        <button onclick="document.getElementById('template-area').style.display='none'" style="padding:0.75rem 2rem;background:rgba(45,55,72,0.7);border:1px solid rgba(14,165,233,0.3);border-radius:0.5rem;color:#94a3b8;cursor:pointer;">Close</button>
+                    </div>
+                    <div id="template-feedback" style="display:none;margin-top:1rem;padding:1rem;background:rgba(45,55,72,0.9);border-radius:0.5rem;color:#e2e8f0;"></div>
+                </div>
+            </div>
+
+            <!-- SENTENCES SECTION -->
+            <div id="sentences" style="display:none;padding:1.5rem;">
+                <h2 style="color:#fff;font-size:1.5rem;margin-bottom:1rem;">✏️ Sentence Building Activities</h2>
+                <p style="color:#94a3b8;margin-bottom:1.5rem;">Practice improving your sentence structure with interactive exercises.</p>
+
+                <div style="display:grid;gap:1.5rem;">
+                    <!-- Expand the Sentence -->
+                    <div style="background:rgba(45,55,72,0.7);border-radius:0.75rem;padding:1.5rem;border-left:4px solid #f59e0b;">
+                        <h3 style="color:#fff;font-size:1.25rem;margin-bottom:0.5rem;">🔍 Activity 1: Expand the Sentence</h3>
+                        <p style="color:#94a3b8;margin-bottom:1rem;">Add details to make simple sentences more interesting and descriptive.</p>
+                        <div id="expand-q" style="background:rgba(14,165,233,0.1);padding:1rem;border-radius:0.5rem;margin-bottom:1rem;">
+                            <strong style="color:#f59e0b;">Simple Sentence:</strong>
+                            <p id="expand-text" style="color:#e2e8f0;font-size:1.1rem;margin-top:0.5rem;">"The dog barked."</p>
+                        </div>
+                        <textarea id="expand-input" style="width:100%;min-height:100px;background:rgba(45,55,72,0.9);border:1px solid rgba(14,165,233,0.2);color:#e2e8f0;padding:1rem;border-radius:0.5rem;" placeholder="Expand this sentence with more details..."></textarea>
+                        <div style="display:flex;gap:1rem;margin-top:1rem;">
+                            <button onclick="checkExpand()" style="padding:0.5rem 1.5rem;background:linear-gradient(135deg,#f59e0b,#fbbf24);border:none;border-radius:0.5rem;color:#fff;font-weight:700;cursor:pointer;">Check</button>
+                            <button onclick="newExpand()" style="padding:0.5rem 1.5rem;background:rgba(45,55,72,0.7);border:1px solid rgba(14,165,233,0.3);border-radius:0.5rem;color:#94a3b8;cursor:pointer;">New Sentence</button>
+                        </div>
+                        <div id="expand-feedback" style="display:none;margin-top:1rem;padding:1rem;background:rgba(45,55,72,0.9);border-radius:0.5rem;color:#e2e8f0;"></div>
+                    </div>
+
+                    <!-- Combine Sentences -->
+                    <div style="background:rgba(45,55,72,0.7);border-radius:0.75rem;padding:1.5rem;border-left:4px solid #10b981;">
+                        <h3 style="color:#fff;font-size:1.25rem;margin-bottom:0.5rem;">🔗 Activity 2: Combine Sentences</h3>
+                        <p style="color:#94a3b8;margin-bottom:1rem;">Join short sentences using conjunctions (and, but, because, although, etc.).</p>
+                        <div id="combine-q" style="background:rgba(14,165,233,0.1);padding:1rem;border-radius:0.5rem;margin-bottom:1rem;">
+                            <strong style="color:#10b981;">Combine these sentences:</strong>
+                            <ul id="combine-text" style="color:#e2e8f0;margin-top:0.5rem;padding-left:1.25rem;"></ul>
+                        </div>
+                        <textarea id="combine-input" style="width:100%;min-height:100px;background:rgba(45,55,72,0.9);border:1px solid rgba(14,165,233,0.2);color:#e2e8f0;padding:1rem;border-radius:0.5rem;" placeholder="Combine into one or two sentences..."></textarea>
+                        <div style="display:flex;gap:1rem;margin-top:1rem;">
+                            <button onclick="checkCombine()" style="padding:0.5rem 1.5rem;background:linear-gradient(135deg,#10b981,#34d399);border:none;border-radius:0.5rem;color:#fff;font-weight:700;cursor:pointer;">Check</button>
+                            <button onclick="newCombine()" style="padding:0.5rem 1.5rem;background:rgba(45,55,72,0.7);border:1px solid rgba(14,165,233,0.3);border-radius:0.5rem;color:#94a3b8;cursor:pointer;">New Exercise</button>
+                        </div>
+                        <div id="combine-feedback" style="display:none;margin-top:1rem;padding:1rem;background:rgba(45,55,72,0.9);border-radius:0.5rem;color:#e2e8f0;"></div>
+                    </div>
+
+                    <!-- Fix the Sentence -->
+                    <div style="background:rgba(45,55,72,0.7);border-radius:0.75rem;padding:1.5rem;border-left:4px solid #ef4444;">
+                        <h3 style="color:#fff;font-size:1.25rem;margin-bottom:0.5rem;">🔧 Activity 3: Fix the Sentence</h3>
+                        <p style="color:#94a3b8;margin-bottom:1rem;">Correct grammar, punctuation, and word order errors.</p>
+                        <div id="fix-q" style="background:rgba(14,165,233,0.1);padding:1rem;border-radius:0.5rem;margin-bottom:1rem;">
+                            <strong style="color:#ef4444;">Incorrect Sentence:</strong>
+                            <p id="fix-text" style="color:#e2e8f0;font-size:1.1rem;margin-top:0.5rem;font-style:italic;"></p>
+                        </div>
+                        <textarea id="fix-input" style="width:100%;min-height:100px;background:rgba(45,55,72,0.9);border:1px solid rgba(14,165,233,0.2);color:#e2e8f0;padding:1rem;border-radius:0.5rem;" placeholder="Write the corrected sentence..."></textarea>
+                        <div style="display:flex;gap:1rem;margin-top:1rem;">
+                            <button onclick="checkFix()" style="padding:0.5rem 1.5rem;background:linear-gradient(135deg,#ef4444,#f87171);border:none;border-radius:0.5rem;color:#fff;font-weight:700;cursor:pointer;">Check</button>
+                            <button onclick="newFix()" style="padding:0.5rem 1.5rem;background:rgba(45,55,72,0.7);border:1px solid rgba(14,165,233,0.3);border-radius:0.5rem;color:#94a3b8;cursor:pointer;">New Exercise</button>
+                            <button onclick="showFixHint()" style="padding:0.5rem 1.5rem;background:rgba(14,165,233,0.2);border:1px solid rgba(14,165,233,0.3);border-radius:0.5rem;color:#90e0ef;cursor:pointer;">💡 Hint</button>
+                        </div>
+                        <div id="fix-hint" style="display:none;margin-top:0.5rem;padding:0.75rem;background:rgba(14,165,233,0.1);border-radius:0.5rem;color:#90e0ef;font-size:0.9rem;"></div>
+                        <div id="fix-feedback" style="display:none;margin-top:1rem;padding:1rem;background:rgba(45,55,72,0.9);border-radius:0.5rem;color:#e2e8f0;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PARAGRAPHS SECTION -->
+            <div id="paragraphs" style="display:none;padding:1.5rem;">
+                <h2 style="color:#fff;font-size:1.5rem;margin-bottom:1rem;">📑 Paragraph Organization</h2>
+                <p style="color:#94a3b8;margin-bottom:1.5rem;">Learn to write well-organized paragraphs with clear structure.</p>
+
+                <div style="display:grid;gap:1.5rem;">
+                    <!-- Understanding Paragraph Structure -->
+                    <div style="background:rgba(45,55,72,0.7);border-radius:0.75rem;padding:1.5rem;border-left:4px solid #8b5cf6;">
+                        <h3 style="color:#fff;font-size:1.25rem;margin-bottom:1rem;">📚 Understanding Paragraph Structure</h3>
+                        <div style="display:grid;md:grid-cols-3;gap:1rem;">
+                            <div style="background:rgba(14,165,233,0.1);padding:1.25rem;border-radius:0.5rem;">
+                                <h4 style="color:#8b5cf6;font-size:1.1rem;margin-bottom:0.5rem;">🎯 Topic Sentence</h4>
+                                <p style="color:#94a3b8;font-size:0.9rem;">The first sentence that tells the main idea of the paragraph.</p>
+                                <p style="color:#e2e8f0;font-size:0.85rem;margin-top:0.5rem;"><em>"Learning a new language opens many doors."</em></p>
+                            </div>
+                            <div style="background:rgba(14,165,233,0.1);padding:1.25rem;border-radius:0.5rem;">
+                                <h4 style="color:#8b5cf6;font-size:1.1rem;margin-bottom:0.5rem;">📖 Supporting Details</h4>
+                                <p style="color:#94a3b8;font-size:0.9rem;">Facts, examples, and explanations that support the topic.</p>
+                                <p style="color:#e2e8f0;font-size:0.85rem;margin-top:0.5rem;"><em>"It helps you communicate with more people, understand different cultures, and improve career opportunities."</em></p>
+                            </div>
+                            <div style="background:rgba(14,165,233,0.1);padding:1.25rem;border-radius:0.5rem;">
+                                <h4 style="color:#8b5cf6;font-size:1.1rem;margin-bottom:0.5rem;">✅ Concluding Sentence</h4>
+                                <p style="color:#94a3b8;font-size:0.9rem;">Wraps up the paragraph and reinforces the main idea.</p>
+                                <p style="color:#e2e8f0;font-size:0.85rem;margin-top:0.5rem;"><em>"Therefore, language learning is an invaluable skill in today's global world."</em></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Order the Sentences Activity -->
+                    <div style="background:rgba(45,55,72,0.7);border-radius:0.75rem;padding:1.5rem;border-left:4px solid #10b981;">
+                        <h3 style="color:#fff;font-size:1.25rem;margin-bottom:0.5rem;">🔄 Activity: Order the Sentences</h3>
+                        <p style="color:#94a3b8;margin-bottom:1rem;">Put the scrambled sentences in the correct order to form a coherent paragraph.</p>
+                        <div id="order-container" style="background:rgba(14,165,233,0.1);padding:1rem;border-radius:0.5rem;margin-bottom:1rem;">
+                            <strong style="color:#10b981;">Scrambled Paragraph:</strong>
+                            <div id="order-sentences" style="margin-top:1rem;display:grid;gap:0.5rem;"></div>
+                        </div>
+                        <div style="margin-bottom:1rem;">
+                            <label style="color:#94a3b8;font-size:0.9rem;">Your Order (enter numbers separated by commas):</label>
+                            <input type="text" id="order-input" style="width:100%;padding:0.75rem;margin-top:0.5rem;background:rgba(45,55,72,0.9);border:1px solid rgba(14,165,233,0.2);color:#e2e8f0;border-radius:0.5rem;" placeholder="e.g., 3,1,4,2,5">
+                        </div>
+                        <div style="display:flex;gap:1rem;">
+                            <button onclick="checkOrder()" style="padding:0.5rem 1.5rem;background:linear-gradient(135deg,#10b981,#34d399);border:none;border-radius:0.5rem;color:#fff;font-weight:700;cursor:pointer;">Check Order</button>
+                            <button onclick="newOrder()" style="padding:0.5rem 1.5rem;background:rgba(45,55,72,0.7);border:1px solid rgba(14,165,233,0.3);border-radius:0.5rem;color:#94a3b8;cursor:pointer;">New Paragraph</button>
+                        </div>
+                        <div id="order-feedback" style="display:none;margin-top:1rem;padding:1rem;background:rgba(45,55,72,0.9);border-radius:0.5rem;color:#e2e8f0;"></div>
+                    </div>
+
+                    <!-- Write Your Own Paragraph -->
+                    <div style="background:rgba(45,55,72,0.7);border-radius:0.75rem;padding:1.5rem;border-left:4px solid #f59e0b;">
+                        <h3 style="color:#fff;font-size:1.25rem;margin-bottom:0.5rem;">✏️ Write Your Own Paragraph</h3>
+                        <p style="color:#94a3b8;margin-bottom:1rem;">Practice writing a complete paragraph with proper structure.</p>
+                        <div style="margin-bottom:1rem;">
+                            <label style="color:#94a3b8;font-size:0.9rem;">Choose a topic:</label>
+                            <select id="para-topic" onchange="loadParaTopic()" style="width:100%;padding:0.75rem;margin-top:0.5rem;background:rgba(45,55,72,0.9);border:1px solid rgba(14,165,233,0.2);color:#e2e8f0;border-radius:0.5rem;">
+                                <option value="">Select a topic...</option>
+                                <option value="Why reading is important">Why reading is important</option>
+                                <option value="The benefits of exercise">The benefits of exercise</option>
+                                <option value="My favorite season">My favorite season</option>
+                                <option value="Technology in education">Technology in education</option>
+                            </select>
+                        </div>
+                        <div id="para-guidelines" style="display:none;background:rgba(14,165,233,0.1);padding:1rem;border-radius:0.5rem;margin-bottom:1rem;">
+                            <strong style="color:#f59e0b;">Topic:</strong> <span id="para-topic-display" style="color:#e2e8f0;"></span>
+                            <p style="color:#94a3b8;font-size:0.9rem;margin-top:0.5rem;">Remember to include: ✓ Topic sentence ✓ At least 3 supporting details ✓ Concluding sentence</p>
+                        </div>
+                        <textarea id="para-input" style="width:100%;min-height:200px;background:rgba(45,55,72,0.9);border:1px solid rgba(14,165,233,0.2);color:#e2e8f0;padding:1rem;border-radius:0.5rem;" placeholder="Write your paragraph here..."></textarea>
+                        <div style="display:flex;gap:1rem;margin-top:1rem;">
+                            <button onclick="checkParagraph()" style="padding:0.75rem 2rem;background:linear-gradient(135deg,#f59e0b,#fbbf24);border:none;border-radius:0.5rem;color:#fff;font-weight:700;cursor:pointer;">✓ Check Paragraph</button>
+                            <button onclick="document.getElementById('para-input').value=''" style="padding:0.75rem 2rem;background:rgba(45,55,72,0.7);border:1px solid rgba(14,165,233,0.3);border-radius:0.5rem;color:#94a3b8;cursor:pointer;">Clear</button>
+                        </div>
+                        <div id="para-feedback" style="display:none;margin-top:1rem;padding:1rem;background:rgba(45,55,72,0.9);border-radius:0.5rem;color:#e2e8f0;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CREATIVE SECTION -->
+            <div id="creative" style="display:none;padding:1.5rem;">
+                <h2 style="color:#fff;font-size:1.5rem;margin-bottom:1rem;">🎨 Creative Expression</h2>
+                <p style="color:#94a3b8;margin-bottom:1.5rem;">Unleash your creativity with fun writing exercises!</p>
+
+                <div style="display:grid;gap:1.5rem;">
+                    <!-- Story Starter Generator -->
+                    <div style="background:rgba(45,55,72,0.7);border-radius:0.75rem;padding:1.5rem;border-left:4px solid #f59e0b;">
+                        <h3 style="color:#fff;font-size:1.25rem;margin-bottom:0.5rem;">🎲 Story Starter Generator</h3>
+                        <p style="color:#94a3b8;margin-bottom:1rem;">Get random story ideas to spark your imagination!</p>
+                        <div id="story-starter" style="background:rgba(14,165,233,0.1);padding:1.5rem;border-radius:0.5rem;margin-bottom:1rem;min-height:100px;display:flex;align-items:center;justify-content:center;">
+                            <p style="color:#94a3b8;font-style:italic;">Click the button to generate a story starter!</p>
+                        </div>
+                        <button onclick="generateStoryStarter()" style="padding:0.75rem 2rem;background:linear-gradient(135deg,#f59e0b,#fbbf24);border:none;border-radius:0.5rem;color:#fff;font-weight:700;cursor:pointer;">🎲 Generate New Starter</button>
+                        <textarea id="story-input" style="width:100%;min-height:200px;background:rgba(45,55,72,0.9);border:1px solid rgba(14,165,233,0.2);color:#e2e8f0;padding:1rem;border-radius:0.5rem;margin-top:1rem;" placeholder="Continue the story..."></textarea>
+                        <button onclick="checkStory()" style="margin-top:1rem;padding:0.75rem 2rem;background:rgba(14,165,233,0.3);border:1px solid rgba(14,165,233,0.4);border-radius:0.5rem;color:#90e0ef;cursor:pointer;">Check My Story</button>
+                        <div id="story-feedback" style="display:none;margin-top:1rem;padding:1rem;background:rgba(45,55,72,0.9);border-radius:0.5rem;color:#e2e8f0;"></div>
+                    </div>
+
+                    <!-- Quick Write Timer -->
+                    <div style="background:rgba(45,55,72,0.7);border-radius:0.75rem;padding:1.5rem;border-left:4px solid #10b981;">
+                        <h3 style="color:#fff;font-size:1.25rem;margin-bottom:0.5rem;">⏱️ Quick Write Challenge</h3>
+                        <p style="color:#94a3b8;margin-bottom:1rem;">Write continuously without stopping! Don't worry about perfection.</p>
+                        <div style="display:flex;gap:1rem;margin-bottom:1rem;flex-wrap:wrap;">
+                            <button onclick="startQuickWrite(3)" style="padding:0.5rem 1.5rem;background:rgba(14,165,233,0.3);border:1px solid rgba(14,165,233,0.4);border-radius:0.5rem;color:#90e0ef;cursor:pointer;">3 min</button>
+                            <button onclick="startQuickWrite(5)" style="padding:0.5rem 1.5rem;background:rgba(14,165,233,0.3);border:1px solid rgba(14,165,233,0.4);border-radius:0.5rem;color:#90e0ef;cursor:pointer;">5 min</button>
+                            <button onclick="startQuickWrite(10)" style="padding:0.5rem 1.5rem;background:rgba(14,165,233,0.3);border:1px solid rgba(14,165,233,0.4);border-radius:0.5rem;color:#90e0ef;cursor:pointer;">10 min</button>
+                        </div>
+                        <div id="timer-display" style="display:none;font-size:3rem;font-weight:700;color:#f59e0b;text-align:center;margin-bottom:1rem;"></div>
+                        <textarea id="quickwrite-input" style="width:100%;min-height:200px;background:rgba(45,55,72,0.9);border:1px solid rgba(14,165,233,0.2);color:#e2e8f0;padding:1rem;border-radius:0.5rem;" placeholder="Choose a time and start writing!"></textarea>
+                        <div style="display:flex;gap:1rem;margin-top:1rem;">
+                            <button onclick="stopQuickWrite()" style="padding:0.75rem 2rem;background:rgba(239,68,68,0.7);border:1px solid rgba(239,68,68,0.4);border-radius:0.5rem;color:#fca5a5;cursor:pointer;">Stop Timer</button>
+                            <button onclick="analyzeQuickWrite()" style="padding:0.75rem 2rem;background:linear-gradient(135deg,#10b981,#34d399);border:none;border-radius:0.5rem;color:#fff;font-weight:700;cursor:pointer;">Analyze Writing</button>
+                        </div>
+                        <div id="quickwrite-feedback" style="display:none;margin-top:1rem;padding:1rem;background:rgba(45,55,72,0.9);border-radius:0.5rem;color:#e2e8f0;"></div>
+                    </div>
+
+                    <!-- Picture Prompt -->
+                    <div style="background:rgba(45,55,72,0.7);border-radius:0.75rem;padding:1.5rem;border-left:4px solid #8b5cf6;">
+                        <h3 style="color:#fff;font-size:1.25rem;margin-bottom:0.5rem;">🖼️ Picture Prompt Challenge</h3>
+                        <p style="color:#94a3b8;margin-bottom:1rem;">Imagine a story based on the scene described below.</p>
+                        <div id="picture-prompt" style="background:rgba(14,165,233,0.1);padding:1.5rem;border-radius:0.5rem;margin-bottom:1rem;">
+                            <div style="font-size:3rem;text-align:center;margin-bottom:1rem;">🏰🌙✨</div>
+                            <p style="color:#e2e8f0;text-align:center;"><em>"An ancient castle under a full moon, with one window glowing mysteriously..."</em></p>
+                        </div>
+                        <textarea id="picture-input" style="width:100%;min-height:200px;background:rgba(45,55,72,0.9);border:1px solid rgba(14,165,233,0.2);color:#e2e8f0;padding:1rem;border-radius:0.5rem;" placeholder="Write a story inspired by this scene..."></textarea>
+                        <button onclick="checkPicture()" style="margin-top:1rem;padding:0.75rem 2rem;background:rgba(14,165,233,0.3);border:1px solid rgba(14,165,233,0.4);border-radius:0.5rem;color:#90e0ef;cursor:pointer;">Check My Story</button>
+                        <div id="picture-feedback" style="display:none;margin-top:1rem;padding:1rem;background:rgba(45,55,72,0.9);border-radius:0.5rem;color:#e2e8f0;"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
     <script>
-        const prompts = {
-            creative: { title: 'Creative Writing', text: 'You discover a hidden door in your school. Where does it lead?', tips: ['Use vivid descriptions', 'Create interesting characters', 'Include a challenge'] },
-            narrative: { title: 'Narrative Writing', text: 'Write about a time you learned an important lesson.', tips: ['Start with clear beginning', 'Include details', 'End with what you learned'] },
-            expository: { title: 'Expository Writing', text: 'Explain why learning English is important.', tips: ['Start with thesis', 'Provide examples', 'Organize logically'] },
-            persuasive: { title: 'Persuasive Writing', text: 'Should students have homework every day?', tips: ['State opinion clearly', 'Provide reasons', 'Address counterarguments'] }
-        };
+        // Tab navigation
         function show(id) {
-            ['prompts','templates','sentences','paragraphs','creative'].forEach(x => document.getElementById(x).style.display = x===id?'block':'none');
+            ['prompts','templates','sentences','paragraphs','creative'].forEach(x => {
+                document.getElementById(x).style.display = x===id?'block':'none';
+                document.getElementById('btn-'+x).style.background = x===id?'rgba(14,165,233,0.3)':'rgba(45,55,72,0.5)';
+                document.getElementById('btn-'+x).style.color = x===id?'#fff':'#94a3b8';
+            });
         }
+
+        // PROMPTS DATA
+        const prompts = {
+            creative: { 
+                title: 'Creative Writing', 
+                text: 'You discover a hidden door in your school. Where does it lead?', 
+                tips: ['Use vivid descriptions', 'Create interesting characters', 'Include a challenge'],
+                vocab: 'mysterious, ancient, enchanted, discovered, ventured, extraordinary'
+            },
+            narrative: { 
+                title: 'Narrative Writing', 
+                text: 'Write about a time you learned an important lesson.', 
+                tips: ['Start with clear beginning', 'Include sensory details', 'End with what you learned'],
+                vocab: 'experience, realized, challenging, memorable, valuable, transformed'
+            },
+            expository: { 
+                title: 'Expository Writing', 
+                text: 'Explain why learning English is important.', 
+                tips: ['Start with thesis statement', 'Provide examples', 'Organize logically'],
+                vocab: 'essential, communication, opportunities, global, academic, professional'
+            },
+            persuasive: { 
+                title: 'Persuasive Writing', 
+                text: 'Should students have homework every day?', 
+                tips: ['State opinion clearly', 'Provide reasons with evidence', 'Address counterarguments'],
+                vocab: 'beneficial, excessive, balance, reinforce, independent, overwhelming'
+            }
+        };
+
         function showPrompt(cat) {
             const p = prompts[cat];
             document.getElementById('pt').textContent = p.title;
             document.getElementById('ptx').textContent = p.text;
             document.getElementById('tips').innerHTML = p.tips.map(t=>'<li>'+t+'</li>').join('');
+            document.getElementById('vocab').textContent = p.vocab;
             document.getElementById('parea').style.display = 'block';
+            document.getElementById('wi').value = '';
+            document.getElementById('wf').style.display = 'none';
         }
+
         function checkWriting() {
             const t = document.getElementById('wi').value;
             const w = t.trim().split(/\s+/).filter(x=>x.length>0).length;
             const s = t.split(/[.!?]+/).filter(x=>x.trim().length>0).length;
             const avg = s>0 ? Math.round(w/s) : 0;
             let fb = [];
-            if(w<50) fb.push('Try writing more.');
-            else if(w>=150) fb.push('Great length!');
-            if(s<3) fb.push('Add more sentences.');
-            if(fb.length===0) fb.push('Excellent work!');
-            document.getElementById('wf').innerHTML = '<div><b>Words:</b> '+w+' | <b>Sentences:</b> '+s+' | <b>Avg:</b> '+avg+'</div>'+fb.join('<br>');
+            
+            if(w === 0) fb.push('Please start writing something!');
+            else if(w<50) fb.push('Try expanding your ideas more.');
+            else if(w>=150) fb.push('Great length! Keep it up!');
+            else fb.push('Good progress!');
+            
+            if(s<3 && w>0) fb.push('Try adding more sentences.');
+            if(avg > 20) fb.push('Consider breaking up longer sentences.');
+            if(avg < 8) fb.push('Try combining some short sentences.');
+            
+            if(fb.length<=1 && w>=50) fb.unshift('Excellent work!');
+            
+            document.getElementById('wf').innerHTML = '<div style="margin-bottom:0.5rem;"><b>📊 Analysis:</b></div><div>Words: '+w+' | Sentences: '+s+' | Avg words/sentence: '+avg+'</div><div style="margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid rgba(14,165,233,0.2);">'+fb.join('<br>')+'</div>';
             document.getElementById('wf').style.display = 'block';
         }
-        function startTimer(m) {
-            const d = document.getElementById('timer');
-            d.style.display = 'block';
-            let s = m*60;
-            const int = setInterval(() => {
-                const mins = Math.floor(s/60), secs = s%60;
-                d.textContent = mins.toString().padStart(2,'0')+':'+secs.toString().padStart(2,'0');
-                if(s<=0) { clearInterval(int); alert("Time's up!"); d.style.display='none'; }
-                s--;
+
+        function clearWriting() {
+            document.getElementById('wi').value = '';
+            document.getElementById('wf').style.display = 'none';
+        }
+
+        // TEMPLATES
+        function useTemplate(type) {
+            const area = document.getElementById('template-area');
+            const title = document.getElementById('template-title');
+            const input = document.getElementById('template-input');
+            const feedback = document.getElementById('template-feedback');
+            
+            area.style.display = 'block';
+            feedback.style.display = 'none';
+            input.value = '';
+            
+            if(type === 'story') {
+                title.textContent = '📖 Story Structure Template';
+                input.placeholder = '1. INTRODUCTION:\nIntroduce your characters and setting...\n\n2. RISING ACTION:\nBuild tension with events...\n\n3. CLIMAX:\nThe turning point...\n\n4. FALLING ACTION:\nEvents after the climax...\n\n5. RESOLUTION:\nHow it ends...';
+            } else if(type === 'essay') {
+                title.textContent = '📝 Five-Paragraph Essay Template';
+                input.placeholder = 'PARAGRAPH 1 - INTRODUCTION:\nHook: ...\nBackground: ...\nThesis: ...\n\nPARAGRAPH 2 - BODY 1:\nTopic sentence: ...\nEvidence: ...\nExplanation: ...\n\nPARAGRAPH 3 - BODY 2:\nTopic sentence: ...\nEvidence: ...\nExplanation: ...\n\nPARAGRAPH 4 - BODY 3:\nTopic sentence: ...\nEvidence: ...\nExplanation: ...\n\nPARAGRAPH 5 - CONCLUSION:\nRestate thesis: ...\nSummary: ...\nFinal thought: ...';
+            } else if(type === 'peel') {
+                title.textContent = '🔤 PEEL Paragraph Template';
+                input.placeholder = 'POINT (Topic Sentence):\n...\n\nEVIDENCE:\n...\n\nEXPLANATION:\n...\n\nLINK (Concluding sentence):\n...';
+            }
+            
+            area.scrollIntoView({behavior: 'smooth'});
+        }
+
+        function checkTemplate() {
+            const t = document.getElementById('template-input').value;
+            const w = t.trim().split(/\s+/).filter(x=>x.length>0).length;
+            const s = t.split(/[.!?]+/).filter(x=>x.trim().length>0).length;
+            
+            let fb = [];
+            if(w === 0) fb.push('Please start writing using the template!');
+            else if(w<100) fb.push('Keep developing your ideas using the template structure.');
+            else fb.push('Great use of the template!');
+            
+            if(s<5) fb.push('Make sure to complete all sections of the template.');
+            
+            document.getElementById('template-feedback').innerHTML = '<div><b>Words:</b> '+w+' | <b>Sentences:</b> '+s+'</div><div style="margin-top:0.5rem;">'+fb.join('<br>')+'</div>';
+            document.getElementById('template-feedback').style.display = 'block';
+        }
+
+        // SENTENCE ACTIVITIES
+        const expandSentences = [
+            {simple: '"The dog barked."', example: '"The small, energetic dog barked loudly at the mailman approaching the door."' },
+            {simple: '"She walked home."', example: '"After the long meeting, she walked home slowly through the quiet, rain-soaked streets."' },
+            {simple: '"The sun set."', example: '"The brilliant orange sun set gracefully behind the distant mountains, painting the sky in shades of pink and purple."' },
+            {simple: '"He ate breakfast."', example: '"Rushing to catch the bus, he quickly ate a simple breakfast of toast and coffee."' }
+        ];
+        let currentExpand = 0;
+
+        function newExpand() {
+            currentExpand = Math.floor(Math.random() * expandSentences.length);
+            document.getElementById('expand-text').textContent = expandSentences[currentExpand].simple;
+            document.getElementById('expand-input').value = '';
+            document.getElementById('expand-feedback').style.display = 'none';
+        }
+
+        function checkExpand() {
+            const input = document.getElementById('expand-input').value;
+            const words = input.trim().split(/\s+/).filter(x=>x.length>0).length;
+            const orig = expandSentences[currentExpand].simple.split(/\s+/).length;
+            
+            let fb = '';
+            if(words <= orig) {
+                fb = 'Try adding more details! Your expanded sentence should be longer than the original.';
+            } else if(words < orig + 5) {
+                fb = 'Good start! Try adding even more descriptive words (adjectives, adverbs).';
+            } else {
+                fb = 'Excellent expansion! You added great details.';
+            }
+            
+            document.getElementById('expand-feedback').innerHTML = '<b>Your sentence:</b> '+words+' words<br><b>Feedback:</b> '+fb;
+            document.getElementById('expand-feedback').style.display = 'block';
+        }
+
+        const combineExercises = [
+            {sentences: ['It was raining.', 'I forgot my umbrella.', 'I got wet.'], answer: 'Because it was raining and I forgot my umbrella, I got wet.'},
+            {sentences: ['She studied hard.', 'She passed the test.', 'She was happy.'], answer: 'She studied hard, so she passed the test and was happy.'},
+            {sentences: ['The movie was boring.', 'We stayed until the end.', 'We wanted popcorn.'], answer: 'Although the movie was boring, we stayed until the end because we wanted popcorn.'}
+        ];
+        let currentCombine = 0;
+
+        function newCombine() {
+            currentCombine = Math.floor(Math.random() * combineExercises.length);
+            document.getElementById('combine-text').innerHTML = combineExercises[currentCombine].sentences.map(s=>'<li>'+s+'</li>').join('');
+            document.getElementById('combine-input').value = '';
+            document.getElementById('combine-feedback').style.display = 'none';
+        }
+
+        function checkCombine() {
+            const input = document.getElementById('combine-input').value;
+            const words = input.trim().split(/\s+/).filter(x=>x.length>0).length;
+            const originals = combineExercises[currentCombine].sentences.reduce((a,b)=>a+b.split(/\s+/).length,0);
+            
+            let fb = '';
+            if(words >= originals) {
+                fb = 'Good job! You combined the sentences effectively.';
+            } else {
+                fb = 'Try to keep all the original information while combining.';
+            }
+            
+            if(input.toLowerCase().includes('because') || input.toLowerCase().includes('although') || input.toLowerCase().includes('and') || input.toLowerCase().includes('so')) {
+                fb += ' Great use of conjunctions!';
+            }
+            
+            document.getElementById('combine-feedback').innerHTML = '<b>Feedback:</b> '+fb;
+            document.getElementById('combine-feedback').style.display = 'block';
+        }
+
+        const fixExercises = [
+            {wrong: 'she go to school yesterday', correct: 'She went to school yesterday.', hint: 'Check the verb tense and capitalization.'},
+            {wrong: 'the cats is sleeping on the sofa', correct: 'The cats are sleeping on the sofa.', hint: 'Check subject-verb agreement.'},
+            {wrong: 'he dont like vegetables', correct: "He doesn't like vegetables.", hint: 'Check the negative form and apostrophe.'},
+            {wrong: 'where are you going ?', correct: 'Where are you going?', hint: 'Check punctuation spacing.'}
+        ];
+        let currentFix = 0;
+
+        function newFix() {
+            currentFix = Math.floor(Math.random() * fixExercises.length);
+            document.getElementById('fix-text').textContent = '"' + fixExercises[currentFix].wrong + '"';
+            document.getElementById('fix-input').value = '';
+            document.getElementById('fix-hint').style.display = 'none';
+            document.getElementById('fix-feedback').style.display = 'none';
+        }
+
+        function showFixHint() {
+            document.getElementById('fix-hint').textContent = 'Hint: ' + fixExercises[currentFix].hint;
+            document.getElementById('fix-hint').style.display = 'block';
+        }
+
+        function checkFix() {
+            const input = document.getElementById('fix-input').value.trim();
+            const correct = fixExercises[currentFix].correct;
+            
+            let fb = '';
+            if(input.toLowerCase() === correct.toLowerCase()) {
+                fb = '✓ Perfect! Your correction is correct!';
+            } else if(input.length > correct.length - 5) {
+                fb = 'Close! Check capitalization, verb forms, and punctuation.';
+            } else {
+                fb = 'Try again. Look at the hint for help.';
+            }
+            
+            document.getElementById('fix-feedback').innerHTML = '<b>Correct answer:</b> '+correct+'<br><b>Feedback:</b> '+fb;
+            document.getElementById('fix-feedback').style.display = 'block';
+        }
+
+        // PARAGRAPH ACTIVITIES
+        const orderParagraphs = [
+            {
+                sentences: [
+                    'Finally, brush your teeth before bed to keep them healthy.',
+                    'First, put toothpaste on your toothbrush.',
+                    'Brushing your teeth is an important daily habit.',
+                    'Next, brush all surfaces of your teeth for two minutes.',
+                    'Then, rinse your mouth with water.'
+                ],
+                correct: [3,2,4,5,1]
+            },
+            {
+                sentences: [
+                    'In conclusion, regular exercise leads to a healthier, happier life.',
+                    'Exercise has many amazing benefits for your body and mind.',
+                    'Additionally, it reduces stress and improves your mood.',
+                    'First, it strengthens your heart and muscles.',
+                    'Moreover, exercise helps you sleep better at night.'
+                ],
+                correct: [2,4,3,5,1]
+            }
+        ];
+        let currentOrder = 0;
+
+        function newOrder() {
+            currentOrder = Math.floor(Math.random() * orderParagraphs.length);
+            const shuffled = orderParagraphs[currentOrder].sentences.map((s,i)=>({text:s,num:i+1}))
+                .sort(()=>Math.random()-0.5);
+            document.getElementById('order-sentences').innerHTML = shuffled.map(item=>
+                '<div style="background:rgba(45,55,72,0.7);padding:0.75rem;border-radius:0.5rem;"><strong style="color:#10b981;">'+item.num+'. </strong><span style="color:#e2e8f0;">'+item.text+'</span></div>'
+            ).join('');
+            document.getElementById('order-input').value = '';
+            document.getElementById('order-feedback').style.display = 'none';
+        }
+
+        function checkOrder() {
+            const input = document.getElementById('order-input').value.split(',').map(x=>parseInt(x.trim())).filter(x=>!isNaN(x));
+            const correct = orderParagraphs[currentOrder].correct;
+            
+            let fb = '';
+            if(JSON.stringify(input) === JSON.stringify(correct)) {
+                fb = '✓ Perfect! You ordered the sentences correctly!';
+            } else {
+                fb = 'Not quite right. Think about: topic sentence first, then supporting details, then conclusion.';
+            }
+            
+            document.getElementById('order-feedback').innerHTML = fb;
+            document.getElementById('order-feedback').style.display = 'block';
+        }
+
+        function loadParaTopic() {
+            const topic = document.getElementById('para-topic').value;
+            if(topic) {
+                document.getElementById('para-guidelines').style.display = 'block';
+                document.getElementById('para-topic-display').textContent = topic;
+            } else {
+                document.getElementById('para-guidelines').style.display = 'none';
+            }
+        }
+
+        function checkParagraph() {
+            const t = document.getElementById('para-input').value;
+            const w = t.trim().split(/\s+/).filter(x=>x.length>0).length;
+            const s = t.split(/[.!?]+/).filter(x=>x.trim().length>0).length;
+            
+            let fb = [];
+            if(w === 0) fb.push('Please write a paragraph first!');
+            else {
+                if(s < 4) fb.push('A good paragraph usually has 4-6 sentences.');
+                else fb.push('Good sentence count!');
+                
+                if(w < 60) fb.push('Try adding more supporting details.');
+                else fb.push('Nice length!');
+                
+                const firstSentence = t.split('.')[0].toLowerCase();
+                if(firstSentence.includes('there are') || firstSentence.includes('i think') || !firstSentence.includes('is') && !firstSentence.includes('are')) {
+                    fb.push('Make sure your first sentence clearly states the main idea.');
+                }
+            }
+            
+            document.getElementById('para-feedback').innerHTML = '<div><b>Words:</b> '+w+' | <b>Sentences:</b> '+s+'</div><div style="margin-top:0.5rem;">'+fb.join('<br>')+'</div>';
+            document.getElementById('para-feedback').style.display = 'block';
+        }
+
+        // CREATIVE ACTIVITIES
+        const storyStarters = [
+            'The old map said "X marks the spot," but when I dug there, I found something unexpected...',
+            'If I could talk to animals, the first thing I would ask my pet is...',
+            'The weather forecast said sunny skies, but when I looked outside, I saw three moons in the sky...',
+            'Dear Future Me, I hope you remember the day when...',
+            'The mysterious package arrived with no return address and a note that read: "Open only when..."',
+            'Everyone said the house was haunted, but I decided to investigate anyway...'
+        ];
+
+        function generateStoryStarter() {
+            const starter = storyStarters[Math.floor(Math.random() * storyStarters.length)];
+            document.getElementById('story-starter').innerHTML = '<p style="color:#e2e8f0;font-size:1.1rem;">'+starter+'</p>';
+        }
+
+        function checkStory() {
+            const t = document.getElementById('story-input').value;
+            const w = t.trim().split(/\s+/).filter(x=>x.length>0).length;
+            
+            let fb = [];
+            if(w === 0) fb.push('Start writing your story!');
+            else if(w < 50) fb.push('Keep going! Develop your story more.');
+            else if(w < 100) fb.push('Good progress! Add more details about characters and setting.');
+            else fb.push('Excellent storytelling! Consider adding dialogue or more description.');
+            
+            document.getElementById('story-feedback').innerHTML = '<b>Word Count:</b> '+w+'<br>'+fb.join('<br>');
+            document.getElementById('story-feedback').style.display = 'block';
+        }
+
+        let timerInterval = null;
+
+        function startQuickWrite(minutes) {
+            stopQuickWrite();
+            const display = document.getElementById('timer-display');
+            display.style.display = 'block';
+            let seconds = minutes * 60;
+            
+            timerInterval = setInterval(() => {
+                const mins = Math.floor(seconds / 60);
+                const secs = seconds % 60;
+                display.textContent = mins.toString().padStart(2,'0') + ':' + secs.toString().padStart(2,'0');
+                
+                if(seconds <= 0) {
+                    clearInterval(timerInterval);
+                    display.textContent = "Time's up!";
+                    setTimeout(() => display.style.display = 'none', 2000);
+                }
+                seconds--;
             }, 1000);
         }
+
+        function stopQuickWrite() {
+            if(timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+            document.getElementById('timer-display').style.display = 'none';
+        }
+
+        function analyzeQuickWrite() {
+            const t = document.getElementById('quickwrite-input').value;
+            const w = t.trim().split(/\s+/).filter(x=>x.length>0).length;
+            const s = t.split(/[.!?]+/).filter(x=>x.trim().length>0).length;
+            
+            let fb = [];
+            if(w === 0) fb.push('You didn\'t write anything yet!');
+            else {
+                fb.push('Great job writing continuously!');
+                if(w >= 100) fb.push('Amazing! You wrote over 100 words!');
+                else if(w >= 50) fb.push('Good effort! Keep practicing.');
+                else fb.push('Keep practicing to build fluency.');
+            }
+            
+            document.getElementById('quickwrite-feedback').innerHTML = '<div><b>Words:</b> '+w+' | <b>Sentences:</b> '+s+'</div><div style="margin-top:0.5rem;">'+fb.join('<br>')+'</div>';
+            document.getElementById('quickwrite-feedback').style.display = 'block';
+        }
+
+        function checkPicture() {
+            const t = document.getElementById('picture-input').value;
+            const w = t.trim().split(/\s+/).filter(x=>x.length>0).length;
+            
+            let fb = [];
+            if(w === 0) fb.push('Start writing your story based on the picture prompt!');
+            else if(w < 50) fb.push('Describe what you see and imagine what happens next.');
+            else fb.push('Wonderful! You created a story from the image.');
+            
+            document.getElementById('picture-feedback').innerHTML = '<b>Word Count:</b> '+w+'<br>'+fb.join('<br>');
+            document.getElementById('picture-feedback').style.display = 'block';
+        }
+
+        // Initialize
+        newExpand();
+        newCombine();
+        newFix();
+        newOrder();
     </script>
 </body>
 </html>
