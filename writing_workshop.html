@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guided Writing Workshop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen" style="background:linear-gradient(135deg,#0f172a,#1e3a5f,#0891b2);font-family:sans-serif;">
+    <a href="index.html" style="position:fixed;top:1rem;right:1rem;padding:0.5rem 1rem;background:rgba(14,165,233,0.2);border:1px solid rgba(14,165,233,0.4);border-radius:8px;color:#90e0ef;text-decoration:none;">Back</a>
+    <header style="padding:3rem 1rem;text-align:center;">
+        <h1 style="font-size:2.5rem;font-weight:700;color:#fff;margin-bottom:1rem;">Writing Workshop</h1>
+    </header>
+    <main style="padding:2rem;max-width:72rem;margin:0 auto;">
+        <div style="background:rgba(26,31,46,0.95);border:1px solid rgba(14,165,233,0.2);border-radius:1rem;overflow:hidden;">
+            <div style="display:flex;border-bottom:1px solid #374151;">
+                <button onclick="show('prompts')" style="flex:1;padding:1rem;background:rgba(14,165,233,0.3);color:#fff;border:none;">Prompts</button>
+                <button onclick="show('templates')" style="flex:1;padding:1rem;background:rgba(45,55,72,0.5);color:#94a3b8;border:none;">Templates</button>
+                <button onclick="show('sentences')" style="flex:1;padding:1rem;background:rgba(45,55,72,0.5);color:#94a3b8;border:none;">Sentences</button>
+                <button onclick="show('paragraphs')" style="flex:1;padding:1rem;background:rgba(45,55,72,0.5);color:#94a3b8;border:none;">Paragraphs</button>
+                <button onclick="show('creative')" style="flex:1;padding:1rem;background:rgba(45,55,72,0.5);color:#94a3b8;border:none;">Creative</button>
+            </div>
+            <div id="prompts" style="padding:1.5rem;">
+                <h2 style="color:#fff;font-size:1.5rem;margin-bottom:1rem;">Writing Prompts</h2>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:1.5rem;">
+                    <div onclick="showPrompt('creative')" style="background:rgba(45,55,72,0.7);border-left:4px solid #f59e0b;padding:1rem;border-radius:0.5rem;cursor:pointer;"><h3 style="color:#fff;">Creative</h3><p style="color:#94a3b8;font-size:0.875rem;">Fantastical worlds</p></div>
+                    <div onclick="showPrompt('narrative')" style="background:rgba(45,55,72,0.7);border-left:4px solid #10b981;padding:1rem;border-radius:0.5rem;cursor:pointer;"><h3 style="color:#fff;">Narrative</h3><p style="color:#94a3b8;font-size:0.875rem;">Personal stories</p></div>
+                    <div onclick="showPrompt('expository')" style="background:rgba(45,55,72,0.7);border-left:4px solid #8b5cf6;padding:1rem;border-radius:0.5rem;cursor:pointer;"><h3 style="color:#fff;">Expository</h3><p style="color:#94a3b8;font-size:0.875rem;">Facts & details</p></div>
+                    <div onclick="showPrompt('persuasive')" style="background:rgba(45,55,72,0.7);border-left:4px solid #ef4444;padding:1rem;border-radius:0.5rem;cursor:pointer;"><h3 style="color:#fff;">Persuasive</h3><p style="color:#94a3b8;font-size:0.875rem;">Arguments</p></div>
+                </div>
+                <div id="parea" style="display:none;background:rgba(14,165,233,0.1);border:2px dashed rgba(14,165,233,0.3);border-radius:0.75rem;padding:1.5rem;">
+                    <h3 id="pt" style="color:#fff;margin-bottom:0.5rem;"></h3>
+                    <p id="ptx" style="color:#e2e8f0;margin-bottom:1rem;"></p>
+                    <div style="margin-bottom:1rem;"><strong style="color:#90e0ef;">Tips:</strong><ul id="tips" style="color:#94a3b8;margin-top:0.5rem;"></ul></div>
+                    <textarea id="wi" style="width:100%;min-height:150px;background:rgba(45,55,72,0.9);border:1px solid rgba(14,165,233,0.2);color:#e2e8f0;padding:1rem;border-radius:0.5rem;" placeholder="Start writing..."></textarea>
+                    <button onclick="checkWriting()" style="margin-top:1rem;padding:0.75rem 2rem;background:linear-gradient(135deg,#f59e0b,#fbbf24);border:none;border-radius:0.5rem;color:#fff;font-weight:700;cursor:pointer;">Check Writing</button>
+                    <div id="wf" style="display:none;margin-top:1rem;padding:1rem;background:rgba(45,55,72,0.9);border-radius:0.5rem;color:#e2e8f0;"></div>
+                </div>
+            </div>
+            <div id="templates" style="display:none;padding:1.5rem;"><h2 style="color:#fff;">Templates</h2><p style="color:#94a3b8;">Use these structures for your writing.</p></div>
+            <div id="sentences" style="display:none;padding:1.5rem;"><h2 style="color:#fff;">Sentence Building</h2><p style="color:#94a3b8;">Practice sentence structures.</p></div>
+            <div id="paragraphs" style="display:none;padding:1.5rem;"><h2 style="color:#fff;">Paragraph Organization</h2><p style="color:#94a3b8;">Learn paragraph structure.</p></div>
+        </div>
+    </main>
+    <script>
+        const prompts = {
+            creative: { title: 'Creative Writing', text: 'You discover a hidden door in your school. Where does it lead?', tips: ['Use vivid descriptions', 'Create interesting characters', 'Include a challenge'] },
+            narrative: { title: 'Narrative Writing', text: 'Write about a time you learned an important lesson.', tips: ['Start with clear beginning', 'Include details', 'End with what you learned'] },
+            expository: { title: 'Expository Writing', text: 'Explain why learning English is important.', tips: ['Start with thesis', 'Provide examples', 'Organize logically'] },
+            persuasive: { title: 'Persuasive Writing', text: 'Should students have homework every day?', tips: ['State opinion clearly', 'Provide reasons', 'Address counterarguments'] }
+        };
+        function show(id) {
+            ['prompts','templates','sentences','paragraphs','creative'].forEach(x => document.getElementById(x).style.display = x===id?'block':'none');
+        }
+        function showPrompt(cat) {
+            const p = prompts[cat];
+            document.getElementById('pt').textContent = p.title;
+            document.getElementById('ptx').textContent = p.text;
+            document.getElementById('tips').innerHTML = p.tips.map(t=>'<li>'+t+'</li>').join('');
+            document.getElementById('parea').style.display = 'block';
+        }
+        function checkWriting() {
+            const t = document.getElementById('wi').value;
+            const w = t.trim().split(/\s+/).filter(x=>x.length>0).length;
+            const s = t.split(/[.!?]+/).filter(x=>x.trim().length>0).length;
+            const avg = s>0 ? Math.round(w/s) : 0;
+            let fb = [];
+            if(w<50) fb.push('Try writing more.');
+            else if(w>=150) fb.push('Great length!');
+            if(s<3) fb.push('Add more sentences.');
+            if(fb.length===0) fb.push('Excellent work!');
+            document.getElementById('wf').innerHTML = '<div><b>Words:</b> '+w+' | <b>Sentences:</b> '+s+' | <b>Avg:</b> '+avg+'</div>'+fb.join('<br>');
+            document.getElementById('wf').style.display = 'block';
+        }
+        function startTimer(m) {
+            const d = document.getElementById('timer');
+            d.style.display = 'block';
+            let s = m*60;
+            const int = setInterval(() => {
+                const mins = Math.floor(s/60), secs = s%60;
+                d.textContent = mins.toString().padStart(2,'0')+':'+secs.toString().padStart(2,'0');
+                if(s<=0) { clearInterval(int); alert("Time's up!"); d.style.display='none'; }
+                s--;
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

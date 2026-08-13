@@ -1,5 +1,1 @@
-(index.html is a source file, so no changes needed to .gitignore)
-
-```gitignore
-
-```
+Nothing should be ignored based on the provided file changes. The changes only include HTML files (writing_workshop.html and index.html), which are source code files and should not be added to .gitignore.
