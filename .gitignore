@@ -1,1 +1,1 @@
-Nothing should be ignored based on the provided file changes. The changes only include HTML files (writing_workshop.html and index.html), which are source code files and should not be added to .gitignore.
+Nothing should be ignored based on the provided file changes. The only modified file is `writing_workshop.html`, which is a source file and should not be added to .gitignore.
