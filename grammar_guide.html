@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Grammar Guide - CMC Network</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .back-btn {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 10px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .nav-tab {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-tab:hover, .nav-tab.active {
+            background: white;
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .section {
+            display: none;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: fadeIn 0.5s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 25px;
+            font-size: 2rem;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .topic {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: #f8f9ff;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+
+        .topic h3 {
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .topic p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .example-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border: 2px dashed #667eea;
+        }
+
+        .example-box.correct {
+            border-left: 5px solid #4CAF50;
+            background: #f0fff0;
+        }
+
+        .example-box.incorrect {
+            border-left: 5px solid #f44336;
+            background: #fff0f0;
+        }
+
+        .example-label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .correct .example-label { color: #4CAF50; }
+        .incorrect .example-label { color: #f44336; }
+
+        .rule-box {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .rule-box h4 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .quiz-container {
+            margin-top: 30px;
+            padding: 25px;
+            background: #f0f4ff;
+            border-radius: 15px;
+        }
+
+        .quiz-question {
+            margin-bottom: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .quiz-option {
+            padding: 12px 20px;
+            background: #f8f9ff;
+            border: 2px solid #e0e5ff;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-option:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .quiz-option.selected {
+            background: #764ba2;
+            color: white;
+            border-color: #764ba2;
+        }
+
+        .quiz-option.correct {
+            background: #4CAF50 !important;
+            color: white !important;
+            border-color: #4CAF50 !important;
+        }
+
+        .quiz-option.wrong {
+            background: #f44336 !important;
+            color: white !important;
+            border-color: #f44336 !important;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 500;
+            display: none;
+        }
+
+        .feedback.success {
+            background: #d4edda;
+            color: #155724;
+            display: block;
+        }
+
+        .feedback.error {
+            background: #f8d7da;
+            color: #721c24;
+            display: block;
+        }
+
+        .score-display {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #667eea;
+            margin-top: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .tips-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .tips-list li {
+            padding: 10px 0 10px 30px;
+            position: relative;
+            border-bottom: 1px solid #e0e5ff;
+        }
+
+        .tips-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            .section { padding: 25px; }
+            .nav-tabs { gap: 8px; }
+            .nav-tab { padding: 10px 15px; font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-btn">← Back to Home</a>
+            <h1>📚 Complete Grammar Guide</h1>
+            <p>Master the fundamentals of English grammar with interactive lessons and quizzes</p>
+        </header>
+
+        <div class="nav-tabs">
+            <div class="nav-tab active" data-section="parts-of-speech">Parts of Speech</div>
+            <div class="nav-tab" data-section="sentence-structure">Sentence Structure</div>
+            <div class="nav-tab" data-section="punctuation">Punctuation</div>
+            <div class="nav-tab" data-section="tenses">Verb Tenses</div>
+            <div class="nav-tab" data-section="common-mistakes">Common Mistakes</div>
+            <div class="nav-tab" data-section="quiz">Practice Quiz</div>
+        </div>
+
+        <!-- Parts of Speech -->
+        <div id="parts-of-speech" class="section active">
+            <h2>Parts of Speech</h2>
+            
+            <div class="topic">
+                <h3>1. Nouns</h3>
+                <p>Nouns are words that name people, places, things, or ideas.</p>
+                <div class="rule-box">
+                    <h4>Types of Nouns:</h4>
+                    <ul class="tips-list">
+                        <li><strong>Common nouns:</strong> general names (city, dog, teacher)</li>
+                        <li><strong>Proper nouns:</strong> specific names (Paris, Rover, Mr. Smith) - always capitalized</li>
+                        <li><strong>Concrete nouns:</strong> things you can perceive with senses (book, music)</li>
+                        <li><strong>Abstract nouns:</strong> ideas or concepts (freedom, love, happiness)</li>
+                    </ul>
+                </div>
+                <div class="example-box incorrect">
+                    <span class="example-label">❌ Incorrect:</span>
+                    i live in paris and my dog rover loves it.
+                </div>
+                <div class="example-box correct">
+                    <span class="example-label">✅ Correct:</span>
+                    I live in Paris and my dog Rover loves it.
+                </div>
+            </div>
+
+            <div class="topic">
+                <h3>2. Verbs</h3>
+                <p>Verbs express actions, occurrences, or states of being.</p>
+                <div class="rule-box">
+                    <h4>Key Points:</h4>
+                    <ul class="tips-list">
+                        <li>Action verbs show what someone or something does (run, write, think)</li>
+                        <li>Linking verbs connect subjects to descriptions (is, seem, become)</li>
+                        <li>Helping verbs assist main verbs (have, will, can, must)</li>
+                    </ul>
+                </div>
+                <div class="example-box correct">
+                    <span class="example-label">✅ Examples:</span>
+                    She <strong>runs</strong> every morning. (action)<br>
+                    He <strong>is</strong> a teacher. (linking)<br>
+                    They <strong>will study</strong> tonight. (helping + main)
+                </div>
+            </div>
+
+            <div class="topic">
+                <h3>3. Adjectives & Adverbs</h3>
+                <p>Adjectives describe nouns; adverbs describe verbs, adjectives, or other adverbs.</p>
+                <div class="rule-box">
+                    <h4>Quick Tip:</h4>
+                    <p>Many adverbs end in "-ly", but not all! (fast, hard, well are adverbs without -ly)</p>
+                </div>
+                <div class="example-box correct">
+                    <span class="example-label">✅ Examples:</span>
+                    The <strong>quick</strong> brown fox (adjective describing "fox")<br>
+                    She runs <strong>quickly</strong>. (adverb describing "runs")<br>
+                    He is <strong>extremely</strong> talented. (adverb describing adjective "talented")
+                </div>
+            </div>
+
+            <div class="topic">
+                <h3>4. Pronouns</h3>
+                <p>Pronouns replace nouns to avoid repetition.</p>
+                <div class="rule-box">
+                    <h4>Common Pronoun Types:</h4>
+                    <ul class="tips-list">
+                        <li>Subject: I, you, he, she, it, we, they</li>
+                        <li>Object: me, you, him, her, it, us, them</li>
+                        <li>Possessive: my/mine, your/yours, his, her/hers, its, our/ours, their/theirs</li>
+                    </ul>
+                </div>
+                <div class="example-box incorrect">
+                    <span class="example-label">❌ Incorrect:</span>
+                    Me and him went to the store.
+                </div>
+                <div class="example-box correct">
+                    <span class="example-label">✅ Correct:</span>
+                    He and I went to the store.
+                </div>
+            </div>
+        </div>
+
+        <!-- Sentence Structure -->
+        <div id="sentence-structure" class="section">
+            <h2>Sentence Structure</h2>
+            
+            <div class="topic">
+                <h3>Basic Sentence Patterns</h3>
+                <p>Every complete sentence needs a subject and a predicate (verb).</p>
+                <div class="rule-box">
+                    <h4>Four Main Types:</h4>
+                    <ul class="tips-list">
+                        <li><strong>Simple:</strong> One independent clause (The dog barked.)</li>
+                        <li><strong>Compound:</strong> Two independent clauses joined by conjunction (The dog barked, and the cat ran.)</li>
+                        <li><strong>Complex:</strong> One independent + one dependent clause (When the dog barked, the cat ran.)</li>
+                        <li><strong>Compound-Complex:</strong> Two+ independent + one+ dependent clauses</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="topic">
+                <h3>Subject-Verb Agreement</h3>
+                <p>The subject and verb must agree in number (singular/plural).</p>
+                <div class="example-box incorrect">
+                    <span class="example-label">❌ Incorrect:</span>
+                    The list of items are on the table.<br>
+                    Each of the students have a book.
+                </div>
+                <div class="example-box correct">
+                    <span class="example-label">✅ Correct:</span>
+                    The list of items <strong>is</strong> on the table. (subject = "list", singular)<br>
+                    Each of the students <strong>has</strong> a book. (subject = "Each", singular)
+                </div>
+                <div class="rule-box">
+                    <h4>Tricky Cases:</h4>
+                    <ul class="tips-list">
+                        <li>Words like "each," "everyone," "nobody" are singular</li>
+                        <li>Ignore phrases between subject and verb ("of items," "of the students")</li>
+                        <li>"Either/or" and "neither/nor" agree with the closer subject</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="topic">
+                <h3>Parallel Structure</h3>
+                <p>Items in a list or comparison should use the same grammatical form.</p>
+                <div class="example-box incorrect">
+                    <span class="example-label">❌ Incorrect:</span>
+                    She likes hiking, swimming, and to ride bikes.<br>
+                    The project was challenging but rewarding experience.
+                </div>
+                <div class="example-box correct">
+                    <span class="example-label">✅ Correct:</span>
+                    She likes hiking, swimming, and riding bikes. (all -ing forms)<br>
+                    The project was challenging but was a rewarding experience. (parallel clauses)
+                </div>
+            </div>
+        </div>
+
+        <!-- Punctuation -->
+        <div id="punctuation" class="section">
+            <h2>Punctuation Rules</h2>
+            
+            <div class="topic">
+                <h3>Commas (,)</h3>
+                <div class="rule-box">
+                    <h4>When to Use Commas:</h4>
+                    <ul class="tips-list">
+                        <li>Separate items in a list (apples, oranges, and bananas)</li>
+                        <li>After introductory phrases (However, I disagree.)</li>
+                        <li>Before conjunctions joining independent clauses (I wanted to go, but I was tired.)</li>
+                        <li>Set off non-essential information (My brother, who lives in Paris, is visiting.)</li>
+                    </ul>
+                </div>
+                <div class="example-box incorrect">
+                    <span class="example-label">❌ Incorrect (Missing Oxford comma):</span>
+                    I invited my parents Oprah Winfrey and the President.
+                </div>
+                <div class="example-box correct">
+                    <span class="example-label">✅ Correct:</span>
+                    I invited my parents, Oprah Winfrey, and the President.
+                </div>
+            </div>
+
+            <div class="topic">
+                <h3>Semicolons (;) & Colons (:)</h3>
+                <p><strong>Semicolon:</strong> Connects closely related independent clauses or separates complex list items.</p>
+                <div class="example-box correct">
+                    <span class="example-label">✅ Semicolon Examples:</span>
+                    I have a big test tomorrow; I can't go out tonight.<br>
+                    We visited Paris, France; London, England; and Rome, Italy.
+                </div>
+                <p style="margin-top: 15px;"><strong>Colon:</strong> Introduces lists, explanations, or quotations.</p>
+                <div class="example-box correct">
+                    <span class="example-label">✅ Colon Examples:</span>
+                    You need three things: courage, patience, and practice.<br>
+                    She had one goal: to win the championship.
+                </div>
+            </div>
+
+            <div class="topic">
+                <h3>Apostrophes (')</h3>
+                <div class="rule-box">
+                    <h4>Two Main Uses:</h4>
+                    <ul class="tips-list">
+                        <li>Possession: Sarah's book, the dogs' toys (plural ending in s)</li>
+                        <li>Contractions: don't (do not), it's (it is), they're (they are)</li>
+                    </ul>
+                </div>
+                <div class="example-box incorrect">
+                    <span class="example-label">❌ Common Mistake:</span>
+                    Its a beautiful day. The cats toy is broken.
+                </div>
+                <div class="example-box correct">
+                    <span class="example-label">✅ Correct:</span>
+                    It's a beautiful day. (It is)<br>
+                    The cat's toy is broken. (possessive)
+                </div>
+            </div>
+
+            <div class="topic">
+                <h3>Quotation Marks (" ")</h3>
+                <div class="rule-box">
+                    <h4>Important Rules:</h4>
+                    <ul class="tips-list">
+                        <li>Periods and commas go INSIDE quotation marks</li>
+                        <li>Colons and semicolons go OUTSIDE quotation marks</li>
+                        <li>Question marks depend on context</li>
+                    </ul>
+                </div>
+                <div class="example-box correct">
+                    <span class="example-label">✅ Examples:</span>
+                    She said, "I'll be there soon."<br>
+                    Did he really say "I quit"?<br>
+                    He called her "the best"; however, she disagreed.
+                </div>
+            </div>
+        </div>
+
+        <!-- Verb Tenses -->
+        <div id="tenses" class="section">
+            <h2>Verb Tenses</h2>
+            
+            <div class="topic">
+                <h3>Present Tenses</h3>
+                <div class="rule-box">
+                    <h4>Simple Present:</h4>
+                    <p>Habits, facts, general truths</p>
+                </div>
+                <div class="example-box correct">
+                    <span class="example-label">✅ Examples:</span>
+                    She walks to school every day.<br>
+                    Water boils at 100°C.
+                </div>
+
+                <div class="rule-box" style="margin-top: 15px;">
+                    <h4>Present Continuous:</h4>
+                    <p>Actions happening now or temporary situations</p>
+                </div>
+                <div class="example-box correct">
+                    <span class="example-label">✅ Examples:</span>
+                    I am studying grammar right now.<br>
+                    They are staying with us this week.
+                </div>
+
+                <div class="rule-box" style="margin-top: 15px;">
+                    <h4>Present Perfect:</h4>
+                    <p>Actions started in past, continue to present, or completed at unspecified time</p>
+                </div>
+                <div class="example-box correct">
+                    <span class="example-label">✅ Examples:</span>
+                    I have lived here for five years.<br>
+                    She has visited Paris three times.
+                </div>
+            </div>
+
+            <div class="topic">
+                <h3>Past Tenses</h3>
+                <div class="rule-box">
+                    <h4>Simple Past:</h4>
+                    <p>Completed actions at specific time in past</p>
+                </div>
+                <div class="example-box correct">
+                    <span class="example-label">✅ Examples:</span>
+                    I walked to school yesterday.<br>
+                    She finished her homework last night.
+                </div>
+
+                <div class="rule-box" style="margin-top: 15px;">
+                    <h4>Past Continuous:</h4>
+                    <p>Actions in progress at specific past time</p>
+                </div>
+                <div class="example-box correct">
+                    <span class="example-label">✅ Examples:</span>
+                    I was studying when you called.<br>
+                    They were playing soccer at 3 PM.
+                </div>
+
+                <div class="rule-box" style="margin-top: 15px;">
+                    <h4>Past Perfect:</h4>
+                    <p>Action completed before another past action</p>
+                </div>
+                <div class="example-box correct">
+                    <span class="example-label">✅ Examples:</span>
+                    I had already eaten when she arrived.<br>
+                    They had finished the project before the deadline.
+                </div>
+            </div>
+
+            <div class="topic">
+                <h3>Future Tenses</h3>
+                <div class="rule-box">
+                    <h4>Simple Future:</h4>
+                    <p>Actions that will happen</p>
+                </div>
+                <div class="example-box correct">
+                    <span class="example-label">✅ Examples:</span>
+                    I will call you tomorrow.<br>
+                    She is going to study medicine.
+                </div>
+
+                <div class="rule-box" style="margin-top: 15px;">
+                    <h4>Future Perfect:</h4>
+                    <p>Action that will be completed before a future time</p>
+                </div>
+                <div class="example-box correct">
+                    <span class="example-label">✅ Examples:</span>
+                    By next year, I will have graduated.<br>
+                    They will have finished by 5 PM.
+                </div>
+            </div>
+
+            <div class="topic">
+                <h3>Irregular Verbs Quick Reference</h3>
+                <div class="example-box">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tr style="background: #667eea; color: white;">
+                            <th style="padding: 10px;">Base Form</th>
+                            <th style="padding: 10px;">Past Simple</th>
+                            <th style="padding: 10px;">Past Participle</th>
+                        </tr>
+                        <tr><td style="padding: 10px; border-bottom: 1px solid #ddd;">go</td><td style="padding: 10px; border-bottom: 1px solid #ddd;">went</td><td style="padding: 10px; border-bottom: 1px solid #ddd;">gone</td></tr>
+                        <tr><td style="padding: 10px; border-bottom: 1px solid #ddd;">see</td><td style="padding: 10px; border-bottom: 1px solid #ddd;">saw</td><td style="padding: 10px; border-bottom: 1px solid #ddd;">seen</td></tr>
+                        <tr><td style="padding: 10px; border-bottom: 1px solid #ddd;">write</td><td style="padding: 10px; border-bottom: 1px solid #ddd;">wrote</td><td style="padding: 10px; border-bottom: 1px solid #ddd;">written</td></tr>
+                        <tr><td style="padding: 10px; border-bottom: 1px solid #ddd;">take</td><td style="padding: 10px; border-bottom: 1px solid #ddd;">took</td><td style="padding: 10px; border-bottom: 1px solid #ddd;">taken</td></tr>
+                        <tr><td style="padding: 10px;">bring</td><td style="padding: 10px;">brought</td><td style="padding: 10px;">brought</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Common Mistakes -->
+        <div id="common-mistakes" class="section">
+            <h2>Common Grammar Mistakes</h2>
+            
+            <div class="topic">
+                <h3>1. Your vs. You're</h3>
+                <div class="rule-box">
+                    <h4>Remember:</h4>
+                    <ul class="tips-list">
+                        <li><strong>Your</strong> = possessive (belonging to you)</li>
+                        <li><strong>You're</strong> = contraction of "you are"</li>
+                    </ul>
+                </div>
+                <div class="example-box incorrect">
+                    <span class="example-label">❌ Incorrect:</span>
+                    Your going to love this. Is this you're book?
+                </div>
+                <div class="example-box correct">
+                    <span class="example-label">✅ Correct:</span>
+                    You're going to love this. Is this your book?
+                </div>
+            </div>
+
+            <div class="topic">
+                <h3>2. Their vs. There vs. They're</h3>
+                <div class="rule-box">
+                    <h4>Quick Guide:</h4>
+                    <ul class="tips-list">
+                        <li><strong>Their</strong> = possessive (belonging to them)</li>
+                        <li><strong>There</strong> = place or existence</li>
+                        <li><strong>They're</strong> = contraction of "they are"</li>
+                    </ul>
+                </div>
+                <div class="example-box correct">
+                    <span class="example-label">✅ Examples:</span>
+                    Their house is over there, and they're coming soon.
+                </div>
+            </div>
+
+            <div class="topic">
+                <h3>3. Its vs. It's</h3>
+                <div class="rule-box">
+                    <h4>Test:</h4>
+                    <p>If you can replace it with "it is," use <strong>it's</strong>. Otherwise, use <strong>its</strong> (possessive).</p>
+                </div>
+                <div class="example-box incorrect">
+                    <span class="example-label">❌ Incorrect:</span>
+                    The dog wagged it's tail. Its raining outside.
+                </div>
+                <div class="example-box correct">
+                    <span class="example-label">✅ Correct:</span>
+                    The dog wagged its tail. It's raining outside.
+                </div>
+            </div>
+
+            <div class="topic">
+                <h3>4. Affect vs. Effect</h3>
+                <div class="rule-box">
+                    <h4>Simple Rule:</h4>
+                    <ul class="tips-list">
+                        <li><strong>Affect</strong> (usually verb) = to influence</li>
+                        <li><strong>Effect</strong> (usually noun) = result or consequence</li>
+                    </ul>
+                </div>
+                <div class="example-box correct">
+                    <span class="example-label">✅ Examples:</span>
+                    The weather will affect our plans. (verb)<br>
+                    The effect of the storm was devastating. (noun)
+                </div>
+            </div>
+
+            <div class="topic">
+                <h3>5. Who vs. Whom</h3>
+                <div class="rule-box">
+                    <h4>Trick:</h4>
+                    <p>Replace with he/him: if "he" works, use <strong>who</strong>; if "him" works, use <strong>whom</strong>.</p>
+                </div>
+                <div class="example-box correct">
+                    <span class="example-label">✅ Examples:</span>
+                    Who called? (He called.)<br>
+                    To whom should I speak? (Should I speak to him?)
+                </div>
+            </div>
+
+            <div class="topic">
+                <h3>6. Less vs. Fewer</h3>
+                <div class="rule-box">
+                    <h4>Rule:</h4>
+                    <ul class="tips-list">
+                        <li><strong>Fewer</strong> = countable items (fewer apples, fewer students)</li>
+                        <li><strong>Less</strong> = uncountable quantities (less water, less time)</li>
+                    </ul>
+                </div>
+                <div class="example-box incorrect">
+                    <span class="example-label">❌ Incorrect:</span>
+                    I have less friends than you.
+                </div>
+                <div class="example-box correct">
+                    <span class="example-label">✅ Correct:</span>
+                    I have fewer friends than you.
+                </div>
+            </div>
+        </div>
+
+        <!-- Practice Quiz -->
+        <div id="quiz" class="section">
+            <h2>Grammar Practice Quiz</h2>
+            <p style="margin-bottom: 20px;">Test your knowledge with these 10 questions!</p>
+            
+            <div class="quiz-container" id="quiz-container">
+                <!-- Questions will be loaded by JavaScript -->
+            </div>
+
+            <button class="btn" onclick="submitQuiz()">Submit Answers</button>
+            <button class="btn" onclick="resetQuiz()" style="background: #999; margin-left: 10px;">Reset Quiz</button>
+            
+            <div class="score-display" id="score-display"></div>
+        </div>
+    </div>
+
+    <script>
+        // Tab Navigation
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+                
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.section).classList.add('active');
+            });
+        });
+
+        // Quiz Data
+        const quizQuestions = [
+            {
+                question: "Which sentence is correct?",
+                options: [
+                    "Me and John went to the store.",
+                    "John and I went to the store.",
+                    "John and me went to the store.",
+                    "I and John went to the store."
+                ],
+                correct: 1,
+                explanation: "'John and I' is correct because 'I' is a subject pronoun. Remove 'John' to test: 'I went' sounds right, 'Me went' does not."
+            },
+            {
+                question: "Choose the correct punctuation:",
+                options: [
+                    "She said \"I'll be there soon\".",
+                    "She said, \"I'll be there soon.\"",
+                    "She said \"I'll be there soon.\"",
+                    "She said, \"I'll be there soon\"."
+                ],
+                correct: 1,
+                explanation: "Use a comma before a quotation, and the period goes inside the quotation marks."
+            },
+            {
+                question: "Which word completes the sentence? 'The weather will _____ our plans.'",
+                options: ["effect", "affect", "effects", "affects"],
+                correct: 1,
+                explanation: "'Affect' is usually a verb meaning 'to influence.' 'Effect' is usually a noun meaning 'result.'"
+            },
+            {
+                question: "Identify the correct sentence:",
+                options: [
+                    "Its a beautiful day outside.",
+                    "It's a beautiful day outside.",
+                    "Its' a beautiful day outside.",
+                    "It's a beautiful day, outside."
+                ],
+                correct: 1,
+                explanation: "'It's' is the contraction of 'it is.' 'Its' shows possession."
+            },
+            {
+                question: "Which sentence shows proper subject-verb agreement?",
+                options: [
+                    "The list of items are on the table.",
+                    "The list of items is on the table.",
+                    "The list of items were on the table.",
+                    "The list of items have been on the table."
+                ],
+                correct: 1,
+                explanation: "The subject is 'list' (singular), not 'items.' Therefore, use the singular verb 'is.'"
+            },
+            {
+                question: "Choose the correct form: 'She has _____ to Paris three times.'",
+                options: ["went", "gone", "go", "going"],
+                correct: 1,
+                explanation: "Present perfect tense requires 'has/have' + past participle. The past participle of 'go' is 'gone.'"
+            },
+            {
+                question: "Which sentence uses parallel structure correctly?",
+                options: [
+                    "She likes hiking, swimming, and to ride bikes.",
+                    "She likes to hike, swimming, and bike riding.",
+                    "She likes hiking, swimming, and biking.",
+                    "She likes to hike, swim, and bike riding."
+                ],
+                correct: 2,
+                explanation: "All items in the list should have the same grammatical form. Option C uses all -ing forms consistently."
+            },
+            {
+                question: "Select the correct option: '_____ going to the party tonight?'",
+                options: ["Your", "You're", "Yours", "You"],
+                correct: 1,
+                explanation: "'You're' is the contraction of 'you are.' Test: 'You are going' makes sense."
+            },
+            {
+                question: "Which sentence is punctuated correctly?",
+                options: [
+                    "I bought apples oranges and bananas.",
+                    "I bought apples, oranges, and bananas.",
+                    "I bought apples oranges, and bananas.",
+                    "I bought, apples, oranges, and bananas."
+                ],
+                correct: 1,
+                explanation: "Use commas to separate items in a list. The Oxford comma (before 'and') is recommended for clarity."
+            },
+            {
+                question: "Choose the correct word: 'I have _____ friends than you.'",
+                options: ["less", "fewer", "lesser", "more less"],
+                correct: 1,
+                explanation: "Use 'fewer' for countable items (friends). Use 'less' for uncountable quantities (less water)."
+            }
+        ];
+
+        let selectedAnswers = new Array(quizQuestions.length).fill(null);
+
+        function loadQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
+
+            quizQuestions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'quiz-question';
+                questionDiv.innerHTML = `
+                    <p style="font-weight: 600; margin-bottom: 10px;">${index + 1}. ${q.question}</p>
+                    <div class="quiz-options">
+                        ${q.options.map((opt, i) => `
+                            <div class="quiz-option" data-question="${index}" data-option="${i}" onclick="selectOption(${index}, ${i})">${opt}</div>
+                        `).join('')}
+                    </div>
+                    <div class="feedback" id="feedback-${index}"></div>
+                `;
+                container.appendChild(questionDiv);
+            });
+        }
+
+        function selectOption(questionIndex, optionIndex) {
+            selectedAnswers[questionIndex] = optionIndex;
+            
+            document.querySelectorAll(`.quiz-option[data-question="${questionIndex}"]`).forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            document.querySelector(`.quiz-option[data-question="${questionIndex}"][data-option="${optionIndex}"]`)
+                .classList.add('selected');
+        }
+
+        function submitQuiz() {
+            let score = 0;
+            
+            quizQuestions.forEach((q, index) => {
+                const feedbackEl = document.getElementById(`feedback-${index}`);
+                const options = document.querySelectorAll(`.quiz-option[data-question="${index}"]`);
+                
+                options.forEach(opt => {
+                    opt.style.pointerEvents = 'none';
+                    const optIndex = parseInt(opt.dataset.option);
+                    
+                    if (optIndex === q.correct) {
+                        opt.classList.add('correct');
+                    } else if (opt.classList.contains('selected') && optIndex !== q.correct) {
+                        opt.classList.add('wrong');
+                    }
+                });
+
+                if (selectedAnswers[index] === q.correct) {
+                    score++;
+                    feedbackEl.className = 'feedback success';
+                    feedbackEl.innerHTML = `✓ Correct! ${q.explanation}`;
+                } else {
+                    feedbackEl.className = 'feedback error';
+                    feedbackEl.innerHTML = `✗ Incorrect. ${q.explanation}`;
+                }
+            });
+
+            const scoreDisplay = document.getElementById('score-display');
+            scoreDisplay.textContent = `Your Score: ${score}/${quizQuestions.length} (${Math.round(score/quizQuestions.length*100)}%)`;
+            scoreDisplay.style.display = 'block';
+            
+            if (score >= 8) {
+                scoreDisplay.innerHTML += '<br>🎉 Excellent work!';
+            } else if (score >= 6) {
+                scoreDisplay.innerHTML += '<br>👍 Good job! Keep practicing!';
+            } else {
+                scoreDisplay.innerHTML += '<br>📚 Review the sections above and try again!';
+            }
+        }
+
+        function resetQuiz() {
+            selectedAnswers.fill(null);
+            loadQuiz();
+            document.getElementById('score-display').style.display = 'none';
+        }
+
+        // Initialize quiz on load
+        loadQuiz();
+    </script>
+</body>
+</html>
