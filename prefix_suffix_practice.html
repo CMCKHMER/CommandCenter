@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prefix & Suffix Practice</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Poppins:wght@600;700;800;900&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Outfit', sans-serif; 
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 25%, #0891b2 75%, #06b6d4 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+        
+        .hero-headline { font-family: 'Poppins', sans-serif; }
+        .hero-body { font-family: 'Nunito', sans-serif; }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #ffffff 0%, #90e0ef 50%, #fbbf24 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .theme-input {
+            background: linear-gradient(135deg, rgba(45, 55, 72, 0.9) 0%, rgba(26, 31, 46, 0.95) 100%);
+            border: 1px solid rgba(14, 165, 233, 0.2);
+            color: #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        
+        .theme-input:focus {
+            outline: none;
+            border-color: rgba(14, 165, 233, 0.6);
+            box-shadow: 0 0 20px rgba(14, 165, 233, 0.3);
+        }
+        
+        .btn-3d {
+            position: relative;
+            display: inline-block;
+            padding: 12px 32px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #ffffff;
+            background: linear-gradient(135deg, #0077b6 0%, #00b4d8 50%, #90e0ef 100%);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 
+                0 8px 0 #005f91,
+                0 15px 20px rgba(0, 119, 182, 0.4),
+                0 0 30px rgba(0, 180, 216, 0.3);
+        }
+        
+        .btn-3d:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 
+                0 12px 0 #005f91,
+                0 20px 30px rgba(0, 119, 182, 0.5),
+                0 0 50px rgba(0, 180, 216, 0.6);
+        }
+        
+        .btn-3d:active {
+            transform: translateY(4px);
+            box-shadow: 
+                0 4px 0 #005f91,
+                0 8px 15px rgba(0, 119, 182, 0.3);
+        }
+        
+        .tab-active {
+            background: rgba(14, 165, 233, 0.3);
+            color: #fff;
+        }
+        
+        .tab-inactive {
+            background: rgba(45, 55, 72, 0.5);
+            color: #94a3b8;
+        }
+        
+        .correct-answer {
+            background: rgba(16, 185, 129, 0.3);
+            border-color: rgba(16, 185, 129, 0.6);
+        }
+        
+        .incorrect-answer {
+            background: rgba(239, 68, 68, 0.3);
+            border-color: rgba(239, 68, 68, 0.6);
+        }
+        
+        .feedback-correct {
+            color: #34d399;
+        }
+        
+        .feedback-incorrect {
+            color: #f87171;
+        }
+    </style>
+</head>
+<body>
+    <!-- Back Button -->
+    <a href="index.html" style="position:fixed;top:1rem;right:1rem;padding:0.5rem 1rem;background:rgba(14,165,233,0.2);border:1px solid rgba(14,165,233,0.4);border-radius:8px;color:#90e0ef;text-decoration:none;z-index:100;">← Back to Home</a>
+    
+    <!-- Header -->
+    <header class="py-12 px-4 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold gradient-text mb-4">🔤 Prefix & Suffix Practice</h1>
+        <p class="text-xl text-gray-300 max-w-3xl mx-auto">Master word building with interactive exercises for all skill levels</p>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 pb-16">
+        <!-- Level Selection Tabs -->
+        <div class="flex flex-wrap justify-center gap-4 mb-8">
+            <button onclick="showLevel('beginner')" id="btn-beginner" class="flex-1 min-w-[150px] max-w-[200px] py-3 px-6 rounded-lg font-semibold tab-active transition-all">
+                🌟 Beginner
+            </button>
+            <button onclick="showLevel('intermediate')" id="btn-intermediate" class="flex-1 min-w-[150px] max-w-[200px] py-3 px-6 rounded-lg font-semibold tab-inactive transition-all">
+                📚 Intermediate
+            </button>
+            <button onclick="showLevel('advanced')" id="btn-advanced" class="flex-1 min-w-[150px] max-w-[200px] py-3 px-6 rounded-lg font-semibold tab-inactive transition-all">
+                🎓 Advanced
+            </button>
+        </div>
+        
+        <!-- Rules Section -->
+        <div class="glass-card rounded-xl p-6 mb-8">
+            <h2 class="text-2xl font-bold gradient-text mb-4">📖 Quick Reference Guide</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="text-yellow-400 font-bold mb-2">✨ Prefixes</h3>
+                    <ul class="text-gray-300 space-y-2 text-sm">
+                        <li><strong>un-</strong> = not (happy → unhappy)</li>
+                        <li><strong>re-</strong> = again (write → rewrite)</li>
+                        <li><strong>pre-</strong> = before (view → preview)</li>
+                        <li><strong>dis-</strong> = opposite (agree → disagree)</li>
+                        <li><strong>mis-</strong> = wrongly (understand → misunderstand)</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-cyan-400 font-bold mb-2">✨ Suffixes</h3>
+                    <ul class="text-gray-300 space-y-2 text-sm">
+                        <li><strong>-er/-or</strong> = one who (teach → teacher)</li>
+                        <li><strong>-ing</strong> = action (run → running)</li>
+                        <li><strong>-ly</strong> = manner (quick → quickly)</li>
+                        <li><strong>-ness</strong> = state (kind → kindness)</li>
+                        <li><strong>-able</strong> = capable (read → readable)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Beginner Level -->
+        <div id="beginner-level" class="level-section">
+            <div class="glass-card rounded-xl p-6 mb-6">
+                <h2 class="text-2xl font-bold text-yellow-400 mb-4">🌟 Beginner Exercises</h2>
+                <p class="text-gray-300 mb-6">Add the correct prefix or suffix to complete each word.</p>
+                
+                <div id="beginner-questions" class="space-y-4">
+                    <!-- Questions will be loaded by JavaScript -->
+                </div>
+                
+                <button onclick="checkAnswers('beginner')" class="mt-6 btn-3d">Check Answers</button>
+                <div id="beginner-feedback" class="mt-4 text-lg font-semibold"></div>
+            </div>
+        </div>
+        
+        <!-- Intermediate Level -->
+        <div id="intermediate-level" class="level-section hidden">
+            <div class="glass-card rounded-xl p-6 mb-6">
+                <h2 class="text-2xl font-bold text-cyan-400 mb-4">📚 Intermediate Exercises</h2>
+                <p class="text-gray-300 mb-6">Choose the correct prefix or suffix. Watch for spelling changes!</p>
+                
+                <div id="intermediate-questions" class="space-y-4">
+                    <!-- Questions will be loaded by JavaScript -->
+                </div>
+                
+                <button onclick="checkAnswers('intermediate')" class="mt-6 btn-3d">Check Answers</button>
+                <div id="intermediate-feedback" class="mt-4 text-lg font-semibold"></div>
+            </div>
+        </div>
+        
+        <!-- Advanced Level -->
+        <div id="advanced-level" class="level-section hidden">
+            <div class="glass-card rounded-xl p-6 mb-6">
+                <h2 class="text-2xl font-bold text-purple-400 mb-4">🎓 Advanced Exercises</h2>
+                <p class="text-gray-300 mb-6">Master complex word forms with Latin and Greek roots.</p>
+                
+                <div id="advanced-questions" class="space-y-4">
+                    <!-- Questions will be loaded by JavaScript -->
+                </div>
+                
+                <button onclick="checkAnswers('advanced')" class="mt-6 btn-3d">Check Answers</button>
+                <div id="advanced-feedback" class="mt-4 text-lg font-semibold"></div>
+            </div>
+        </div>
+        
+        <!-- Practice Worksheet Download -->
+        <div class="glass-card rounded-xl p-6 mt-8 text-center">
+            <h2 class="text-2xl font-bold gradient-text mb-4">📝 Download Practice Worksheet</h2>
+            <p class="text-gray-300 mb-6">Get a printable PDF worksheet with additional exercises for offline practice.</p>
+            <button onclick="downloadWorksheet()" class="btn-3d bg-gradient-to-r from-purple-600 to-pink-600">
+                📥 Download PDF Worksheet
+            </button>
+        </div>
+    </main>
+    
+    <script>
+        // Question Data
+        const questions = {
+            beginner: [
+                { base: 'happy', answer: 'unhappy', hint: 'not happy', options: ['unhappy', 'rehappy', 'prehappy'] },
+                { base: 'write', answer: 'rewrite', hint: 'write again', options: ['writeer', 'rewrite', 'writing'] },
+                { base: 'teach', answer: 'teacher', hint: 'one who teaches', options: ['teaching', 'teacher', 'teached'] },
+                { base: 'quick', answer: 'quickly', hint: 'in a quick manner', options: ['quickful', 'quickly', 'quickness'] },
+                { base: 'view', answer: 'preview', hint: 'view before', options: ['review', 'preview', 'unview'] },
+                { base: 'kind', answer: 'kindness', hint: 'state of being kind', options: ['kindful', 'kindness', 'kindly'] },
+                { base: 'agree', answer: 'disagree', hint: 'opposite of agree', options: ['unagree', 'misagree', 'disagree'] },
+                { base: 'run', answer: 'running', hint: 'action of run', options: ['runned', 'running', 'runner'] }
+            ],
+            intermediate: [
+                { base: 'beautiful', answer: 'beautifully', hint: 'manner of being beautiful', options: ['beautifulness', 'beautifully', 'beautifuler'] },
+                { base: 'comfort', answer: 'comfortable', hint: 'capable of providing comfort', options: ['comfortful', 'comfortable', 'comforting'] },
+                { base: 'create', answer: 'creation', hint: 'the act of creating', options: ['creater', 'creation', 'creational'] },
+                { base: 'possible', answer: 'impossible', hint: 'not possible', options: ['unpossible', 'impossible', 'dispossible'] },
+                { base: 'fortune', answer: 'misfortune', hint: 'bad fortune', options: ['unfortune', 'misfortune', 'disfortune'] },
+                { base: 'connect', answer: 'connection', hint: 'the act of connecting', options: ['connectment', 'connection', 'connectance'] },
+                { base: 'hope', answer: 'hopeless', hint: 'without hope', options: ['hopeful', 'hopeless', 'hopely'] },
+                { base: 'act', answer: 'actor', hint: 'one who acts', options: ['acter', 'actor', 'action'] }
+            ],
+            advanced: [
+                { base: 'dictate', answer: 'contradict', hint: 'speak against', options: ['predict', 'contradict', 'indicate'] },
+                { base: 'port', answer: 'transport', hint: 'carry across', options: ['import', 'transport', 'report'] },
+                { base: 'spect', answer: 'introspect', hint: 'look within', options: ['inspect', 'introspect', 'retrospect'] },
+                { base: 'struct', answer: 'construct', hint: 'build together', options: ['destruct', 'construct', 'instruct'] },
+                { base: 'bene', answer: 'beneficial', hint: 'producing good', options: ['maleficent', 'beneficial', 'benign'] },
+                { base: 'mal', answer: 'malfunction', hint: 'function badly', options: ['function', 'malfunction', 'prefunction'] },
+                { base: 'anti', answer: 'antibiotic', hint: 'against life (bacteria)', options: ['antifreeze', 'antibiotic', 'anticlockwise'] },
+                { base: 'auto', answer: 'automatic', hint: 'self-acting', options: ['automobile', 'automatic', 'autograph'] }
+            ]
+        };
+        
+        // Show selected level
+        function showLevel(level) {
+            // Hide all levels
+            document.querySelectorAll('.level-section').forEach(el => el.classList.add('hidden'));
+            
+            // Show selected level
+            document.getElementById(`${level}-level`).classList.remove('hidden');
+            
+            // Update tab styles
+            document.querySelectorAll('[id^="btn-"]').forEach(btn => {
+                btn.classList.remove('tab-active');
+                btn.classList.add('tab-inactive');
+            });
+            document.getElementById(`btn-${level}`).classList.remove('tab-inactive');
+            document.getElementById(`btn-${level}`).classList.add('tab-active');
+            
+            // Load questions for this level
+            loadQuestions(level);
+        }
+        
+        // Load questions
+        function loadQuestions(level) {
+            const container = document.getElementById(`${level}-questions`);
+            container.innerHTML = '';
+            
+            questions[level].forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'p-4 rounded-lg bg-opacity-20 bg-blue-900 border border-blue-700';
+                questionDiv.innerHTML = `
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-gray-300 font-semibold">Q${index + 1}:</span>
+                        <span class="text-xs text-gray-400">Hint: ${q.hint}</span>
+                    </div>
+                    <div class="flex items-center gap-3 flex-wrap">
+                        <span class="text-white text-lg">${q.base} + </span>
+                        <select id="${level}-q${index}" class="theme-input px-4 py-2 rounded-lg">
+                            <option value="">Choose...</option>
+                            ${q.options.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
+                        </select>
+                    </div>
+                    <div id="${level}-feedback${index}" class="mt-2 text-sm"></div>
+                `;
+                container.appendChild(questionDiv);
+            });
+        }
+        
+        // Check answers
+        function checkAnswers(level) {
+            let score = 0;
+            const total = questions[level].length;
+            
+            questions[level].forEach((q, index) => {
+                const select = document.getElementById(`${level}-q${index}`);
+                const feedback = document.getElementById(`${level}-feedback${index}`);
+                const userAnswer = select.value;
+                
+                if (userAnswer === q.answer) {
+                    score++;
+                    select.classList.remove('incorrect-answer');
+                    select.classList.add('correct-answer');
+                    feedback.innerHTML = '<span class="feedback-correct">✓ Correct!</span>';
+                } else if (userAnswer === '') {
+                    select.classList.remove('correct-answer', 'incorrect-answer');
+                    feedback.innerHTML = '<span class="text-gray-400">Please select an answer</span>';
+                } else {
+                    select.classList.remove('correct-answer');
+                    select.classList.add('incorrect-answer');
+                    feedback.innerHTML = `<span class="feedback-incorrect">✗ Incorrect. The answer is: <strong>${q.answer}</strong></span>`;
+                }
+            });
+            
+            // Display overall score
+            const feedbackDiv = document.getElementById(`${level}-feedback`);
+            const percentage = Math.round((score / total) * 100);
+            
+            if (percentage === 100) {
+                feedbackDiv.innerHTML = `<span class="feedback-correct">🎉 Perfect! ${score}/${total} (${percentage}%)</span>`;
+            } else if (percentage >= 70) {
+                feedbackDiv.innerHTML = `<span class="text-yellow-400">👍 Good job! ${score}/${total} (${percentage}%)</span>`;
+            } else {
+                feedbackDiv.innerHTML = `<span class="feedback-incorrect">📚 Keep practicing! ${score}/${total} (${percentage}%)</span>`;
+            }
+        }
+        
+        // Download worksheet (simulated)
+        function downloadWorksheet() {
+            alert('📥 Worksheet download started!\n\nIn a production environment, this would generate and download a PDF file with:\n- 20 additional prefix exercises\n- 20 additional suffix exercises\n- Answer key\n- Explanation of rules\n- Word building challenges');
+        }
+        
+        // Initialize with beginner level
+        showLevel('beginner');
+    </script>
+</body>
+</html>
