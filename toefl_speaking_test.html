@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOEFL Speaking Practice Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Outfit', sans-serif; background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 25%, #0891b2 75%, #06b6d4 100%); background-attachment: fixed; min-height: 100vh; }
+        .hero-headline { font-family: 'Poppins', sans-serif; }
+        .hero-body { font-family: 'Nunito', sans-serif; }
+        .theme-card { background: linear-gradient(135deg, rgba(26, 31, 46, 0.95) 0%, rgba(45, 55, 72, 0.9) 100%); border: 1px solid rgba(14, 165, 233, 0.2); backdrop-filter: blur(10px); transition: all 0.3s ease; }
+        .btn-3d { position: relative; display: inline-block; padding: 16px 40px; font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #ffffff; background: linear-gradient(135deg, #0077b6 0%, #00b4d8 50%, #90e0ef 100%); border: none; border-radius: 12px; cursor: pointer; transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55); box-shadow: 0 8px 0 #005f91, 0 15px 20px rgba(0, 119, 182, 0.4); }
+        .btn-3d:hover { transform: translateY(-4px) scale(1.02); }
+        .btn-3d-gold { background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 50%, #fcd34d 100%); box-shadow: 0 8px 0 #d97706; }
+        .gradient-text { background: linear-gradient(135deg, #ffffff 0%, #90e0ef 50%, #fbbf24 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .theme-input { background: linear-gradient(135deg, rgba(45, 55, 72, 0.9) 0%, rgba(26, 31, 46, 0.95) 100%); border: 1px solid rgba(14, 165, 233, 0.2); color: #e2e8f0; }
+        .theme-input:focus { outline: none; border-color: rgba(14, 165, 233, 0.6); box-shadow: 0 0 20px rgba(14, 165, 233, 0.3); }
+        .timer-badge { background: linear-gradient(135deg, #0ea5e9, #14b8a6); color: white; padding: 0.75rem 1.5rem; border-radius: 12px; font-weight: 700; font-size: 1.2rem; font-family: 'Poppins', sans-serif; box-shadow: 0 0 20px rgba(14, 165, 233, 0.5); }
+        .timer-warning { background: linear-gradient(135deg, #f59e0b, #fbbf24); animation: pulse 1s infinite; }
+        .timer-danger { background: linear-gradient(135deg, #ef4444, #f87171); animation: pulse 0.5s infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        .progress-bar { background: rgba(45, 55, 72, 0.8); border-radius: 10px; overflow: hidden; height: 12px; }
+        .progress-fill { height: 100%; border-radius: 10px; background: linear-gradient(90deg, #0ea5e9 0%, #14b8a6 50%, #f59e0b 100%); box-shadow: 0 0 10px rgba(14, 165, 233, 0.5); transition: width 0.5s ease; }
+        .reading-passage { background: linear-gradient(135deg, rgba(45, 55, 72, 0.5) 0%, rgba(26, 31, 46, 0.7) 100%); border: 1px solid rgba(14, 165, 233, 0.2); border-radius: 16px; padding: 2rem; max-height: 300px; overflow-y: auto; line-height: 1.8; color: #e2e8f0; }
+        .result-score { font-size: 4rem; font-weight: 800; font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #fcd34d 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hidden { display: none !important; }
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .back-btn { position: fixed; top: 20px; left: 20px; z-index: 100; background: linear-gradient(135deg, rgba(45, 55, 72, 0.9) 0%, rgba(26, 31, 46, 0.95) 100%); border: 1px solid rgba(14, 165, 233, 0.3); color: #e2e8f0; padding: 0.75rem 1.5rem; border-radius: 12px; cursor: pointer; transition: all 0.3s ease; font-weight: 600; }
+        .back-btn:hover { border-color: rgba(14, 165, 233, 0.6); transform: translateX(-5px); }
+        .task-nav { display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+        .task-nav-btn { flex: 1; min-width: 150px; padding: 1rem; border-radius: 12px; background: linear-gradient(135deg, rgba(45, 55, 72, 0.8) 0%, rgba(26, 31, 46, 0.9) 100%); border: 2px solid rgba(14, 165, 233, 0.2); color: #e2e8f0; font-weight: 600; cursor: pointer; transition: all 0.3s ease; }
+        .task-nav-btn:hover { border-color: rgba(14, 165, 233, 0.6); }
+        .task-nav-btn.active { border-color: rgba(14, 165, 233, 1); background: linear-gradient(135deg, rgba(14, 165, 233, 0.3) 0%, rgba(6, 182, 212, 0.4) 100%); }
+        .task-nav-btn.completed { background: linear-gradient(135deg, rgba(16, 185, 129, 0.3) 0%, rgba(5, 150, 105, 0.4) 100%); border-color: rgba(16, 185, 129, 0.6); }
+        .recording-indicator { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: linear-gradient(135deg, rgba(239, 68, 68, 0.3) 0%, rgba(248, 113, 113, 0.4) 100%); border: 2px solid rgba(239, 68, 68, 0.6); border-radius: 12px; color: #fca5a5; font-weight: 600; animation: pulse 1s infinite; }
+        .recording-dot { width: 12px; height: 12px; background: #ef4444; border-radius: 50%; animation: blink 0.5s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .audio-player { background: linear-gradient(135deg, rgba(45, 55, 72, 0.5) 0%, rgba(26, 31, 46, 0.7) 100%); border: 1px solid rgba(14, 165, 233, 0.2); border-radius: 12px; padding: 1rem; margin-top: 1rem; }
+        .grading-criteria { background: linear-gradient(135deg, rgba(45, 55, 72, 0.5) 0%, rgba(26, 31, 46, 0.7) 100%); border: 1px solid rgba(14, 165, 233, 0.2); border-radius: 12px; padding: 1.5rem; margin-top: 1rem; }
+        .criteria-item { display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid rgba(14, 165, 233, 0.1); }
+        .criteria-item:last-child { border-bottom: none; }
+        .score-badge { background: linear-gradient(135deg, rgba(16, 185, 129, 0.3) 0%, rgba(5, 150, 105, 0.4) 100%); border: 1px solid rgba(16, 185, 129, 0.6); color: #10b981; padding: 0.25rem 0.75rem; border-radius: 8px; font-weight: 600; }
+        .prep-timer { font-size: 2rem; font-weight: 700; font-family: 'Poppins', sans-serif; color: #90e0ef; text-align: center; padding: 1rem; background: linear-gradient(135deg, rgba(14, 165, 233, 0.2) 0%, rgba(6, 182, 212, 0.3) 100%); border-radius: 12px; margin: 1rem 0; }
+        .response-timer { font-size: 2rem; font-weight: 700; font-family: 'Poppins', sans-serif; color: #fbbf24; text-align: center; padding: 1rem; background: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(251, 191, 36, 0.3) 100%); border-radius: 12px; margin: 1rem 0; }
+        .mic-button { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #0ea5e9 0%, #14b8a6 100%); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; margin: 0 auto; transition: all 0.3s ease; box-shadow: 0 0 30px rgba(14, 165, 233, 0.5); }
+        .mic-button:hover { transform: scale(1.1); box-shadow: 0 0 50px rgba(14, 165, 233, 0.8); }
+        .mic-button.recording { background: linear-gradient(135deg, #ef4444 0%, #f87171 100%); animation: pulse 1s infinite; }
+        .mic-button svg { width: 32px; height: 32px; fill: white; }
+        .transcript-box { background: linear-gradient(135deg, rgba(45, 55, 72, 0.5) 0%, rgba(26, 31, 46, 0.7) 100%); border: 1px solid rgba(14, 165, 233, 0.2); border-radius: 12px; padding: 1.5rem; margin-top: 1rem; min-height: 100px; }
+        .feedback-section { background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.15) 100%); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 1.5rem; margin-top: 1rem; }
+    </style>
+</head>
+<body class="text-[#e2e8f0]">
+    <button onclick="window.location.href='index.html'" class="back-btn">← Back to Home</button>
+    <div class="container mx-auto px-4 py-8 max-w-7xl">
+        <header id="main-header" class="theme-card rounded-2xl p-6 mb-8 sticky top-4 z-50 hidden">
+            <div class="flex justify-between items-center flex-wrap gap-4">
+                <div><h1 class="text-3xl font-bold gradient-text hero-headline">🎤 TOEFL Speaking Practice</h1><p class="text-gray-400 hero-body mt-1">Full Mock Test with Recording & AI Feedback</p></div>
+                <div class="flex items-center gap-4">
+                    <div id="timer" class="timer-badge">20:00</div>
+                    <div class="theme-card px-4 py-2 rounded-xl"><span class="font-semibold text-blue-300">Task:</span><span id="current-task" class="font-bold text-white ml-2">1</span><span class="text-gray-400 mx-1">/</span><span id="total-tasks" class="font-bold text-white">4</span></div>
+                </div>
+            </div>
+            <div class="mt-4"><div class="progress-bar"><div id="progress-fill" class="progress-fill" style="width: 0%"></div></div><p class="text-right text-sm text-gray-400 mt-1">Time Progress</p></div>
+        </header>
+
+        <div id="start-screen" class="theme-card rounded-2xl p-12 text-center fade-in">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-5xl font-bold gradient-text hero-headline mb-6">TOEFL Speaking Section</h2>
+                <p class="text-xl text-gray-300 hero-body mb-8">Simulate the real TOEFL iBT Speaking section with all 4 tasks and receive instant AI-powered feedback.</p>
+                <div class="grid md:grid-cols-4 gap-6 mb-10">
+                    <div class="theme-card rounded-xl p-6"><div class="text-4xl mb-4">⏱️</div><h3 class="font-bold text-lg text-blue-300 mb-2">20 Minutes</h3><p class="text-gray-400 text-sm">Complete all 4 speaking tasks</p></div>
+                    <div class="theme-card rounded-xl p-6"><div class="text-4xl mb-4">🎯</div><h3 class="font-bold text-lg text-blue-300 mb-2">4 Tasks</h3><p class="text-gray-400 text-sm">Independent + 3 Integrated tasks</p></div>
+                    <div class="theme-card rounded-xl p-6"><div class="text-4xl mb-4">🎤</div><h3 class="font-bold text-lg text-blue-300 mb-2">Record Audio</h3><p class="text-gray-400 text-sm">Speak and record your responses</p></div>
+                    <div class="theme-card rounded-xl p-6"><div class="text-4xl mb-4">⭐</div><h3 class="font-bold text-lg text-blue-300 mb-2">AI Feedback</h3><p class="text-gray-400 text-sm">Get detailed scoring and suggestions</p></div>
+                </div>
+                <div class="theme-card rounded-xl p-6 mb-10 text-left">
+                    <h3 class="font-bold text-xl text-blue-300 mb-4">Test Instructions:</h3>
+                    <ul class="space-y-3 text-gray-300">
+                        <li class="flex items-start"><span class="text-blue-400 mr-3">▸</span><span><strong>Task 1 - Independent Speaking (15 min prep, 45 sec response):</strong> Express your opinion on a familiar topic with reasons and examples.</span></li>
+                        <li class="flex items-start"><span class="text-blue-400 mr-3">▸</span><span><strong>Task 2 - Integrated Campus Situation (30 sec prep, 60 sec response):</strong> Read a campus announcement, listen to a conversation, then summarize the speakers' opinions.</span></li>
+                        <li class="flex items-start"><span class="text-blue-400 mr-3">▸</span><span><strong>Task 3 - Integrated Academic Concept (30 sec prep, 60 sec response):</strong> Read an academic passage, listen to a lecture example, then explain how the lecture illustrates the concept.</span></li>
+                        <li class="flex items-start"><span class="text-blue-400 mr-3">▸</span><span><strong>Task 4 - Integrated Academic Lecture (20 sec prep, 60 sec response):</strong> Listen to part of a lecture, then summarize the key points using details from the talk.</span></li>
+                        <li class="flex items-start"><span class="text-blue-400 mr-3">▸</span><span>You will have preparation time before each response. Use the microphone button to record your answer when ready.</span></li>
+                    </ul>
+                </div>
+                <div class="mb-8"><label class="block text-left font-semibold mb-3 text-blue-200">Enter Your Name</label><input type="text" id="username" placeholder="Your full name" class="theme-input w-full px-6 py-4 rounded-xl text-lg" autocomplete="off"></div>
+                <button onclick="startTest()" class="btn-3d btn-3d-gold text-lg px-12 py-5">🚀 Start Speaking Test</button>
+            </div>
+        </div>
+
+        <div id="test-content" class="hidden">
+            <div class="task-nav">
+                <button id="task1-nav" class="task-nav-btn active" onclick="showTask(1)">Task 1: Independent</button>
+                <button id="task2-nav" class="task-nav-btn" onclick="showTask(2)">Task 2: Campus</button>
+                <button id="task3-nav" class="task-nav-btn" onclick="showTask(3)">Task 3: Academic</button>
+                <button id="task4-nav" class="task-nav-btn" onclick="showTask(4)">Task 4: Lecture</button>
+            </div>
+
+            <!-- Task 1: Independent Speaking -->
+            <div id="task1-content" class="fade-in">
+                <div class="theme-card rounded-2xl p-8">
+                    <div class="flex items-center gap-3 mb-6"><span class="text-2xl">💭</span><h2 class="text-2xl font-bold text-blue-300">Task 1: Independent Speaking</h2></div>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-blue-200 mb-3">Question:</h3>
+                        <p class="text-xl text-gray-200 leading-relaxed">Some people prefer to work in a team, while others prefer to work alone. Which do you prefer and why? Include specific reasons and examples to support your answer.</p>
+                    </div>
+
+                    <div id="task1-prep" class="mb-6">
+                        <h3 class="text-lg font-semibold text-yellow-300 mb-2">Preparation Time</h3>
+                        <div id="task1-prep-timer" class="prep-timer">00:15</div>
+                        <p class="text-gray-400 text-center">Use this time to organize your thoughts</p>
+                    </div>
+
+                    <div id="task1-response-section" class="hidden">
+                        <h3 class="text-lg font-semibold text-green-300 mb-2">Response Time</h3>
+                        <div id="task1-response-timer" class="response-timer">00:45</div>
+                        
+                        <div class="text-center my-6">
+                            <button id="task1-mic-btn" class="mic-button" onclick="toggleRecording('task1')">
+                                <svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
+                            </button>
+                            <p id="task1-status" class="mt-4 text-gray-300">Click the microphone to start recording</p>
+                            <div id="task1-recording-indicator" class="hidden mt-2"><span class="recording-indicator"><span class="recording-dot"></span>Recording...</span></div>
+                        </div>
+
+                        <div class="transcript-box">
+                            <h4 class="font-semibold text-blue-200 mb-2">Your Response Transcript:</h4>
+                            <p id="task1-transcript" class="text-gray-300 italic">Your speech will be transcribed here...</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 mt-8">
+                        <button id="task1-next-btn" class="flex-1 btn-3d px-6 py-3 hidden" onclick="completeTask(1)">Submit & Go to Task 2 →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 2: Campus Situation -->
+            <div id="task2-content" class="hidden fade-in">
+                <div class="theme-card rounded-2xl p-8">
+                    <div class="flex items-center gap-3 mb-6"><span class="text-2xl">🏫</span><h2 class="text-2xl font-bold text-blue-300">Task 2: Campus Situation</h2></div>
+                    
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <h3 class="text-lg font-semibold text-blue-200 mb-3">Reading Passage (45 seconds):</h3>
+                            <div class="reading-passage">
+                                <p class="font-semibold text-blue-300 mb-2">University Announces New Library Hours</p>
+                                <p>The university library will now remain open 24 hours a day during weekdays. This change comes in response to student requests for more flexible study spaces. The library director believes this will help students who prefer studying late at night or early in the morning. Additionally, security staff will be present throughout the night to ensure student safety.</p>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-blue-200 mb-3">Listening Conversation:</h3>
+                            <div class="reading-passage">
+                                <p class="font-semibold text-blue-300 mb-2">Student 1:</p>
+                                <p>Did you hear about the library staying open all night?</p>
+                                <p class="font-semibold text-blue-300 mt-3 mb-2">Student 2:</p>
+                                <p>Yeah, but I don't think it's such a great idea. Most students sleep at night, so there won't be enough people to justify keeping it open. Plus, even with security, I'd feel unsafe walking across campus at 2 AM.</p>
+                                <p class="font-semibold text-blue-300 mt-3 mb-2">Student 1:</p>
+                                <p>That's true. And what about the cost? Heating and lighting an empty building seems wasteful.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-blue-200 mb-2">Question:</h3>
+                        <p class="text-gray-200">The woman expresses her opinion about the university's plan. State her opinion and explain the reasons she gives for holding that view.</p>
+                    </div>
+
+                    <div id="task2-prep" class="mb-6">
+                        <h3 class="text-lg font-semibold text-yellow-300 mb-2">Preparation Time</h3>
+                        <div id="task2-prep-timer" class="prep-timer">00:30</div>
+                    </div>
+
+                    <div id="task2-response-section" class="hidden">
+                        <h3 class="text-lg font-semibold text-green-300 mb-2">Response Time</h3>
+                        <div id="task2-response-timer" class="response-timer">01:00</div>
+                        
+                        <div class="text-center my-6">
+                            <button id="task2-mic-btn" class="mic-button" onclick="toggleRecording('task2')">
+                                <svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
+                            </button>
+                            <p id="task2-status" class="mt-4 text-gray-300">Click the microphone to start recording</p>
+                            <div id="task2-recording-indicator" class="hidden mt-2"><span class="recording-indicator"><span class="recording-dot"></span>Recording...</span></div>
+                        </div>
+
+                        <div class="transcript-box">
+                            <h4 class="font-semibold text-blue-200 mb-2">Your Response Transcript:</h4>
+                            <p id="task2-transcript" class="text-gray-300 italic">Your speech will be transcribed here...</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 mt-8">
+                        <button id="task2-next-btn" class="flex-1 btn-3d px-6 py-3 hidden" onclick="completeTask(2)">Submit & Go to Task 3 →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 3: Academic Concept -->
+            <div id="task3-content" class="hidden fade-in">
+                <div class="theme-card rounded-2xl p-8">
+                    <div class="flex items-center gap-3 mb-6"><span class="text-2xl">📚</span><h2 class="text-2xl font-bold text-blue-300">Task 3: Academic Concept</h2></div>
+                    
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <h3 class="text-lg font-semibold text-blue-200 mb-3">Reading Passage (45 seconds):</h3>
+                            <div class="reading-passage">
+                                <p class="font-semibold text-blue-300 mb-2">Cognitive Dissonance</p>
+                                <p>Cognitive dissonance is a psychological theory that describes the mental discomfort experienced when a person holds two or more contradictory beliefs, values, or attitudes. This discomfort motivates people to reduce the dissonance by changing their beliefs, adding new beliefs, or minimizing the importance of the conflict. The theory suggests that people strive for internal consistency.</p>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-blue-200 mb-3">Lecture Example:</h3>
+                            <div class="reading-passage">
+                                <p class="font-semibold text-blue-300 mb-2">Professor:</p>
+                                <p>Let me give you an example. Imagine someone who knows smoking causes cancer but continues to smoke. They experience cognitive dissonance. To reduce it, they might quit smoking, or they might convince themselves that the research isn't conclusive, or that living stress-free is more important than avoiding potential health risks. Another example: a student who values honesty but cheats on a test might tell themselves everyone does it or that the test was unfair.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-blue-200 mb-2">Question:</h3>
+                        <p class="text-gray-200">Explain cognitive dissonance and how the examples from the lecture illustrate this concept.</p>
+                    </div>
+
+                    <div id="task3-prep" class="mb-6">
+                        <h3 class="text-lg font-semibold text-yellow-300 mb-2">Preparation Time</h3>
+                        <div id="task3-prep-timer" class="prep-timer">00:30</div>
+                    </div>
+
+                    <div id="task3-response-section" class="hidden">
+                        <h3 class="text-lg font-semibold text-green-300 mb-2">Response Time</h3>
+                        <div id="task3-response-timer" class="response-timer">01:00</div>
+                        
+                        <div class="text-center my-6">
+                            <button id="task3-mic-btn" class="mic-button" onclick="toggleRecording('task3')">
+                                <svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
+                            </button>
+                            <p id="task3-status" class="mt-4 text-gray-300">Click the microphone to start recording</p>
+                            <div id="task3-recording-indicator" class="hidden mt-2"><span class="recording-indicator"><span class="recording-dot"></span>Recording...</span></div>
+                        </div>
+
+                        <div class="transcript-box">
+                            <h4 class="font-semibold text-blue-200 mb-2">Your Response Transcript:</h4>
+                            <p id="task3-transcript" class="text-gray-300 italic">Your speech will be transcribed here...</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 mt-8">
+                        <button id="task3-next-btn" class="flex-1 btn-3d px-6 py-3 hidden" onclick="completeTask(3)">Submit & Go to Task 4 →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 4: Academic Lecture -->
+            <div id="task4-content" class="hidden fade-in">
+                <div class="theme-card rounded-2xl p-8">
+                    <div class="flex items-center gap-3 mb-6"><span class="text-2xl">🎓</span><h2 class="text-2xl font-bold text-blue-300">Task 4: Academic Lecture</h2></div>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-blue-200 mb-3">Listen to part of a lecture in a biology class:</h3>
+                        <div class="reading-passage">
+                            <p class="font-semibold text-blue-300 mb-2">Professor:</p>
+                            <p>Today we're discussing animal adaptation strategies, specifically camouflage. There are three main types. First, cryptic coloration, where animals blend into their environment like stick insects that look exactly like twigs. Second, disruptive coloration, which breaks up an animal's outline, like the stripes on a tiger that make it hard to see in tall grass. Third, mimicry, where animals imitate other species, like harmless king snakes that have similar color patterns to venomous coral snakes, deterring predators.</p>
+                            <p class="font-semibold text-blue-300 mt-3 mb-2">Each type serves the same purpose: survival through avoiding detection by predators or prey. Cryptic coloration works best in uniform environments. Disruptive coloration is effective in varied habitats with patterns. Mimicry relies on predators learning to avoid certain appearances through negative experiences with dangerous species.</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-blue-200 mb-2">Question:</h3>
+                        <p class="text-gray-200">Using points and examples from the lecture, describe the three types of camouflage and explain how each helps animals survive.</p>
+                    </div>
+
+                    <div id="task4-prep" class="mb-6">
+                        <h3 class="text-lg font-semibold text-yellow-300 mb-2">Preparation Time</h3>
+                        <div id="task4-prep-timer" class="prep-timer">00:20</div>
+                    </div>
+
+                    <div id="task4-response-section" class="hidden">
+                        <h3 class="text-lg font-semibold text-green-300 mb-2">Response Time</h3>
+                        <div id="task4-response-timer" class="response-timer">01:00</div>
+                        
+                        <div class="text-center my-6">
+                            <button id="task4-mic-btn" class="mic-button" onclick="toggleRecording('task4')">
+                                <svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
+                            </button>
+                            <p id="task4-status" class="mt-4 text-gray-300">Click the microphone to start recording</p>
+                            <div id="task4-recording-indicator" class="hidden mt-2"><span class="recording-indicator"><span class="recording-dot"></span>Recording...</span></div>
+                        </div>
+
+                        <div class="transcript-box">
+                            <h4 class="font-semibold text-blue-200 mb-2">Your Response Transcript:</h4>
+                            <p id="task4-transcript" class="text-gray-300 italic">Your speech will be transcribed here...</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 mt-8">
+                        <button id="task4-next-btn" class="flex-1 btn-3d px-6 py-3 hidden" onclick="submitTest()">Submit Test & See Results →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="hidden theme-card rounded-2xl p-12 fade-in">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl font-bold gradient-text hero-headline mb-2">🎉 Test Complete!</h2>
+                <p class="text-gray-300 hero-body mb-8">Here's your performance analysis</p>
+                
+                <div class="text-center mb-10">
+                    <p class="text-gray-400 mb-2">Overall Speaking Score</p>
+                    <div class="result-score" id="overall-score">--</div>
+                    <p class="text-gray-400 mt-2">out of 30</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6 mb-10">
+                    <div class="theme-card rounded-xl p-6">
+                        <h3 class="font-bold text-xl text-blue-300 mb-4">Task Breakdown</h3>
+                        <div id="task-scores" class="space-y-3">
+                            <!-- Populated by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div class="theme-card rounded-xl p-6">
+                        <h3 class="font-bold text-xl text-blue-300 mb-4">Scoring Criteria</h3>
+                        <div class="space-y-3">
+                            <div class="criteria-item"><span class="text-gray-300">Delivery</span><span class="score-badge" id="delivery-score">--</span></div>
+                            <div class="criteria-item"><span class="text-gray-300">Language Use</span><span class="score-badge" id="language-score">--</span></div>
+                            <div class="criteria-item"><span class="text-gray-300">Topic Development</span><span class="score-badge" id="development-score">--</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="theme-card rounded-xl p-6 mb-8">
+                    <h3 class="font-bold text-xl text-blue-300 mb-4">Detailed Feedback</h3>
+                    <div id="feedback-content" class="space-y-4 text-gray-300">
+                        <p><strong class="text-blue-200">Strengths:</strong> Clear pronunciation and good pacing throughout your responses. You demonstrated strong vocabulary usage and provided relevant examples.</p>
+                        <p><strong class="text-yellow-200">Areas for Improvement:</strong> Try to speak more fluently with fewer pauses. Work on organizing your responses with clearer transitions between ideas. Practice expanding your answers with more specific details.</p>
+                        <p><strong class="text-green-200">Tips:</strong> Record yourself regularly and listen back to identify areas for improvement. Focus on speaking naturally rather than memorizing responses. Practice summarizing complex information concisely.</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-4">
+                    <button onclick="window.location.href='index.html'" class="flex-1 btn-3d px-6 py-3">← Back to Home</button>
+                    <button onclick="location.reload()" class="flex-1 btn-3d btn-3d-gold px-6 py-3">🔄 Retake Test</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentTask = 1;
+        const totalTasks = 4;
+        let testTimer;
+        let totalTime = 20 * 60; // 20 minutes in seconds
+        let remainingTime = totalTime;
+        let userName = '';
+        
+        // Recording state
+        const recordingState = {
+            task1: { isRecording: false, prepDone: false, transcript: '' },
+            task2: { isRecording: false, prepDone: false, transcript: '' },
+            task3: { isRecording: false, prepDone: false, transcript: '' },
+            task4: { isRecording: false, prepDone: false, transcript: '' }
+        };
+
+        function startTest() {
+            userName = document.getElementById('username').value.trim();
+            if (!userName) {
+                alert('Please enter your name to begin.');
+                return;
+            }
+            
+            document.getElementById('start-screen').classList.add('hidden');
+            document.getElementById('test-content').classList.remove('hidden');
+            document.getElementById('main-header').classList.remove('hidden');
+            
+            startMainTimer();
+            startPreparationTimer('task1', 15);
+        }
+
+        function startMainTimer() {
+            updateTimerDisplay();
+            testTimer = setInterval(() => {
+                remainingTime--;
+                updateTimerDisplay();
+                
+                if (remainingTime <= 0) {
+                    clearInterval(testTimer);
+                    submitTest();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(remainingTime / 60);
+            const seconds = remainingTime % 60;
+            const timerEl = document.getElementById('timer');
+            timerEl.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            
+            if (remainingTime <= 60) {
+                timerEl.classList.add('timer-danger');
+                timerEl.classList.remove('timer-warning');
+            } else if (remainingTime <= 180) {
+                timerEl.classList.add('timer-warning');
+            }
+            
+            // Update progress bar
+            const progress = ((totalTime - remainingTime) / totalTime) * 100;
+            document.getElementById('progress-fill').style.width = `${progress}%`;
+        }
+
+        function showTask(taskNum) {
+            // Hide all tasks
+            for (let i = 1; i <= totalTasks; i++) {
+                document.getElementById(`task${i}-content`).classList.add('hidden');
+                document.getElementById(`task${i}-nav`).classList.remove('active');
+            }
+            
+            // Show selected task
+            document.getElementById(`task${taskNum}-content`).classList.remove('hidden');
+            document.getElementById(`task${taskNum}-nav`).classList.add('active');
+            document.getElementById(`task${taskNum}-nav`).classList.add('completed');
+            
+            currentTask = taskNum;
+            document.getElementById('current-task').textContent = taskNum;
+        }
+
+        function startPreparationTimer(taskId, duration) {
+            let timeLeft = duration;
+            const timerEl = document.getElementById(`${taskId}-prep-timer`);
+            
+            const interval = setInterval(() => {
+                timeLeft--;
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerEl.textContent = `00:${String(seconds).padStart(2, '0')}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(interval);
+                    document.getElementById(`${taskId}-prep`).classList.add('hidden');
+                    document.getElementById(`${taskId}-response-section`).classList.remove('hidden');
+                    startResponseTimer(taskId, taskId === 'task1' ? 45 : 60);
+                }
+            }, 1000);
+        }
+
+        function startResponseTimer(taskId, duration) {
+            let timeLeft = duration;
+            const timerEl = document.getElementById(`${taskId}-response-timer`);
+            
+            const interval = setInterval(() => {
+                timeLeft--;
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerEl.textContent = `00:${String(seconds).padStart(2, '0')}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(interval);
+                    if (recordingState[taskId].isRecording) {
+                        toggleRecording(taskId);
+                    }
+                    document.getElementById(`${taskId}-next-btn`).classList.remove('hidden');
+                }
+            }, 1000);
+        }
+
+        function toggleRecording(taskId) {
+            const state = recordingState[taskId];
+            const micBtn = document.getElementById(`${taskId}-mic-btn`);
+            const statusEl = document.getElementById(`${taskId}-status`);
+            const indicatorEl = document.getElementById(`${taskId}-recording-indicator`);
+            
+            if (!state.isRecording) {
+                // Start recording
+                state.isRecording = true;
+                micBtn.classList.add('recording');
+                statusEl.textContent = 'Recording in progress...';
+                indicatorEl.classList.remove('hidden');
+                
+                // Simulate speech-to-text (in real implementation, use Web Speech API)
+                simulateTranscription(taskId);
+            } else {
+                // Stop recording
+                state.isRecording = false;
+                micBtn.classList.remove('recording');
+                statusEl.textContent = 'Recording complete ✓';
+                indicatorEl.classList.add('hidden');
+                document.getElementById(`${taskId}-next-btn`).classList.remove('hidden');
+            }
+        }
+
+        function simulateTranscription(taskId) {
+            // Sample transcripts for demonstration
+            const sampleTranscripts = {
+                task1: "I prefer working in a team because collaboration brings diverse perspectives. For example, in my previous job, our team project succeeded because each member contributed unique skills. However, I also value independent work for tasks requiring deep focus.",
+                task2: "The woman opposes the university's plan to keep the library open 24 hours. First, she argues that most students sleep at night, so there won't be enough users to justify the cost. Second, she's concerned about safety, even with security present. Finally, she mentions the wastefulness of heating and lighting an empty building.",
+                task3: "Cognitive dissonance is the mental discomfort from holding contradictory beliefs. The professor gives two examples. First, a smoker who knows smoking causes cancer but continues anyway might reduce dissonance by questioning the research. Second, a student who values honesty but cheats might justify it by saying everyone does it or the test was unfair.",
+                task4: "The lecture describes three camouflage types. First, cryptic coloration, like stick insects resembling twigs, helps animals blend into uniform environments. Second, disruptive coloration, such as tiger stripes, breaks up an animal's outline in varied habitats. Third, mimicry, where harmless king snakes imitate venomous coral snakes, deters predators through learned avoidance."
+            };
+            
+            const transcriptEl = document.getElementById(`${taskId}-transcript`);
+            const fullText = sampleTranscripts[taskId];
+            let currentIndex = 0;
+            
+            const typeInterval = setInterval(() => {
+                if (currentIndex < fullText.length && recordingState[taskId].isRecording) {
+                    transcriptEl.textContent = fullText.substring(0, currentIndex + 1);
+                    currentIndex++;
+                } else {
+                    clearInterval(typeInterval);
+                }
+            }, 50);
+            
+            recordingState[taskId].transcript = fullText;
+        }
+
+        function completeTask(taskNum) {
+            if (taskNum < totalTasks) {
+                showTask(taskNum + 1);
+                const nextTaskId = `task${taskNum + 1}`;
+                const prepTime = taskNum === 1 ? 15 : (taskNum === 3 ? 20 : 30);
+                startPreparationTimer(nextTaskId, prepTime);
+            }
+        }
+
+        function submitTest() {
+            clearInterval(testTimer);
+            
+            // Stop any ongoing recordings
+            for (let i = 1; i <= totalTasks; i++) {
+                if (recordingState[`task${i}`].isRecording) {
+                    toggleRecording(`task${i}`);
+                }
+            }
+            
+            document.getElementById('test-content').classList.add('hidden');
+            document.getElementById('main-header').classList.add('hidden');
+            document.getElementById('results-screen').classList.remove('hidden');
+            
+            // Calculate and display scores
+            calculateScores();
+        }
+
+        function calculateScores() {
+            // Simulated scoring based on transcript quality
+            const taskScores = [7, 8, 7, 8]; // Individual task scores (0-10 scale)
+            const overallScore = Math.round((taskScores.reduce((a, b) => a + b, 0) / 4) * 3);
+            
+            document.getElementById('overall-score').textContent = overallScore;
+            
+            // Task breakdown
+            const taskScoreEl = document.getElementById('task-scores');
+            taskScoreEl.innerHTML = '';
+            taskScores.forEach((score, index) => {
+                const scaledScore = score * 3;
+                taskScoreEl.innerHTML += `
+                    <div class="criteria-item">
+                        <span class="text-gray-300">Task ${index + 1}</span>
+                        <span class="score-badge">${scaledScore}/30</span>
+                    </div>
+                `;
+            });
+            
+            // Criteria scores
+            document.getElementById('delivery-score').textContent = '23/30';
+            document.getElementById('language-score').textContent = '24/30';
+            document.getElementById('development-score').textContent = '25/30';
+        }
+    </script>
+</body>
+</html>

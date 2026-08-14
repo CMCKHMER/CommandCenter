@@ -1,1 +1,1 @@
-Nothing needs to be added to .gitignore since the changes only include HTML files (prefix_suffix_practice.html and index.html) which are source files that should be tracked in version control.
+Nothing needs to be added to .gitignore since the changes only include HTML files (.html) which are source code files and should not be ignored.
