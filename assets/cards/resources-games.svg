@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1a0a2e"/>
+    </linearGradient>
+    <radialGradient id="ctrlGlow" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#a78bfa" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="240" fill="url(#bg)"/>
+  <circle cx="200" cy="125" r="90" fill="url(#ctrlGlow)"/>
+  <!-- Game Controller body -->
+  <path d="M120,110 Q105,100 105,125 Q105,160 130,165 Q155,172 175,155 L200,145 L225,155 Q245,172 270,165 Q295,160 295,125 Q295,100 280,110 L260,105 Q240,95 200,95 Q160,95 140,105 Z" fill="#2d1b6e" stroke="#a78bfa" stroke-width="2"/>
+  <!-- Left d-pad -->
+  <rect x="128" y="120" width="9" height="26" rx="3" fill="#7c3aed"/>
+  <rect x="120" y="128" width="25" height="9" rx="3" fill="#7c3aed"/>
+  <!-- Right face buttons -->
+  <circle cx="258" cy="120" r="7" fill="#34d399" opacity="0.9"/>
+  <circle cx="272" cy="133" r="7" fill="#f87171" opacity="0.9"/>
+  <circle cx="244" cy="133" r="7" fill="#fbbf24" opacity="0.9"/>
+  <circle cx="258" cy="146" r="7" fill="#60a5fa" opacity="0.9"/>
+  <text x="258" y="124" font-family="sans-serif" font-size="8" fill="#fff" text-anchor="middle">▲</text>
+  <text x="272" y="137" font-family="sans-serif" font-size="8" fill="#fff" text-anchor="middle">○</text>
+  <text x="244" y="137" font-family="sans-serif" font-size="8" fill="#fff" text-anchor="middle">□</text>
+  <text x="258" y="150" font-family="sans-serif" font-size="8" fill="#fff" text-anchor="middle">✕</text>
+  <!-- Center buttons -->
+  <circle cx="190" cy="128" r="5" fill="#4a3080"/>
+  <circle cx="210" cy="128" r="5" fill="#4a3080"/>
+  <!-- Analog sticks -->
+  <circle cx="160" cy="148" r="12" fill="#1a0f40" stroke="#7c3aed" stroke-width="1.5"/>
+  <circle cx="160" cy="148" r="7" fill="#7c3aed" opacity="0.7"/>
+  <circle cx="240" cy="148" r="12" fill="#1a0f40" stroke="#7c3aed" stroke-width="1.5"/>
+  <circle cx="240" cy="148" r="7" fill="#7c3aed" opacity="0.7"/>
+  <!-- Glowing buttons/pixel elements -->
+  <rect x="50" y="60" width="12" height="12" rx="2" fill="#f87171" opacity="0.8"/>
+  <rect x="68" y="52" width="10" height="10" rx="2" fill="#fbbf24" opacity="0.7"/>
+  <rect x="50" y="76" width="10" height="10" rx="2" fill="#34d399" opacity="0.7"/>
+  <rect x="330" y="60" width="12" height="12" rx="2" fill="#a78bfa" opacity="0.8"/>
+  <rect x="348" y="52" width="10" height="10" rx="2" fill="#60a5fa" opacity="0.7"/>
+  <rect x="330" y="76" width="10" height="10" rx="2" fill="#f472b6" opacity="0.7"/>
+  <!-- Pixel dots -->
+  <circle cx="85" cy="175" r="3" fill="#a78bfa" opacity="0.6"/>
+  <circle cx="95" cy="185" r="3" fill="#60a5fa" opacity="0.6"/>
+  <circle cx="105" cy="175" r="3" fill="#f87171" opacity="0.6"/>
+  <circle cx="315" cy="175" r="3" fill="#34d399" opacity="0.6"/>
+  <circle cx="305" cy="185" r="3" fill="#fbbf24" opacity="0.6"/>
+  <!-- Label -->
+  <rect x="10" y="10" width="110" height="28" rx="8" fill="#7c3aed" opacity="0.8"/>
+  <text x="65" y="29" font-family="sans-serif" font-size="13" font-weight="bold" fill="#e9d5ff" text-anchor="middle">Games</text>
+</svg>

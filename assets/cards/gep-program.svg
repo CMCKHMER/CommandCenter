@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1a2a1a"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <radialGradient id="trophyGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#fbbf24" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="240" fill="url(#bg)"/>
+  <circle cx="200" cy="130" r="100" fill="url(#trophyGlow)"/>
+  <!-- Trophy -->
+  <rect x="180" y="175" width="40" height="12" rx="3" fill="url(#goldGrad)"/>
+  <rect x="188" y="162" width="24" height="16" rx="2" fill="#d97706"/>
+  <path d="M165,95 Q165,155 200,155 Q235,155 235,95 Z" fill="url(#goldGrad)"/>
+  <path d="M165,105 Q145,105 145,125 Q145,145 165,142" stroke="#d97706" stroke-width="4" fill="none"/>
+  <path d="M235,105 Q255,105 255,125 Q255,145 235,142" stroke="#d97706" stroke-width="4" fill="none"/>
+  <rect x="162" y="92" width="76" height="10" rx="3" fill="#fbbf24"/>
+  <!-- Star on trophy -->
+  <polygon points="200,108 204,120 217,120 207,128 211,140 200,132 189,140 193,128 183,120 196,120" fill="#fff" opacity="0.95"/>
+  <!-- Laurel wreath -->
+  <g opacity="0.85">
+    <!-- Left laurel leaves -->
+    <ellipse cx="148" cy="120" rx="10" ry="6" fill="#14b8a6" transform="rotate(-40 148 120)"/>
+    <ellipse cx="140" cy="132" rx="10" ry="6" fill="#0d9488" transform="rotate(-50 140 132)"/>
+    <ellipse cx="137" cy="145" rx="10" ry="6" fill="#14b8a6" transform="rotate(-60 137 145)"/>
+    <ellipse cx="140" cy="158" rx="10" ry="6" fill="#0d9488" transform="rotate(-70 140 158)"/>
+    <!-- Right laurel leaves -->
+    <ellipse cx="252" cy="120" rx="10" ry="6" fill="#14b8a6" transform="rotate(40 252 120)"/>
+    <ellipse cx="260" cy="132" rx="10" ry="6" fill="#0d9488" transform="rotate(50 260 132)"/>
+    <ellipse cx="263" cy="145" rx="10" ry="6" fill="#14b8a6" transform="rotate(60 263 145)"/>
+    <ellipse cx="260" cy="158" rx="10" ry="6" fill="#0d9488" transform="rotate(70 260 158)"/>
+  </g>
+  <!-- Diploma scroll -->
+  <rect x="40" y="145" width="80" height="55" rx="5" fill="#1e3a5f" stroke="#0891b2" stroke-width="1.5"/>
+  <rect x="35" y="145" width="10" height="55" rx="5" fill="#0891b2"/>
+  <rect x="115" y="145" width="10" height="55" rx="5" fill="#0891b2"/>
+  <line x1="50" y1="162" x2="110" y2="162" stroke="#bae6fd" stroke-width="1.5" opacity="0.7"/>
+  <line x1="50" y1="170" x2="110" y2="170" stroke="#bae6fd" stroke-width="1.5" opacity="0.5"/>
+  <line x1="50" y1="178" x2="100" y2="178" stroke="#bae6fd" stroke-width="1.5" opacity="0.5"/>
+  <text x="80" y="157" font-family="sans-serif" font-size="9" fill="#fbbf24" text-anchor="middle" font-weight="bold">DIPLOMA</text>
+  <!-- Upward arrow mountain -->
+  <polygon points="330,185 315,155 300,185" fill="#0891b2" opacity="0.7"/>
+  <polygon points="360,185 340,140 320,185" fill="#0ea5e9" opacity="0.8"/>
+  <polygon points="380,185 365,165 350,185" fill="#06b6d4" opacity="0.6"/>
+  <line x1="340" y1="140" x2="340" y2="110" stroke="#fbbf24" stroke-width="2.5"/>
+  <polygon points="340,100 333,115 347,115" fill="#fbbf24"/>
+  <!-- Stars -->
+  <circle cx="50" cy="40" r="2" fill="#fbbf24" opacity="0.8"/>
+  <circle cx="350" cy="30" r="2" fill="#fbbf24" opacity="0.8"/>
+  <circle cx="370" cy="60" r="1.5" fill="#06b6d4" opacity="0.8"/>
+  <circle cx="30" cy="80" r="1.5" fill="#14b8a6" opacity="0.8"/>
+  <!-- Label -->
+  <rect x="10" y="10" width="155" height="30" rx="8" fill="#d97706" opacity="0.8"/>
+  <text x="87" y="30" font-family="sans-serif" font-size="13" font-weight="bold" fill="#fff" text-anchor="middle">GEP Program</text>
+</svg>

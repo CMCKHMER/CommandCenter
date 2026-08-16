@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e3a5f"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="240" fill="url(#bg)"/>
+  <!-- Essay document -->
+  <rect x="80" y="30" width="170" height="200" rx="6" fill="#1e3a5f" stroke="#0891b2" stroke-width="2"/>
+  <!-- Document header bar -->
+  <rect x="80" y="30" width="170" height="22" rx="6" fill="#0891b2" opacity="0.75"/>
+  <text x="165" y="45" font-family="sans-serif" font-size="9" fill="#fff" text-anchor="middle" font-weight="bold">ESSAY RESPONSE</text>
+  <!-- Title line -->
+  <line x1="92" y1="65" x2="238" y2="65" stroke="#bae6fd" stroke-width="2.5" opacity="0.8"/>
+  <!-- Paragraph lines -->
+  <line x1="92" y1="80" x2="238" y2="80" stroke="#bae6fd" stroke-width="1.5" opacity="0.6"/>
+  <line x1="92" y1="90" x2="238" y2="90" stroke="#bae6fd" stroke-width="1.5" opacity="0.6"/>
+  <line x1="92" y1="100" x2="230" y2="100" stroke="#bae6fd" stroke-width="1.5" opacity="0.6"/>
+  <line x1="92" y1="110" x2="238" y2="110" stroke="#bae6fd" stroke-width="1.5" opacity="0.5"/>
+  <line x1="92" y1="120" x2="238" y2="120" stroke="#bae6fd" stroke-width="1.5" opacity="0.5"/>
+  <line x1="92" y1="130" x2="225" y2="130" stroke="#bae6fd" stroke-width="1.5" opacity="0.5"/>
+  <line x1="92" y1="146" x2="238" y2="146" stroke="#bae6fd" stroke-width="1.5" opacity="0.5"/>
+  <line x1="92" y1="156" x2="238" y2="156" stroke="#bae6fd" stroke-width="1.5" opacity="0.5"/>
+  <line x1="92" y1="166" x2="230" y2="166" stroke="#bae6fd" stroke-width="1.5" opacity="0.4"/>
+  <line x1="92" y1="176" x2="238" y2="176" stroke="#bae6fd" stroke-width="1.5" opacity="0.4"/>
+  <line x1="92" y1="186" x2="220" y2="186" stroke="#bae6fd" stroke-width="1.5" opacity="0.4"/>
+  <!-- Pen writing -->
+  <g transform="translate(290,85) rotate(35)">
+    <rect x="-6" y="0" width="12" height="65" rx="4" fill="#fbbf24"/>
+    <polygon points="0,65 -5,80 5,80" fill="#e0e0e0"/>
+    <rect x="-6" y="0" width="12" height="10" rx="4" fill="#d97706"/>
+    <rect x="-5" y="53" width="10" height="13" rx="0" fill="#f9a8d4"/>
+  </g>
+  <!-- Word count badge -->
+  <rect x="285" y="155" width="95" height="45" rx="10" fill="#fbbf24" opacity="0.9"/>
+  <text x="332" y="173" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">150+</text>
+  <text x="332" y="191" font-family="sans-serif" font-size="9" fill="#0f172a" text-anchor="middle">words</text>
+  <!-- Label -->
+  <rect x="10" y="10" width="175" height="28" rx="8" fill="#0891b2" opacity="0.75"/>
+  <text x="97" y="29" font-family="sans-serif" font-size="13" font-weight="bold" fill="#e0f7ff" text-anchor="middle">TOEFL Writing</text>
+</svg>

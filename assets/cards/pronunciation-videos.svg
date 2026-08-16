@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#0c2340"/>
+    </linearGradient>
+    <radialGradient id="mouthGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#06b6d4" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="240" fill="url(#bg)"/>
+  <circle cx="200" cy="120" r="95" fill="url(#mouthGlow)"/>
+  <!-- Speech bubble -->
+  <rect x="90" y="50" width="180" height="110" rx="18" fill="#1e3a5f" stroke="#06b6d4" stroke-width="2"/>
+  <polygon points="140,160 130,185 165,160" fill="#1e3a5f" stroke="#06b6d4" stroke-width="2"/>
+  <!-- Phonetic waveform inside bubble -->
+  <line x1="105" y1="105" x2="105" y2="105" stroke="#06b6d4" stroke-width="0"/>
+  <rect x="105" y="95" width="6" height="30" rx="3" fill="#06b6d4" opacity="0.8"/>
+  <rect x="115" y="80" width="6" height="60" rx="3" fill="#0ea5e9" opacity="0.9"/>
+  <rect x="125" y="90" width="6" height="40" rx="3" fill="#06b6d4" opacity="0.8"/>
+  <rect x="135" y="70" width="6" height="80" rx="3" fill="#0891b2" opacity="0.9"/>
+  <rect x="145" y="88" width="6" height="45" rx="3" fill="#06b6d4" opacity="0.8"/>
+  <rect x="155" y="75" width="6" height="70" rx="3" fill="#0ea5e9" opacity="0.9"/>
+  <rect x="165" y="85" width="6" height="50" rx="3" fill="#06b6d4" opacity="0.8"/>
+  <rect x="175" y="78" width="6" height="64" rx="3" fill="#0891b2" opacity="0.9"/>
+  <rect x="185" y="90" width="6" height="40" rx="3" fill="#06b6d4" opacity="0.8"/>
+  <rect x="195" y="82" width="6" height="56" rx="3" fill="#0ea5e9" opacity="0.9"/>
+  <rect x="205" y="93" width="6" height="34" rx="3" fill="#06b6d4" opacity="0.8"/>
+  <rect x="215" y="75" width="6" height="70" rx="3" fill="#0891b2" opacity="0.9"/>
+  <rect x="225" y="88" width="6" height="44" rx="3" fill="#06b6d4" opacity="0.8"/>
+  <rect x="235" y="80" width="6" height="60" rx="3" fill="#0ea5e9" opacity="0.9"/>
+  <rect x="245" y="92" width="6" height="36" rx="3" fill="#06b6d4" opacity="0.8"/>
+  <!-- Play button overlay -->
+  <circle cx="175" cy="105" r="22" fill="#0f172a" opacity="0.6"/>
+  <polygon points="167,95 167,115 190,105" fill="#fbbf24" opacity="0.9"/>
+  <!-- Sound arcs right side -->
+  <path d="M305,90 Q315,105 305,120" fill="none" stroke="#06b6d4" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+  <path d="M318,80 Q332,105 318,130" fill="none" stroke="#06b6d4" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+  <path d="M331,70 Q349,105 331,140" fill="none" stroke="#0ea5e9" stroke-width="1.5" stroke-linecap="round" opacity="0.35"/>
+  <!-- Mouth icon below -->
+  <ellipse cx="155" cy="195" rx="25" ry="14" fill="#0f172a" stroke="#06b6d4" stroke-width="2"/>
+  <path d="M133,195 Q143,207 155,207 Q167,207 177,195" fill="#0891b2" opacity="0.7"/>
+  <!-- Phoneme label -->
+  <text x="220" y="200" font-family="sans-serif" font-size="14" fill="#fbbf24" opacity="0.8">/θ/ /ð/ /æ/</text>
+  <!-- Label -->
+  <rect x="10" y="10" width="200" height="28" rx="8" fill="#0891b2" opacity="0.75"/>
+  <text x="105" y="29" font-family="sans-serif" font-size="13" font-weight="bold" fill="#e0f7ff" text-anchor="middle">Pronunciation Videos</text>
+</svg>

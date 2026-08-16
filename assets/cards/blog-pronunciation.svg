@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#0c2340"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="240" fill="url(#bg)"/>
+  <!-- Mouth / lip profile -->
+  <ellipse cx="155" cy="120" rx="65" ry="42" fill="#1e3a5f" stroke="#06b6d4" stroke-width="2.5"/>
+  <path d="M100,120 Q122,148 155,148 Q188,148 210,120" fill="#0891b2" opacity="0.6"/>
+  <path d="M112,120 Q135,140 155,140 Q175,140 198,120" fill="#0c1a30" opacity="0.7"/>
+  <!-- Teeth hint -->
+  <rect x="130" y="112" width="50" height="14" rx="3" fill="#e0f7ff" opacity="0.4"/>
+  <!-- Phoneme symbols -->
+  <text x="265" y="80" font-family="sans-serif" font-size="20" fill="#fbbf24" text-anchor="middle" opacity="0.9">/θ/</text>
+  <text x="310" y="115" font-family="sans-serif" font-size="18" fill="#06b6d4" text-anchor="middle" opacity="0.9">/ð/</text>
+  <text x="280" y="150" font-family="sans-serif" font-size="20" fill="#34d399" text-anchor="middle" opacity="0.9">/æ/</text>
+  <text x="330" y="75" font-family="sans-serif" font-size="16" fill="#f472b6" text-anchor="middle" opacity="0.7">/ŋ/</text>
+  <text x="345" y="145" font-family="sans-serif" font-size="16" fill="#a78bfa" text-anchor="middle" opacity="0.7">/ʃ/</text>
+  <!-- Checkmark list -->
+  <text x="50" y="65" font-family="sans-serif" font-size="12" fill="#34d399" opacity="0.9">✓</text>
+  <line x1="65" y1="63" x2="100" y2="63" stroke="#bae6fd" stroke-width="1.5" opacity="0.6"/>
+  <text x="50" y="85" font-family="sans-serif" font-size="12" fill="#34d399" opacity="0.9">✓</text>
+  <line x1="65" y1="83" x2="100" y2="83" stroke="#bae6fd" stroke-width="1.5" opacity="0.6"/>
+  <text x="50" y="105" font-family="sans-serif" font-size="12" fill="#34d399" opacity="0.9">✓</text>
+  <line x1="65" y1="103" x2="100" y2="103" stroke="#bae6fd" stroke-width="1.5" opacity="0.6"/>
+  <text x="50" y="160" font-family="sans-serif" font-size="12" fill="#34d399" opacity="0.9">✓</text>
+  <line x1="65" y1="158" x2="100" y2="158" stroke="#bae6fd" stroke-width="1.5" opacity="0.6"/>
+  <text x="50" y="180" font-family="sans-serif" font-size="12" fill="#34d399" opacity="0.9">✓</text>
+  <line x1="65" y1="178" x2="100" y2="178" stroke="#bae6fd" stroke-width="1.5" opacity="0.6"/>
+  <!-- Sound arcs from mouth -->
+  <path d="M215,108 Q225,120 215,132" fill="none" stroke="#06b6d4" stroke-width="2.5" opacity="0.7" stroke-linecap="round"/>
+  <path d="M228,100 Q242,120 228,140" fill="none" stroke="#06b6d4" stroke-width="2" opacity="0.5" stroke-linecap="round"/>
+  <!-- Label -->
+  <rect x="10" y="10" width="250" height="28" rx="8" fill="#0891b2" opacity="0.75"/>
+  <text x="130" y="29" font-family="sans-serif" font-size="12" font-weight="bold" fill="#e0f7ff" text-anchor="middle">5 Tips: Master Pronunciation</text>
+</svg>

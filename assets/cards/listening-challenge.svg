@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#0c2340"/>
+    </linearGradient>
+    <radialGradient id="hpglow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#06b6d4" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="240" fill="url(#bg)"/>
+  <circle cx="200" cy="120" r="100" fill="url(#hpglow)"/>
+  <!-- Headphones -->
+  <path d="M130,120 Q130,65 200,65 Q270,65 270,120" fill="none" stroke="#06b6d4" stroke-width="8" stroke-linecap="round"/>
+  <rect x="115" y="112" width="30" height="40" rx="12" fill="#0891b2"/>
+  <rect x="255" y="112" width="30" height="40" rx="12" fill="#0891b2"/>
+  <rect x="120" y="118" width="20" height="28" rx="8" fill="#0ea5e9"/>
+  <rect x="260" y="118" width="20" height="28" rx="8" fill="#0ea5e9"/>
+  <!-- Sound waves left -->
+  <path d="M95,120 Q90,132 95,144" fill="none" stroke="#06b6d4" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+  <path d="M80,112 Q73,132 80,152" fill="none" stroke="#06b6d4" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+  <path d="M65,104 Q56,132 65,160" fill="none" stroke="#06b6d4" stroke-width="1.5" stroke-linecap="round" opacity="0.35"/>
+  <!-- Sound waves right -->
+  <path d="M305,120 Q310,132 305,144" fill="none" stroke="#06b6d4" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+  <path d="M320,112 Q327,132 320,152" fill="none" stroke="#06b6d4" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+  <path d="M335,104 Q344,132 335,160" fill="none" stroke="#06b6d4" stroke-width="1.5" stroke-linecap="round" opacity="0.35"/>
+  <!-- Musical notes -->
+  <text x="165" y="175" font-family="sans-serif" font-size="22" fill="#fbbf24" opacity="0.8">♪</text>
+  <text x="195" y="185" font-family="sans-serif" font-size="16" fill="#f59e0b" opacity="0.6">♫</text>
+  <text x="220" y="178" font-family="sans-serif" font-size="20" fill="#fbbf24" opacity="0.7">♩</text>
+  <!-- Microphone -->
+  <rect x="192" y="105" width="16" height="26" rx="8" fill="#14b8a6"/>
+  <path d="M183,125 Q183,140 200,140 Q217,140 217,125" fill="none" stroke="#14b8a6" stroke-width="2.5"/>
+  <line x1="200" y1="140" x2="200" y2="152" stroke="#14b8a6" stroke-width="2.5"/>
+  <line x1="193" y1="152" x2="207" y2="152" stroke="#14b8a6" stroke-width="2.5"/>
+  <!-- Label -->
+  <rect x="10" y="10" width="200" height="30" rx="8" fill="#0891b2" opacity="0.75"/>
+  <text x="110" y="30" font-family="sans-serif" font-size="13" font-weight="bold" fill="#e0f7ff" text-anchor="middle">Listening Challenge</text>
+</svg>
