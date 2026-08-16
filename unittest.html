@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self'; form-action 'self' https://docs.google.com; object-src 'none'; base-uri 'self'">
     <title>Aii Language Center - Reading Future Connect 2 Review Test</title>
     <style>
         :root {
@@ -287,38 +288,80 @@
             section.questions.forEach((q, index) => {
                 const questionDiv = document.createElement('div');
                 questionDiv.className = 'question-container';
-                
+
                 if (q.type === 'fill-blank') {
-                    let wordBankHtml = `<div class="word-bank">`;
+                    const qtEl = document.createElement('div');
+                    qtEl.className = 'question-text';
+                    qtEl.textContent = q.question;
+                    questionDiv.appendChild(qtEl);
+
+                    const wb = document.createElement('div');
+                    wb.className = 'word-bank';
                     q.wordBank.forEach(word => {
-                        wordBankHtml += `<span class="word-chip" onclick="fillBlank(this, '${word}', ${id}, ${index})">${word}</span>`;
+                        const chip = document.createElement('span');
+                        chip.className = 'word-chip';
+                        chip.textContent = word;
+                        chip.addEventListener('click', () => fillBlank(chip, word, id, index));
+                        wb.appendChild(chip);
                     });
-                    wordBankHtml += `</div>`;
-                    
-                    questionDiv.innerHTML = `
-                        <div class="question-text">${q.question}</div>
-                        ${wordBankHtml}
-                        <div class="blank-answer-display" style="font-weight:bold; color:var(--success-color); min-height:24px;"></div>
-                    `;
+                    questionDiv.appendChild(wb);
+
+                    const ans = document.createElement('div');
+                    ans.className = 'blank-answer-display';
+                    ans.style.fontWeight = 'bold';
+                    ans.style.color = 'var(--success-color)';
+                    ans.style.minHeight = '24px';
+                    questionDiv.appendChild(ans);
                 } else if (q.type === 'multiple-choice' || q.type === 'reading-passage') {
-                    questionDiv.innerHTML = `
-                        ${q.type === 'reading-passage' ? `<div class="reading-passage">${q.passage}</div>` : ''}
-                        <div class="question-text">${q.question}</div>
-                        <ul class="options-list">
-                            ${q.options.map((opt, i) => `
-                                <li class="option-item" data-index="${i}" onclick="selectOption(${id}, ${index}, ${i})">${opt}</li>
-                            `).join('')}
-                        </ul>
-                    `;
+                    if (q.type === 'reading-passage') {
+                        const passageEl = document.createElement('div');
+                        passageEl.className = 'reading-passage';
+                        passageEl.textContent = q.passage;
+                        questionDiv.appendChild(passageEl);
+                    }
+                    const qtEl = document.createElement('div');
+                    qtEl.className = 'question-text';
+                    qtEl.textContent = q.question;
+                    questionDiv.appendChild(qtEl);
+
+                    const ul = document.createElement('ul');
+                    ul.className = 'options-list';
+                    q.options.forEach((opt, i) => {
+                        const li = document.createElement('li');
+                        li.className = 'option-item';
+                        li.dataset.index = i;
+                        li.textContent = opt;
+                        li.addEventListener('click', () => selectOption(id, index, i));
+                        ul.appendChild(li);
+                    });
+                    questionDiv.appendChild(ul);
                 } else if (q.type === 'short-answer') {
-                    questionDiv.innerHTML = `
-                        <div class="question-text">${q.question}</div>
-                        <input type="text" class="short-answer-input" placeholder="Type your answer here..." id="input-${id}-${index}">
-                        <button class="check-btn" onclick="checkShortAnswer(${id}, ${index}, '${q.answer.replace(/'/g, "\\'")}')">Check Answer</button>
-                        <div class="correct-answer-reveal" id="reveal-${id}-${index}">Correct Answer: ${q.answer}</div>
-                    `;
+                    const qtEl = document.createElement('div');
+                    qtEl.className = 'question-text';
+                    qtEl.textContent = q.question;
+                    questionDiv.appendChild(qtEl);
+
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.className = 'short-answer-input';
+                    input.placeholder = 'Type your answer here...';
+                    input.id = `input-${id}-${index}`;
+                    questionDiv.appendChild(input);
+
+                    const btn = document.createElement('button');
+                    btn.className = 'check-btn';
+                    btn.textContent = 'Check Answer';
+                    btn.addEventListener('click', () => checkShortAnswer(id, index, q.answer));
+                    questionDiv.appendChild(btn);
+
+                    const reveal = document.createElement('div');
+                    reveal.className = 'correct-answer-reveal';
+                    reveal.id = `reveal-${id}-${index}`;
+                    reveal.textContent = 'Correct Answer: ';
+                    reveal.appendChild(document.createTextNode(q.answer));
+                    questionDiv.appendChild(reveal);
                 }
-                
+
                 questionsContainer.appendChild(questionDiv);
             });
 

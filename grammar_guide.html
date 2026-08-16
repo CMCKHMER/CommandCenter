@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self'; form-action 'self' https://docs.google.com; object-src 'none'; base-uri 'self'">
     <title>Complete Grammar Guide - CMC Network</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -887,15 +888,31 @@
             quizQuestions.forEach((q, index) => {
                 const questionDiv = document.createElement('div');
                 questionDiv.className = 'quiz-question';
-                questionDiv.innerHTML = `
-                    <p style="font-weight: 600; margin-bottom: 10px;">${index + 1}. ${q.question}</p>
-                    <div class="quiz-options">
-                        ${q.options.map((opt, i) => `
-                            <div class="quiz-option" data-question="${index}" data-option="${i}" onclick="selectOption(${index}, ${i})">${opt}</div>
-                        `).join('')}
-                    </div>
-                    <div class="feedback" id="feedback-${index}"></div>
-                `;
+
+                const p = document.createElement('p');
+                p.style.fontWeight = '600';
+                p.style.marginBottom = '10px';
+                p.textContent = `${index + 1}. ${q.question}`;
+                questionDiv.appendChild(p);
+
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'quiz-options';
+                q.options.forEach((opt, i) => {
+                    const optEl = document.createElement('div');
+                    optEl.className = 'quiz-option';
+                    optEl.dataset.question = index;
+                    optEl.dataset.option = i;
+                    optEl.textContent = opt;
+                    optEl.addEventListener('click', () => selectOption(index, i));
+                    optionsDiv.appendChild(optEl);
+                });
+                questionDiv.appendChild(optionsDiv);
+
+                const feedback = document.createElement('div');
+                feedback.className = 'feedback';
+                feedback.id = `feedback-${index}`;
+                questionDiv.appendChild(feedback);
+
                 container.appendChild(questionDiv);
             });
         }
@@ -932,10 +949,10 @@
                 if (selectedAnswers[index] === q.correct) {
                     score++;
                     feedbackEl.className = 'feedback success';
-                    feedbackEl.innerHTML = `✓ Correct! ${q.explanation}`;
+                    feedbackEl.textContent = `✓ Correct! ${q.explanation}`;
                 } else {
                     feedbackEl.className = 'feedback error';
-                    feedbackEl.innerHTML = `✗ Incorrect. ${q.explanation}`;
+                    feedbackEl.textContent = `✗ Incorrect. ${q.explanation}`;
                 }
             });
 
@@ -944,11 +961,14 @@
             scoreDisplay.style.display = 'block';
             
             if (score >= 8) {
-                scoreDisplay.innerHTML += '<br>🎉 Excellent work!';
+                scoreDisplay.appendChild(document.createElement('br'));
+                scoreDisplay.appendChild(document.createTextNode('🎉 Excellent work!'));
             } else if (score >= 6) {
-                scoreDisplay.innerHTML += '<br>👍 Good job! Keep practicing!';
+                scoreDisplay.appendChild(document.createElement('br'));
+                scoreDisplay.appendChild(document.createTextNode('👍 Good job! Keep practicing!'));
             } else {
-                scoreDisplay.innerHTML += '<br>📚 Review the sections above and try again!';
+                scoreDisplay.appendChild(document.createElement('br'));
+                scoreDisplay.appendChild(document.createTextNode('📚 Review the sections above and try again!'));
             }
         }
 
