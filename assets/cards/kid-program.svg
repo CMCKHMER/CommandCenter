@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e3a5f"/>
+    </linearGradient>
+    <linearGradient id="bookGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0891b2"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+    <radialGradient id="starglow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#fbbf24" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="240" fill="url(#bg)"/>
+  <!-- Open Book -->
+  <rect x="100" y="100" width="90" height="110" rx="4" fill="#0c2a4a"/>
+  <rect x="102" y="100" width="88" height="108" rx="3" fill="url(#bookGrad)" opacity="0.85"/>
+  <rect x="190" y="100" width="90" height="110" rx="4" fill="#1e3a5f"/>
+  <rect x="192" y="100" width="88" height="108" rx="3" fill="#0ea5e9" opacity="0.7"/>
+  <!-- Spine -->
+  <rect x="188" y="100" width="4" height="110" rx="2" fill="#0f172a"/>
+  <!-- Book lines -->
+  <line x1="112" y1="120" x2="180" y2="120" stroke="#e0f7ff" stroke-width="1.5" opacity="0.6"/>
+  <line x1="112" y1="130" x2="180" y2="130" stroke="#e0f7ff" stroke-width="1.5" opacity="0.6"/>
+  <line x1="112" y1="140" x2="170" y2="140" stroke="#e0f7ff" stroke-width="1.5" opacity="0.6"/>
+  <line x1="112" y1="150" x2="175" y2="150" stroke="#e0f7ff" stroke-width="1.5" opacity="0.6"/>
+  <line x1="200" y1="120" x2="272" y2="120" stroke="#bae6fd" stroke-width="1.5" opacity="0.5"/>
+  <line x1="200" y1="130" x2="272" y2="130" stroke="#bae6fd" stroke-width="1.5" opacity="0.5"/>
+  <line x1="200" y1="140" x2="260" y2="140" stroke="#bae6fd" stroke-width="1.5" opacity="0.5"/>
+  <!-- Rocket -->
+  <g transform="translate(300,55) rotate(-30)">
+    <ellipse cx="0" cy="0" rx="12" ry="26" fill="#0ea5e9"/>
+    <polygon points="0,-26 -10,-10 10,-10" fill="#f59e0b"/>
+    <rect x="-4" y="14" width="8" height="10" fill="#1e3a5f"/>
+    <ellipse cx="-10" cy="22" rx="6" ry="4" fill="#f59e0b" opacity="0.8"/>
+    <ellipse cx="10" cy="22" rx="6" ry="4" fill="#f59e0b" opacity="0.8"/>
+    <circle cx="0" cy="0" r="5" fill="#bae6fd"/>
+  </g>
+  <!-- Graduation Cap -->
+  <g transform="translate(95,65)">
+    <rect x="-20" y="-4" width="40" height="8" rx="2" fill="#fbbf24"/>
+    <polygon points="0,-20 -22,-4 22,-4" fill="#f59e0b"/>
+    <line x1="22" y1="-4" x2="30" y2="10" stroke="#fbbf24" stroke-width="2"/>
+    <circle cx="30" cy="12" r="3" fill="#fbbf24"/>
+  </g>
+  <!-- Pencils -->
+  <g transform="translate(55, 105)">
+    <rect x="0" y="0" width="10" height="70" rx="2" fill="#fbbf24" transform="rotate(-15)"/>
+    <polygon points="5,-5 0,0 10,0" fill="#f59e0b" transform="rotate(-15)"/>
+    <rect x="0" y="60" width="10" height="8" rx="0" fill="#f9a8d4" transform="rotate(-15)"/>
+  </g>
+  <!-- Stars scattered -->
+  <polygon points="340,30 343,40 353,40 345,46 348,56 340,50 332,56 335,46 327,40 337,40" fill="#fbbf24" opacity="0.9"/>
+  <polygon points="55,45 57,51 64,51 58,55 60,61 55,58 50,61 52,55 46,51 53,51" fill="#06b6d4" opacity="0.7"/>
+  <polygon points="365,110 367,116 373,116 368,120 370,126 365,123 360,126 362,120 357,116 363,116" fill="#14b8a6" opacity="0.7"/>
+  <!-- Star chart lines -->
+  <line x1="320" y1="160" x2="360" y2="140" stroke="#06b6d4" stroke-width="1" opacity="0.4"/>
+  <line x1="360" y1="140" x2="380" y2="170" stroke="#06b6d4" stroke-width="1" opacity="0.4"/>
+  <circle cx="320" cy="160" r="3" fill="#06b6d4"/>
+  <circle cx="360" cy="140" r="3" fill="#06b6d4"/>
+  <circle cx="380" cy="170" r="3" fill="#06b6d4"/>
+  <circle cx="345" cy="185" r="3" fill="#0ea5e9"/>
+  <line x1="320" y1="160" x2="345" y2="185" stroke="#06b6d4" stroke-width="1" opacity="0.4"/>
+  <line x1="345" y1="185" x2="380" y2="170" stroke="#06b6d4" stroke-width="1" opacity="0.4"/>
+  <!-- Label -->
+  <rect x="10" y="10" width="155" height="30" rx="8" fill="#0891b2" opacity="0.7"/>
+  <text x="87" y="30" font-family="sans-serif" font-size="13" font-weight="bold" fill="#e0f7ff" text-anchor="middle">Kid Program</text>
+</svg>

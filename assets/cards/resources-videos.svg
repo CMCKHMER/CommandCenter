@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1a1030"/>
+    </linearGradient>
+    <radialGradient id="playglow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="240" fill="url(#bg)"/>
+  <!-- Clapperboard -->
+  <rect x="90" y="60" width="220" height="160" rx="8" fill="#1e3a5f" stroke="#0891b2" stroke-width="2"/>
+  <!-- Top clapper strip -->
+  <rect x="90" y="60" width="220" height="35" rx="8" fill="#0f172a"/>
+  <!-- Black/white clapperboard diagonal stripes -->
+  <clipPath id="topClip">
+    <rect x="90" y="60" width="220" height="35" rx="8"/>
+  </clipPath>
+  <g clip-path="url(#topClip)">
+    <rect x="90" y="60" width="30" height="35" fill="#f59e0b"/>
+    <rect x="120" y="60" width="30" height="35" fill="#0f172a"/>
+    <rect x="150" y="60" width="30" height="35" fill="#f59e0b"/>
+    <rect x="180" y="60" width="30" height="35" fill="#0f172a"/>
+    <rect x="210" y="60" width="30" height="35" fill="#f59e0b"/>
+    <rect x="240" y="60" width="30" height="35" fill="#0f172a"/>
+    <rect x="270" y="60" width="40" height="35" fill="#f59e0b"/>
+  </g>
+  <!-- Hinge line -->
+  <rect x="90" y="92" width="220" height="4" fill="#0891b2" opacity="0.7"/>
+  <!-- Play area / screen -->
+  <rect x="105" y="104" width="190" height="100" rx="4" fill="#0a0a1a"/>
+  <!-- Play button glow -->
+  <circle cx="200" cy="154" r="42" fill="url(#playglow)"/>
+  <!-- Play button circle -->
+  <circle cx="200" cy="154" r="32" fill="none" stroke="#fbbf24" stroke-width="3" opacity="0.9"/>
+  <!-- Play triangle -->
+  <polygon points="192,140 192,168 222,154" fill="#fbbf24" opacity="0.95"/>
+  <!-- Video timeline bar -->
+  <rect x="105" y="208" width="190" height="8" rx="4" fill="#1e3a5f"/>
+  <rect x="105" y="208" width="90" height="8" rx="4" fill="#0891b2"/>
+  <circle cx="195" cy="212" r="5" fill="#06b6d4"/>
+  <!-- Label -->
+  <rect x="10" y="10" width="120" height="28" rx="8" fill="#f59e0b" opacity="0.8"/>
+  <text x="70" y="29" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">Videos</text>
+</svg>

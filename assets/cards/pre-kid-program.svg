@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e3a5f"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#06b6d4" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="400" height="240" fill="url(#sky)"/>
+  <circle cx="200" cy="120" r="110" fill="url(#glow1)"/>
+  <!-- Floor -->
+  <rect x="0" y="190" width="400" height="50" rx="0" fill="#0c2340" opacity="0.7"/>
+  <!-- Alphabet Blocks -->
+  <rect x="60" y="148" width="45" height="45" rx="5" fill="#0891b2"/>
+  <text x="82" y="177" font-family="sans-serif" font-size="20" font-weight="bold" fill="#e0f7ff" text-anchor="middle">A</text>
+  <rect x="63" y="145" width="45" height="45" rx="5" fill="#0ea5e9" opacity="0.85"/>
+  <text x="85" y="174" font-family="sans-serif" font-size="20" font-weight="bold" fill="#fff" text-anchor="middle">A</text>
+  <rect x="110" y="155" width="42" height="42" rx="5" fill="#14b8a6"/>
+  <text x="131" y="182" font-family="sans-serif" font-size="18" font-weight="bold" fill="#fff" text-anchor="middle">B</text>
+  <rect x="156" y="162" width="40" height="40" rx="5" fill="#f59e0b"/>
+  <text x="176" y="188" font-family="sans-serif" font-size="18" font-weight="bold" fill="#fff" text-anchor="middle">C</text>
+  <!-- Teddy Bear -->
+  <circle cx="280" cy="110" r="28" fill="#f59e0b" opacity="0.9"/>
+  <circle cx="265" cy="90" r="13" fill="#fbbf24"/>
+  <circle cx="295" cy="90" r="13" fill="#fbbf24"/>
+  <circle cx="280" cy="108" r="22" fill="#fbbf24"/>
+  <circle cx="274" cy="104" r="4" fill="#0f172a"/>
+  <circle cx="286" cy="104" r="4" fill="#0f172a"/>
+  <ellipse cx="280" cy="113" rx="6" ry="4" fill="#e08000"/>
+  <circle cx="270" cy="158" r="10" fill="#f59e0b" opacity="0.8"/>
+  <circle cx="290" cy="158" r="10" fill="#f59e0b" opacity="0.8"/>
+  <rect x="268" y="135" width="24" height="28" rx="5" fill="#fbbf24"/>
+  <!-- Stars -->
+  <polygon points="330,40 333,50 344,50 335,57 338,67 330,61 322,67 325,57 316,50 327,50" fill="#fbbf24" opacity="0.9"/>
+  <polygon points="55,50 57,58 65,58 59,63 61,71 55,66 49,71 51,63 45,58 53,58" fill="#06b6d4" opacity="0.8"/>
+  <!-- Balloons -->
+  <ellipse cx="340" cy="90" rx="18" ry="22" fill="#f472b6" opacity="0.85"/>
+  <path d="M340 112 Q342 120 338 128" stroke="#f9a8d4" stroke-width="2" fill="none"/>
+  <ellipse cx="360" cy="75" rx="15" ry="19" fill="#a78bfa" opacity="0.85"/>
+  <path d="M360 94 Q362 102 359 110" stroke="#c4b5fd" stroke-width="2" fill="none"/>
+  <ellipse cx="315" cy="80" rx="14" ry="17" fill="#34d399" opacity="0.85"/>
+  <path d="M315 97 Q317 105 314 114" stroke="#6ee7b7" stroke-width="2" fill="none"/>
+  <!-- Title label -->
+  <rect x="10" y="10" width="175" height="30" rx="8" fill="#0891b2" opacity="0.7"/>
+  <text x="97" y="30" font-family="sans-serif" font-size="13" font-weight="bold" fill="#e0f7ff" text-anchor="middle">Pre-Kid Program</text>
+</svg>

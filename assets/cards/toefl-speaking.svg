@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#0c2340"/>
+    </linearGradient>
+    <radialGradient id="micGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#14b8a6" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#14b8a6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="240" fill="url(#bg)"/>
+  <circle cx="165" cy="115" r="90" fill="url(#micGlow)"/>
+  <!-- Microphone stand -->
+  <line x1="165" y1="165" x2="165" y2="210" stroke="#14b8a6" stroke-width="4" stroke-linecap="round"/>
+  <line x1="145" y1="210" x2="185" y2="210" stroke="#14b8a6" stroke-width="4" stroke-linecap="round"/>
+  <!-- Mic body -->
+  <rect x="148" y="65" width="34" height="54" rx="17" fill="#14b8a6"/>
+  <rect x="153" y="70" width="24" height="44" rx="12" fill="#0d9488"/>
+  <!-- Mic grille lines -->
+  <line x1="153" y1="82" x2="177" y2="82" stroke="#14b8a6" stroke-width="1.5" opacity="0.7"/>
+  <line x1="153" y1="90" x2="177" y2="90" stroke="#14b8a6" stroke-width="1.5" opacity="0.7"/>
+  <line x1="153" y1="98" x2="177" y2="98" stroke="#14b8a6" stroke-width="1.5" opacity="0.7"/>
+  <!-- Mic bracket -->
+  <path d="M133,140 Q133,165 165,165 Q197,165 197,140" fill="none" stroke="#14b8a6" stroke-width="3"/>
+  <!-- Speech bubble -->
+  <rect x="220" y="55" width="145" height="95" rx="14" fill="#1e3a5f" stroke="#06b6d4" stroke-width="2"/>
+  <polygon points="225,140 210,160 240,142" fill="#1e3a5f"/>
+  <!-- Sound bars inside bubble -->
+  <rect x="235" y="90" width="8" height="25" rx="4" fill="#06b6d4" opacity="0.8"/>
+  <rect x="248" y="78" width="8" height="50" rx="4" fill="#0ea5e9" opacity="0.9"/>
+  <rect x="261" y="85" width="8" height="35" rx="4" fill="#06b6d4" opacity="0.8"/>
+  <rect x="274" y="72" width="8" height="58" rx="4" fill="#0891b2" opacity="0.9"/>
+  <rect x="287" y="82" width="8" height="38" rx="4" fill="#06b6d4" opacity="0.8"/>
+  <rect x="300" y="78" width="8" height="46" rx="4" fill="#0ea5e9" opacity="0.9"/>
+  <rect x="313" y="88" width="8" height="25" rx="4" fill="#06b6d4" opacity="0.8"/>
+  <rect x="326" y="80" width="8" height="42" rx="4" fill="#0891b2" opacity="0.8"/>
+  <rect x="339" y="90" width="8" height="22" rx="4" fill="#06b6d4" opacity="0.7"/>
+  <!-- Timer chip 45s -->
+  <rect x="50" y="45" width="78" height="36" rx="8" fill="#0f172a" stroke="#fbbf24" stroke-width="2"/>
+  <text x="89" y="59" font-family="sans-serif" font-size="9" fill="#fbbf24" text-anchor="middle">PREP TIME</text>
+  <text x="89" y="73" font-family="sans-serif" font-size="13" font-weight="bold" fill="#fbbf24" text-anchor="middle">45 sec</text>
+  <!-- Label -->
+  <rect x="10" y="200" width="185" height="28" rx="8" fill="#14b8a6" opacity="0.8"/>
+  <text x="102" y="219" font-family="sans-serif" font-size="13" font-weight="bold" fill="#fff" text-anchor="middle">TOEFL Speaking</text>
+</svg>
