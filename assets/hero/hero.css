@@ -112,6 +112,17 @@
   mask-image: radial-gradient(70% 70% at 40% 50%, #000 30%, transparent 78%);
 }
 
+/* mirrored copy anchoring the right edge — keeps the PCB traces present in a
+   wide panoramic crop instead of only the bottom-left corner */
+.cc-hero__bg--circuit-r {
+  left: auto;
+  right: -9%;
+  bottom: -10%;
+  width: min(660px, 44%);
+  opacity: 0.4;
+  transform: scaleX(-1);
+}
+
 .cc-hero__bg--floor {
   left: 0;
   bottom: -2px;
@@ -129,6 +140,19 @@
 .cc-hero__orb--a { top: -140px; left: -100px; width: 480px; height: 480px; background: rgba(34, 211, 238, 0.5); }
 .cc-hero__orb--b { top: -90px; right: 6%; width: 420px; height: 420px; background: rgba(168, 85, 247, 0.45); }
 .cc-hero__orb--c { bottom: -180px; left: 42%; width: 520px; height: 400px; background: rgba(163, 230, 53, 0.24); }
+
+/* slow breathing on the light pools so the backdrop never reads as static */
+@media (prefers-reduced-motion: no-preference) {
+  .cc-hero__orb { animation: cc-breathe 16s ease-in-out infinite alternate; will-change: transform; }
+  .cc-hero__orb--a { animation-duration: 19s; }
+  .cc-hero__orb--b { animation-delay: -6s; animation-duration: 23s; }
+  .cc-hero__orb--c { animation-delay: -11s; }
+}
+
+@keyframes cc-breathe {
+  from { transform: scale(1); opacity: 0.36; }
+  to   { transform: scale(1.14); opacity: 0.5; }
+}
 
 .cc-hero__sheen {
   position: absolute;
@@ -806,6 +830,11 @@
   padding-top: clamp(8px, 1vw, 12px);
   border-top: 1px solid var(--cc-line-soft);
 }
+/* ultrawide banners have spare horizontal room — let the strip breathe into
+   five equal cells instead of leaving dead space at both edges */
+@media (min-width: 1700px) {
+  .cc-hero__metrics { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+}
 .cc-hero__metric {
   display: flex;
   align-items: center;
@@ -919,6 +948,11 @@
 .cc-hero__shard--cross { top: 57%;   left: 44.5%; width: 15px;  height: 15px;  color: rgba(163, 230, 53, 0.55);  animation-delay: -6s; }
 .cc-hero__shard--tri   { bottom: 26%; right: 1.7%; width: 26px; height: 26px;  color: rgba(125, 211, 252, 0.5);  animation-delay: -8s; }
 .cc-hero__shard--dot   { top: 28%;   left: 7%;    width: 11px;  height: 11px;  color: rgba(192, 132, 252, 0.7);  animation-delay: -2s; }
+/* plus glyph in the copy column's lower gutter — only shown once there is
+   room for the side decorations (>= 1181 px, see the responsive block) */
+.cc-hero__shard--plus  { bottom: 24%; left: 47%;  width: 20px;  height: 20px;  color: rgba(34, 211, 238, 0.45);  animation-delay: -4.5s; }
+/* diamond on the far-right edge, echoing the hex node on the left */
+.cc-hero__shard--diamond { top: 15%;  right: 1.2%; width: 30px; height: 30px;  color: rgba(163, 230, 53, 0.45);  animation-delay: -7s; }
 
 /* ------------------------------------------------------------------ *
  * 09. Motion + reduced motion
