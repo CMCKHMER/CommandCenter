@@ -37,7 +37,7 @@
 
   --cc-text: #e6f1ff;
   --cc-text-dim: #93a7bd;
-  --cc-text-faint: #5c6f85;
+  --cc-text-faint: #7b90a6;
 
   --cc-display: 'Space Grotesk', 'Outfit', system-ui, sans-serif;
   --cc-body: 'Outfit', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -95,7 +95,7 @@
 .cc-hero__bg--map {
   top: 4%;
   right: -6%;
-  width: min(1180px, 78%);
+  width: clamp(880px, 72vw, 1760px);
   opacity: 0.5;
   mix-blend-mode: screen;
   -webkit-mask-image: linear-gradient(100deg, transparent 4%, #000 34%, #000 78%, transparent 98%);
@@ -143,11 +143,11 @@
   width: 100%;
   max-width: var(--cc-shell);
   margin: 0 auto;
-  padding: clamp(20px, 3vw, 40px) clamp(18px, 3.4vw, 56px) clamp(28px, 3.4vw, 52px);
+  padding: clamp(16px, 2.3vw, 32px) clamp(18px, 3.4vw, 56px) clamp(22px, 2.6vw, 40px);
   display: flex;
   flex-direction: column;
-  gap: clamp(22px, 2.6vw, 40px);
-  min-height: min(860px, 94vh);
+  gap: clamp(16px, 1.9vw, 30px);
+  min-height: min(880px, 92vh);
 }
 
 /* ------------------------------------------------------------------ *
@@ -285,11 +285,11 @@
 }
 
 .cc-hero__title {
-  margin: 20px 0 0;
+  margin: 18px 0 0;
   font-family: var(--cc-display);
   font-weight: 700;
-  font-size: clamp(2.5rem, 5.7vw, 4.85rem);
-  line-height: 0.98;
+  font-size: clamp(2.4rem, 5.2vw, 4.5rem);
+  line-height: 1;
   letter-spacing: -0.028em;
   color: #f4f9ff;
   text-wrap: balance;
@@ -320,10 +320,11 @@
 }
 
 .cc-hero__lede {
-  margin: 22px 0 0;
+  margin: 18px 0 0;
   max-width: 50ch;
-  font-size: clamp(1rem, 1.16vw, 1.14rem);
-  line-height: 1.66;
+  font-size: clamp(1rem, 1.12vw, 1.1rem);
+  line-height: 1.62;
+  text-wrap: pretty;
   color: var(--cc-text-dim);
 }
 .cc-hero__lede strong { color: #cfe9f7; font-weight: 600; }
@@ -332,8 +333,8 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  margin-top: 20px;
-  padding: 9px 15px;
+  margin-top: 18px;
+  padding: 8px 14px;
   border: 1px dashed rgba(126, 178, 214, 0.26);
   border-radius: 10px;
   background: rgba(6, 11, 19, 0.6);
@@ -353,7 +354,7 @@
   animation: cc-blink 1.15s steps(1, end) infinite;
 }
 
-.cc-hero__actions { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 30px; }
+.cc-hero__actions { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 24px; }
 
 .cc-hero__btn {
   position: relative;
@@ -408,7 +409,7 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 10px 20px;
-  margin-top: 26px;
+  margin-top: 20px;
   font-family: var(--cc-mono);
   font-size: 11.5px;
   letter-spacing: 0.08em;
@@ -511,14 +512,14 @@
 
 .cc-hero__termbody {
   position: relative;
-  padding: 15px 18px 16px;
+  padding: 13px 18px 14px;
   font-family: var(--cc-mono);
   font-size: 12.9px;
-  line-height: 1.88;
+  line-height: 1.78;
   overflow: hidden;
   /* faint CRT scanlines, aligned with the line-height above */
   background-image: linear-gradient(rgba(34, 211, 238, 0.035) 1px, transparent 1px);
-  background-size: 100% 1.88em;
+  background-size: 100% 1.78em;
 }
 .cc-hero__termbody::after {
   /* scanline sweep */
@@ -567,7 +568,8 @@
   margin-top: 6px;
   height: 4px;
   border-radius: 999px;
-  background: rgba(126, 178, 214, 0.12);
+  background: rgba(126, 178, 214, 0.2);
+  box-shadow: 0 0 0 1px rgba(126, 178, 214, 0.06) inset;
   overflow: hidden;
 }
 .cc-hero__progress i {
@@ -575,8 +577,8 @@
   height: 100%;
   border-radius: 999px;
   background: linear-gradient(90deg, var(--cc-cyan), var(--cc-green));
+  width: var(--cc-w, 68%);
   box-shadow: 0 0 14px rgba(34, 211, 238, 0.8);
-  transition: width 0.6s cubic-bezier(0.3, 0.8, 0.3, 1);
 }
 
 /* ------------------------------------------------------------------ *
@@ -606,14 +608,14 @@
 .cc-hero__blocks {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-  padding: 14px;
+  gap: 9px;
+  padding: 12px;
 }
 .cc-hero__block {
   display: flex;
   flex-direction: column;
-  gap: 7px;
-  padding: 11px 11px;
+  gap: 6px;
+  padding: 10px;
   border: 1px solid var(--cc-line-soft);
   border-radius: var(--cc-radius-sm);
   background: linear-gradient(160deg, rgba(21, 31, 48, 0.75), rgba(9, 14, 23, 0.6));
@@ -633,7 +635,7 @@
 .cc-hero__spark { padding: 12px 14px 16px; }
 .cc-hero__spark svg { display: block; width: 100%; height: 66px; overflow: visible; }
 .cc-hero__spark line { stroke: rgba(126, 178, 214, 0.12); stroke-width: 1; }
-.cc-hero__spark .cc-hero__area { fill: url(#ccSparkFill); opacity: 0; transition: opacity 0.9s ease 0.35s; }
+.cc-hero__spark .cc-hero__area { fill: url(#ccSparkFill); opacity: 1; }
 .cc-hero__spark .cc-hero__sparkline {
   fill: none;
   stroke: url(#ccSparkStroke);
@@ -641,8 +643,7 @@
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-dasharray: 620;
-  stroke-dashoffset: 620;
-  transition: stroke-dashoffset 1.7s cubic-bezier(0.25, 0.9, 0.25, 1);
+  stroke-dashoffset: 0;            /* base = drawn: correct without JS */
   filter: drop-shadow(0 0 7px rgba(34, 211, 238, 0.7));
 }
 .cc-hero__telemetry .cc-hero__bars {
@@ -654,11 +655,10 @@
 }
 .cc-hero__bars i {
   flex: 1;
-  height: 6%;
+  height: var(--cc-h, 40%);
   border-radius: 3px 3px 1px 1px;
   background: linear-gradient(180deg, rgba(34, 211, 238, 0.95), rgba(14, 116, 144, 0.35));
   box-shadow: 0 0 16px -6px rgba(34, 211, 238, 0.95);
-  transition: height 0.85s cubic-bezier(0.22, 0.9, 0.24, 1);
 }
 .cc-hero__bars i:nth-child(4n) { background: linear-gradient(180deg, rgba(163, 230, 53, 0.9), rgba(74, 222, 128, 0.28)); }
 .cc-hero__bars i:nth-child(7n) { background: linear-gradient(180deg, rgba(192, 132, 252, 0.9), rgba(126, 34, 206, 0.3)); }
@@ -699,14 +699,14 @@
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: clamp(10px, 1.1vw, 16px);
-  padding-top: clamp(8px, 1.1vw, 14px);
+  padding-top: clamp(8px, 1vw, 12px);
   border-top: 1px solid var(--cc-line-soft);
 }
 .cc-hero__metric {
   display: flex;
   align-items: center;
   gap: 13px;
-  padding: 14px 16px;
+  padding: 12px 16px;
   border: 1px solid var(--cc-line-soft);
   border-radius: var(--cc-radius-sm);
   background: linear-gradient(160deg, rgba(15, 23, 37, 0.72), rgba(7, 11, 19, 0.5));
@@ -724,18 +724,35 @@
 .cc-hero__metric b {
   display: block;
   font-family: var(--cc-mono);
-  font-size: 19px;
+  font-size: clamp(20px, 1.5vw, 25px);
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
   color: #f1f9ff;
+  white-space: nowrap;
 }
-.cc-hero__metric span {
+/* the counter <span> must inherit the numeral styling — an unqualified
+   `.cc-hero__metric span` rule would otherwise shrink and block it, pushing
+   the +/-/% unit onto its own line. */
+.cc-hero__metric b [data-cc-count] { display: inline; font: inherit; letter-spacing: inherit; }
+.cc-hero__metric-unit {
+  margin-left: 1px;
+  font-size: 0.62em;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--cc-cyan);
+}
+.cc-hero__metric--g .cc-hero__metric-unit { color: var(--cc-green); }
+.cc-hero__metric--p .cc-hero__metric-unit { color: #c084fc; }
+.cc-hero__metric-label {
   display: block;
+  margin-top: 3px;
   font-family: var(--cc-mono);
   font-size: 10.5px;
   letter-spacing: 0.13em;
   text-transform: uppercase;
   color: var(--cc-text-faint);
+  white-space: nowrap;
 }
 
 /* ------------------------------------------------------------------ *
@@ -766,10 +783,10 @@
 .cc-hero__chip--p { border-color: rgba(168, 85, 247, 0.24); box-shadow: 0 0 30px -14px rgba(168, 85, 247, 0.9), 0 1px 0 rgba(255, 255, 255, 0.06) inset; }
 .cc-hero__chip--p svg { color: #e9d5ff; }
 
-.cc-hero__chip--1 { top: 17%; left: 46.5%; animation-delay: -0.4s; }
-.cc-hero__chip--2 { top: 62%; left: 3.5%; animation-delay: -2.1s; }
-.cc-hero__chip--3 { bottom: 19%; right: 2.5%; animation-delay: -3.4s; }
-.cc-hero__chip--4 { top: 8%; right: 11%; animation-delay: -5s; }
+.cc-hero__chip--1 { top: 13%; left: 45%; animation-delay: -0.4s; }
+.cc-hero__chip--2 { bottom: 38%; left: 1.6%; animation-delay: -2.1s; }
+.cc-hero__chip--3 { top: 44%; right: 1.6%; animation-delay: -3.4s; }
+.cc-hero__chip--4 { bottom: 12%; right: 3.2%; animation-delay: -5s; }
 
 /* ------------------------------------------------------------------ *
  * 09. Motion + reduced motion
@@ -791,10 +808,26 @@
   50% { transform: translate3d(0, -13px, 0); }
 }
 
-.cc-hero.is-live .cc-hero__sparkline { stroke-dashoffset: 0; }
-.cc-hero.is-live .cc-hero__area { opacity: 1; }
-.cc-hero.is-live .cc-hero__bars i { height: var(--cc-h, 40%); }
-.cc-hero.is-live .cc-hero__progress i { width: var(--cc-w, 68%); }
+@keyframes cc-draw { from { stroke-dashoffset: 620; } to { stroke-dashoffset: 0; } }
+@keyframes cc-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes cc-rise {
+  from { height: 6%; }
+  to { height: var(--cc-h, 40%); }
+}
+@keyframes cc-fill {
+  from { width: 0; }
+  to { width: var(--cc-w, 68%); }
+}
+
+/* The finished look is the default (so a JS-less render is complete); the
+   page script adds `.is-live` to replay it as an entrance animation. */
+.cc-hero.is-live .cc-hero__sparkline { animation: cc-draw 1.7s cubic-bezier(0.25, 0.9, 0.25, 1) both; }
+.cc-hero.is-live .cc-hero__area { animation: cc-fade 0.9s ease 0.35s both; }
+.cc-hero.is-live .cc-hero__bars i { animation: cc-rise 0.85s cubic-bezier(0.22, 0.9, 0.24, 1) both; }
+/* three delay buckets give the bar chart a loose, un-mechanical cascade */
+.cc-hero.is-live .cc-hero__bars i:nth-child(3n + 2) { animation-delay: 0.07s; }
+.cc-hero.is-live .cc-hero__bars i:nth-child(3n) { animation-delay: 0.14s; }
+.cc-hero.is-live .cc-hero__progress i { animation: cc-fill 0.6s cubic-bezier(0.3, 0.8, 0.3, 1) both; }
 
 @media (prefers-reduced-motion: reduce) {
   .cc-hero *,
@@ -805,10 +838,6 @@
   }
   .cc-hero .cc-hero__typebar,
   .cc-hero__console .cc-hero__caret { opacity: 1; }
-  .cc-hero .cc-hero__sparkline { stroke-dashoffset: 0; }
-  .cc-hero .cc-hero__area { opacity: 1; }
-  .cc-hero .cc-hero__bars i { height: var(--cc-h, 40%); }
-  .cc-hero .cc-hero__progress i { width: var(--cc-w, 68%); }
 }
 
 /* ------------------------------------------------------------------ *

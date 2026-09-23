@@ -19,21 +19,36 @@ design/
   build-art.mjs              generates world-map.svg, hero.html, poster, previews
   build-coastline.mjs        decodes Natural Earth data into design/data/
   verify-hero.mjs            static checks (assets, classes, paths, tags)
+  shot.mjs                   renders the real page in headless Chromium (screenshots + poster)
   data/coastline.json        coastline rings, Natural Earth 1:50m (public domain)
   previews/*.png             raster previews for review
+  previews/live/*.png        browser renders of the real page (generated, not committed)
 ```
 
-## Why a comp and not a screenshot
+## Comp, screenshot, and which one wins
 
-There is no browser in the sandbox this was built in, so the layout could not be
-screenshotted. `design/hero-mock.svg` is instead a **1:1 spec of the hero** —
-the same copy, the same pixel geometry, the same colours as `hero.css` — and it
-is rasterised both to `design/previews/hero-mock.png` (review at 1520px) and to
-`assets/hero/hero-poster.png` at 1200×630 for social cards. Every number in the
-comp has a counterpart in the stylesheet: the shell is 1520 px wide, the
-headline is 77.6 px at that width, the terminal body is 12.9 px/1.88, panels are
-16 px radius, and so on. Open `command-center.html` in a browser to see the real
-thing; the two should match closely.
+`design/hero-mock.svg` is a **1:1 spec of the hero** — same copy, same pixel
+geometry, same colours as `hero.css`. Every number in the comp has a
+counterpart in the stylesheet: the shell is 1520 px wide, the terminal body is
+12.9 px, panels are 16 px radius, and so on. It is still useful as an annotated
+reference for spacing, but it is a drawing: it cannot catch a cascade bug.
+
+`design/shot.mjs` is the source of truth. It drives the *actual page* in headless
+Chromium, injects the `@fontsource` copies of the three typefaces (so the render
+does not depend on Google Fonts being reachable), waits for the entry animation
+to settle, and writes:
+
+- `design/previews/live/<viewport>.png` — 1600x900, 1920x1080, 2560x1080,
+  1280x800, 834x1112, 390x844
+- `design/previews/live/report.json` — measured hero box, aspect ratio, title
+  size, loaded font faces, console errors, and any element overflowing the hero
+- `assets/hero/hero-poster.png` — the 1200x630 og:image, cropped from a real
+  1920x1008 render rather than from the comp
+
+That is how the metric-strip regression was found: in the comp the cards read
+`128+ / COMMANDS SHIPPED`, but in the browser the unit wrapped onto its own line
+and the numerals rendered at label size, because a single unqualified
+`.cc-hero__metric span` rule was also matching the counter `<span>` inside `<b>`.
 
 The artwork layers were rendered individually and inspected as PNGs, which is
 how a malformed arc in the comp was caught (an `a` command whose flags swallowed
@@ -43,8 +58,13 @@ a coordinate and drew a stray curve across the canvas).
 
 ```bash
 npm i -D sharp                       # dev-only, used for raster previews
-node design/build-art.mjs            # world map, fragment, poster, previews
+node design/build-art.mjs            # world map, fragment, comp previews
 node design/verify-hero.mjs          # checks must pass
+
+# browser renders + the social poster (needs a Chromium build)
+npm i -D playwright-core @sparticuz/chromium \
+         @fontsource/space-grotesk @fontsource/outfit @fontsource/jetbrains-mono
+node design/shot.mjs
 
 # optional: rebuild the coastline dataset from scratch
 npm i -D world-atlas topojson-client
@@ -90,8 +110,17 @@ eye as well.
 | `--cc-purple` | `#a855f7` | secondary accent, gradients |
 | `--cc-text` | `#e6f1ff` | body copy |
 | `--cc-text-dim` | `#93a7bd` | descriptions |
-| `--cc-text-faint` | `#5c6f85` | labels, metadata |
+| `--cc-text-faint` | `#7b90a6` | labels, metadata |
 
 Type: **Space Grotesk** for the headline (`--cc-display`), **Outfit** for prose
 (`--cc-body`), **JetBrains Mono** for anything terminal-flavoured (`--cc-mono`).
 All three load from Google Fonts, with system fallbacks for offline use.
+
+## Progressive enhancement
+
+The finished state is the *default*: the counters carry their real values, the
+sparkline is already drawn, and the bars carry their heights, all from the
+markup and base CSS. `hero.js` only adds `.is-live`, which replays the entry as
+keyframe animations and types the prompt. So with JavaScript disabled nothing
+looks half-built, and with `prefers-reduced-motion` the animation is skipped
+while the finished state stays visible.

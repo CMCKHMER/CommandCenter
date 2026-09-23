@@ -5,7 +5,11 @@
  *
  *   assets/hero/world-map.svg   dotted equirectangular world map (generated from continent outlines)
  *   design/previews/*.png       raster previews of every hero SVG (for review + README screenshots)
- *   assets/hero/hero-poster.png 1200x630 social/poster render of the banner
+ *   design/previews/hero-mock.png  render of the design comp (design/hero-mock.svg)
+ *
+ * The 1200x630 social poster (assets/hero/hero-poster.png) is exported from a
+ * real browser render instead — see design/shot.mjs — so it always matches
+ * what the page actually looks like.
  *
  * Run:  node design/build-art.mjs
  * Deps: sharp (dev-only, not required by the site itself)
@@ -184,22 +188,22 @@ ${block.trim()}
 }
 
 /* ------------------------------------------------------------------ *
- * 4. Poster / og:image render (1200x630) from the design comp
+ * 4. Design comp preview (the annotated SVG source of truth for review)
+ *    The social poster is generated from the live page instead: see
+ *    `node design/shot.mjs`, which writes assets/hero/hero-poster.png.
  * ------------------------------------------------------------------ */
 const poster = join(root, 'design/hero-poster.svg');
 if (existsSync(poster)) {
-  await sharp(poster, { density: 192 }).resize({ width: 1200, height: 630, fit: 'cover' })
-    .png({ compressionLevel: 9 }).toFile(join(root, 'assets/hero/hero-poster.png'));
-  console.log('✓ assets/hero/hero-poster.png');
+  await sharp(poster, { density: 96 }).resize({ width: 1520 }).flatten({ background: '#05070d' })
+    .png().toFile(join(root, 'design/previews/hero-poster-comp.png'));
+  console.log('✓ design/previews/hero-poster-comp.png (early comp, superseded by hero-mock)');
 }
 
 const comp = join(root, 'design/hero-mock.svg');
 if (existsSync(comp)) {
-  await sharp(comp, { density: 192 }).resize({ width: 1200, height: 630, fit: 'cover' })
-    .png({ compressionLevel: 9 }).toFile(join(root, 'assets/hero/hero-poster.png'));
   await sharp(comp, { density: 96 }).resize({ width: 1520 }).flatten({ background: '#05070d' })
     .png().toFile(join(root, 'design/previews/hero-mock.png'));
-  console.log('✓ assets/hero/hero-poster.png + design/previews/hero-mock.png');
+  console.log('✓ design/previews/hero-mock.png');
 }
 
 /* ------------------------------------------------------------------ *

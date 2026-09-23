@@ -1,12 +1,14 @@
 /* ==========================================================================
    CommandCenter — hero behaviour
-   Progressive enhancement only: with JS disabled the section still renders
-   complete (counters are pre-seeded with 0-markup fallbacks, the terminal
-   line keeps its static text). Everything respects prefers-reduced-motion.
+   Progressive enhancement only: without JS the section renders its finished
+   state (counters, sparkline, bars and progress all carry their final values
+   in the markup and the base CSS), so nothing looks half-built.
 
-     · reveals the "live" state (sparkline draw, bars, progress) on scroll
+     · on entry it replays the "live" animation (sparkline draw, bars, progress)
      · types out the terminal prompt on a loop
      · counts the metric strip up when it enters the viewport
+
+   Everything respects prefers-reduced-motion.
    ========================================================================== */
 (function () {
   'use strict';
@@ -16,7 +18,7 @@
 
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---- 1. reveal ---------------------------------------------------- */
+  /* ---- 1. play the entrance animation ------------------------------- */
   function reveal() {
     hero.classList.add('is-live');
     hero.dispatchEvent(new CustomEvent('cc:hero-live'));

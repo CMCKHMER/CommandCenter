@@ -173,7 +173,7 @@
             <div class="cc-hero__line"><span class="cc-hero__gutter">8</span><span class="cc-hero__msg"><span class="cc-hero__time">12:04:14</span>  → routing <span class="cc-hero__str">10%</span> traffic · region <span class="cc-hero__path">ap-southeast</span></span></div>
             <div class="cc-hero__line"><span class="cc-hero__gutter">9</span><span class="cc-hero__msg"><span class="cc-hero__time">12:04:18</span>  <span class="cc-hero__ok">✔ canary stable</span>  <span class="cc-hero__line--muted">rollback armed</span></span></div>
 
-            <div class="cc-hero__line cc-hero__typing"><span class="cc-hero__gutter">10</span><span class="cc-hero__msg"><span class="cc-hero__prompt">➜</span> <span class="cc-hero__cmd" data-cc-type="cc logs --follow --tail 0"></span><span class="cc-hero__typebar" aria-hidden="true"></span></span></div>
+            <div class="cc-hero__line cc-hero__typing"><span class="cc-hero__gutter">10</span><span class="cc-hero__msg"><span class="cc-hero__prompt">➜</span> <span class="cc-hero__cmd" data-cc-type="cc logs --follow --tail 0|cc trace dispatch --live|cc env switch staging">cc logs --follow --tail 0</span><span class="cc-hero__typebar" aria-hidden="true"></span></span></div>
 
             <div class="cc-hero__progress" style="--cc-w:34%">
               <i aria-hidden="true"></i>
@@ -261,19 +261,19 @@
     <div class="cc-hero__metrics">
       <div class="cc-hero__metric">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l6-6-6-6"/><path d="M12 19h8"/></svg>
-        <div><b><span data-cc-count="128">0</span>+</b><span>Commands shipped</span></div>
+        <div><b><span data-cc-count="128">128</span><i class="cc-hero__metric-unit">+</i></b><span class="cc-hero__metric-label">Commands shipped</span></div>
       </div>
       <div class="cc-hero__metric cc-hero__metric--g">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3L5 13h5l-1 8 8-10h-5z"/></svg>
-        <div><b><span data-cc-count="0.9" data-cc-decimals="1">0</span> ms</b><span>p95 dispatch</span></div>
+        <div><b><span data-cc-count="0.9" data-cc-decimals="1">0.9</span><i class="cc-hero__metric-unit">ms</i></b><span class="cc-hero__metric-label">p95 dispatch</span></div>
       </div>
       <div class="cc-hero__metric">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.2-2.9 7.6-7 9-4.1-1.4-7-4.8-7-9V6z"/><path d="M9.4 12.2l1.9 1.9 3.6-3.7"/></svg>
-        <div><b><span data-cc-count="99.98" data-cc-decimals="2">0</span>%</b><span>Uptime · 30 days</span></div>
+        <div><b><span data-cc-count="99.98" data-cc-decimals="2">99.98</span><i class="cc-hero__metric-unit">%</i></b><span class="cc-hero__metric-label">Uptime · 30 days</span></div>
       </div>
       <div class="cc-hero__metric cc-hero__metric--p">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20a5.5 5.5 0 0111 0"/><path d="M16 5.2a3.2 3.2 0 010 6M17.5 20a5.5 5.5 0 00-2-4.3"/></svg>
-        <div><b><span data-cc-count="4200" data-cc-group="1">0</span>+</b><span>Devs onboarded</span></div>
+        <div><b><span data-cc-count="4200" data-cc-group="1">4,200</span><i class="cc-hero__metric-unit">+</i></b><span class="cc-hero__metric-label">Devs onboarded</span></div>
       </div>
     </div>
 
