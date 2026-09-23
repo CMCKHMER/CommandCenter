@@ -1,0 +1,244 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1520" height="900" viewBox="0 0 1520 900" fill="none">
+  <title>CommandCenter hero — design comp (mirrors assets/hero/hero.css at 1520px)</title>
+  <defs>
+    <linearGradient id="ink" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#070b14"/><stop offset="1" stop-color="#04060b"/>
+    </linearGradient>
+    <radialGradient id="poolA"><stop offset="0" stop-color="#22d3ee" stop-opacity=".16"/><stop offset="1" stop-color="#22d3ee" stop-opacity="0"/></radialGradient>
+    <radialGradient id="poolB"><stop offset="0" stop-color="#a855f7" stop-opacity=".15"/><stop offset="1" stop-color="#a855f7" stop-opacity="0"/></radialGradient>
+    <radialGradient id="poolC"><stop offset="0" stop-color="#a3e635" stop-opacity=".09"/><stop offset="1" stop-color="#a3e635" stop-opacity="0"/></radialGradient>
+    <pattern id="gFine" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M26 0H0V26" stroke="#22d3ee" stroke-opacity=".045"/></pattern>
+    <pattern id="gCoarse" width="130" height="130" patternUnits="userSpaceOnUse"><path d="M130 0H0V130" stroke="#22d3ee" stroke-opacity=".075"/></pattern>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#101826" stop-opacity=".88"/><stop offset="1" stop-color="#080d16" stop-opacity=".92"/></linearGradient>
+    <linearGradient id="bar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0e1624" stop-opacity=".9"/><stop offset="1" stop-color="#080d16" stop-opacity=".8"/></linearGradient>
+    <linearGradient id="mark" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#67e8f9"/><stop offset=".45" stop-color="#22d3ee"/><stop offset="1" stop-color="#a3e635"/></linearGradient>
+    <linearGradient id="ctl" x1="0" y1="0" x2="1" y2="0"><stop offset=".04" stop-color="#22d3ee"/><stop offset=".38" stop-color="#7dd3fc"/><stop offset=".88" stop-color="#a855f7"/></linearGradient>
+    <linearGradient id="btn" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7dd3fc"/><stop offset=".42" stop-color="#22d3ee"/><stop offset="1" stop-color="#a3e635"/></linearGradient>
+    <linearGradient id="sparkStroke" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#22d3ee"/><stop offset=".62" stop-color="#67e8f9"/><stop offset="1" stop-color="#a3e635"/></linearGradient>
+    <linearGradient id="sparkFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#22d3ee" stop-opacity=".3"/><stop offset="1" stop-color="#22d3ee" stop-opacity="0"/></linearGradient>
+    <linearGradient id="barG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#0e7490" stop-opacity=".45"/></linearGradient>
+    <linearGradient id="barGg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a3e635"/><stop offset="1" stop-color="#4ade80" stop-opacity=".35"/></linearGradient>
+    <linearGradient id="barGp" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c084fc"/><stop offset="1" stop-color="#7e22ce" stop-opacity=".4"/></linearGradient>
+    <linearGradient id="prog" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#a3e635"/></linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
+  </defs>
+
+  <!-- background -->
+  <rect width="1520" height="900" fill="url(#ink)"/>
+  <rect width="1520" height="900" fill="url(#gFine)"/>
+  <rect width="1520" height="900" fill="url(#gCoarse)"/>
+  <ellipse cx="120" cy="-20" rx="700" ry="520" fill="url(#poolA)"/>
+  <ellipse cx="1400" cy="60" rx="620" ry="480" fill="url(#poolB)"/>
+  <ellipse cx="640" cy="980" rx="700" ry="420" fill="url(#poolC)"/>
+
+  <!-- top status bar : x 56..1464, y 40..98 -->
+  <rect x="56" y="40" width="1408" height="58" rx="29" fill="url(#bar)" stroke="#7eb2d6" stroke-opacity=".14"/>
+  <rect x="72" y="52" width="34" height="34" rx="10" fill="url(#mark)"/>
+  <path d="M84 62l5 5-5 5M94 74h7" stroke="#04121a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="117" y="74" font-family="SG" font-size="15.5" font-weight="700" fill="#e6f1ff">Command<tspan fill="#22d3ee">Center</tspan></text>
+  <g font-family="JBM" font-size="12" fill="#93a7bd" letter-spacing=".06em">
+    <text x="1090" y="75">CONSOLE</text>
+    <text x="1188" y="75">API</text>
+    <text x="1246" y="75">STATUS</text>
+  </g>
+  <rect x="1306" y="53" width="142" height="32" rx="16" fill="#a3e635" fill-opacity=".07" stroke="#a3e635" stroke-opacity=".28"/>
+  <circle cx="1326" cy="69" r="4" fill="#a3e635" filter="url(#glow)"/>
+  <text x="1338" y="74" font-family="JBM" font-size="11.5" fill="#d9f99d" letter-spacing=".1em">SYSTEM ONLINE</text>
+
+  <!-- ===== left column : x 56..747 ===== -->
+  <!-- eyebrow -->
+  <rect x="56" y="150" width="284" height="32" rx="16" fill="#090f19" stroke="#7eb2d6" stroke-opacity=".14"/>
+  <rect x="64" y="157" width="52" height="18" rx="9" fill="url(#mark)"/>
+  <text x="74" y="171" font-family="JBM" font-size="11" font-weight="700" fill="#06202b">v2.4</text>
+  <text x="126" y="171" font-family="JBM" font-size="11.5" fill="#93a7bd" letter-spacing=".14em">DEVELOPER CONTROL PLANE</text>
+
+  <!-- headline -->
+  <text x="56" y="268" font-family="SG" font-size="77.6" font-weight="700" letter-spacing="-2.5" fill="#f4f9ff">One console for</text>
+  <text x="56" y="344" font-family="SG" font-size="77.6" font-weight="700" letter-spacing="-2.5" fill="url(#ctl)">every command.</text>
+
+  <!-- lede (max-width 54ch ≈ 486px) -->
+  <g font-family="SG" font-size="18.2" fill="#93a7bd">
+    <text x="56" y="424">CommandCenter is the terminal-native hub where</text>
+    <text x="56" y="454"><tspan fill="#cfe9f7" font-weight="600">your scripts, pipelines and clusters</tspan> report in.</text>
+    <text x="56" y="484">Dispatch work in milliseconds, watch it execute live, and</text>
+    <text x="56" y="514">keep every environment, service and deploy on one screen.</text>
+  </g>
+
+  <!-- console chip -->
+  <rect x="56" y="546" width="330" height="38" rx="10" fill="#060b13" fill-opacity=".7" stroke="#7eb2d6" stroke-opacity=".26" stroke-dasharray="4 4"/>
+  <text x="72" y="570" font-family="JBM" font-size="12.5" fill="#a3e635">➜</text>
+  <text x="92" y="570" font-family="JBM" font-size="12.5" fill="#a5f3fc">cc run deploy --edge</text>
+  <rect x="248" y="562" width="8" height="15" fill="#22d3ee" filter="url(#glow)"/>
+
+  <!-- buttons -->
+  <rect x="56" y="612" width="214" height="46" rx="12" fill="url(#btn)" filter="url(#glow)"/>
+  <path d="M76 628l12 7-12 7z" fill="#04131b"/>
+  <text x="98" y="641" font-family="JBM" font-size="13" font-weight="700" fill="#04131b" letter-spacing=".08em">LAUNCH CONSOLE</text>
+  <rect x="286" y="612" width="192" height="46" rx="12" fill="#0b121e" stroke="#7eb2d6" stroke-opacity=".14"/>
+  <rect x="306" y="625" width="13" height="20" rx="2" fill="none" stroke="#e6f1ff" stroke-width="1.8"/>
+  <path d="M310 625v20" stroke="#e6f1ff" stroke-width="1.8"/>
+  <text x="330" y="641" font-family="JBM" font-size="13" font-weight="600" fill="#e6f1ff" letter-spacing=".08em">READ THE DOCS</text>
+
+  <!-- trust row -->
+  <g font-family="JBM" font-size="11.5" fill="#5c6f85" letter-spacing=".08em">
+    <text x="70" y="700">SOC 2 TYPE II</text>
+    <text x="222" y="700">ZERO-TRUST KEYS</text>
+    <text x="410" y="700">18 K STARS</text>
+  </g>
+  <g stroke="#22d3ee" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".9">
+    <path d="M56 694l4 4.5 7-8"/>
+    <path d="M206 686l6 2.6v5.2c0 3.6-2.5 6.6-6 7.8-3.5-1.2-6-4.2-6-7.8v-5.2z"/>
+  </g>
+
+  <!-- ===== right column : stage x 798..1464 ===== -->
+  <!-- terminal panel -->
+  <rect x="798" y="140" width="666" height="340" rx="16" fill="url(#panel)" stroke="#7eb2d6" stroke-opacity=".16"/>
+  <path d="M798 156a16 16 0 0116-16h634a16 16 0 0116 16v10H798z" fill="#121b2a" fill-opacity=".9"/>
+  <path d="M798 156a16 16 0 0116-16h634a16 16 0 0116 16" stroke="#22d3ee" stroke-opacity=".5" fill="none"/>
+  <line x1="798" y1="186" x2="1464" y2="186" stroke="#7eb2d6" stroke-opacity=".08"/>
+  <circle cx="820" cy="164" r="5.5" fill="#f87171" filter="url(#glow)"/>
+  <circle cx="840" cy="164" r="5.5" fill="#fbbf24" filter="url(#glow)"/>
+  <circle cx="860" cy="164" r="5.5" fill="#4ade80" filter="url(#glow)"/>
+  <rect x="884" y="153" width="126" height="24" rx="7" fill="#22d3ee" fill-opacity=".1" stroke="#22d3ee" stroke-opacity=".2"/>
+  <text x="898" y="169" font-family="JBM" font-size="11.5" fill="#a5f3fc">~/cmdcenter</text>
+  <text x="1366" y="169" font-family="JBM" font-size="11" fill="#5c6f85">zsh · 2.4.0</text>
+  <text x="1432" y="169" font-family="JBM" font-size="11" fill="#bbf7d0">● live</text>
+
+  <!-- terminal lines : start y 216, line-height 25.8 -->
+  <g font-family="JBM" font-size="12.9">
+    <text x="820" y="216" fill="#33465c">1</text>
+    <text x="846" y="216" fill="#a3e635">➜</text>
+    <text x="866" y="216" fill="#e8f6ff">cc status --env production</text>
+
+    <text x="820" y="242" fill="#33465c">2</text>
+    <text x="846" y="242" fill="#86efac">✔</text>
+    <text x="866" y="242" fill="#e6f1ff">6 nodes healthy · <tspan fill="#22d3ee">0.9 ms</tspan> p95 dispatch</text>
+
+    <text x="820" y="268" fill="#33465c">3</text>
+    <text x="846" y="268" fill="#fbbf24">⚠</text>
+    <text x="866" y="268" fill="#5c6f85">1 policy drift on staging (auto-fix armed)</text>
+
+    <text x="820" y="294" fill="#33465c">4</text>
+    <text x="846" y="294" fill="#a3e635">➜</text>
+    <text x="866" y="294" fill="#e8f6ff">cc deploy gateway <tspan fill="#22d3ee">--canary</tspan> <tspan fill="#fcd34d">10%</tspan></text>
+
+    <text x="820" y="320" fill="#33465c">5</text>
+    <text x="846" y="320" fill="#64748b">12:04:07</text>
+    <text x="916" y="320" fill="#e6f1ff">building image <tspan fill="#c084fc">cmdcenter/gateway:2.4.0</tspan></text>
+
+    <text x="820" y="346" fill="#33465c">6</text>
+    <text x="846" y="346" fill="#64748b">12:04:09</text>
+    <text x="916" y="346" fill="#86efac">✔ build complete</text>
+    <text x="1064" y="346" fill="#e6f1ff">1.8 s</text>
+
+    <text x="820" y="372" fill="#33465c">7</text>
+    <text x="846" y="372" fill="#64748b">12:04:11</text>
+    <text x="916" y="372" fill="#86efac">✔ tests 428 passed</text>
+    <text x="1094" y="372" fill="#e6f1ff">0 failed</text>
+
+    <text x="820" y="398" fill="#33465c">8</text>
+    <text x="846" y="398" fill="#64748b">12:04:14</text>
+    <text x="916" y="398" fill="#e6f1ff">→ routing <tspan fill="#fcd34d">10%</tspan> traffic · region <tspan fill="#c084fc">ap-southeast</tspan></text>
+
+    <text x="820" y="424" fill="#33465c">9</text>
+    <text x="846" y="424" fill="#64748b">12:04:18</text>
+    <text x="916" y="424" fill="#86efac">✔ canary stable</text>
+    <text x="1064" y="424" fill="#5c6f85">rollback armed</text>
+
+    <text x="820" y="450" fill="#33465c">10</text>
+    <text x="846" y="450" fill="#a3e635">➜</text>
+    <text x="866" y="450" fill="#e8f6ff">cc logs --follow --tail 0</text>
+    <rect x="1124" y="438" width="8" height="14" fill="#22d3ee" filter="url(#glow)"/>
+  </g>
+  <rect x="820" y="462" width="626" height="4" rx="2" fill="#7eb2d6" fill-opacity=".12"/>
+  <rect x="820" y="462" width="213" height="4" rx="2" fill="url(#prog)" filter="url(#glow)"/>
+
+  <!-- command blocks panel : x 798..1160, y 500..692 -->
+  <rect x="798" y="500" width="362" height="192" rx="16" fill="url(#panel)" stroke="#7eb2d6" stroke-opacity=".16"/>
+  <text x="816" y="527" font-family="JBM" font-size="11" fill="#93a7bd" letter-spacing=".13em">COMMAND BLOCKS</text>
+  <text x="1084" y="527" font-family="JBM" font-size="11" fill="#5c6f85">6 MOUNTED</text>
+  <line x1="798" y1="540" x2="1160" y2="540" stroke="#7eb2d6" stroke-opacity=".08"/>
+  <g>
+    <rect x="812" y="552" width="104" height="58" rx="11" fill="#151f30" stroke="#7eb2d6" stroke-opacity=".08"/>
+    <path d="M826 570l6 6-6 6M838 582h8" stroke="#22d3ee" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="826" y="600" font-family="JBM" font-size="11.5" font-weight="600" fill="#dbeafe">shell</text>
+
+    <rect x="924" y="552" width="104" height="58" rx="11" fill="#151f30" stroke="#7eb2d6" stroke-opacity=".08"/>
+    <g stroke="#a3e635" stroke-width="1.7" fill="none"><circle cx="940" cy="566" r="2.4"/><circle cx="940" cy="578" r="2.4"/><circle cx="952" cy="572" r="2.4"/><path d="M942.4 566h2.6a3 3 0 013 3M942.4 578h2.6a3 3 0 003-3"/></g>
+    <text x="938" y="600" font-family="JBM" font-size="11.5" font-weight="600" fill="#dbeafe">gitops</text>
+
+    <rect x="1036" y="552" width="110" height="58" rx="11" fill="#151f30" stroke="#7eb2d6" stroke-opacity=".08"/>
+    <rect x="1048" y="561" width="12" height="12" rx="2" fill="none" stroke="#c084fc" stroke-width="1.7"/>
+    <path d="M1052 557v4M1056 557v4M1052 573v4M1056 573v4M1044 565h4M1044 569h4M1060 565h4M1060 569h4" stroke="#c084fc" stroke-width="1.5"/>
+    <text x="1050" y="600" font-family="JBM" font-size="11.5" font-weight="600" fill="#dbeafe">runtime</text>
+
+    <rect x="812" y="620" width="104" height="58" rx="11" fill="#151f30" stroke="#7eb2d6" stroke-opacity=".08"/>
+    <ellipse cx="840" cy="634" rx="8" ry="3.4" fill="none" stroke="#22d3ee" stroke-width="1.7"/>
+    <path d="M832 634v10c0 1.9 3.6 3.4 8 3.4s8-1.5 8-3.4v-10" fill="none" stroke="#22d3ee" stroke-width="1.7"/>
+    <text x="826" y="668" font-family="JBM" font-size="11.5" font-weight="600" fill="#dbeafe">datastore</text>
+
+    <rect x="924" y="620" width="104" height="58" rx="11" fill="#151f30" stroke="#7eb2d6" stroke-opacity=".08"/>
+    <g fill="none" stroke="#a3e635" stroke-width="1.6">
+      <circle cx="940" cy="636" r="9.5"/>
+      <ellipse cx="940" cy="636" rx="4" ry="9.5" stroke-width="1.3"/>
+      <path d="M930.8 632h18.4M930.8 640h18.4" stroke-width="1.3"/>
+    </g>
+    <text x="938" y="668" font-family="JBM" font-size="11.5" font-weight="600" fill="#dbeafe">edge</text>
+
+    <rect x="1036" y="620" width="110" height="58" rx="11" fill="#151f30" stroke="#7eb2d6" stroke-opacity=".08"/>
+    <path d="M1052 632l7 3v6c0 4.2-2.9 7.6-7 9-4.1-1.4-7-4.8-7-9v-6z" fill="none" stroke="#c084fc" stroke-width="1.7"/>
+    <text x="1050" y="668" font-family="JBM" font-size="11.5" font-weight="600" fill="#dbeafe">guard</text>
+  </g>
+
+  <!-- telemetry panel : x 1180..1464, y 500..692 -->
+  <rect x="1180" y="500" width="284" height="192" rx="16" fill="url(#panel)" stroke="#7eb2d6" stroke-opacity=".16"/>
+  <text x="1198" y="527" font-family="JBM" font-size="11" fill="#93a7bd" letter-spacing=".13em">DISPATCH LATENCY</text>
+  <text x="1438" y="527" font-family="JBM" font-size="11" fill="#5c6f85">P95</text>
+  <line x1="1180" y1="540" x2="1464" y2="540" stroke="#7eb2d6" stroke-opacity=".08"/>
+  <g transform="translate(1196 552) scale(0.79)">
+    <line x1="0" y1="18" x2="316" y2="18" stroke="#7eb2d6" stroke-opacity=".12"/>
+    <line x1="0" y1="36" x2="316" y2="36" stroke="#7eb2d6" stroke-opacity=".12"/>
+    <line x1="0" y1="54" x2="316" y2="54" stroke="#7eb2d6" stroke-opacity=".12"/>
+    <path d="M0 52L20 44L40 47L60 38L80 41L100 33L120 29L140 31L160 24L180 27L200 21L220 18L240 22L260 15L280 13L300 11L316 9L316 72L0 72Z" fill="url(#sparkFill)"/>
+    <path d="M0 52L20 44L40 47L60 38L80 41L100 33L120 29L140 31L160 24L180 27L200 21L220 18L240 22L260 15L280 13L300 11L316 9" fill="none" stroke="url(#sparkStroke)" stroke-width="2.2" stroke-linecap="round" filter="url(#glow)"/>
+  </g>
+  <g>
+    <rect x="1196" y="640" width="7" height="14" rx="3" fill="url(#barG)"/><rect x="1207" y="625" width="7" height="29" rx="3" fill="url(#barG)"/>
+    <rect x="1218" y="632" width="7" height="22" rx="3" fill="url(#barG)"/><rect x="1229" y="610" width="7" height="44" rx="3" fill="url(#barGg)"/>
+    <rect x="1240" y="628" width="7" height="26" rx="3" fill="url(#barG)"/><rect x="1251" y="604" width="7" height="50" rx="3" fill="url(#barG)"/>
+    <rect x="1262" y="620" width="7" height="34" rx="3" fill="url(#barG)"/><rect x="1273" y="596" width="7" height="58" rx="3" fill="url(#barGg)"/>
+    <rect x="1284" y="630" width="7" height="24" rx="3" fill="url(#barG)"/><rect x="1295" y="616" width="7" height="38" rx="3" fill="url(#barG)"/>
+    <rect x="1306" y="602" width="7" height="52" rx="3" fill="url(#barGp)"/><rect x="1317" y="634" width="7" height="20" rx="3" fill="url(#barG)"/>
+    <rect x="1328" y="612" width="7" height="42" rx="3" fill="url(#barG)"/><rect x="1339" y="590" width="7" height="64" rx="3" fill="url(#barGg)"/>
+    <rect x="1350" y="622" width="7" height="32" rx="3" fill="url(#barG)"/><rect x="1361" y="606" width="7" height="48" rx="3" fill="url(#barG)"/>
+    <rect x="1372" y="628" width="7" height="26" rx="3" fill="url(#barG)"/><rect x="1383" y="614" width="7" height="40" rx="3" fill="url(#barG)"/>
+    <rect x="1394" y="598" width="7" height="56" rx="3" fill="url(#barG)"/><rect x="1405" y="630" width="7" height="24" rx="3" fill="url(#barG)"/>
+    <rect x="1416" y="618" width="7" height="36" rx="3" fill="url(#barG)"/><rect x="1427" y="606" width="7" height="48" rx="3" fill="url(#barGg)"/>
+    <rect x="1438" y="622" width="7" height="32" rx="3" fill="url(#barG)"/><rect x="1449" y="610" width="7" height="44" rx="3" fill="url(#barG)"/>
+  </g>
+
+  <!-- ===== metric strip : y 730..792 ===== -->
+  <g>
+    <rect x="56" y="730" width="330" height="62" rx="11" fill="#0f1725" fill-opacity=".72" stroke="#7eb2d6" stroke-opacity=".08"/>
+    <path d="M76 752l7 7-7 7M90 766h9" stroke="#22d3ee" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+    <text x="116" y="761" font-family="JBM" font-size="19" font-weight="700" fill="#f1f9ff">128+</text>
+    <text x="116" y="778" font-family="JBM" font-size="10.5" fill="#5c6f85" letter-spacing=".13em">COMMANDS SHIPPED</text>
+
+    <rect x="398" y="730" width="330" height="62" rx="11" fill="#0f1725" fill-opacity=".72" stroke="#7eb2d6" stroke-opacity=".08"/>
+    <path d="M414 746l-9 11h4.5l-1 9 9-11H413z" fill="#a3e635" filter="url(#glow)"/>
+    <text x="434" y="761" font-family="JBM" font-size="19" font-weight="700" fill="#f1f9ff">0.9 ms</text>
+    <text x="434" y="778" font-family="JBM" font-size="10.5" fill="#5c6f85" letter-spacing=".13em">P95 DISPATCH</text>
+
+    <rect x="740" y="730" width="330" height="62" rx="11" fill="#0f1725" fill-opacity=".72" stroke="#7eb2d6" stroke-opacity=".08"/>
+    <path d="M760 744l8 3.5v7c0 4.8-3.4 8.8-8 10.4-4.6-1.6-8-5.6-8-10.4v-7z" fill="none" stroke="#22d3ee" stroke-width="1.8"/>
+    <text x="778" y="761" font-family="JBM" font-size="19" font-weight="700" fill="#f1f9ff">99.98%</text>
+    <text x="778" y="778" font-family="JBM" font-size="10.5" fill="#5c6f85" letter-spacing=".13em">UPTIME · 30 DAYS</text>
+
+    <rect x="1082" y="730" width="382" height="62" rx="11" fill="#0f1725" fill-opacity=".72" stroke="#7eb2d6" stroke-opacity=".08"/>
+    <circle cx="1106" cy="752" r="4" fill="none" stroke="#c084fc" stroke-width="1.8"/>
+    <path d="M1096 766a5.5 5.5 0 0111 0M1121 750a4 4 0 010 7M1122.5 766a5.5 5.5 0 00-2-4.3" fill="none" stroke="#c084fc" stroke-width="1.8"/>
+    <text x="1136" y="761" font-family="JBM" font-size="19" font-weight="700" fill="#f1f9ff">4,200+</text>
+    <text x="1136" y="778" font-family="JBM" font-size="10.5" fill="#5c6f85" letter-spacing=".13em">DEVS ONBOARDED</text>
+  </g>
+</svg>

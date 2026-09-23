@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="700" viewBox="0 0 900 700" fill="none">
+  <title>CommandCenter circuit traces</title>
+  <defs>
+    <linearGradient id="traceCyan" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#22d3ee" stop-opacity=".05"/>
+      <stop offset=".45" stop-color="#22d3ee" stop-opacity=".75"/>
+      <stop offset="1" stop-color="#67e8f9" stop-opacity=".15"/>
+    </linearGradient>
+    <linearGradient id="tracePurple" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#a855f7" stop-opacity=".05"/>
+      <stop offset=".5" stop-color="#c084fc" stop-opacity=".65"/>
+      <stop offset="1" stop-color="#a855f7" stop-opacity=".08"/>
+    </linearGradient>
+    <linearGradient id="traceGreen" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#a3e635" stop-opacity=".05"/>
+      <stop offset=".5" stop-color="#a3e635" stop-opacity=".6"/>
+      <stop offset="1" stop-color="#4ade80" stop-opacity=".06"/>
+    </linearGradient>
+    <filter id="cGlow" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="2.4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="cSoft" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="6"/></filter>
+  </defs>
+
+  <!-- traces -->
+  <g fill="none" stroke-width="1.6" stroke-linecap="square">
+    <path d="M-10 96H236L296 156H520L556 192H700L742 150H910" stroke="url(#traceCyan)"/>
+    <path d="M-10 300H180L232 248H430L468 286H610" stroke="url(#tracePurple)" stroke-width="1.4"/>
+    <path d="M910 118H762L700 180H556" stroke="url(#traceCyan)" stroke-width="1.3"/>
+    <path d="M910 424H742L688 478H520L482 516H300" stroke="url(#tracePurple)"/>
+    <path d="M-10 566H160L222 628H420" stroke="url(#traceGreen)" stroke-width="1.4"/>
+    <path d="M126 710V566L182 510V388L142 348V196" stroke="url(#traceCyan)" stroke-width="1.3"/>
+    <path d="M770 710V586L704 520V432" stroke="url(#traceGreen)"/>
+    <path d="M430 710V640L486 584H646L700 530" stroke="url(#traceCyan)" stroke-width="1.3"/>
+    <path d="M608 300V196L648 156H742" stroke="url(#tracePurple)" stroke-width="1.3"/>
+    <path d="M232 96V188L276 232V330" stroke="url(#traceGreen)" stroke-width="1.2"/>
+    <path d="M340 700V600L396 544V462L352 418" stroke="url(#tracePurple)" stroke-width="1.2"/>
+    <path d="M-10 424H120L168 472H286" stroke="url(#traceCyan)" stroke-width="1.2"/>
+  </g>
+
+  <!-- vias + pads -->
+  <g>
+    <g filter="url(#cGlow)">
+      <circle cx="700" cy="150" r="4.2" fill="none" stroke="#22d3ee" stroke-width="1.6" stroke-opacity=".9"/>
+      <circle cx="610" cy="286" r="3.6" fill="none" stroke="#c084fc" stroke-width="1.5" stroke-opacity=".85"/>
+      <circle cx="300" cy="516" r="3.6" fill="none" stroke="#c084fc" stroke-width="1.5" stroke-opacity=".8"/>
+      <circle cx="420" cy="628" r="3.4" fill="none" stroke="#a3e635" stroke-width="1.5" stroke-opacity=".85"/>
+      <circle cx="142" cy="196" r="3.4" fill="none" stroke="#22d3ee" stroke-width="1.5" stroke-opacity=".8"/>
+      <circle cx="704" cy="432" r="3.4" fill="none" stroke="#a3e635" stroke-width="1.5" stroke-opacity=".75"/>
+      <circle cx="352" cy="418" r="3.2" fill="none" stroke="#c084fc" stroke-width="1.4" stroke-opacity=".7"/>
+      <circle cx="286" cy="472" r="3.2" fill="none" stroke="#22d3ee" stroke-width="1.4" stroke-opacity=".7"/>
+    </g>
+    <g fill="#a5f3fc">
+      <circle cx="700" cy="150" r="1.5"/><circle cx="142" cy="196" r="1.3"/><circle cx="286" cy="472" r="1.2"/>
+    </g>
+    <g fill="#d9f99d"><circle cx="420" cy="628" r="1.3"/><circle cx="704" cy="432" r="1.3"/></g>
+    <g fill="#e9d5ff"><circle cx="610" cy="286" r="1.3"/><circle cx="300" cy="516" r="1.3"/><circle cx="352" cy="418" r="1.2"/></g>
+  </g>
+
+  <!-- chip blocks with pins -->
+  <g stroke="#22d3ee" stroke-opacity=".35" fill="#0a1018">
+    <rect x="740" y="596" width="86" height="62" rx="5" stroke-width="1.2"/>
+    <rect x="58" y="118" width="70" height="52" rx="4" stroke-width="1.1" stroke="#c084fc" stroke-opacity=".32"/>
+  </g>
+  <g stroke="#22d3ee" stroke-opacity=".5" stroke-width="1.4">
+    <path d="M754 596v-10M780 596v-10M806 596v-10M754 658v10M780 658v10M806 658v10"/>
+    <path d="M58 132h-10M58 150h-10M128 132h10M128 150h10" stroke="#c084fc" stroke-opacity=".45"/>
+  </g>
+
+  <!-- glowing node bloom -->
+  <circle cx="700" cy="150" r="46" fill="#22d3ee" fill-opacity=".10" filter="url(#cSoft)"/>
+  <circle cx="300" cy="516" r="44" fill="#a855f7" fill-opacity=".09" filter="url(#cSoft)"/>
+  <circle cx="420" cy="628" r="40" fill="#a3e635" fill-opacity=".08" filter="url(#cSoft)"/>
+</svg>

@@ -63,6 +63,26 @@ npx http-server -p 8000
 - The `The_Hallow_Below_story/` directory contains an interactive story with its own index.html — useful as an example of multi-page content in this repo.
 - Several pages appear to be learning modules or tests (TOEFL pages, word exercises). Inspect each HTML file to find the source content and any assets embedded inline.
 
+## CommandCenter hero banner
+A wide, dark, terminal-inspired hero section built as a drop-in homepage banner.
+
+![CommandCenter hero](assets/hero/hero-poster.png)
+
+- **Preview it:** open [`command-center.html`](command-center.html) — a standalone page that renders the banner at full size.
+- **Drop it in:** copy [`assets/hero/hero.html`](assets/hero/hero.html) into a page that already links `assets/hero/hero.css` and `assets/hero/hero.js`. All styles are scoped under `.cc-hero`, so it will not collide with existing Tailwind or page styles.
+- **Artwork:** four hand-built SVG layers (`assets/hero/hero-grid.svg`, `hero-floor.svg`, `world-map.svg`, `circuit.svg`) — holographic grid, perspective data floor, dotted world map, and glowing circuit traces. All are resolution-independent and total under 30 kB.
+- **Behaviour:** the sparkline draws itself, telemetry bars rise, metric counters count up, and the prompt types out on a loop — all progressive enhancement, and everything still renders with JavaScript disabled.
+
+Rebuild the artwork previews, the reusable fragment and the social poster with:
+
+```bash
+npm i -D sharp
+node design/build-art.mjs      # writes assets/hero/* + design/previews/*.png
+node design/verify-hero.mjs    # static checks: assets, classes, SVG paths, tags
+```
+
+See [`design/README.md`](design/README.md) for how the artwork is generated.
+
 ## Screenshots
 A placeholder screenshot has been added at assets/screenshot.svg — replace it with a real PNG/JPEG screenshot if you want images in the README.
 
