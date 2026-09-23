@@ -1,0 +1,250 @@
+<!--
+  CommandCenter hero — drop-in fragment
+  Paste into any page after linking assets/hero/hero.css and assets/hero/hero.js.
+  Paths are relative to the site root; adjust if the page lives in a subfolder.
+  Regenerate with: node design/build-art.mjs
+-->
+<section class="cc-hero" id="command-center" aria-labelledby="cc-hero-title">
+
+  <!-- ambient artwork -->
+  <div class="cc-hero__bg" aria-hidden="true">
+    <img class="cc-hero__bg--grid" src="assets/hero/hero-grid.svg" alt="" width="1600" height="900">
+    <img class="cc-hero__bg--floor" src="assets/hero/hero-floor.svg" alt="" width="1600" height="520">
+    <img class="cc-hero__bg--map" src="assets/hero/world-map.svg" alt="" width="1600" height="900">
+    <img class="cc-hero__bg--circuit" src="assets/hero/circuit.svg" alt="" width="900" height="700">
+    <span class="cc-hero__orb cc-hero__orb--a"></span>
+    <span class="cc-hero__orb cc-hero__orb--b"></span>
+    <span class="cc-hero__orb cc-hero__orb--c"></span>
+    <span class="cc-hero__sheen"></span>
+  </div>
+
+  <!-- floating command chips -->
+  <div class="cc-hero__chips" aria-hidden="true">
+    <span class="cc-hero__chip cc-hero__chip--1">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l6-6-6-6"/><path d="M12 19h8"/></svg>
+    </span>
+    <span class="cc-hero__chip cc-hero__chip--2 cc-hero__chip--g">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="5" r="2.4"/><circle cx="6" cy="19" r="2.4"/><circle cx="18" cy="12" r="2.4"/><path d="M8.4 5h4.6a3 3 0 013 3v0M8.4 19h4.6a3 3 0 003-3v0"/></svg>
+    </span>
+    <span class="cc-hero__chip cc-hero__chip--3 cc-hero__chip--p">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="7.5" ry="3.2"/><path d="M4.5 6v12c0 1.8 3.4 3.2 7.5 3.2s7.5-1.4 7.5-3.2V6"/><path d="M4.5 12c0 1.8 3.4 3.2 7.5 3.2s7.5-1.4 7.5-3.2"/></svg>
+    </span>
+    <span class="cc-hero__chip cc-hero__chip--4">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/></svg>
+    </span>
+  </div>
+
+  <div class="cc-hero__shell">
+
+    <!-- 03 · status bar -->
+    <div class="cc-hero__bar">
+      <div class="cc-hero__brand">
+        <span class="cc-hero__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8l4 4-4 4"/><path d="M13 16h5"/></svg>
+        </span>
+        <span class="cc-hero__wordmark">Command<span>Center</span></span>
+      </div>
+
+      <nav class="cc-hero__barnav" aria-label="CommandCenter">
+        <a href="#command-center">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l6-6-6-6"/><path d="M12 19h8"/></svg>
+          Console
+        </a>
+        <a href="#command-center">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-5 6 5 6"/><path d="M15 6l5 6-5 6"/></svg>
+          API
+        </a>
+        <a href="#command-center">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13h4l2.5-7 4 14L16 13h5"/></svg>
+          Status
+        </a>
+      </nav>
+
+      <span class="cc-hero__status">
+        <i class="cc-hero__led" aria-hidden="true"></i>
+        <span>System online</span>
+      </span>
+    </div>
+
+    <!-- 04 / 05 · headline + terminal -->
+    <div class="cc-hero__main">
+      <div class="cc-hero__copy">
+        <span class="cc-hero__eyebrow"><b>v2.4</b> Developer control plane</span>
+
+        <h1 class="cc-hero__title" id="cc-hero-title">
+          One console for <em data-glow="every command">every command</em>.
+        </h1>
+
+        <p class="cc-hero__lede">
+          CommandCenter is the terminal-native hub where your scripts, pipelines and
+          clusters report in. Dispatch work in milliseconds, watch it execute live,
+          and keep <strong>every environment, service and deploy</strong> on one
+          keyboard-driven screen.
+        </p>
+
+        <div class="cc-hero__console" role="img" aria-label="Terminal prompt: cc run deploy --edge">
+          <span class="cc-hero__prompt">➜</span>
+          <span>cc run deploy --edge</span>
+          <span class="cc-hero__caret" aria-hidden="true"></span>
+        </div>
+
+        <div class="cc-hero__actions">
+          <a class="cc-hero__btn cc-hero__btn--primary" href="#command-center">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4l14 8-14 8z"/></svg>
+            Launch console
+          </a>
+          <a class="cc-hero__btn cc-hero__btn--ghost" href="#command-center">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 016.5 3H19v18H6.5A2.5 2.5 0 014 18.5z"/><path d="M8 3v18"/></svg>
+            Read the docs
+          </a>
+        </div>
+
+        <div class="cc-hero__trust">
+          <span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            SOC 2 Type II
+          </span>
+          <span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.2-2.9 7.6-7 9-4.1-1.4-7-4.8-7-9V6z"/></svg>
+            Zero-trust keys
+          </span>
+          <span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4 1.2-4-2.2-6-2.6m12 5.6v-3.4c0-1 .1-1.4-.5-2 2.3-.3 4.6-1.1 4.6-5.1a4 4 0 00-1.1-2.8 3.7 3.7 0 00-.1-2.8s-1.2-.4-3.8 1.4a9.3 9.3 0 00-5 0C6.5 3.7 5.3 4.1 5.3 4.1a3.7 3.7 0 00-.1 2.8A4 4 0 004 9.7c0 4 2.3 4.8 4.6 5.1-.6.6-.6 1.2-.5 2V22"/></svg>
+            18 k stars
+          </span>
+        </div>
+      </div>
+
+      <!-- terminal + modules + telemetry -->
+      <div class="cc-hero__stage">
+        <div class="cc-hero__panel cc-hero__term">
+          <div class="cc-hero__termhead">
+            <span class="cc-hero__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="cc-hero__tab">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l6-6-6-6"/><path d="M12 19h8"/></svg>
+              ~/cmdcenter
+            </span>
+            <span class="cc-hero__termmeta">
+              <span>zsh · 2.4.0</span>
+              <span class="cc-hero__ok">● connected</span>
+            </span>
+          </div>
+
+          <div class="cc-hero__termbody" role="img"
+               aria-label="CommandCenter terminal session showing a canary deploy succeeding: build complete, 428 tests passed, gateway listening.">
+            <div class="cc-hero__line"><span class="cc-hero__gutter">1</span><span class="cc-hero__msg"><span class="cc-hero__prompt">➜</span> <span class="cc-hero__cmd">cc status --env production</span></span></div>
+            <div class="cc-hero__line"><span class="cc-hero__gutter">2</span><span class="cc-hero__msg"><span class="cc-hero__ok">✔</span> 6 nodes healthy · <span class="cc-hero__flag">0.9 ms</span> p95 dispatch</span></div>
+            <div class="cc-hero__line"><span class="cc-hero__gutter">3</span><span class="cc-hero__msg cc-hero__line--muted"><span class="cc-hero__warn">⚠</span> 1 policy drift on staging (auto-fix armed)</span></div>
+            <div class="cc-hero__line"><span class="cc-hero__gutter">4</span><span class="cc-hero__msg"><span class="cc-hero__prompt">➜</span> <span class="cc-hero__cmd">cc deploy gateway <span class="cc-hero__flag">--canary</span> <span class="cc-hero__str">10%</span></span></span></div>
+            <div class="cc-hero__line"><span class="cc-hero__gutter">5</span><span class="cc-hero__msg"><span class="cc-hero__time">12:04:07</span>  building image  <span class="cc-hero__path">cmdcenter/gateway:2.4.0</span></span></div>
+            <div class="cc-hero__line"><span class="cc-hero__gutter">6</span><span class="cc-hero__msg"><span class="cc-hero__time">12:04:09</span>  <span class="cc-hero__ok">✔ build complete</span>  1.8 s</span></div>
+            <div class="cc-hero__line"><span class="cc-hero__gutter">7</span><span class="cc-hero__msg"><span class="cc-hero__time">12:04:11</span>  <span class="cc-hero__ok">✔ tests 428 passed</span>  0 failed</span></div>
+            <div class="cc-hero__line"><span class="cc-hero__gutter">8</span><span class="cc-hero__msg"><span class="cc-hero__time">12:04:14</span>  → routing <span class="cc-hero__str">10%</span> traffic · region <span class="cc-hero__path">ap-southeast</span></span></div>
+            <div class="cc-hero__line"><span class="cc-hero__gutter">9</span><span class="cc-hero__msg"><span class="cc-hero__time">12:04:18</span>  <span class="cc-hero__ok">✔ canary stable</span>  <span class="cc-hero__line--muted">rollback armed</span></span></div>
+
+            <div class="cc-hero__line cc-hero__typing"><span class="cc-hero__gutter">10</span><span class="cc-hero__msg"><span class="cc-hero__prompt">➜</span> <span class="cc-hero__cmd" data-cc-type="cc logs --follow --tail 0|cc trace dispatch --live|cc env switch staging">cc logs --follow --tail 0</span><span class="cc-hero__typebar" aria-hidden="true"></span></span></div>
+
+            <div class="cc-hero__progress" style="--cc-w:34%">
+              <i aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="cc-hero__row">
+          <div class="cc-hero__panel">
+            <div class="cc-hero__panelhead">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.6"/><rect x="14" y="3" width="7" height="7" rx="1.6"/><rect x="3" y="14" width="7" height="7" rx="1.6"/><rect x="14" y="14" width="7" height="7" rx="1.6"/></svg>
+              Command blocks
+              <b>6 mounted</b>
+            </div>
+            <div class="cc-hero__blocks">
+              <div class="cc-hero__block">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l6-6-6-6"/><path d="M12 19h8"/></svg>
+                <b>shell</b><small>42 sessions</small>
+              </div>
+              <div class="cc-hero__block cc-hero__block--g">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="5" r="2.4"/><circle cx="6" cy="19" r="2.4"/><circle cx="18" cy="12" r="2.4"/><path d="M8.4 5h4.6a3 3 0 013 3M8.4 19h4.6a3 3 0 003-3"/></svg>
+                <b>gitops</b><small>18 repos</small>
+              </div>
+              <div class="cc-hero__block cc-hero__block--p">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/></svg>
+                <b>runtime</b><small>6 nodes</small>
+              </div>
+              <div class="cc-hero__block">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="7.5" ry="3.2"/><path d="M4.5 6v12c0 1.8 3.4 3.2 7.5 3.2s7.5-1.4 7.5-3.2V6"/><path d="M4.5 12c0 1.8 3.4 3.2 7.5 3.2s7.5-1.4 7.5-3.2"/></svg>
+                <b>datastore</b><small>0.4 ms</small>
+              </div>
+              <div class="cc-hero__block cc-hero__block--g">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18a4 4 0 01-.6-7.9 5.4 5.4 0 0110.3-1.2A3.9 3.9 0 0117 18z"/><path d="M12 12v6"/></svg>
+                <b>edge</b><small>24 regions</small>
+              </div>
+              <div class="cc-hero__block cc-hero__block--p">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.2-2.9 7.6-7 9-4.1-1.4-7-4.8-7-9V6z"/><path d="M9.4 12.2l1.9 1.9 3.6-3.7"/></svg>
+                <b>guard</b><small>policies</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="cc-hero__panel cc-hero__telemetry">
+            <div class="cc-hero__panelhead">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13h4l2.5-7 4 14L16 13h5"/></svg>
+              Dispatch latency
+              <b>p95</b>
+            </div>
+            <div class="cc-hero__spark">
+              <svg viewBox="0 0 320 72" preserveAspectRatio="none" role="img" aria-label="Dispatch latency trending down to 0.9 milliseconds over 30 days">
+                <defs>
+                  <linearGradient id="ccSparkStroke" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0" stop-color="#22d3ee"/><stop offset="0.62" stop-color="#67e8f9"/><stop offset="1" stop-color="#a3e635"/>
+                  </linearGradient>
+                  <linearGradient id="ccSparkFill" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#22d3ee" stop-opacity="0.32"/><stop offset="1" stop-color="#22d3ee" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <line x1="0" y1="18" x2="320" y2="18"/>
+                <line x1="0" y1="36" x2="320" y2="36"/>
+                <line x1="0" y1="54" x2="320" y2="54"/>
+                <path class="cc-hero__area" d="M0 52L20 44L40 47L60 38L80 41L100 33L120 29L140 31L160 24L180 27L200 21L220 18L240 22L260 15L280 13L300 11L320 9L320 72L0 72Z"/>
+                <path class="cc-hero__sparkline" d="M0 52L20 44L40 47L60 38L80 41L100 33L120 29L140 31L160 24L180 27L200 21L220 18L240 22L260 15L280 13L300 11L320 9"/>
+              </svg>
+            </div>
+            <div class="cc-hero__bars" aria-hidden="true">
+              <i style="--cc-h:34%"></i><i style="--cc-h:52%"></i><i style="--cc-h:41%"></i><i style="--cc-h:68%"></i>
+              <i style="--cc-h:47%"></i><i style="--cc-h:73%"></i><i style="--cc-h:58%"></i><i style="--cc-h:82%"></i>
+              <i style="--cc-h:44%"></i><i style="--cc-h:61%"></i><i style="--cc-h:76%"></i><i style="--cc-h:39%"></i>
+              <i style="--cc-h:66%"></i><i style="--cc-h:88%"></i><i style="--cc-h:55%"></i><i style="--cc-h:71%"></i>
+              <i style="--cc-h:49%"></i><i style="--cc-h:63%"></i><i style="--cc-h:79%"></i><i style="--cc-h:46%"></i>
+              <i style="--cc-h:57%"></i><i style="--cc-h:84%"></i><i style="--cc-h:52%"></i><i style="--cc-h:69%"></i>
+            </div>
+            <div class="cc-hero__stats">
+              <div class="cc-hero__stat"><b>0.9 ms</b><span>p95</span></div>
+              <div class="cc-hero__stat"><b>0.4 ms</b><span>median</span></div>
+              <div class="cc-hero__stat"><b>1.2 M</b><span>cmds / day</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 07 · metric strip -->
+    <div class="cc-hero__metrics">
+      <div class="cc-hero__metric">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l6-6-6-6"/><path d="M12 19h8"/></svg>
+        <div><b><span data-cc-count="128">128</span><i class="cc-hero__metric-unit">+</i></b><span class="cc-hero__metric-label">Commands shipped</span></div>
+      </div>
+      <div class="cc-hero__metric cc-hero__metric--g">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3L5 13h5l-1 8 8-10h-5z"/></svg>
+        <div><b><span data-cc-count="0.9" data-cc-decimals="1">0.9</span><i class="cc-hero__metric-unit">ms</i></b><span class="cc-hero__metric-label">p95 dispatch</span></div>
+      </div>
+      <div class="cc-hero__metric">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.2-2.9 7.6-7 9-4.1-1.4-7-4.8-7-9V6z"/><path d="M9.4 12.2l1.9 1.9 3.6-3.7"/></svg>
+        <div><b><span data-cc-count="99.98" data-cc-decimals="2">99.98</span><i class="cc-hero__metric-unit">%</i></b><span class="cc-hero__metric-label">Uptime · 30 days</span></div>
+      </div>
+      <div class="cc-hero__metric cc-hero__metric--p">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20a5.5 5.5 0 0111 0"/><path d="M16 5.2a3.2 3.2 0 010 6M17.5 20a5.5 5.5 0 00-2-4.3"/></svg>
+        <div><b><span data-cc-count="4200" data-cc-group="1">4,200</span><i class="cc-hero__metric-unit">+</i></b><span class="cc-hero__metric-label">Devs onboarded</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>

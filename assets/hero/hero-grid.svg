@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" fill="none">
+  <title>CommandCenter ambient holographic grid</title>
+  <defs>
+    <linearGradient id="base" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#04060c"/>
+      <stop offset=".45" stop-color="#060a13"/>
+      <stop offset="1" stop-color="#04060c"/>
+    </linearGradient>
+
+    <pattern id="fine" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" stroke="#22d3ee" stroke-opacity=".055" stroke-width="1"/>
+    </pattern>
+    <pattern id="coarse" width="120" height="120" patternUnits="userSpaceOnUse">
+      <path d="M120 0H0V120" stroke="#22d3ee" stroke-opacity=".085" stroke-width="1"/>
+    </pattern>
+
+    <radialGradient id="glowCyan" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#22d3ee" stop-opacity=".30"/>
+      <stop offset=".45" stop-color="#0e7490" stop-opacity=".13"/>
+      <stop offset="1" stop-color="#0e7490" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowPurple" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#a855f7" stop-opacity=".26"/>
+      <stop offset=".5" stop-color="#7e22ce" stop-opacity=".11"/>
+      <stop offset="1" stop-color="#7e22ce" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowGreen" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#a3e635" stop-opacity=".18"/>
+      <stop offset=".5" stop-color="#4ade80" stop-opacity=".08"/>
+      <stop offset="1" stop-color="#4ade80" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vignette" cx=".5" cy=".45" r=".72">
+      <stop offset=".45" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#02040a" stop-opacity=".85"/>
+    </radialGradient>
+
+    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="3" result="n"/>
+      <feColorMatrix in="n" type="saturate" values="0"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#base)"/>
+
+  <!-- holographic grid -->
+  <rect width="1600" height="900" fill="url(#fine)"/>
+  <rect width="1600" height="900" fill="url(#coarse)"/>
+
+  <!-- ambient light pools -->
+  <ellipse cx="150" cy="120" rx="620" ry="520" fill="url(#glowCyan)"/>
+  <ellipse cx="1500" cy="330" rx="560" ry="480" fill="url(#glowPurple)"/>
+  <ellipse cx="620" cy="940" rx="620" ry="420" fill="url(#glowGreen)"/>
+
+  <!-- circuit traces -->
+  <g stroke-linecap="square" fill="none">
+    <path d="M0 214h180l58 58h150l36-36h210" stroke="#22d3ee" stroke-opacity=".38" stroke-width="1.4"/>
+    <path d="M0 258h120l44-44h190" stroke="#a855f7" stroke-opacity=".30" stroke-width="1.2"/>
+    <path d="M1600 132h-190l-52 52h-186l-30-30h-160" stroke="#22d3ee" stroke-opacity=".30" stroke-width="1.3"/>
+    <path d="M1600 700h-170l-64-64h-180" stroke="#a855f7" stroke-opacity=".26" stroke-width="1.2"/>
+    <path d="M0 742h150l62-62h176" stroke="#a3e635" stroke-opacity=".22" stroke-width="1.2"/>
+    <path d="M96 900V806l64-64V612" stroke="#22d3ee" stroke-opacity=".20" stroke-width="1.2"/>
+    <path d="M1524 900V820l-58-58v-96" stroke="#a855f7" stroke-opacity=".20" stroke-width="1.2"/>
+  </g>
+
+  <!-- circuit nodes -->
+  <g>
+    <circle cx="634" cy="236" r="3.2" fill="#22d3ee" fill-opacity=".85" filter="url(#soft)"/>
+    <circle cx="634" cy="236" r="2.2" fill="#a5f3fc"/>
+    <circle cx="1140" cy="184" r="2.8" fill="#22d3ee" fill-opacity=".8" filter="url(#soft)"/>
+    <circle cx="1140" cy="184" r="1.9" fill="#a5f3fc"/>
+    <circle cx="1186" cy="636" r="2.6" fill="#c084fc" fill-opacity=".8" filter="url(#soft)"/>
+    <circle cx="1186" cy="636" r="1.8" fill="#e9d5ff"/>
+    <circle cx="388" cy="680" r="2.4" fill="#a3e635" fill-opacity=".8" filter="url(#soft)"/>
+    <circle cx="388" cy="680" r="1.7" fill="#d9f99d"/>
+    <circle cx="160" cy="612" r="2.4" fill="#22d3ee" fill-opacity=".7" filter="url(#soft)"/>
+    <circle cx="1466" cy="762" r="2.4" fill="#c084fc" fill-opacity=".7" filter="url(#soft)"/>
+    <g fill="none" stroke="#22d3ee" stroke-opacity=".45" stroke-width="1.2">
+      <rect x="1494" y="120" width="14" height="14" rx="2"/>
+      <rect x="26" y="196" width="12" height="12" rx="2" stroke="#a855f7" stroke-opacity=".5"/>
+      <rect x="1380" y="690" width="12" height="12" rx="2" stroke="#a3e635" stroke-opacity=".4"/>
+    </g>
+  </g>
+
+  <!-- scanline sheen -->
+  <g opacity=".5">
+    <rect y="0" width="1600" height="2" fill="#22d3ee" fill-opacity=".05"/>
+    <rect y="300" width="1600" height="2" fill="#22d3ee" fill-opacity=".05"/>
+    <rect y="600" width="1600" height="2" fill="#22d3ee" fill-opacity=".05"/>
+  </g>
+
+  <rect width="1600" height="900" fill="url(#vignette)"/>
+  <rect width="1600" height="900" filter="url(#grain)" opacity=".045" style="mix-blend-mode:overlay"/>
+</svg>

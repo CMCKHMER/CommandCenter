@@ -54,3 +54,6 @@ dmypy.json
 .DS_Store
 Thumbs.db
 ```
+
+# Hero: local browser-render output (regenerate with: node design/shot.mjs)
+design/previews/live/
