@@ -586,9 +586,15 @@
  * ------------------------------------------------------------------ */
 .cc-hero__row {
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  grid-template-areas:
+    'code code'
+    'blocks telemetry';
   gap: clamp(14px, 1.4vw, 20px);
 }
+
+.cc-hero__blocks-panel { grid-area: blocks; }
+.cc-hero__telemetry    { grid-area: telemetry; }
 
 .cc-hero__panelhead {
   display: flex;
@@ -693,6 +699,104 @@
 }
 
 /* ------------------------------------------------------------------ *
+ * 06b. Code panel — syntax-highlighted editor card
+ * ------------------------------------------------------------------ */
+.cc-hero__code {
+  grid-area: code;
+  display: flex;
+  flex-direction: column;
+}
+/* the editor gets a cooler, slightly more saturated backdrop than the rest */
+.cc-hero__code {
+  background:
+    radial-gradient(90% 140% at 82% -20%, rgba(168, 85, 247, 0.12), transparent 55%),
+    linear-gradient(180deg, rgba(14, 21, 35, 0.88), rgba(7, 12, 21, 0.92));
+}
+
+.cc-hero__code .cc-hero__panelhead b { color: #86efac; }
+
+.cc-hero__codebody {
+  position: relative;
+  flex: 1 1 auto;
+  padding: 14px 16px 12px 8px;
+  font-family: var(--cc-mono);
+  font-size: 12.7px;
+  line-height: 1.74;
+  overflow: hidden;
+  /* faint line grid, locked to the code line-height */
+  background-image: linear-gradient(rgba(126, 178, 214, 0.04) 1px, transparent 1px);
+  background-size: 100% 1.74em;
+}
+
+.cc-hero__cl {
+  display: flex;
+  gap: 12px;
+  white-space: pre;
+  align-items: baseline;
+}
+.cc-hero__cl i {
+  flex: 0 0 20px;
+  text-align: right;
+  font-style: normal;
+  font-size: 0.82em;
+  line-height: inherit;
+  color: #35495f;
+  user-select: none;
+  position: sticky;
+  left: 0;
+}
+.cc-hero__cl span { min-width: 0; }
+
+/* active line: the line the caret sits on */
+.cc-hero__cl--active {
+  position: relative;
+}
+.cc-hero__cl--active::before {
+  content: '';
+  position: absolute;
+  inset: -2px -16px -2px -8px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, rgba(34, 211, 238, 0.10), rgba(34, 211, 238, 0.02) 60%, transparent);
+  border-left: 2px solid rgba(34, 211, 238, 0.65);
+  box-shadow: -8px 0 18px -10px rgba(34, 211, 238, 0.9);
+  pointer-events: none;
+}
+
+/* token colours (One-Dark-ish, tuned to the neon palette) */
+.cc-hero__c-kw  { color: #c084fc; }                      /* keywords          */
+.cc-hero__c-fn  { color: #67e8f9; }                      /* function calls    */
+.cc-hero__c-str { color: #a3e635; }                      /* strings           */
+.cc-hero__c-num { color: #fbbf24; }                      /* numbers           */
+.cc-hero__c-key { color: #93c5fd; }                      /* object keys       */
+.cc-hero__c-var { color: #e2e8f0; }                      /* identifiers       */
+.cc-hero__c-com { color: #64748b; font-style: italic; }  /* comments          */
+
+.cc-hero__codecaret {
+  display: inline-block;
+  width: 8px;
+  height: 15px;
+  margin-left: 1px;
+  vertical-align: -3px;
+  background: var(--cc-cyan);
+  box-shadow: 0 0 12px rgba(34, 211, 238, 0.95);
+  animation: cc-blink 1.05s steps(1, end) infinite;
+}
+
+.cc-hero__codebar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 16px;
+  border-top: 1px solid var(--cc-line-soft);
+  background: linear-gradient(180deg, rgba(11, 17, 28, 0.6), rgba(7, 11, 19, 0.8));
+  font-family: var(--cc-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  color: var(--cc-text-faint);
+}
+.cc-hero__codebar span:last-child { margin-left: auto; color: #64748b; }
+
+/* ------------------------------------------------------------------ *
  * 07. Metric strip
  * ------------------------------------------------------------------ */
 .cc-hero__metrics {
@@ -789,6 +893,34 @@
 .cc-hero__chip--4 { bottom: 12%; right: 3.2%; animation-delay: -5s; }
 
 /* ------------------------------------------------------------------ *
+ * 08b. Geometric shards — minimal outlines drifting in the negative
+ *      space (holo-ring, hex node, crosshair, triangle, data dot)
+ * ------------------------------------------------------------------ */
+.cc-hero__shards {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.cc-hero__shard {
+  position: absolute;
+  opacity: 0.5;
+  animation: cc-drift 11s ease-in-out infinite;
+}
+.cc-hero__shard circle,
+.cc-hero__shard path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  vector-effect: non-scaling-stroke;
+}
+.cc-hero__shard--ring  { top: 8%;    right: 33%;  width: 118px; height: 118px; color: rgba(34, 211, 238, 0.55);  animation: cc-spin 52s linear infinite; }
+.cc-hero__shard--hex   { bottom: 12%; left: 2.2%; width: 56px;  height: 56px;  color: rgba(168, 85, 247, 0.6);   animation-delay: -3.5s; }
+.cc-hero__shard--cross { top: 57%;   left: 44.5%; width: 15px;  height: 15px;  color: rgba(163, 230, 53, 0.55);  animation-delay: -6s; }
+.cc-hero__shard--tri   { bottom: 26%; right: 1.7%; width: 26px; height: 26px;  color: rgba(125, 211, 252, 0.5);  animation-delay: -8s; }
+.cc-hero__shard--dot   { top: 28%;   left: 7%;    width: 11px;  height: 11px;  color: rgba(192, 132, 252, 0.7);  animation-delay: -2s; }
+
+/* ------------------------------------------------------------------ *
  * 09. Motion + reduced motion
  * ------------------------------------------------------------------ */
 @keyframes cc-blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
@@ -806,6 +938,13 @@
 @keyframes cc-float {
   0%, 100% { transform: translate3d(0, 0, 0); }
   50% { transform: translate3d(0, -13px, 0); }
+}
+
+@keyframes cc-spin { to { transform: rotate(1turn); } }
+
+@keyframes cc-drift {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -12px; }
 }
 
 @keyframes cc-draw { from { stroke-dashoffset: 620; } to { stroke-dashoffset: 0; } }
@@ -837,6 +976,7 @@
     transition-duration: 0.001ms !important;
   }
   .cc-hero .cc-hero__typebar,
+  .cc-hero .cc-hero__codecaret,
   .cc-hero__console .cc-hero__caret { opacity: 1; }
 }
 
@@ -846,13 +986,20 @@
 @media (max-width: 1180px) {
   .cc-hero__main { grid-template-columns: minmax(0, 1fr); gap: 34px; }
   .cc-hero__shell { min-height: 0; }
-  .cc-hero__chips { display: none; }
+  .cc-hero__chips,
+  .cc-hero__shards { display: none; }
   .cc-hero__bg--map { opacity: 0.34; }
 }
 
 @media (max-width: 900px) {
   .cc-hero__barnav { display: none; }
-  .cc-hero__row { grid-template-columns: minmax(0, 1fr); }
+  .cc-hero__row {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      'code'
+      'blocks'
+      'telemetry';
+  }
   .cc-hero__metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
@@ -863,6 +1010,7 @@
   .cc-hero__actions .cc-hero__btn { flex: 1 1 100%; justify-content: center; }
   /* let log lines wrap instead of being cut off by the panel edge */
   .cc-hero__termbody { font-size: 11.4px; line-height: 1.82; }
+  .cc-hero__codebody { font-size: 11px; }
   .cc-hero__line { white-space: normal; }
   .cc-hero__line .cc-hero__gutter { flex-basis: 16px; }
   .cc-hero__line .cc-hero__time { display: none; }

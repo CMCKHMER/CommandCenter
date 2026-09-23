@@ -18,6 +18,29 @@
     <span class="cc-hero__sheen"></span>
   </div>
 
+  <!-- geometric accents: holo-ring, hex, cross, triangle, data node -->
+  <div class="cc-hero__shards" aria-hidden="true">
+    <svg class="cc-hero__shard cc-hero__shard--ring" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="52" stroke-dasharray="7 11"/>
+      <circle cx="60" cy="60" r="34"/>
+      <circle cx="60" cy="8" r="2.5" fill="currentColor" stroke="none"/>
+    </svg>
+    <svg class="cc-hero__shard cc-hero__shard--hex" viewBox="0 0 100 100">
+      <path d="M50 8l36 21v42L50 92 14 71V29z"/>
+      <path d="M50 34l19 11v22L50 78 31 67V45z"/>
+    </svg>
+    <svg class="cc-hero__shard cc-hero__shard--cross" viewBox="0 0 40 40">
+      <path d="M20 7v26M7 20h26"/>
+    </svg>
+    <svg class="cc-hero__shard cc-hero__shard--tri" viewBox="0 0 48 48">
+      <path d="M24 8l16 28H8z"/>
+    </svg>
+    <svg class="cc-hero__shard cc-hero__shard--dot" viewBox="0 0 16 16">
+      <circle cx="8" cy="8" r="3.5"/>
+      <circle cx="8" cy="8" r="6.5" stroke-dasharray="2 4"/>
+    </svg>
+  </div>
+
   <!-- floating command chips -->
   <div class="cc-hero__chips" aria-hidden="true">
     <span class="cc-hero__chip cc-hero__chip--1">
@@ -151,7 +174,33 @@
         </div>
 
         <div class="cc-hero__row">
-          <div class="cc-hero__panel">
+          <div class="cc-hero__panel cc-hero__code">
+            <div class="cc-hero__panelhead">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="M10 13l2 2-2 2"/><path d="M14.5 17h1.5"/></svg>
+              gateway.deploy.ts
+              <b>● synced</b>
+            </div>
+
+            <div class="cc-hero__codebody" role="img"
+                 aria-label="Code editor showing gateway.deploy.ts: a TypeScript script that builds a canary deploy pipeline with the CommandCenter SDK and runs it in production.">
+              <div class="cc-hero__cl"><i>1</i><span class="cc-hero__c-com">// pipelines/gateway.deploy.ts</span></div>
+              <div class="cc-hero__cl"><i>2</i><span><span class="cc-hero__c-kw">import</span> { <span class="cc-hero__c-var">cc</span> } <span class="cc-hero__c-kw">from</span> <span class="cc-hero__c-str">'@cmdcenter/sdk'</span></span></div>
+              <div class="cc-hero__cl"><i>3</i><span>&nbsp;</span></div>
+              <div class="cc-hero__cl"><i>4</i><span><span class="cc-hero__c-kw">const</span> <span class="cc-hero__c-var">deploy</span> = <span class="cc-hero__c-fn">cc</span>.<span class="cc-hero__c-fn">pipeline</span>(<span class="cc-hero__c-str">'gateway'</span>)</span></div>
+              <div class="cc-hero__cl"><i>5</i><span>  .<span class="cc-hero__c-fn">image</span>(<span class="cc-hero__c-str">'cmdcenter/gateway:2.4.0'</span>)</span></div>
+              <div class="cc-hero__cl"><i>6</i><span>  .<span class="cc-hero__c-fn">canary</span>(<span class="cc-hero__c-num">0.1</span>)</span></div>
+              <div class="cc-hero__cl"><i>7</i><span>  .<span class="cc-hero__c-fn">health</span>({ <span class="cc-hero__c-key">path</span>: <span class="cc-hero__c-str">'/readyz'</span> })</span></div>
+              <div class="cc-hero__cl"><i>8</i><span>&nbsp;</span></div>
+              <div class="cc-hero__cl cc-hero__cl--active"><i>9</i><span><span class="cc-hero__c-kw">await</span> <span class="cc-hero__c-var">deploy</span>.<span class="cc-hero__c-fn">run</span>({ <span class="cc-hero__c-key">env</span>: <span class="cc-hero__c-str">'production'</span> })<span class="cc-hero__codecaret" aria-hidden="true"></span></span></div>
+            </div>
+
+            <div class="cc-hero__codebar">
+              <span>TypeScript · UTF-8 · LF</span>
+              <span>Ln 9 · Col 39</span>
+            </div>
+          </div>
+
+          <div class="cc-hero__panel cc-hero__blocks-panel">
             <div class="cc-hero__panelhead">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.6"/><rect x="14" y="3" width="7" height="7" rx="1.6"/><rect x="3" y="14" width="7" height="7" rx="1.6"/><rect x="14" y="14" width="7" height="7" rx="1.6"/></svg>
               Command blocks
